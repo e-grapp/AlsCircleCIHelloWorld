@@ -7,7 +7,7 @@ workflows:
   welcome:
     triggers:
       - schedule:
-          cron: "7 * * * *"
+          cron: "15 * * * *"
           filters:
             branches:
               only:
