@@ -4,8 +4,7 @@ orbs:
   welcome: circleci/welcome-orb@0.4.1
 
 workflows:
-  # Name the workflow "welcome"
-  cron:
+  welcome:
     triggers:
       - schedule:
           cron: "0 * * * *"
