@@ -9,5 +9,9 @@ workflows:
     triggers:
       - schedule:
           cron: "0 * * * *"
+          filters:
+            branches:
+              only:
+                - master
     jobs:
       - welcome/run
