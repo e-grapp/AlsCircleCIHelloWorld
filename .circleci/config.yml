@@ -5,12 +5,12 @@ orbs:
 
 workflows:
   welcome:
-    triggers:
-      - schedule:
-          cron: "15 * * * *"
-          filters:
-            branches:
-              only:
-                - master
+#   triggers:
+#     - schedule:
+#         cron: "15 * * * *"
+#         filters:
+#           branches:
+#             only:
+#               - master
     jobs:
       - welcome/run
