@@ -9,5 +9,5 @@ workflows:
         - welcome/run:
             filters:
               branches:
-                only:
+                ignore:
                   - testbranch
