@@ -5,6 +5,9 @@ orbs:
 
 workflows:
     welcome:
+      triggers:
+        - schedule:
+            cron: "47,50,53,56,59 * * * *"
       jobs:
         - welcome/run:
             filters:
