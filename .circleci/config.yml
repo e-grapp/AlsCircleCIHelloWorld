@@ -1,36 +1,86 @@
-version: 2.1
-
-orbs:
-  welcome: circleci/welcome-orb@0.4.1
-  docker: circleci/docker@1.5.0
-
-executor:
-  hadolint/hadolint:
-    tag: 2.4.0-debian
-
+version: 2
 jobs:
-  nodestuffs:
-    machine:
-      image: ubuntu-2004:202104-01
+  build:
+    machine: 
+      image: ubuntu-1604:202004-01
     steps:
       - checkout
       - run:
-          name: Python Stuff
+          halt_build_on_fail: false
+          name: Setup environment for tests with Python 3
           command: |
-            pyenv versions
-
+             pyenv versions
+             pyenv global 3.8.2
+             pip install -U selenium
+             pip install --upgrade pip
+             pip install -U webium
+             pip install allure-pytest==2.7.1
+             pip install pytest==5.4.3
+             pip install pytest-html
+             pip install pyperclip==1.5.27
+             pip install seleniumwrapper
+             pip install selenium-wire
+             pip install pycryptodome
+             pip install requests
+             pip install pytz
+             pip install Faker==3.0.1
+             sudo apt-get update; sudo apt-get install pigz
+             python -c "import selenium; print(selenium.__version__)"
+             sudo apt-add-repository -y ppa:qameta/allure
+             sudo apt-get update
+             sudo apt install xsel
+             sudo apt-get install allure
+             sudo apt-get clean
+             sudo apt-get install dpkg
+             curl -L -o google-chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+             sudo dpkg -i google-chrome.deb
+             sudo sed -i 's|HERE/chrome\"|HERE/chrome\" --disable-setuid-sandbox|g' /opt/google/chrome/google-chrome
+             rm google-chrome.deb
+             wget https://chromedriver.storage.googleapis.com/89.0.4389.23/chromedriver_linux64.zip
+             unzip chromedriver_linux64.zip
+             sudo cp chromedriver /usr/local/bin/chromedriver
+             sudo apt install openjdk-11-jre-headless
+             sudo apt install openjdk-11-jdk
+             sudo apt-get install openjfx
+             wget https://selenium-release.storage.googleapis.com/3.141/selenium-server-standalone-3.141.59.jar
+             sudo update-alternatives --auto java
+      - run:
+          name: Launch Selenium Grid Hub
+          command: |
+            /usr/lib/jvm/java-11-openjdk-amd64/bin/java –jar selenium-server-standalone-3.141.59.jar –role hub -log /tmp/selenium.log
+      - run:
+          name: Register Selenium Grid Node
+          command: |
+            java –jar selenium-server-standalone-3.141.59.jar –role node –hub http://192.168.1.9:4444/grid/register -port 1234
+      - run:
+          name: Run Selenium Tests
+          command: |
+            cd tests/admin_tests && python -m pytest test_clients_14_exclude_accounts_from_aggregated_scores.py --alluredir=/tmp/my_allure_results
+          no_output_timeout: 20m
+      - run:
+          name: Generate Selenium Allure Report
+          when: always
+          command: |
+            allure generate -o /tmp/my_allure_results/report /tmp/my_allure_results
+      - store_artifacts:
+            path: /tmp/my_allure_results/report
+      - run:
+          name: Run SeleniumWire Tests
+          when: always
+          environment:
+            SELENIUM_DRIVER: "SeleniumWire"
+          command: |
+            cd tests && python -m pytest test_clients_25_validate_morning_star_modal_container_in_share_account_page.py --alluredir=/tmp/my_allure_results
+          no_output_timeout: 20m
+      - run:
+          name: Generate SeleniumWire Allure Report
+          when: always
+          command: |
+            allure generate -o /tmp/my_allure_results/report/wire_report /tmp/my_allure_results
+      - store_artifacts:
+          path: /tmp/my_allure_results/report/wire_report
 workflows:
-  docker_test:
+  version: 2
+  build:
     jobs:
-      - docker/hadolint
-  welcome:
-#     triggers:
-#       - schedule:
-#           cron: "47,50,53,56,59 * * * *"
-    jobs:
-      - nodestuffs
-#       - welcome/run:
-#           filters:
-#             branches:
-#               ignore:
-#                 - testbranch
+      - build
