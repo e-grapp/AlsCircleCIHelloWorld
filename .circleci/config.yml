@@ -1,9 +1,9 @@
 version: 2
 jobs:
   build:
-    machine: 
-      image: ubuntu-1604:202004-01
-    steps:
+    macos:
+      xcode: 12.5.0
+      steps:
       - checkout
       - run:
           halt_build_on_fail: false
