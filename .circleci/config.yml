@@ -56,7 +56,7 @@ jobs:
           name: Run Selenium Tests
           command: |
             cd tests/admin_tests && python -m pytest test_clients_14_exclude_accounts_from_aggregated_scores.py --alluredir=/tmp/my_allure_results
-          no_output_timeout: 20m
+          no_output_timeout: 10m
       - run:
           name: Generate Selenium Allure Report
           when: always
