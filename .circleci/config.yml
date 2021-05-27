@@ -3,6 +3,7 @@ jobs:
   build:
     macos:
       xcode: 12.5.0
+    resource_class: m2.medium
     steps:
       - checkout
       - run:
