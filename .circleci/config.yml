@@ -2,8 +2,7 @@ version: 2
 jobs:
   build:
     macos:
-      xcode: 12.4.0
-    resource_class: large
+      xcode: 12.5.0
     steps:
       - checkout
       - run:
