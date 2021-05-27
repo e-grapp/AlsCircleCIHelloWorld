@@ -1,8 +1,8 @@
 version: 2
 jobs:
   build:
-    docker:
-      - image: cimg/base:2021.04
+    macos:
+      xcode: 12.5.0
     steps:
       - checkout
       - run:
