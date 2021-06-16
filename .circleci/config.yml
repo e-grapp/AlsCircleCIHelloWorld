@@ -19,7 +19,7 @@ jobs:
       - run:
           name: Print version on remote docker
           command: |
-            docker docker -v            
+            docker -v            
              
 workflows:
   version: 2
