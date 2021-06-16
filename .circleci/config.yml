@@ -18,9 +18,7 @@ jobs:
           version: 19.03.13
       - run:
           name: Print version on remote docker
-          command: |
-            ssh remote-docker
-            docker -v            
+          command: ssh remote-docker \ docker -v
              
 workflows:
   version: 2
