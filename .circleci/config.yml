@@ -9,7 +9,7 @@ jobs:
       - run:
           name: Print version on local docker
           command: |
-             hostnamectl
+            hostnamectl
   remote:
     docker:
       image: cimg/base:2021.04
@@ -26,3 +26,4 @@ workflows:
   build:
     jobs:
       - build
+      - remote
