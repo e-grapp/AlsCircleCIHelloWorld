@@ -1,14 +1,26 @@
 version: 2
+
 jobs:
-  build:
-    macos:
-      xcode: 11.3.0
+  local:
+    docker:
+      image: cimg/base:2021.04
     steps:
       - checkout
       - run:
-          name: Print "Hello World"
+          name: Print version on local docker
           command: |
-             echo "Hello World"
+             hostnamectl
+  remote:
+    docker:
+      image: cimg/base:2021.04
+    steps:
+      - checkout
+      - run:
+          name: Print version on remote docker
+          command: |
+            ssh remote-docker
+            hostnamectl            
+             
 workflows:
   version: 2
   build:
