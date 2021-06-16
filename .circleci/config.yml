@@ -8,7 +8,7 @@ jobs:
       - checkout
       - run:
           name: Print version on local docker
-          command: hostnamectl
+          command: docker -v
   remote:
     docker:
       - image: cimg/base:2021.04
@@ -19,7 +19,7 @@ jobs:
           name: Print version on remote docker
           command: |
             ssh remote-docker
-            hostnamectl            
+            docker -v            
              
 workflows:
   version: 2
