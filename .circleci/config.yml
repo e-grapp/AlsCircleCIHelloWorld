@@ -20,7 +20,6 @@ jobs:
           name: Print version on remote docker
           command: |
             pwd
-            docker pwd
             ssh remote-docker \ pwd
              
 workflows:
