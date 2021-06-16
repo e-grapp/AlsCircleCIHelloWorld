@@ -19,6 +19,7 @@ jobs:
       - run:
           name: Print version on remote docker
           command: |
+            ssh remote-docker
             docker -v            
              
 workflows:
