@@ -8,8 +8,7 @@ jobs:
       - checkout
       - run:
           name: Print version on local docker
-          command: |
-            hostnamectl
+          command: hostnamectl
   remote:
     docker:
       image: cimg/base:2021.04
