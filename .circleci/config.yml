@@ -31,6 +31,17 @@ jobs:
             chmod +x ./kubectl
             mv kubectl /usr/bin
             kubectl version --short --client
+      - run:
+          name: Install And Configure helm
+          environment:
+            AWS_REGION: 'eu-west-1' # Helm Charts Bucket Region Has nothing to do with the deployment logic
+          command: |
+            wget https://get.helm.sh/helm-v3.0.1-linux-amd64.tar.gz
+            tar xf helm-v3.0.1-linux-amd64.tar.gz
+            mv linux-amd64/helm /usr/bin
+            helm repo add stable https://charts.helm.sh/stable
+            helm plugin install https://github.com/hypnoglow/helm-s3.git
+            helm repo add hl-stable s3://hl-charts/hl-stable
              
 workflows:
   version: 2
