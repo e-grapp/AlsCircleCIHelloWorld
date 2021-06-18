@@ -2,17 +2,33 @@ version: 2
 
 jobs:
   local:
-    macos:
-      xcode: "11.3.0"
+    docker:
+      - image: alpine:latest
     steps:
       - run:
-          name: Brew gubbins
+          name: install curl
+          command: apk add curl py-pip git bash  wget
+      - run:
+          name: install which
+          command: apk add which  
+      - run:
+          name: install jq
+          command: apk add jq
+      - run:
+          name: Install Docker client
           command: |
-                brew unlink python@2
-                brew update-reset
-                brew tap wix/brew
-                brew install applesimutils
-                brew install watchman
+            set -x
+            VER="17.09.0-ce"
+            curl -L -o /tmp/docker-$VER.tgz https://download.docker.com/linux/static/stable/x86_64/docker-$VER.tgz
+            tar -xz -C /tmp -f /tmp/docker-$VER.tgz
+            mv /tmp/docker/* /usr/bin
+      - run:
+          name: Install kubectl
+          command: |
+            curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.16.15/2020-11-02/bin/linux/amd64/kubectl
+            chmod +x ./kubectl
+            mv kubectl /usr/bin
+            kubectl version --short --client
              
 workflows:
   version: 2
