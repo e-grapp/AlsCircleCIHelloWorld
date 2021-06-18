@@ -2,29 +2,20 @@ version: 2
 
 jobs:
   local:
-    docker:
-      - image: cimg/base:2021.04
+    macos:
+      xcode: "11.3.0"
     steps:
-      - checkout
       - run:
-          name: Print version on local docker
-          command: docker -v
-  remote:
-    docker:
-      - image: cimg/base:2021.04
-    steps:
-      - checkout
-      - setup_remote_docker:
-          version: 19.03.13
-      - run:
-          name: Print version on remote docker
+          name: Brew gubbins
           command: |
-            pwd
-            ssh remote-docker \ pwd
+                brew unlink python@2
+                brew update-reset
+                brew tap wix/brew
+                brew install applesimutils
+                brew install watchman
              
 workflows:
   version: 2
   build:
     jobs:
       - local
-      - remote
