@@ -25,15 +25,12 @@ jobs:
       - run:
           name: Pipeline Single Quotes!
           command: echo << pipeline.parameters.pipelineSingleQuotes >>
-    steps:
       - run:
           name: Pipeline Double Quotes!
           command: echo << pipeline.parameters.pipelineDoubleQuotes >>
-    steps:
       - run:
           name: Element Single Quotes!
           command: echo << parameters.elementSingleQuotes >>
-    steps:
       - run:
           name: Element Double Quotes!
           command: echo << parameters.elementDoubleQuotes >>
