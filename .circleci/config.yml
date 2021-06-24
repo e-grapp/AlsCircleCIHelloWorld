@@ -32,11 +32,11 @@ jobs:
     steps:
       - run:
           name: Element Single Quotes!
-          command: echo << parameters.pipelineSingleQuotes >>
+          command: echo << parameters.elementSingleQuotes >>
     steps:
       - run:
           name: Element Double Quotes!
-          command: echo << parameters.pipelineDoubleQuotes >>
+          command: echo << parameters.elementDoubleQuotes >>
              
 workflows:
   version: 2
