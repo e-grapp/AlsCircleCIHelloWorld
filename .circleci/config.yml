@@ -10,8 +10,9 @@ parameters:
 
 jobs:
   local:
-    docker:
-      - image: circleci/node:latest
+
+    macos:
+      xcode: 12.5.0
 
     parameters:
       elementSingleQuotes:
@@ -34,6 +35,9 @@ jobs:
       - run:
           name: Element Double Quotes!
           command: echo << parameters.elementDoubleQuotes >>
+      - run:
+          name: What is my password though?
+          command: echo $FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD
              
 workflows:
   version: 2
