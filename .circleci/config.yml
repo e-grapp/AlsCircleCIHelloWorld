@@ -11,8 +11,8 @@ parameters:
 jobs:
   local:
 
-    macos:
-      xcode: 12.5.0
+    docker:
+      - image: cimg/ruby:2.7.4
 
     parameters:
       elementSingleQuotes:
