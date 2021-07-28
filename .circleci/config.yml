@@ -29,11 +29,6 @@ jobs:
             - "**/*"
 
 commands:
-  attach_at_root:
-    steps:
-      - attach_workspace:
-          at: *workspace_root
-  
   save_spm_cache:
     steps:
       - save_cache:
