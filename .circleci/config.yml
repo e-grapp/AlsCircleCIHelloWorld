@@ -1,71 +1,67 @@
-# .circleci/config.yml
+# For a detailed guide to building and testing on iOS, read the docs:
+# https://circleci.com/docs/2.0/testing-ios/
+
 version: 2.1
+
+workflows:
+  main_workflow:
+    jobs:
+      - checkout_and_build
+
+constants:
+  cache:
+    - &spm_cache_key spm-cache-{{ arch }}-{{ .Branch }}-{{ checksum "./addedfile.txt" }}
+
 jobs:
-  build:
-    machine:
-      image: android:202102-01
-    # To optimize build times, we recommend "large" and above for Android-related jobs
-    resource_class: large
+  checkout_and_build:
+    macos:
+      xcode: 12.5.1
+    resource_class: m2.medium
+    working_directory: *working_directory
     steps:
       - checkout
-      - run:
-          name: Create avd
-          command: |
-            SYSTEM_IMAGES="system-images;android-S;default;x86"
-            sdkmanager "$SYSTEM_IMAGES"
-            echo "no" | avdmanager --verbose create avd -n test -k "$SYSTEM_IMAGES"
-      - run:
-          name: Launch emulator
-          command: |
-            emulator -avd test -delay-adb -verbose -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
-          background: true
-      - run:
-          name: Generate cache key
-          command: |
-            find . -name 'build.gradle' | sort | xargs cat |
-            shasum | awk '{print $1}' > /tmp/gradle_cache_seed
-      - restore_cache:
-          key: gradle-v1-{{ arch }}-{{ checksum "/tmp/gradle_cache_seed" }}
-      - run:
-          # run in parallel with the emulator starting up, to optimize build time
-          name: Run assembleDebugAndroidTest task
-          command: |
-            ./gradlew assembleDebugAndroidTest
-      - run:
-          name: Wait for emulator to start
-          command: |
-            circle-android wait-for-boot
-      - run:
-          name: Disable emulator animations
-          command: |
-            adb shell settings put global window_animation_scale 0.0
-            adb shell settings put global transition_animation_scale 0.0
-            adb shell settings put global animator_duration_scale 0.0
-      - run:
-          name: Run UI tests (with retry)
-          command: |
-            MAX_TRIES=2
-            run_with_retry() {
-               n=1
-               until [ $n -gt $MAX_TRIES ]
-               do
-                  echo "Starting test attempt $n"
-                  ./gradlew connectedDebugAndroidTest && break
-                  n=$[$n+1]
-                  sleep 5
-               done
-               if [ $n -gt $MAX_TRIES ]; then
-                 echo "Max tries reached ($MAX_TRIES)"
-                 exit 1
-               fi
-            }
-            run_with_retry 
-      - save_cache:
-          key: gradle-v1-{{ arch }}-{{ checksum "/tmp/gradle_cache_seed" }}
+      - restore_spm_cache
+      - create_logs_directory
+      - create_derived_data_directory
+      - save_spm_cache
+      - persist_to_workspace:
+          root: .
           paths:
-            - ~/.gradle/caches
-            - ~/.gradle/wrapper
-workflows:
-  build:
-    jobs:
-      - build
+            - "**/*"
+
+commands:
+  attach_at_root:
+    steps:
+      - attach_workspace:
+          at: *workspace_root
+  
+  save_spm_cache:
+    steps:
+      - save_cache:
+          paths:
+            - SourcePackages/
+          key: *spm_cache_key
+
+  restore_spm_cache:
+    steps:
+      - restore_cache:
+          key: *spm_cache_key
+
+  create_logs_directory:
+    steps:
+      - run:
+          name: Create log directory
+          command: mkdir -p logs
+
+  create_derived_data_directory:
+    steps:
+      - run:
+          name: Create DerivedData directory
+          command: mkdir DerivedData
+
+  restore_derived_data_directory:
+    steps:
+      - run:
+          name: Retrieve DerivedData directory
+          command: cp -r /tmp/workspace/ .
+
