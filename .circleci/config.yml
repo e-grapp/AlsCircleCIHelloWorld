@@ -1,61 +1,15 @@
-# For a detailed guide to building and testing on iOS, read the docs:
-# https://circleci.com/docs/2.0/testing-ios/
+version: 2.1 # Use version 2.1 to enable orb usage.
 
-version: 2.1
-
-workflows:
-  main_workflow:
-    jobs:
-      - checkout_and_build
-
-constants:
-  cache:
-    - &spm_cache_key spm-cache-{{ arch }}-{{ .Branch }}-{{ checksum "./addedfile.txt" }}
+orbs:
+  win: circleci/windows@2.2.0 # The Windows orb give you everything you need to start using the Windows executor.
 
 jobs:
-  checkout_and_build:
-    macos:
-      xcode: 12.5.1
-    resource_class: large
+  build: # name of your job
+    executor:
+      name: win/default # executor type
+      size: "medium" # resource class, can be "medium", "large", "xlarge", "2xlarge", defaults to "medium" if not specified
+
     steps:
+      # Commands are run in a Windows virtual machine environment
       - checkout
-      - restore_spm_cache
-      - create_logs_directory
-      - create_derived_data_directory
-      - save_spm_cache
-      - persist_to_workspace:
-          root: .
-          paths:
-            - "**/*"
-
-commands:
-  save_spm_cache:
-    steps:
-      - save_cache:
-          paths:
-            - SourcePackages/
-          key: *spm_cache_key
-
-  restore_spm_cache:
-    steps:
-      - restore_cache:
-          key: *spm_cache_key
-
-  create_logs_directory:
-    steps:
-      - run:
-          name: Create log directory
-          command: mkdir -p logs
-
-  create_derived_data_directory:
-    steps:
-      - run:
-          name: Create DerivedData directory
-          command: mkdir DerivedData
-
-  restore_derived_data_directory:
-    steps:
-      - run:
-          name: Retrieve DerivedData directory
-          command: cp -r /tmp/workspace/ .
-
+      - run: Write-Host 'Hello, Windows'
