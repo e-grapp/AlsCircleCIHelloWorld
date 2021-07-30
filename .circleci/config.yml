@@ -8,54 +8,11 @@ workflows:
     jobs:
       - checkout_and_build
 
-constants:
-  cache:
-    - &spm_cache_key spm-cache-{{ arch }}-{{ .Branch }}-{{ checksum "./addedfile.txt" }}
-
 jobs:
   checkout_and_build:
-    macos:
-      xcode: 12.5.1
+    docker: circleci/php:7.4.3-cli
     resource_class: large
     steps:
-      - checkout
-      - restore_spm_cache
-      - create_logs_directory
-      - create_derived_data_directory
-      - save_spm_cache
-      - persist_to_workspace:
-          root: .
-          paths:
-            - "**/*"
-
-commands:
-  save_spm_cache:
-    steps:
-      - save_cache:
-          paths:
-            - SourcePackages/
-          key: *spm_cache_key
-
-  restore_spm_cache:
-    steps:
-      - restore_cache:
-          key: *spm_cache_key
-
-  create_logs_directory:
-    steps:
-      - run:
-          name: Create log directory
-          command: mkdir -p logs
-
-  create_derived_data_directory:
-    steps:
-      - run:
-          name: Create DerivedData directory
-          command: mkdir DerivedData
-
-  restore_derived_data_directory:
-    steps:
-      - run:
-          name: Retrieve DerivedData directory
-          command: cp -r /tmp/workspace/ .
-
+      run:
+        name: Install nodejs
+        command: sudo apt-get install -y nodejs
