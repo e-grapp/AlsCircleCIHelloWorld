@@ -10,8 +10,8 @@ workflows:
 
 jobs:
   checkout_and_build:
-    docker: circleci/php:7.4.3-cli
-    resource_class: large
+    docker: 
+      - image: circleci/php:7.4.3-cli
     steps:
       run:
         name: Install nodejs
