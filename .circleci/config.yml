@@ -11,11 +11,9 @@ workflows:
 jobs:
   checkout_and_build:
     docker: 
-      - image: cimg/php:7.4.3
+      - image: cimg/php:7.4.4-node
     steps:
       - run:
-          name: Install nodejs
+          name: List packages
           command: |
-            curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
-            sudo apt-get install -y nodejs
-            node --version && npm -v
+            sudo apt list --installed
