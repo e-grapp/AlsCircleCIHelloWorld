@@ -20,7 +20,7 @@ jobs:
     steps:
       - run:
           name: Add VNC user
-          command: sudo /usr/sbin/sysadminctl -addUser vncuser -fullName "VNC User" -password "Password1" -admin
+          command: sudo /usr/sbin/sysadminctl -addUser vncuser -fullName "VNC User" -password 'Password1' -admin
       - mac-permissions/add-permission:
           bundle-id: "com.apple.sshd"
           permission-type: "kTCCServiceScreenCapture"
