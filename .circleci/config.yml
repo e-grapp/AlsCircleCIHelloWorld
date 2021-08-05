@@ -3,19 +3,11 @@ version: 2.1
 orbs:
   mac-permissions: circleci/macos@1.1.0
 
-parameters:
-  pipelineSingleQuotes:
-    type: string
-    default: '1234567890'
-  pipelineDoubleQuotes:
-    type: string
-    default: "1234567890"
-
 jobs:
   permissions-check:
 
     macos:
-      xcode: 12.5.0
+      xcode: 12.4.0
 
     steps:
       - run:
@@ -34,6 +26,9 @@ jobs:
           name: Capture Screen Recording
           command: screencapture -V2 ~/screencapture/capture.mov
           background: true
+      - run:
+          name: Capture Screen Recording (Terminal)
+          command: /System/Applications/Utilities/Terminal.app/Contents/MacOS/Terminal screencapture -V2 ~/screencapture/capture.mov
       - run:
           name: Capture Screenshot
           command: screencapture -x ~/screencapture/capture.png
