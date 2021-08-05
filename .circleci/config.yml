@@ -9,6 +9,7 @@ jobs:
       xcode: 12.5.0
     steps:
         - mac-permissions/list-permission-types
+        - run: pwd
 
 workflow:
   build-and-test:
