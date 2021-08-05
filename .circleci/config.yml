@@ -19,18 +19,16 @@ jobs:
       - mac-permissions/add-permission:
           bundle-id: "/usr/sbin/sshd"
           permission-type: "KTCCServiceScreenCapture"
+      - mac-permissions/list-permissions
       - run:
           name: Create screencapture directory
           command: mkdir ~/screencapture
       - run:
           name: Capture Screen Recording
           command: screencapture -V2 ~/screencapture/capture.mov
-          background: true
       - run:
           name: Capture Screenshot
           command: screencapture -x ~/screencapture/capture.png
-      - mac-permissions/list-permissions
-      - mac-permissions/list-permission-types
       - store_artifacts:
           path: ~/screencapture
              
