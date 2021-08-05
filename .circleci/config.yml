@@ -1,18 +1,30 @@
 version: 2.1
 
 orbs:
-    mac-permissions: circleci/macos@1.1.0
+  mac-permissions: circleci/macos
+
+parameters:
+  pipelineSingleQuotes:
+    type: string
+    default: '1234567890'
+  pipelineDoubleQuotes:
+    type: string
+    default: "1234567890"
 
 jobs:
-  build-test:
+  permissions-check:
+
     macos:
       xcode: 12.5.0
-    steps:
-      - checkout
-      - mac-permissions/list-permission-types
-      - run: pwd
 
-workflow:
-  build-and-test:
+    steps:
+      - run:
+          name: Pipeline Single Quotes!
+          command: echo << pipeline.parameters.pipelineSingleQuotes >>
+      - mac-permissions/list-permissions
+             
+workflows:
+  version: 2
+  build:
     jobs:
-      - build-test
+      - permissions-check
