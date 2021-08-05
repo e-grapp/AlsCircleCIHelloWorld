@@ -22,10 +22,18 @@ jobs:
           bundle-id: "com.apple.sshd"
           permission-type: "kTCCServiceScreenCapture"
       - run:
-          name: Capture Screen
+          name: Create screencapture directory
+          command: mkdir ~/screencapture
+      - run:
+          name: Capture Screen Recording
           command: screencapture -V2 ~/capture.mov
+      - run:
+          name: Capture Screenshot
+          command: screencapture -x capture.png
       - mac-permissions/list-permissions
       - mac-permissions/list-permission-types
+      - store_artifacts:
+          path: ~/screencapture
              
 workflows:
   version: 2
