@@ -25,7 +25,9 @@ jobs:
       - mac-permissions/list-permissions
       - run:
           name: Create screencapture directory
-          command: mkdir /Users/vncuser/screencapture
+          command: |
+            mkdir /Users/vncuser/screencapture
+            mkdir /Users/distiller/screencapture
       - run:
           name: Pause for 5 minutes
           command: sleep 300
@@ -35,8 +37,11 @@ jobs:
 #      - run:
 #          name: Capture Screen Recording
 #          command: screencapture -V2 ~/screencapture/capture.mov
+      - run:
+          name: Move screen capture
+          command: mv /Users/vncuser/screencapture/capture.mov /Users/distiller/screencapture
       - store_artifacts:
-          path: /Users/vncuser/screencapture
+          path: /Users/distiller/screencapture
              
 workflows:
   version: 2
