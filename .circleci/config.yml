@@ -29,9 +29,9 @@ jobs:
       - run:
           name: Capture Screenshot
           command: screencapture -x ~/screencapture/capture.png
-      - run:
-          name: Capture Screen Recording
-          command: screencapture -V2 ~/screencapture/capture.mov
+#      - run:
+#          name: Capture Screen Recording
+#          command: screencapture -V2 ~/screencapture/capture.mov
       - run:
           name: Pause for 5 minutes
           command: sleep 5m
