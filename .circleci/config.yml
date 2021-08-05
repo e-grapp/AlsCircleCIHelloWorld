@@ -25,18 +25,18 @@ jobs:
       - mac-permissions/list-permissions
       - run:
           name: Create screencapture directory
-          command: mkdir ~/screencapture
+          command: mkdir /Users/vncuser/screencapture
       - run:
           name: Pause for 5 minutes
           command: sleep 300
       - run:
           name: Capture Screenshot
-          command: screencapture -x ~/screencapture/capture.png
+          command: screencapture -x /Users/vncuser/screencapture/capture.png
 #      - run:
 #          name: Capture Screen Recording
 #          command: screencapture -V2 ~/screencapture/capture.mov
       - store_artifacts:
-          path: ~/screencapture
+          path: /Users/vncuser/screencapture
              
 workflows:
   version: 2
