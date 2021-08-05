@@ -27,6 +27,7 @@ jobs:
       - run:
           name: Capture Screen Recording
           command: screencapture -V2 ~/capture.mov
+          background: true
       - run:
           name: Capture Screenshot
           command: screencapture -x capture.png
