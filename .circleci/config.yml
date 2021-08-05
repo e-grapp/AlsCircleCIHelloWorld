@@ -19,11 +19,11 @@ jobs:
 
     steps:
       - mac-permissions/add-permission:
-          bundle-id: "com.apple.screencapture"
+          bundle-id: "com.apple.sshd"
           permission-type: "kTCCServiceScreenCapture"
       - run:
           name: Capture Screen
-          command: screencapture -v ouput.mov
+          command: screencapture -x ~/silentscreenshot.jpg
       - mac-permissions/list-permissions
       - mac-permissions/list-permission-types
              
