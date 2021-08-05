@@ -22,6 +22,7 @@ jobs:
           name: Pipeline Single Quotes!
           command: echo << pipeline.parameters.pipelineSingleQuotes >>
       - mac-permissions/list-permissions
+      - mac-permissions/list-permission-types
              
 workflows:
   version: 2
