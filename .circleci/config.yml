@@ -26,11 +26,11 @@ jobs:
           command: mkdir ~/screencapture
       - run:
           name: Capture Screen Recording
-          command: screencapture -V2 ~/capture.mov
+          command: screencapture -V2 ~/screencapture/capture.mov
           background: true
       - run:
           name: Capture Screenshot
-          command: screencapture -x capture.png
+          command: screencapture -x ~/screencapture/capture.png
       - mac-permissions/list-permissions
       - mac-permissions/list-permission-types
       - store_artifacts:
