@@ -7,7 +7,7 @@ jobs:
   permissions-check:
 
     macos:
-      xcode: 12.4.0
+      xcode: 12.5.0
 
     steps:
       - run:
@@ -17,7 +17,7 @@ jobs:
           bundle-id: "com.apple.Terminal"
           permission-type: "kTCCServiceScreenCapture"
       - mac-permissions/add-permission:
-          bundle-id: "com.apple.sshd"
+          bundle-id: "/usr/sbin/sshd"
           permission-type: "KTCCServiceScreenCapture"
       - run:
           name: Create screencapture directory
@@ -26,9 +26,6 @@ jobs:
           name: Capture Screen Recording
           command: screencapture -V2 ~/screencapture/capture.mov
           background: true
-      - run:
-          name: Capture Screen Recording (Terminal)
-          command: /System/Applications/Utilities/Terminal.app/Contents/MacOS/Terminal screencapture -V2 ~/screencapture/capture.mov
       - run:
           name: Capture Screenshot
           command: screencapture -x ~/screencapture/capture.png
