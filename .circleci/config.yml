@@ -8,5 +8,9 @@ jobs:
     macos:
       xcode: 12.5.0
     steps:
-        - checkout
         - mac-permissions/list-permission-types
+
+workflow:
+  build-and-test:
+    jobs:
+      - build-test
