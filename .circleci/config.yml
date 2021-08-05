@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-    mac-permissions: circleci/macos
+    mac-permissions: circleci/macos@1.1.0
 
 jobs:
   build-test:
