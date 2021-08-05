@@ -26,7 +26,7 @@ jobs:
       - run:
           name: Create screencapture directory
           command: |
-            mkdir /Users/vncuser/screencapture
+            mkdir /Users/Shared/screencapture
             mkdir /Users/distiller/screencapture
       - run:
           name: Pause for 5 minutes
@@ -39,7 +39,7 @@ jobs:
 #          command: screencapture -V2 ~/screencapture/capture.mov
       - run:
           name: Move screen capture
-          command: mv /Users/vncuser/screencapture/capture.mov /Users/distiller/screencapture
+          command: mv /Users/Shared/screencapture/capture.mov /Users/distiller/screencapture
       - store_artifacts:
           path: /Users/distiller/screencapture
              
