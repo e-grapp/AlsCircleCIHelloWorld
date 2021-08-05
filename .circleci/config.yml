@@ -28,7 +28,7 @@ jobs:
           command: mkdir ~/screencapture
       - run:
           name: Pause for 5 minutes
-          command: sleep 5m
+          command: sleep 300
       - run:
           name: Capture Screenshot
           command: screencapture -x ~/screencapture/capture.png
