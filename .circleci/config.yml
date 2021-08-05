@@ -27,11 +27,14 @@ jobs:
           name: Create screencapture directory
           command: mkdir ~/screencapture
       - run:
+          name: Capture Screenshot
+          command: screencapture -x ~/screencapture/capture.png
+      - run:
           name: Capture Screen Recording
           command: screencapture -V2 ~/screencapture/capture.mov
       - run:
-          name: Capture Screenshot
-          command: screencapture -x ~/screencapture/capture.png
+          name: Pause for 5 minutes
+          command: sleep 5m
       - store_artifacts:
           path: ~/screencapture
              
