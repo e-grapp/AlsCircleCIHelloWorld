@@ -18,9 +18,12 @@ jobs:
       xcode: 12.5.0
 
     steps:
+      - mac-permissions/add-permission:
+          bundle-id: "com.apple.screencapture"
+          permission-type: "kTCCServiceScreenCapture"
       - run:
-          name: Pipeline Single Quotes!
-          command: echo << pipeline.parameters.pipelineSingleQuotes >>
+          name: Capture Screen
+          command: screencapture -v ouput.mov
       - mac-permissions/list-permissions
       - mac-permissions/list-permission-types
              
