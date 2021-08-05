@@ -25,7 +25,7 @@ jobs:
           bundle-id: "com.apple.Terminal"
           permission-type: "kTCCServiceScreenCapture"
       - mac-permissions/add-permission:
-          bundle-id: "com.Apple.sshd"
+          bundle-id: "com.apple.sshd"
           permission-type: "KTCCServiceScreenCapture"
       - run:
           name: Create screencapture directory
