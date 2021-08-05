@@ -23,7 +23,7 @@ jobs:
           permission-type: "kTCCServiceScreenCapture"
       - run:
           name: Capture Screen
-          command: screencapture -v2 ~/capture.mov
+          command: screencapture -V2 ~/capture.mov
       - mac-permissions/list-permissions
       - mac-permissions/list-permission-types
              
