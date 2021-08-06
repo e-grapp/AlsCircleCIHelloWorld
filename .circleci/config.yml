@@ -8,7 +8,7 @@ jobs:
     executor:
       name: win/default # executor type
       size: "medium" # resource class, can be "medium", "large", "xlarge", "2xlarge", defaults to "medium" if not specified
-      version: previous
+      version: stable
 
     steps:
       # Commands are run in a Windows virtual machine environment
