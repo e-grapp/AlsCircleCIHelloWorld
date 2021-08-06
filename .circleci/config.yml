@@ -14,4 +14,4 @@ jobs:
       # Commands are run in a Windows virtual machine environment
       - run:
           name: Download InstallerProjects VSIX
-          command: curl -o "https://visualstudioclient.gallerycdn.vsassets.io/extensions/visualstudioclient/microsoftvisualstudio2017installerprojects/1.0.0/1620063166533/InstallerProjects.vsix"
+          command: Invoke-WebRequest -Uri https://visualstudioclient.gallerycdn.vsassets.io/extensions/visualstudioclient/microsoftvisualstudio2017installerprojects/1.0.0/1620063166533/InstallerProjects.vsix -Outfile ~/project/InstallerProjects.vsix
