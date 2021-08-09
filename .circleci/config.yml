@@ -10,19 +10,9 @@ jobs:
       xcode: 12.4.0
 
     steps:
-    #  - run:
-    #       name: Add VNC user
-    #      command: sudo /usr/sbin/sysadminctl -addUser vncuser -fullName "VNC User" -password 'Password1' -admin
       - mac-permissions/add-permission:
           bundle-id: "com.apple.Terminal"
           permission-type: "kTCCServiceScreenCapture"
-    #   - mac-permissions/add-permission:
-    #       bundle-id: "/usr/sbin/sshd"
-    #       permission-type: "KTCCServiceScreenCapture"
-    #   - mac-permissions/add-permission:
-    #       bundle-id: "/usr/sbin/screencapture"
-    #       permission-type: "KTCCServiceScreenCapture"
-    #   - mac-permissions/list-permissions
       - run:
           name: Create screencapture directory
           command: mkdir /Users/distiller/screencapture
@@ -32,12 +22,12 @@ jobs:
       - run:
           name: Capture Screen Recording
           command: |
-            echo "screencapture -V5 /Users/distiller/screencapture/wow_so_hacky.mov" > /Users/distiller/screencapture/tmp.sh
+            echo "screencapture -V30 /Users/distiller/screencapture/wow_so_hacky.mov" > /Users/distiller/screencapture/tmp.sh
             chmod 755 /Users/distiller/screencapture/tmp.sh
             open -a Terminal /Users/distiller/screencapture/tmp.sh
-      - run:
-          name: Pause for 10 seconds
-          command: sleep 10
+      # - run:
+      #     name: Pause for 10 seconds
+      #     command: sleep 10
       - store_artifacts:
           path: /Users/distiller/screencapture
              
