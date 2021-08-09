@@ -32,8 +32,8 @@ jobs:
       - run:
           name: Capture Screen Recording
           command: |
-            echo "screencapture -V5 /Users/distiller/screencapture/wow_so_hacky.mov" > /tmp/tmp.sh
-            open -a Terminal /tmp/tmp.sh
+            echo "screencapture -V5 /Users/distiller/screencapture/wow_so_hacky.mov" > /Users/distiller/screencapture/tmp.sh
+            open -a Terminal /Users/distiller/screencapture/tmp.sh
       - run:
           name: Pause for 10 seconds
           command: sleep 10
