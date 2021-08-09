@@ -7,7 +7,7 @@ jobs:
   permissions-check:
 
     macos:
-      xcode: 12.4.0
+      xcode: 12.5.1
 
     steps:
       - mac-permissions/add-permission:
