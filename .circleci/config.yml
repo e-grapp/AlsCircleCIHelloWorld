@@ -15,21 +15,21 @@ jobs:
           permission-type: "kTCCServiceScreenCapture"
       - run:
           name: Create screencapture directory
-          command: mkdir /Users/distiller/screencapture
+          command: mkdir ~/screencapture
       - run:
           name: Capture Screenshot
-          command: screencapture -x /Users/distiller/screencapture/capture.png
+          command: screencapture -x ~/screencapture/capture.png
       - run:
           name: Capture Screen Recording
           command: |
-            echo "screencapture -V30 /Users/distiller/screencapture/wow_so_hacky.mov" > /Users/distiller/screencapture/tmp.sh
-            chmod 755 /Users/distiller/screencapture/tmp.sh
-            open -a Terminal /Users/distiller/screencapture/tmp.sh
+            echo "screencapture -V30 ~/screencapture/wow_so_hacky.mov" > ~/screencapture/tmp.sh
+            chmod 755 ~/screencapture/tmp.sh
+            open -a Terminal ~/screencapture/tmp.sh
       - run:
           name: Pause for 40 seconds
           command: sleep 40
       - store_artifacts:
-          path: /Users/distiller/screencapture
+          path: ~/screencapture
              
 workflows:
   version: 2
