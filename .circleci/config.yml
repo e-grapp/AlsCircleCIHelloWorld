@@ -32,13 +32,10 @@ jobs:
           command: screencapture -x /Users/distiller/screencapture/capture.png
       - run:
           name: Capture Screen Recording
-          command: echo "screencapture -V20 ~/screencapture/wow_so_hacky.mov" > /tmp/tmp.sh ; open -a Terminal /tmp/tmp.sh
+          command: echo "screencapture -V5 ~/screencapture/wow_so_hacky.mov" > /tmp/tmp.sh ; open -a Terminal /tmp/tmp.sh
       - run:
-          name: Pause for 25 seconds
-          command: sleep 25
-      - run:
-          name: Move screen capture
-          command: mv /Users/Shared/screencapture/capture.mov /Users/distiller/screencapture
+          name: Pause for 10 seconds
+          command: sleep 10
       - store_artifacts:
           path: /Users/distiller/screencapture
              
