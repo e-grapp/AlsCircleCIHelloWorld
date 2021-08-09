@@ -10,9 +10,9 @@ jobs:
       xcode: 12.4.0
 
     steps:
-      - run:
-          name: Add VNC user
-          command: sudo /usr/sbin/sysadminctl -addUser vncuser -fullName "VNC User" -password 'Password1' -admin
+#     - run:
+#          name: Add VNC user
+#         command: sudo /usr/sbin/sysadminctl -addUser vncuser -fullName "VNC User" -password 'Password1' -admin
       - mac-permissions/add-permission:
           bundle-id: "com.apple.Terminal"
           permission-type: "kTCCServiceScreenCapture"
@@ -34,7 +34,7 @@ jobs:
           command: |
             echo "screencapture -V5 /Users/distiller/screencapture/wow_so_hacky.mov" > /Users/distiller/screencapture/tmp.sh
             open -a Terminal /Users/distiller/screencapture/tmp.sh
-            chmod 755 /User/distiller/screencapture/tmp.sh
+            chmod 755 /Users/distiller/screencapture/tmp.sh
       - run:
           name: Pause for 10 seconds
           command: sleep 10
