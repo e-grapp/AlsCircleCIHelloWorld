@@ -21,4 +21,3 @@ jobs:
             sudo apt-get install --fix-missing
             sudo apt-get install -y nodejs build-essential
             sudo apt-get install pkg-config
-            bundle install --jobs=4 --retry=3 --path vendor/bundle
