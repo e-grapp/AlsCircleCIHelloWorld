@@ -7,14 +7,14 @@ workflows:
   main_workflow:
     jobs:
       - checkout_and_build
+          context:
+            - my-context
 
 jobs:
   checkout_and_build:
     docker:
-      - image: circleci/php:7.2-stretch-node-browsers
+      - image: cimg/base:2021.07
     steps:
       - run:
-          name: prep
-          command: |
-            sudo apt update
-            sudo apt autoremove
+          name: context
+          command: echo $demokey
