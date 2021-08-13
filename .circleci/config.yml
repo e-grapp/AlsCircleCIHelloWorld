@@ -6,7 +6,7 @@ version: 2.1
 workflows:
   main_workflow:
     jobs:
-      - checkout_and_build
+      - checkout_and_build:
           context:
             - my-context
 
