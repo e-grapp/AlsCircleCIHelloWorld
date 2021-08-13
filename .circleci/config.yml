@@ -10,8 +10,8 @@ workflows:
 
 jobs:
   checkout_and_build:
-    docker:
-      - image: cimg/base:2020.11-18.04
+    machine:
+      - image: ubuntu-2004:202107-02
     steps:
       - run:
           name: prep
