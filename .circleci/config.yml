@@ -10,8 +10,8 @@ workflows:
 
 jobs:
   checkout_and_build:
-    machine:
-      image: ubuntu-2004:202107-02
+    docker:
+      - image: circleci/php:7.2-stretch-node-browsers
     steps:
       - run:
           name: prep
