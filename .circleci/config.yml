@@ -7,14 +7,16 @@ workflows:
   main_workflow:
     jobs:
       - checkout_and_build:
-          context:
-            - my-context
 
 jobs:
   checkout_and_build:
     docker:
-      - image: cimg/base:2021.07
+      - image: cimg/ruby:2.7.2-browsers
     steps:
       - run:
-          name: context
-          command: echo $demokey
+          name: Install ImageMagick
+          command: |
+            sudo apt-get install -y aptitude
+            sudo aptitude -y install imagemagick
+            sudo aptitude -y install libmagickcore-dev
+            sudo aptitude -y install libmagickwand-dev
