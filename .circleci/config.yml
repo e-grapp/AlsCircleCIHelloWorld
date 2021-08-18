@@ -23,4 +23,6 @@ jobs:
           command: pwd
       - run:
           name: Get directory location and echo command
-          command: echo pwd | pwd
+          command: |
+            echo pwd
+            pwd
