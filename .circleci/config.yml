@@ -13,7 +13,7 @@ workflows:
 jobs:
   checkout_and_build:
     docker:
-      - image: cimg/base:2021.07
+      - image: circleci/ruby:2.6.6-node
     steps:
       - run:
           name: context
