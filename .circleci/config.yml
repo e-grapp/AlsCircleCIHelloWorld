@@ -22,7 +22,5 @@ jobs:
           name: Get directory location
           command: pwd
       - run:
-          name: Get directory location and echo command
-          command: |
-            echo pwd
-            pwd
+          name: Check /etc/apt/apt.conf
+          command: cat /etc/apt/apt.conf
