@@ -18,9 +18,9 @@ jobs:
       - run:
           name: context
           command: echo $demokey
-#      - run:
-#          name: Update apt
-#          command: sudo apt update      
+      - run:
+          name: Update apt
+          command: sudo apt update      
       - run:
           name: Install mysql client
           command: sudo apt install -y --fix-missing default-mysql-client
