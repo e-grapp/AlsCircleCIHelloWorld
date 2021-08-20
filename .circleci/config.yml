@@ -19,7 +19,7 @@ jobs:
       - image: cimg/node:current-browsers
     steps:
       - browser-tools/install-chrome:
-          chrome-version: "latest"
+          chrome-version: 85.0.4183.102
       - browser-tools/install-chromedriver
       - run:
           command: |
