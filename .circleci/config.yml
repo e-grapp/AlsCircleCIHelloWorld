@@ -13,7 +13,7 @@ workflows:
 jobs:
   checkout_and_build:
     docker:
-      - image: cimg/ruby:2.6.6-node
+      - image: cimg/python:3.9.6
     steps:
       - run:
           name: context
@@ -21,9 +21,6 @@ jobs:
       - run:
           name: Update apt
           command: sudo apt update      
-      - run:
-          name: Install mysql client
-          command: sudo apt install -y --fix-missing default-mysql-client
       - run:
           name: Get directory location and echo command
           command: |
