@@ -18,7 +18,8 @@ jobs:
     docker:
       - image: cimg/node:current-browsers
     steps:
-      - browser-tools/install-chrome
+      - browser-tools/install-chrome:
+          chrome-version: "90.0.4430.210"
       - browser-tools/install-chromedriver
       - run:
           command: |
