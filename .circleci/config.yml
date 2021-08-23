@@ -15,8 +15,8 @@ workflows:
 
 jobs:
   checkout_and_build:
-    docker:
-      - image: circleci/android:api-29
+    machine:
+      image: machine-ubuntu
     steps:
 #      - android/create-avd:
 #          avd-name: myavd
