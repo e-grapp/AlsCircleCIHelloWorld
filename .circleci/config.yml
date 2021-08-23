@@ -27,12 +27,12 @@ jobs:
 #          no-window: true
 #          restore-gradle-cache-prefix: v1a
 #          wait-for-emulator: true
-      - run:
-          name: List all APK files
-          command: |
-            ls -al onXmaps/build/outputs/apk/backcountry/qa
-            ls -al onXmaps/build/outputs/apk/hunt/qa
-            ls -al onXmaps/build/outputs/apk/offroad/qa
+      # - run:
+      #     name: List all APK files
+      #     command: |
+      #       ls -al onXmaps/build/outputs/apk/backcountry/qa
+      #       ls -al onXmaps/build/outputs/apk/hunt/qa
+      #       ls -al onXmaps/build/outputs/apk/offroad/qa
 #      - run:
 #          name: All KVM
 #          command: |
