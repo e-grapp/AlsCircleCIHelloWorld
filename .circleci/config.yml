@@ -3,15 +3,16 @@
 
 version: 2.1
 
-workflows:
-  main_workflow:
-    jobs:
-      - checkout_and_build:
-
 jobs:
   checkout_and_build:
     docker:
       - image: circleci/openjdk:11-jdk
     steps:
-      - name: Find current directory
-      - command: pwd
+      - run:
+          name: Find current directory
+          command: pwd
+
+workflows:
+  main_workflow:
+    jobs:
+      - checkout_and_build
