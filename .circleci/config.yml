@@ -3,15 +3,10 @@
 
 version: 2.1
 
-orbs:
-  android: circleci/android@1.0.3
-
 workflows:
   main_workflow:
     jobs:
       - checkout_and_build:
-          context:
-            - my-context
 
 jobs:
   checkout_and_build:
