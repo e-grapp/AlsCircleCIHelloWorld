@@ -5,8 +5,9 @@ version: 2.1
 
 jobs:
   checkout_and_build:
-    docker:
-      - image: circleci/openjdk:11-jdk
+    machine:
+      image: ubuntu-2004:202010-01
+    resource_class: xlarge
     steps:
       - run:
           name: Find current directory
