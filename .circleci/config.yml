@@ -7,17 +7,14 @@ jobs:
   checkout_and_build:
     docker:
       - image: cimg/node:current-browsers
-    steps:
-      - run:
-          name: Find current directory
-          command: pwd
-  install_local_browsers:
-    description: Install Chrome and Firefox
     parameters:
       chrome_browser_version:
         type: string
         default: "89.0.4389.90"
     steps:
+      - run:
+          name: Find current directory
+          command: pwd
       - browser-tools/install-firefox
       - browser-tools/install-chrome:
           chrome-version: << parameters.chrome_browser_version >>
