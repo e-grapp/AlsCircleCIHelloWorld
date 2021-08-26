@@ -1,14 +1,8 @@
 version: 2.1
 
 orbs:
-  slack: circleci/slack@3.4.2
   browser-tools: circleci/browser-tools@1.2.1
 
-parameters:
-  browser:
-    type: string
-    default: ${DEFAULT_BROWSER}
-  
 executors:
   docker_node:
     docker:
