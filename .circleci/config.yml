@@ -11,18 +11,6 @@ parameters:
     description: "Number of containers to run in parallel"
     type: integer
     default: 10
-  run_accessibility:
-    type: boolean
-    default: false
-  run_deploy:
-    type: boolean
-    default: false
-  run_manual_build:
-    type: boolean
-    default: false
-  run_smokes:
-    type: boolean
-    default: false
   target_env:
     description: "Demo Environment to trigger the smoke tests against"
     type: string
@@ -31,11 +19,7 @@ parameters:
     description: "Path to test folder, or specific test file"
     type: string
     default: "\"./tests/**/*.js\""
-  v2_petition_show:
-    description: "Whether to test the v2 petition page"
-    type: string
-    default: "false"
-
+  
 orbs:
   slack: circleci/slack@3.4.2
   browser-tools: circleci/browser-tools@1.1.3
