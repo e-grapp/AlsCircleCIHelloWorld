@@ -35,7 +35,7 @@ commands:
           default: "latest"
       steps:
           - browser-tools/install-chrome:
-              chrome-version: << parameters.chrome_browser_version >>
+              chrome-version: latest #<< parameters.chrome_browser_version >>
 
 workflows:
   build_on_changes:
