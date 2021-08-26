@@ -8,14 +8,6 @@ parameters:
   browser:
     type: string
     default: ${DEFAULT_BROWSER}
-  target_env:
-    description: "Demo Environment to trigger the smoke tests against"
-    type: string
-    default: ${TARGET_ENV}
-  test_path:
-    description: "Path to test folder, or specific test file"
-    type: string
-    default: "\"./tests/**/*.js\""
   
 executors:
   docker_node:
@@ -47,12 +39,6 @@ jobs:
       chrome_browser_version:
         type: string
         default: ""
-      desktop:
-        type: string
-        default: << pipeline.parameters.desktop >>
-      path:
-        type: string
-        default: << pipeline.parameters.test_path >>
 
     steps:
       - install_local_browsers:
