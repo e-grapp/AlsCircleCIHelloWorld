@@ -34,49 +34,9 @@ workflows:
     jobs:
       - lint-only
       - regression_build:
-          name: Site Tour
-          path: "\"./tests/site_navigation/**/*.js\""
-          parallelism: 1
-          requires:
-            - lint-only
-      - regression_build:
-          name: Promotions
-          path: "\"./tests/payments/promotions/**/*.js\""
-          browser: "'chrome:headless'"
-          desktop: "true"
-          parallelism: 15
-          requires:
-            - lint-only
-      - regression_build:
-          name: Membership
-          path: "\"./tests/payments/membership/**/*.js\""
-          browser: "'chrome:headless'"
-          desktop: "true"
-          parallelism: 15
-          requires:
-            - lint-only
-      - regression_build:
-          name: Petitions
-          path: "\"./tests/petitions/**/*.js\""
-          parallelism: 10
-          requires:
-            - lint-only
-      - regression_build:
-          name: Search
-          path: "\"./tests/search/**/*.js\""
-          parallelism: 1
-          requires:
-            - lint-only
-      - regression_build:
           name: Activity Metric Service
           path: "\"./tests/user_activity_metrics/**/*.js\""
           parallelism: 1
-          requires:
-            - lint-only
-      - regression_build:
-          name: Users
-          path: "\"./tests/users/**/*.js\""
-          parallelism: 2
           requires:
             - lint-only
 
