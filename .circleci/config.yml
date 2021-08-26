@@ -1,5 +1,9 @@
 version: 2.1
 
+orbs:
+  slack: circleci/slack@3.4.2
+  browser-tools: circleci/browser-tools@1.2.1
+
 parameters:
   browser:
     type: string
@@ -16,10 +20,6 @@ parameters:
     type: string
     default: "\"./tests/**/*.js\""
   
-orbs:
-  slack: circleci/slack@3.4.2
-  browser-tools: circleci/browser-tools@1.2.1
-
 executors:
   docker_node:
     docker:
@@ -27,13 +27,12 @@ executors:
     working_directory: ~/regression-qaa/
 
 commands:
-
   install_local_browsers:
       description: Install Chrome and Firefox
       parameters:
         chrome_browser_version:
           type: string
-          default: latest
+          default: "latest"
       steps:
           - browser-tools/install-chrome:
               chrome-version: << parameters.chrome_browser_version >>
