@@ -7,10 +7,6 @@ parameters:
   desktop:
     type: string
     default: "false"
-  parallelism:
-    description: "Number of containers to run in parallel"
-    type: integer
-    default: 10
   target_env:
     description: "Demo Environment to trigger the smoke tests against"
     type: string
@@ -39,7 +35,6 @@ commands:
           type: string
           default: "89.0.4389.90"
       steps:
-          - browser-tools/install-firefox
           - browser-tools/install-chrome:
               chrome-version: << parameters.chrome_browser_version >>
 
@@ -48,7 +43,6 @@ workflows:
     jobs:
       - regression_build:
           name: Site Tour
-          parallelism: 1
 
 jobs:
   regression_build:
@@ -60,16 +54,12 @@ jobs:
       chrome_browser_version:
         type: string
         default: ""
-      parallelism:
-        type: integer
-        default: 10 # I've raised a bug with CircleCi, we're unable to use << pipeline.parameters.parallelism >> as the default value here
       desktop:
         type: string
         default: << pipeline.parameters.desktop >>
       path:
         type: string
         default: << pipeline.parameters.test_path >>
-    parallelism: << parameters.parallelism >>
 
     steps:
       - install_local_browsers:
