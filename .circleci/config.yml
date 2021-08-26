@@ -33,7 +33,7 @@ commands:
       parameters:
         chrome_browser_version:
           type: string
-          default: 89.0.4389.90
+          default: latest
       steps:
           - browser-tools/install-chrome:
               chrome-version: << parameters.chrome_browser_version >>
