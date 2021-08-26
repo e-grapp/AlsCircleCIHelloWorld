@@ -4,6 +4,37 @@ parameters:
   browser:
     type: string
     default: ${DEFAULT_BROWSER}
+  desktop:
+    type: string
+    default: "false"
+  parallelism:
+    description: "Number of containers to run in parallel"
+    type: integer
+    default: 10
+  run_accessibility:
+    type: boolean
+    default: false
+  run_deploy:
+    type: boolean
+    default: false
+  run_manual_build:
+    type: boolean
+    default: false
+  run_smokes:
+    type: boolean
+    default: false
+  target_env:
+    description: "Demo Environment to trigger the smoke tests against"
+    type: string
+    default: ${TARGET_ENV}
+  test_path:
+    description: "Path to test folder, or specific test file"
+    type: string
+    default: "\"./tests/**/*.js\""
+  v2_petition_show:
+    description: "Whether to test the v2 petition page"
+    type: string
+    default: "false"
 
 orbs:
   slack: circleci/slack@3.4.2
@@ -16,6 +47,7 @@ executors:
     working_directory: ~/regression-qaa/
 
 commands:
+
   install_local_browsers:
       description: Install Chrome and Firefox
       parameters:
@@ -30,21 +62,31 @@ commands:
 workflows:
   build_on_changes:
     jobs:
-      - lint-only
       - regression_build:
-          name: Activity Metric Service
-          path: "\"./tests/user_activity_metrics/**/*.js\""
+          name: Site Tour
           parallelism: 1
-          requires:
-            - lint-only
 
 jobs:
-  lint-only:
-    parallelism: 1
+  regression_build:
     executor: docker_node
+    parameters:
+      browser:
+        type: string
+        default: << pipeline.parameters.browser >>
+      chrome_browser_version:
+        type: string
+        default: ""
+      parallelism:
+        type: integer
+        default: 10 # I've raised a bug with CircleCi, we're unable to use << pipeline.parameters.parallelism >> as the default value here
+      desktop:
+        type: string
+        default: << pipeline.parameters.desktop >>
+      path:
+        type: string
+        default: << pipeline.parameters.test_path >>
+    parallelism: << parameters.parallelism >>
 
     steps:
-      - env_setup
-      - run:
-          name: Run lint checks
-          command: npm run lint
+      - install_local_browsers:
+          chrome_browser_version: << parameters.chrome_browser_version >>
