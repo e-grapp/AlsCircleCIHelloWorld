@@ -8,9 +8,6 @@ parameters:
   browser:
     type: string
     default: ${DEFAULT_BROWSER}
-  desktop:
-    type: string
-    default: "false"
   target_env:
     description: "Demo Environment to trigger the smoke tests against"
     type: string
@@ -35,7 +32,7 @@ commands:
           default: "latest"
       steps:
           - browser-tools/install-chrome:
-              chrome-version: << parameters.chrome_browser_version >>
+              chrome-version: latest #<< parameters.chrome_browser_version >>
 
 workflows:
   build_on_changes:
@@ -47,9 +44,6 @@ jobs:
   regression_build:
     executor: docker_node
     parameters:
-      browser:
-        type: string
-        default: << pipeline.parameters.browser >>
       chrome_browser_version:
         type: string
         default: ""
