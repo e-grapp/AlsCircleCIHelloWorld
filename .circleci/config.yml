@@ -5,6 +5,9 @@ orbs:
   browser-tools: circleci/browser-tools@1.2.1
 
 parameters:
+  chrome_browser_version:
+    type: string
+    default: ""
   browser:
     type: string
     default: ${DEFAULT_BROWSER}
@@ -50,9 +53,6 @@ jobs:
       browser:
         type: string
         default: << pipeline.parameters.browser >>
-      # chrome_browser_version:
-      #   type: string
-      #   default: ""
       desktop:
         type: string
         default: << pipeline.parameters.desktop >>
