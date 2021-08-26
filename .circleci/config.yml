@@ -34,5 +34,5 @@ jobs:
         default: ""
 
     steps:
-      - install_local_browsers:
+      - install_local_browsers
           #chrome_browser_version: << parameters.chrome_browser_version >>
