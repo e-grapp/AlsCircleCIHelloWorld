@@ -29,8 +29,6 @@ commands:
 
 workflows:
   build_on_changes:
-    unless:
-      or: [ << pipeline.parameters.run_accessibility >>, << pipeline.parameters.run_manual_build >> ]
     jobs:
       - lint-only
       - regression_build:
