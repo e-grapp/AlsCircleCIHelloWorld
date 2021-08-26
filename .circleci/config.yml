@@ -35,7 +35,7 @@ commands:
           default: "latest"
       steps:
           - browser-tools/install-chrome:
-              chrome-version: latest #<< parameters.chrome_browser_version >>
+              chrome-version: << parameters.chrome_browser_version >>
 
 workflows:
   build_on_changes:
@@ -50,9 +50,9 @@ jobs:
       browser:
         type: string
         default: << pipeline.parameters.browser >>
-      chrome_browser_version:
-        type: string
-        default: ""
+      # chrome_browser_version:
+      #   type: string
+      #   default: ""
       desktop:
         type: string
         default: << pipeline.parameters.desktop >>
