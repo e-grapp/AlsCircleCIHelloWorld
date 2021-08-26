@@ -1,28 +1,92 @@
-# For a detailed guide to building and testing on iOS, read the docs:
-# https://circleci.com/docs/2.0/testing-ios/
-
 version: 2.1
 
+parameters:
+  browser:
+    type: string
+    default: ${DEFAULT_BROWSER}
+
 orbs:
+  slack: circleci/slack@3.4.2
   browser-tools: circleci/browser-tools@1.1.3
 
-jobs:
-  checkout_and_build:
+executors:
+  docker_node:
     docker:
       - image: cimg/node:current-browsers
-    parameters:
-      chrome_browser_version:
-        type: string
-        default: "89.0.4389.90"
-    steps:
-      - run:
-          name: Find current directory
-          command: pwd
-      - browser-tools/install-firefox
-      - browser-tools/install-chrome:
-          chrome-version: << parameters.chrome_browser_version >>
+    working_directory: ~/regression-qaa/
+
+commands:
+  install_local_browsers:
+      description: Install Chrome and Firefox
+      parameters:
+        chrome_browser_version:
+          type: string
+          default: "89.0.4389.90"
+      steps:
+          - browser-tools/install-firefox
+          - browser-tools/install-chrome:
+              chrome-version: << parameters.chrome_browser_version >>
 
 workflows:
-  main_workflow:
+  build_on_changes:
+    unless:
+      or: [ << pipeline.parameters.run_accessibility >>, << pipeline.parameters.run_manual_build >> ]
     jobs:
-      - checkout_and_build
+      - lint-only
+      - regression_build:
+          name: Site Tour
+          path: "\"./tests/site_navigation/**/*.js\""
+          parallelism: 1
+          requires:
+            - lint-only
+      - regression_build:
+          name: Promotions
+          path: "\"./tests/payments/promotions/**/*.js\""
+          browser: "'chrome:headless'"
+          desktop: "true"
+          parallelism: 15
+          requires:
+            - lint-only
+      - regression_build:
+          name: Membership
+          path: "\"./tests/payments/membership/**/*.js\""
+          browser: "'chrome:headless'"
+          desktop: "true"
+          parallelism: 15
+          requires:
+            - lint-only
+      - regression_build:
+          name: Petitions
+          path: "\"./tests/petitions/**/*.js\""
+          parallelism: 10
+          requires:
+            - lint-only
+      - regression_build:
+          name: Search
+          path: "\"./tests/search/**/*.js\""
+          parallelism: 1
+          requires:
+            - lint-only
+      - regression_build:
+          name: Activity Metric Service
+          path: "\"./tests/user_activity_metrics/**/*.js\""
+          parallelism: 1
+          requires:
+            - lint-only
+      - regression_build:
+          name: Users
+          path: "\"./tests/users/**/*.js\""
+          parallelism: 2
+          requires:
+            - lint-only
+
+jobs:
+  lint-only:
+    parallelism: 1
+    executor: docker_node
+
+    steps:
+      - env_setup
+      - run:
+          name: Run lint checks
+          command: npm run lint
