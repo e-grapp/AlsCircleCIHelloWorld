@@ -11,10 +11,6 @@ executors:
 commands:
   install_local_browsers:
       description: Install Chrome and Firefox
-      parameters:
-        chrome_browser_version:
-          type: string
-          default: "latest"
       steps:
           - browser-tools/install-chrome:
               chrome-version: << parameters.chrome_browser_version >>
@@ -31,8 +27,8 @@ jobs:
     parameters:
       chrome_browser_version:
         type: string
-        default: ""
+        default: "latest"
 
     steps:
       - install_local_browsers
-          #chrome_browser_version: << parameters.chrome_browser_version >>
+          chrome_browser_version: << parameters.chrome_browser_version >>
