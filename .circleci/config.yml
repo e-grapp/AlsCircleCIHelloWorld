@@ -15,24 +15,6 @@ jobs:
           bundle-id: "com.apple.Terminal"
           permission-type: "kTCCServiceScreenCapture"
           # Adds ScreenCapture permission to Terminal
-      - run:
-          name: Create screencapture directory
-          command: mkdir ~/screencapture
-          # Creates folder for recording
-      - run:
-          name: Capture Screen Recording
-          command: |
-            echo "screencapture -V30 ~/screencapture/wow_so_hacky.mov" > ~/screencapture/tmp.sh
-            chmod 755 ~/screencapture/tmp.sh
-            open -a Terminal ~/screencapture/tmp.sh
-          # Creates shell script, changes permission of script and launches using Terminal
-      - run:
-          name: Pause for 40 seconds
-          command: sleep 40
-          # Er, pauses for 40 secconds
-      - store_artifacts:
-          path: ~/screencapture
-          # Saves contents of folder to artifacts
              
 workflows:
   version: 2
