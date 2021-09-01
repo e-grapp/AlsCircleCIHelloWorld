@@ -22,7 +22,9 @@ commands:
           command: |
             while true; do
             sleep 10
+            echo "Chrome"
             curl https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb --write-out "%{http_code}" -o /dev/null
+            echo "CCI (Ignore)"
             curl https://circleci.com --write-out "%{http_code}" -o /dev/null
             cat /dev/null
             done
