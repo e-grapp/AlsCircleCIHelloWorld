@@ -10,10 +10,14 @@ executors:
 
 commands:
   install_local_browsers:
-      description: Install Chrome and Firefox
-      steps:
-        - browser-tools/install-chrome:
-            chrome-version: << parameters.chrome_browser_version >>
+    description: Install Chrome and Firefox
+    parameters:
+      chrome_browser_version:
+        type: string
+        default: "latest"
+    steps:
+      - browser-tools/install-chrome:
+          chrome-version: << parameters.chrome_browser_version >>
 
 workflows:
   build_on_changes:
@@ -24,10 +28,6 @@ workflows:
 jobs:
   regression_build:
     executor: docker_node
-    parameters:
-      chrome_browser_version:
-        type: string
-        default: latest
 
     steps:
       - install_local_browsers
