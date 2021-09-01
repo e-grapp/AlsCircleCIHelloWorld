@@ -22,9 +22,8 @@ commands:
           command: |
             while true; do
             sleep 10
-            curl -I -sS https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -o /dev/null --fail
+            response=$(curl -I -sS https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -o /dev/null --fail)
             done
-            return 0
           background: true
       - run:
           name: Sleep
