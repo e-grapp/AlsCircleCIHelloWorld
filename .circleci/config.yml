@@ -17,16 +17,10 @@ commands:
         default: "latest"
     steps:
       - run:
-          name: Install Chrome
+          name: Checking Chrome URL
           command: |
-            cd /home/circleci && wget -O google-chrome-stable_current_amd64.deb -t 5 "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb" \
-            && (sudo dpkg -i google-chrome-stable_current_amd64.deb || sudo apt-get -fy install)  \
-            && rm -rf google-chrome-stable_current_amd64.deb \
-            && sudo sed -i 's|HERE/chrome"|HERE/chrome" --disable-setuid-sandbox --no-sandbox|g' \
-            "/opt/google/chrome/google-chrome" \
-            && google-chrome --version
-#      - browser-tools/install-chrome:
-#          chrome-version: << parameters.chrome_browser_version >>
+            chmod 755 ./chrometest.sh
+            ./chrometest.sh
 
 workflows:
   build_on_changes:
