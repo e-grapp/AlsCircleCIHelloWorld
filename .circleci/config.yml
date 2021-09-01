@@ -18,10 +18,12 @@ commands:
     steps:
       - checkout
       - run:
-          name: Checking Chrome URL
           command: |
-            sudo chmod 755 ~/project/chrometest.sh
-            ~/project/chrometest.sh
+            while true; do
+            sleep 5
+            curl -I -sS https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -o /dev/null --fail
+            done
+    background: true
 
 workflows:
   build_on_changes:
