@@ -27,7 +27,7 @@ jobs:
     parameters:
       chrome_browser_version:
         type: string
-        default: "latest"
+        default: latest
 
     steps:
       - install_local_browsers
