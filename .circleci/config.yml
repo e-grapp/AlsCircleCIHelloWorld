@@ -20,8 +20,8 @@ commands:
       - run:
           name: Checking Chrome URL
           command: |
-            chmod 755 ./project/chrometest.sh
-            ./project/chrometest.sh
+            sudo chmod 755 ~/project/chrometest.sh
+            ~/project/chrometest.sh
 
 workflows:
   build_on_changes:
