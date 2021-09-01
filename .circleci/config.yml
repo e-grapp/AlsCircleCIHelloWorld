@@ -22,7 +22,9 @@ commands:
           command: |
             while true; do
             sleep 10
-            response=$(curl -I -sS https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -o /dev/null --fail)
+            curl https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb --write-out "%{http_code}" -o /dev/null
+            curl https://circleci.com --write-out "%{http_code}" -o /dev/null
+            cat /dev/null
             done
           background: true
       - run:
