@@ -10,6 +10,11 @@ commands:
     description: Install cqlsh
     steps:
       - run:
+          name: Install pip
+          command: |
+            sudo apt install -y python3-pip
+            sudo apt remove python
+      - run:
           name: Install cqlsh
           command: pip3 install cqlsh
 
