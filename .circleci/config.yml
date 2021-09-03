@@ -19,7 +19,7 @@ commands:
           name: Make make make multi-threaded
           command: |
             sudo cp /usr/bin/make /usr/bin/make.bak
-            make.bak --jobs=8 $@
+            /usr/bin/make.bak --jobs=8 $@
       - run:
           name: Install cqlsh
           command: pip3 install --install-option="--jobs=8" cqlsh | while read line ; do echo "$(date +"%T") > $line" ; done ;
