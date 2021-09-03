@@ -1,48 +1,27 @@
 version: 2.1
 
-orbs:
-  browser-tools: circleci/browser-tools@1.2.1
-
 executors:
   docker_node:
     docker:
-      - image: cimg/node:current-browsers
+      - image: circleci/golang:1
 
 commands:
-  install_local_browsers:
-    description: Install Chrome and Firefox
-    parameters:
-      chrome_browser_version:
-        type: string
-        default: "latest"
+  install_cqlsh:
+    description: Install cqlsh
     steps:
-      - checkout
       - run:
-          name: Check Chrome URL
-          command: |
-            while true; do
-            sleep 10
-            echo "Chrome"
-            curl https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb --write-out "%{http_code}" -o /dev/null
-            echo "CCI (Ignore)"
-            curl https://circleci.com --write-out "%{http_code}" -o /dev/null
-            cat /dev/null
-            done
-          background: true
-      - run:
-          name: Sleep
-          command: sleep 60m
+          name: Install cqlsh
+          command: pip3 install cqlsh
 
 workflows:
   build_on_changes:
     jobs:
-      - regression_build:
+      - build:
           name: Site Tour
 
 jobs:
-  regression_build:
+  build:
     executor: docker_node
 
     steps:
-      - install_local_browsers
-          #chrome_browser_version: << parameters.chrome_browser_version >>
+      - install_cqlsh
