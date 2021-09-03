@@ -4,6 +4,7 @@ executors:
   docker_node:
     docker:
       - image: circleci/golang:1
+    resource_class: xlarge
 
 commands:
   install_cqlsh:
