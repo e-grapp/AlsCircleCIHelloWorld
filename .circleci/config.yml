@@ -15,12 +15,12 @@ commands:
           command: |
             sudo apt install -y python3-pip
             sudo apt remove python
-      - run:
-          name: Make make make multi-threaded
-          command: |
-            sudo mv /usr/bin/make /usr/bin/make.bak
-            sudo echo /usr/bin/make.bak --jobs=8 $@ > sudo /usr/bin/make
-            sudo chmod 766 /usr/bin/make
+      # - run:
+      #     name: Make make make multi-threaded
+      #     command: |
+      #       sudo mv /usr/bin/make /usr/bin/make.bak
+      #       sudo echo /usr/bin/make.bak --jobs=8 $@ > sudo /usr/bin/make
+      #       sudo chmod 766 /usr/bin/make
       - run:
           name: Install cqlsh
           command: pip3 install --install-option="--jobs=8" cqlsh | while read line ; do echo "$(date +"%T") > $line" ; done ;
