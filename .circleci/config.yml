@@ -16,7 +16,7 @@ commands:
             sudo apt remove python
       - run:
           name: Install cqlsh
-          command: pip3 install cqlsh
+          command: pip3 install cqlsh | while read line ; do echo "$(date +"%T") > $line" ; done ;
 
 workflows:
   build_on_changes:
