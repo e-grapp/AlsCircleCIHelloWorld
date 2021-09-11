@@ -3,8 +3,8 @@ version: 2.1
 executors:
   docker_node:
     docker:
-      - image: circleci/golang:1
-    resource_class: xlarge
+      - image: circleci/base:2021.07
+    resource_class: medium
 
 commands:
   install_cqlsh:
@@ -23,7 +23,7 @@ commands:
       #       sudo chmod 766 /usr/bin/make
       - run:
           name: Install cqlsh
-          command: pip3 install --install-option="--jobs=8" cqlsh | while read line ; do echo "$(date +"%T") > $line" ; done ;
+          command: pip3 install cqlsh | while read line ; do echo "$(date +"%T") > $line" ; done ;
 
 workflows:
   build_on_changes:
@@ -36,4 +36,18 @@ jobs:
     executor: docker_node
 
     steps:
+      - restore_cache:
+          keys:
+            - my-cache
+      
+      - run:
+          name: Get Ubuntu image
+          command: |
+            mkdir ./to_cache
+            wget -P ./to_cache https://releases.ubuntu.com/16.04.7/ubuntu-16.04.6-desktop-i386.iso
+
       - install_cqlsh
+      - save_cache:
+          key: my-cache
+          paths:
+            - ./to_cache/
