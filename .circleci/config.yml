@@ -14,7 +14,6 @@ commands:
           name: Install pip
           command: |
             sudo apt install -y python3-pip
-            sudo apt remove python
       # - run:
       #     name: Make make make multi-threaded
       #     command: |
