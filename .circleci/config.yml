@@ -3,7 +3,7 @@ version: 2.1
 executors:
   docker_node:
     docker:
-      - image: circleci/base:2021.07
+      - image: cimg/base:2021.07
     resource_class: medium
 
 commands:
