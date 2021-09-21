@@ -31,6 +31,8 @@ commands:
 jobs:
 
   deploy-dev:
+    docker:
+      - image: cimg/node:12.18
     steps:
       - deploy
 
@@ -38,4 +40,4 @@ workflows:
 
   build:
     jobs:
-      - deploy-dev
+      deploy-dev
