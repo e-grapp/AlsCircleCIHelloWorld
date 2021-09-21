@@ -6,10 +6,6 @@ orbs:
 commands:
   deploy:
     description: 'Deploy to AWS'
-    parameters:
-      stage:
-        type: string
-        default: 'dev'
     steps:
       - attach_workspace:
           at: .
@@ -35,7 +31,6 @@ commands:
 jobs:
 
   deploy-dev:
-    executor: serverless/default
     steps:
       - deploy
 
