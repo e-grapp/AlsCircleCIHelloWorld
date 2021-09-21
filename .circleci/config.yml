@@ -1,53 +1,53 @@
 version: 2.1
 
-executors:
-  docker_node:
-    docker:
-      - image: cimg/base:2021.07
-    resource_class: medium
+orbs:
+  node: 'circleci/node@4.7.0'
+  serverless: 'circleci/serverless-framework@1.0.1'
+  slack: 'circleci/slack@3.4.2'
 
 commands:
-  install_cqlsh:
-    description: Install cqlsh
+  deploy:
+    description: 'Deploy to AWS'
+    parameters:
+      stage:
+        type: string
+        default: 'dev'
     steps:
+      - attach_workspace:
+          at: .
+      - serverless/setup
       - run:
-          name: Install pip
-          command: |
-            sudo apt update
-            sudo apt install -y python3-pip
-      # - run:
-      #     name: Make make make multi-threaded
-      #     command: |
-      #       sudo mv /usr/bin/make /usr/bin/make.bak
-      #       sudo echo /usr/bin/make.bak --jobs=8 $@ > sudo /usr/bin/make
-      #       sudo chmod 766 /usr/bin/make
+          name: Deploying Core
+          command: NODE_OPTIONS=--max_old_space_size=2048 sls deploy --verbose --stage << parameters.stage >>
       - run:
-          name: Install cqlsh
-          command: pip3 install cqlsh | while read line ; do echo "$(date +"%T") > $line" ; done ;
-
-workflows:
-  build_on_changes:
-    jobs:
-      - build:
-          name: Site Tour
+          name: Deploying Campaign
+          command: sls deploy --stage << parameters.stage >>
+      - run:
+          name: Deploying Journey
+          command: sls deploy --stage << parameters.stage >>
+      - run:
+          name: Deploying Segment
+          command: sls deploy --stage << parameters.stage >>
+      - run:
+          name: Deploying Integration
+          command: sls deploy --stage << parameters.stage >>
+      - run:
+          name: Deploying Revenue
+          command: sls deploy --stage << parameters.stage >>
+      - slack/status:
+          success_message: ':tada: *$CIRCLE_PROJECT_REPONAME* deployed to *<< parameters.stage >>*'
+          failure_message: ':red_circle: *$CIRCLE_PROJECT_REPONAME* deployment to *<< parameters.stage >>* has failed!'
 
 jobs:
-  build:
-    executor: docker_node
 
+  deploy-dev:
+    executor: serverless/default
     steps:
-      - restore_cache:
-          keys:
-            - my-cache
-      
-      - run:
-          name: Get Ubuntu image
-          command: |
-            mkdir ./to_cache
-            wget -P ./to_cache https://releases.ubuntu.com/16.04.7/ubuntu-16.04.6-desktop-i386.iso
+      - deploy:
+          stage: 'dev'
 
-      - install_cqlsh
-      - save_cache:
-          key: my-cache
-          paths:
-            - ./to_cache/
+workflows:
+
+  build:
+    jobs:
+      - deploy-de:v
