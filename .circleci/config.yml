@@ -2,8 +2,6 @@ version: 2.1
 
 orbs:
   node: 'circleci/node@4.7.0'
-  serverless: 'circleci/serverless-framework@1.0.1'
-  slack: 'circleci/slack@3.4.2'
 
 commands:
   deploy:
@@ -18,25 +16,22 @@ commands:
       - serverless/setup
       - run:
           name: Deploying Core
-          command: NODE_OPTIONS=--max_old_space_size=2048 sls deploy --verbose --stage << parameters.stage >>
-      - run:
-          name: Deploying Campaign
-          command: sls deploy --stage << parameters.stage >>
-      - run:
-          name: Deploying Journey
-          command: sls deploy --stage << parameters.stage >>
-      - run:
-          name: Deploying Segment
-          command: sls deploy --stage << parameters.stage >>
-      - run:
-          name: Deploying Integration
-          command: sls deploy --stage << parameters.stage >>
-      - run:
-          name: Deploying Revenue
-          command: sls deploy --stage << parameters.stage >>
-      - slack/status:
-          success_message: ':tada: *$CIRCLE_PROJECT_REPONAME* deployed to *<< parameters.stage >>*'
-          failure_message: ':red_circle: *$CIRCLE_PROJECT_REPONAME* deployment to *<< parameters.stage >>* has failed!'
+          command: NODE_OPTIONS=--max_old_space_size=2048 pwd
+      # - run:
+      #     name: Deploying Campaign
+      #     command: sls deploy --stage << parameters.stage >>
+      # - run:
+      #     name: Deploying Journey
+      #     command: sls deploy --stage << parameters.stage >>
+      # - run:
+      #     name: Deploying Segment
+      #     command: sls deploy --stage << parameters.stage >>
+      # - run:
+      #     name: Deploying Integration
+      #     command: sls deploy --stage << parameters.stage >>
+      # - run:
+      #     name: Deploying Revenue
+      #     command: sls deploy --stage << parameters.stage >>
 
 jobs:
 
