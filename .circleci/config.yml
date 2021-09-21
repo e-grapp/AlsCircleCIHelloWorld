@@ -40,4 +40,4 @@ workflows:
 
   build:
     jobs:
-      deploy-dev
+      - deploy-dev
