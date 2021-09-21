@@ -43,11 +43,10 @@ jobs:
   deploy-dev:
     executor: serverless/default
     steps:
-      - deploy:
-          stage: 'dev'
+      - deploy
 
 workflows:
 
   build:
     jobs:
-      - deploy-de:v
+      - deploy-dev
