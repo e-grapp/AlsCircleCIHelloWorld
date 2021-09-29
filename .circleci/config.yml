@@ -11,7 +11,7 @@ jobs:
       - run:
           name: Set environment variable
           command: |
-            echo 'export "pwd"' >> $BASH_ENV
+            echo 'export "TFPLAN=`pwd`"' >> $BASH_ENV
             # source $BASH_ENV
             # echo ${TFPLAN}
       - run:
