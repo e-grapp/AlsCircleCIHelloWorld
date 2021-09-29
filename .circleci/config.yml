@@ -5,7 +5,8 @@ orbs:
 
 jobs:
   build:
-    image: circleci/postgres:alpine
+    docker:
+      image: circleci/postgres:alpine
     steps:
       - run:
           name: Set environment variable
