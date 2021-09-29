@@ -10,7 +10,10 @@ jobs:
     steps:
       - run:
           name: Set environment variable
-          command: export "TFPLAN=`pwd`" >> $BASH_ENV
+          command: |
+            export "TFPLAN=`pwd`" >> $BASH_ENV
+            source $BASH_ENV
+            echo ${TFPLAN}
       - run:
           name: BASH_ENV
           command: source $BASH_ENV
