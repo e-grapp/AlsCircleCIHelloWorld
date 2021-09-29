@@ -10,7 +10,7 @@ jobs:
           command: echo 'export TFPLAN-1="Does this work with text?"' >> $BASH_ENV
       - run:
           name: Echo env var
-          command: echo ${TFPLAN-1}
+          command: echo $TFPLAN-1
 
 workflows:
   build-test:
