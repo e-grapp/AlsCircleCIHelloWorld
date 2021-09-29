@@ -7,7 +7,9 @@ jobs:
     steps:
       - run:
           name: Set environment variable
-          command: echo 'export "TFPLAN1=$(`pwd`)"' >> $BASH_ENV
+          command: |
+            # echo 'export "TFPLAN1=$(`pwd`)"' >> $BASH_ENV
+            echo 'export TFPLAN="`pwd`"' >> $BASH_ENV
       - run:
           name: Echo env var
           command: echo $TFPLAN1
