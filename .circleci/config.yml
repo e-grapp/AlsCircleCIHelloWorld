@@ -6,7 +6,7 @@ orbs:
 jobs:
   build:
     docker:
-      - image: circleci/base:2021.07
+      - image: cimg/base:2021.07
     steps:
       - run:
           name: Set environment variable
