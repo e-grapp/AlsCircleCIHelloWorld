@@ -1,12 +1,9 @@
 version: 2.1
 
-orbs:
-  slack: 'circleci/slack@3.4.2'
-
 jobs:
   build:
     docker:
-      - image: cimg/base:2021.07
+      - image: circleci/postgres:alpine
     steps:
       - run:
           name: Set environment variable
