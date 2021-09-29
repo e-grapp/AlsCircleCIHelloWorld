@@ -6,13 +6,17 @@ jobs:
       - image: circleci/postgres:alpine
     steps:
       - run:
-          name: Set environment variable
-          command: |
-            # echo 'export "TFPLAN1=$(`pwd`)"' >> $BASH_ENV
-            echo 'export TFPLAN="`pwd`"' >> $BASH_ENV
+          name: Set environment variable 1
+          command: echo 'export TFPLAN1=$(pwd)' >> $BASH_ENV
       - run:
-          name: Echo env var
+          name: Echo env var 1
           command: echo $TFPLAN1
+      - run:
+          name: Set environment variable 2
+          command: echo 'export $TFPLAN2=`pwd`' >> $BASH_ENV
+      - run:
+          name: Echo env var 2
+          command: echo $TFPLAN2
 
 workflows:
   build-test:
