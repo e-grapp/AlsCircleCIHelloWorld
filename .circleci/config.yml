@@ -10,13 +10,13 @@ jobs:
     steps:
       - run:
           name: Set environment variable
-          command: export "TFPLAN=MYVARIABLE" >> $BASH_ENV
+          command: export TFPLAN=MYVARIABLE >> $BASH_ENV
       - run:
           name: BASH_ENV
           command: source $BASH_ENV
       - run:
           name: Echo env var
-          command: echo $TFPLAN
+          command: echo ${TFPLAN}
 
 workflows:
   build-test:
