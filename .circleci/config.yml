@@ -18,9 +18,9 @@ jobs:
           command: mkdir ~/screencapture          
       - run:
           name: Capture Screen
-          command: screencapture -x ~/silentscreenshot.png
+          command: screencapture -x ~//screencapture/screenshot.png
       - store_artifacts:
-          path: ~/screencapture          
+          path: ~/screencapture
       # - mac-permissions/list-permissions
       # - mac-permissions/list-permission-types
              
