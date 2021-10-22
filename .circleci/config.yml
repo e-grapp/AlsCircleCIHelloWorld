@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  mac-permissions: circleci/macos@1.1.0
+  mac-permissions: circleci/macos@2.0.0
 
 jobs:
   permissions-check:
@@ -10,11 +10,14 @@ jobs:
       xcode: 12.5.1
 
     steps:
-      - checkout
       - mac-permissions/add-permission:
-          bundle-id: "com.apple.Terminal"
+          bundle-id: "com.apple.sshd"
           permission-type: "kTCCServiceScreenCapture"
-          # Adds ScreenCapture permission to Terminal
+      - run:
+          name: Capture Screen
+          command: screencapture -x ~/silentscreenshot.jpg
+      # - mac-permissions/list-permissions
+      # - mac-permissions/list-permission-types
              
 workflows:
   version: 2
