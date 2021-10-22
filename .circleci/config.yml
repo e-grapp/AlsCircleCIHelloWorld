@@ -28,5 +28,5 @@ jobs:
 workflows:
   build-test:
     jobs:
-      - build
+      - build:
           context: my-context
