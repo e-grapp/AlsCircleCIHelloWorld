@@ -15,12 +15,12 @@ jobs:
           permission-type: "kTCCServiceScreenCapture"
       - run:
           name: Create screencapture directory
-          command: mkdir ~/screencapture          
+          command: mkdir -P ~/artifacts/screencapture
       - run:
           name: Capture Screen
-          command: screencapture -x ~//screencapture/screenshot.png
+          command: screencapture -x ~/artifacts/screencapture/screenshot.png
       - store_artifacts:
-          path: ~/screencapture
+          path: ~/artifacts
       # - mac-permissions/list-permissions
       # - mac-permissions/list-permission-types
              
