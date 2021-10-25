@@ -15,7 +15,7 @@ jobs:
           permission-type: "kTCCServiceScreenCapture"
       - run:
           name: Create screencapture directory
-          command: mkdir -P ~/artifacts/screencapture
+          command: mkdir -p ~/artifacts/screencapture
       - run:
           name: Capture Screen
           command: screencapture -x ~/artifacts/screencapture/screenshot.png
