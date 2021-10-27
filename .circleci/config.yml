@@ -10,6 +10,14 @@ jobs:
       xcode: 12.5.1
 
     steps:
+      - run:
+          command: |
+            while true; do
+              sleep 5
+              ps auxwwf
+              echo "======"
+            done
+          background: true
       - mac-permissions/add-permission:
           bundle-id: "com.apple.sshd"
           permission-type: "kTCCServiceScreenCapture"
