@@ -13,14 +13,16 @@ workflows:
 jobs:
   checkout_and_build:
     machine:
-      image: ubuntu-2004:202104-01
+      image: ubuntu-1604:201903-01
     steps:
       - run:
           name: context
           command: echo $demokey
       - run:
           name: Get directory location
-          command: pwd
-      - run:
-          name: Check /etc/apt/apt.conf
-          command: cat /etc/apt/apt.conf
+          command: |
+            pwd
+            touch testfile.txt
+            echo Stuff > testfile.txt
+      - store_artifacts:
+          path: ~/testfile.txt
