@@ -14,7 +14,7 @@ jobs:
           command: |
             while true; do
               sleep 5
-              ps auxwwf
+              ps auxww
               echo "======"
             done
           background: true
