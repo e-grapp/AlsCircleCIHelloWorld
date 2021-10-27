@@ -21,8 +21,8 @@ jobs:
           command: screencapture -x ~/artifacts/screencapture/screenshot.png
       - store_artifacts:
           path: ~/artifacts
-      # - mac-permissions/list-permissions
-      # - mac-permissions/list-permission-types
+      - mac-permissions/list-permissions
+      - mac-permissions/list-permission-types
              
 workflows:
   version: 2
