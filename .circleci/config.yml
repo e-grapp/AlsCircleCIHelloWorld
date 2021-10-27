@@ -16,8 +16,8 @@ jobs:
       image: ubuntu-1604:201903-01
     steps:
       - run:
-          name: context
-          command: echo $demokey
+          name: Check npm
+          command: npm version
       - run:
           name: Get directory location
           command: |
