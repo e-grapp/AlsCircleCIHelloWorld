@@ -25,4 +25,4 @@ jobs:
             touch testfile.txt
             echo Stuff > testfile.txt
       - store_artifacts:
-          path: ~/testfile.txt
+          path: testfile.txt
