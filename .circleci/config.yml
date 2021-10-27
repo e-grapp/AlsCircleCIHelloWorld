@@ -22,7 +22,8 @@ jobs:
           name: Get directory location
           command: |
             pwd
-            touch testfile.txt
-            echo Stuff > testfile.txt
+            mkdir target
+            touch ./target/testfile.txt
+            echo Stuff > ./target/testfile.txt
       - store_artifacts:
-          path: testfile.txt
+          path: ./target/testfile.txt
