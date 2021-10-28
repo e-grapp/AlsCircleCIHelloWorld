@@ -7,7 +7,7 @@ jobs:
   permissions-check:
 
     macos:
-      xcode: 12.5.1
+      xcode: 13.1.0
 
     steps:
       - run:
@@ -27,6 +27,9 @@ jobs:
       - run:
           name: Capture Screen
           command: screencapture -x ~/artifacts/screencapture/screenshot.png
+      - run:
+          name: Set Ruby version
+          command: chruby 2.6
       - store_artifacts:
           path: ~/artifacts
       - mac-permissions/list-permissions
