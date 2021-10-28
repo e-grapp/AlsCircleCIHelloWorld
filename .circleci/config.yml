@@ -29,7 +29,9 @@ jobs:
           command: screencapture -x ~/artifacts/screencapture/screenshot.png
       - run:
           name: Set Ruby version
-          command: chruby 2.6
+          command: |
+            chruby 2.6
+            ruby -v
       - store_artifacts:
           path: ~/artifacts
       - mac-permissions/list-permissions
