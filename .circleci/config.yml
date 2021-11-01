@@ -10,14 +10,6 @@ jobs:
       xcode: 13.1.0
 
     steps:
-      - run:
-          command: |
-            while true; do
-              sleep 5
-              ps auxww
-              echo "======"
-            done
-          background: true
       - mac-permissions/add-permission:
           bundle-id: "com.apple.sshd"
           permission-type: "kTCCServiceScreenCapture"
@@ -30,7 +22,7 @@ jobs:
       - run:
           name: Set Ruby version
           command: |
-            chruby 2.6
+            sed -i '' 's/^chruby.*/chruby ruby-3.0/g' ~/.bash_profile
             ruby -v
       - store_artifacts:
           path: ~/artifacts
