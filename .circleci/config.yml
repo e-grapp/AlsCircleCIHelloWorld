@@ -22,7 +22,7 @@ jobs:
       - run:
           name: Set Ruby version
           command: |
-            echo 'chruby ruby-2.6' >> ~/.bash_profile
+            echo 'chruby system' >> ~/.bash_profile
             ruby -v
       - store_artifacts:
           path: ~/artifacts
