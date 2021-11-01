@@ -21,12 +21,11 @@ jobs:
           command: screencapture -x ~/artifacts/screencapture/screenshot.png
       - run:
           name: Set Ruby version
-          command: |
-            sed -i '' 's/^chruby.*/chruby system/g' ~/.bash_profile
+          command: sed -i '' 's/^chruby.*/chruby system/g' ~/.bash_profile
       - run:
           name: Check Ruby version
-          command: |
-            ruby -v      - store_artifacts:
+          command: ruby -v      
+      - store_artifacts:
           path: ~/artifacts
       - mac-permissions/list-permissions
       - mac-permissions/list-permission-types
