@@ -22,7 +22,7 @@ jobs:
       - run:
           name: Set Ruby version
           command: |
-            sed -i '' 's/^chruby.*/chruby ruby-3.0/g' ~/.bash_profile
+            sed -i '' 's/^chruby.*/chruby system/g' ~/.bash_profile
       - run:
           name: Check Ruby version
           command: |
