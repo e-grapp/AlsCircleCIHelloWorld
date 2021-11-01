@@ -3,13 +3,13 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: circleci/redis:5.0-alpine
-    resource_class: large
+      - image: redis/redis:5.0-alpine
+    resource_class: medium
 
     steps:
 
       - run:
-          name: Get jar from maven repeatedly until forever
+          name: Get current dir
           command: pwd
 
       # - run:
