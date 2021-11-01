@@ -22,9 +22,11 @@ jobs:
       - run:
           name: Set Ruby version
           command: |
-            echo 'chruby system' >> ~/.bash_profile
-            ruby -v
-      - store_artifacts:
+            sed -i '' 's/^chruby.*/chruby ruby-3.0/g' ~/.bash_profile
+      - run:
+          name: Check Ruby version
+          command: |
+            ruby -v      - store_artifacts:
           path: ~/artifacts
       - mac-permissions/list-permissions
       - mac-permissions/list-permission-types
