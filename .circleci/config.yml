@@ -22,7 +22,6 @@ jobs:
       - run:
           name: Set Ruby version
           command: |
-#           sed -i '' 's/^chruby.*/chruby system/g' ~/.bash_profile
             echo 'chruby ruby-2.6' >> ~/.bash_profile
             ruby -v
       - store_artifacts:
