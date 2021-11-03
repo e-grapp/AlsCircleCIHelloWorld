@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  mac-permissions: circleci/macos@2.0.0
+  mac: circleci/macos@2.0.0
 
 jobs:
   permissions-check:
@@ -25,7 +25,15 @@ jobs:
 
       - run:
           name: Check Ruby Version
-          command: ruby -v      
+          command: ruby -v
+
+      - mac/switch-tuby
+          version: "3.0"
+
+      - run:
+          name: Check Ruby Version Again
+          command: ruby -v
+
       - store_artifacts:
           path: ~/artifacts
       - mac-permissions/list-permissions
