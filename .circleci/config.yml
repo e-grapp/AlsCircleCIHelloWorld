@@ -22,7 +22,7 @@ jobs:
             sudo sqlite3 "/Users/distiller/Library/Application Support/com.apple.TCC/TCC.db" "$tcc_service_accessibility"
             sudo sqlite3 "/Users/distiller/Library/Application Support/com.apple.TCC/TCC.db" "$tcc_service_events"
             sudo sqlite3 "/Library/Application Support/com.apple.TCC/TCC.db" "$tcc_service_events"
-            osascript -e ./tmp.applescript
+            osascript ./tmp.applescript
             sudo safaridriver --enable
 
       - run:
