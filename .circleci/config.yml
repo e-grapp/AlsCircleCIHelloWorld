@@ -20,10 +20,11 @@ jobs:
           name: Capture Screen
           command: screencapture -x ~/artifacts/screencapture/screenshot.png
       - run:
-          name: Set Ruby version
-          command: sed -i '' 's/^chruby.*/chruby system/g' ~/.bash_profile
+          name: Set Ruby Version
+          command: sed -i '' 's/^chruby.*/chruby ruby-2.6/g' ~/.bash_profile
+
       - run:
-          name: Check Ruby version
+          name: Check Ruby Version
           command: ruby -v      
       - store_artifacts:
           path: ~/artifacts
