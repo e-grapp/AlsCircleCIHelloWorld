@@ -7,7 +7,7 @@ jobs:
   permissions-check:
 
     macos:
-      xcode: 13.1.0
+      xcode: 12.5.1
 
     steps:
 
@@ -27,29 +27,29 @@ jobs:
             osascript ./tmp.applescript
             sudo safaridriver --enable
 
-      - run:
-          name: Create screencapture directory
-          command: mkdir -p ~/artifacts/screencapture
-      - run:
-          name: Capture Screen
-          command: screencapture -x ~/artifacts/screencapture/screenshot.png
-      - run:
-          name: Set Ruby Version
-          command: sed -i '' 's/^chruby.*/chruby ruby-2.6/g' ~/.bash_profile
+      # - run:
+      #     name: Create screencapture directory
+      #     command: mkdir -p ~/artifacts/screencapture
+      # - run:
+      #     name: Capture Screen
+      #     command: screencapture -x ~/artifacts/screencapture/screenshot.png
+      # - run:
+      #     name: Set Ruby Version
+      #     command: sed -i '' 's/^chruby.*/chruby ruby-2.6/g' ~/.bash_profile
 
-      - run:
-          name: Check Ruby Version
-          command: ruby -v
+      # - run:
+      #     name: Check Ruby Version
+      #     command: ruby -v
 
-      - mac/switch-ruby:
-          version: "3.0"
+      # - mac/switch-ruby:
+      #     version: "3.0"
 
-      - run:
-          name: Check Ruby Version Again
-          command: ruby -v
+      # - run:
+      #     name: Check Ruby Version Again
+      #     command: ruby -v
 
-      - store_artifacts:
-          path: ~/artifacts
+      # - store_artifacts:
+      #     path: ~/artifacts
       - mac/list-permissions
       - mac/list-permission-types
              
