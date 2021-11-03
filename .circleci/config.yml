@@ -27,7 +27,7 @@ jobs:
           name: Check Ruby Version
           command: ruby -v
 
-      - mac/switch-tuby
+      - mac/switch-tuby:
           version: "3.0"
 
       - run:
