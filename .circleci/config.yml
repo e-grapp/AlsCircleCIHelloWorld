@@ -1,29 +1,17 @@
-# For a detailed guide to building and testing on iOS, read the docs:
-# https://circleci.com/docs/2.0/testing-ios/
-
-version: 2.1
-
-workflows:
-  main_workflow:
-    jobs:
-      - checkout_and_build:
-          context:
-            - my-context
-
+version: '2.1'
+orbs:
+  android: circleci/android@1.0.3
 jobs:
-  checkout_and_build:
-    machine:
-      image: ubuntu-1604:201903-01
+  test:
+    executor:
+      name: android/android-machine
+      resource-class: large
     steps:
-      - run:
-          name: Check npm
-          command: npm version
-      - run:
-          name: Get directory location
-          command: |
-            pwd
-            mkdir target
-            touch ./target/testfile.txt
-            echo Stuff > ./target/testfile.txt
-      - store_artifacts:
-          path: ./target/testfile.txt
+      - checkout
+      - android/run-tests:
+          test-command: ./gradlew allTests
+  
+workflows:
+  Unit-Tests:
+    jobs:
+      - test
