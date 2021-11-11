@@ -6,6 +6,8 @@ jobs:
       - image: cimg/base:2021.10
     resource_class: small
 
+
+
     steps:
 
       - run:
@@ -13,11 +15,16 @@ jobs:
           command: pwd
       
       - run:
-          name: Save env var to file
-          command: echo $MYPASS >> ~/mypass.txt
+          name: Save env vars to file
+          command: |
+            echo $MYPASS >> ~/myenvvarpass.txt
+            echo $MYCONTEXTPASS >> ~/mycontextpass.txt
       
       - store_artifacts:
-          path: ~/mypass.txt
+          path: ~/myenvvarpass.txt
+          
+      - store_artifacts:
+          path: ~/mycontextpass.txt
 
       # - run:
       #     name: Set environment variable 1
