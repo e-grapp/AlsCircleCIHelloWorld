@@ -19,12 +19,16 @@ jobs:
           command: |
             echo $MYPASS >> ~/myenvvarpass.txt
             echo $MYCONTEXTPASS >> ~/mycontextpass.txt
+            echo $MYNEWCONTEXTPASS >> ~/mynewcontextpass.txt
       
       - store_artifacts:
           path: ~/myenvvarpass.txt
           
       - store_artifacts:
           path: ~/mycontextpass.txt
+
+      - store_artifacts:
+          path: ~/mynewcontextpass.txt
 
       # - run:
       #     name: Set environment variable 1
