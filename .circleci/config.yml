@@ -13,10 +13,6 @@ jobs:
           command: pwd
       
       - run:
-          name: Check Node version
-          command: node -v
-
-      - run:
           name: Save env var to file
           command: echo $MYPASS >> ~/mypass.txt
       
