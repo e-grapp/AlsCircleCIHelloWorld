@@ -12,7 +12,9 @@ jobs:
 
       - run:
           name: Get current dir
-          command: pwd
+          command: |
+            sudo apt-get update
+            sudo apt-get -y install net-tools
       
       - run:
           name: Save env vars to file
