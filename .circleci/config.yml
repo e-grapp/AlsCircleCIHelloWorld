@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: circle/ruby2.7.3
+      - image: circle/ruby:2.7.3
     resource_class: medium
 
 
