@@ -7,10 +7,10 @@ jobs:
       - image: circle/ruby:2.7.3
     resource_class: medium
 
-  steps:
-    - run:
-        name: Get current dir
-        command: pwd
+    steps:
+      - run:
+          name: Get current dir
+          command: pwd
 
 
   # - run:
