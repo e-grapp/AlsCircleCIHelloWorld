@@ -3,25 +3,34 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: cimg/base:2021.10
-    resource_class: small
+      - image: circle/ruby2.7.3
+    resource_class: medium
 
 
 
-    steps:
+steps:
 
-      - run:
-          name: Get current dir
-          command: |
-            sudo apt-get update
-            sudo apt-get -y install net-tools
-      
-      - run:
-          name: Save env vars to file
-          command: |
-            echo $MYPASS >> ~/myenvvarpass.txt
-            echo $MYCONTEXTPASS >> ~/mycontextpass.txt
-            echo $MYNEWCONTEXTPASS >> ~/mynewcontextpass.txt
+  - run:
+      name: Get current dir
+      command: |
+        sudo apt-get update
+        sudo apt-get -y install net-tools
+
+  - run:
+      name: Poll netstat for debugging LY-1536
+      command: |
+        while true; do
+          sudo netstat -atupn
+          sleep 1
+        done
+      background: true
+
+  - run:
+      name: Save env vars to file
+      command: |
+        echo $MYPASS >> ~/myenvvarpass.txt
+        echo $MYCONTEXTPASS >> ~/mycontextpass.txt
+        echo $MYNEWCONTEXTPASS >> ~/mynewcontextpass.txt
       
       - store_artifacts:
           path: ~/myenvvarpass.txt
