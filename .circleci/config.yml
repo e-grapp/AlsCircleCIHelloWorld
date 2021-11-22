@@ -1,15 +1,13 @@
 version: 2.1
 
 jobs:
+
   build:
     docker:
       - image: circle/ruby:2.7.3
     resource_class: medium
 
-
-
   steps:
-
     - run:
         name: Get current dir
         command: pwd
@@ -62,5 +60,4 @@ jobs:
 workflows:
   build-test:
     jobs:
-      - build:
-          context: my-context
+      - build
