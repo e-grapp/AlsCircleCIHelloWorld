@@ -8,38 +8,43 @@ jobs:
 
 
 
-steps:
+  steps:
 
-  - run:
-      name: Get current dir
-      command: |
-        sudo apt-get update
-        sudo apt-get -y install net-tools
+    - run:
+        name: Get current dir
+        command: pwd
 
-  - run:
-      name: Poll netstat for debugging LY-1536
-      command: |
-        while true; do
-          sudo netstat -atupn
-          sleep 1
-        done
-      background: true
 
-  - run:
-      name: Save env vars to file
-      command: |
-        echo $MYPASS >> ~/myenvvarpass.txt
-        echo $MYCONTEXTPASS >> ~/mycontextpass.txt
-        echo $MYNEWCONTEXTPASS >> ~/mynewcontextpass.txt
+  # - run:
+  #     name: Get current dir
+  #     command: |
+  #       sudo apt-get update
+  #       sudo apt-get -y install net-tools
+
+  # - run:
+  #     name: Poll netstat for debugging LY-1536
+  #     command: |
+  #       while true; do
+  #         sudo netstat -atupn
+  #         sleep 1
+  #       done
+  #     background: true
+
+  # - run:
+  #     name: Save env vars to file
+  #     command: |
+  #       echo $MYPASS >> ~/myenvvarpass.txt
+  #       echo $MYCONTEXTPASS >> ~/mycontextpass.txt
+  #       echo $MYNEWCONTEXTPASS >> ~/mynewcontextpass.txt
       
-      - store_artifacts:
-          path: ~/myenvvarpass.txt
+  #     - store_artifacts:
+  #         path: ~/myenvvarpass.txt
           
-      - store_artifacts:
-          path: ~/mycontextpass.txt
+  #     - store_artifacts:
+  #         path: ~/mycontextpass.txt
 
-      - store_artifacts:
-          path: ~/mynewcontextpass.txt
+  #     - store_artifacts:
+  #         path: ~/mynewcontextpass.txt
 
       # - run:
       #     name: Set environment variable 1
