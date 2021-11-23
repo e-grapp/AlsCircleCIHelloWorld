@@ -12,6 +12,7 @@ jobs:
           name: Get image ver
           command: |
             lsb_release -a
+            php -v
 
 
   # - run:
