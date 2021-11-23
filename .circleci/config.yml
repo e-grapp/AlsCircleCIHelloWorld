@@ -2,9 +2,33 @@ version: 2.1
 
 jobs:
 
-  build:
+  php1:
     docker:
       - image: cimg/php@sha256:ee2a0a49e56f81b676f6ba72691149ebde700571e659af27227f723a65efa767
+    resource_class: medium
+
+    steps:
+      - run:
+          name: Get image ver
+          command: |
+            lsb_release -a
+            php -v
+
+  php2:
+    docker:
+      - image: cimg/php@7.4.23
+    resource_class: medium
+
+    steps:
+      - run:
+          name: Get image ver
+          command: |
+            lsb_release -a
+            php -v
+
+  php3:
+    docker:
+      - image: cimg/php@7.4.24
     resource_class: medium
 
     steps:
@@ -62,4 +86,6 @@ jobs:
 workflows:
   build-test:
     jobs:
-      - build
+      - php1
+      - php2
+      - php3
