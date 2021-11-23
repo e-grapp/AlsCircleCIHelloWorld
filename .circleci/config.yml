@@ -2,7 +2,7 @@ version: 2.1
 
 jobs:
 
-  php1:
+  php-pinned:
     docker:
       - image: cimg/php@sha256:ee2a0a49e56f81b676f6ba72691149ebde700571e659af27227f723a65efa767
     resource_class: medium
@@ -14,7 +14,7 @@ jobs:
             lsb_release -a
             php -v
 
-  php2:
+  php-7.4.23:
     docker:
       - image: cimg/php:7.4.23
     resource_class: medium
@@ -26,9 +26,33 @@ jobs:
             lsb_release -a
             php -v
 
-  php3:
+  php-7.4.24:
     docker:
       - image: cimg/php:7.4.24
+    resource_class: medium
+
+    steps:
+      - run:
+          name: Get image ver
+          command: |
+            lsb_release -a
+            php -v
+
+  php-7.4.25:
+    docker:
+      - image: cimg/php:7.4.25
+    resource_class: medium
+
+    steps:
+      - run:
+          name: Get image ver
+          command: |
+            lsb_release -a
+            php -v
+
+  php-7.4.26:
+    docker:
+      - image: cimg/php:7.4.26
     resource_class: medium
 
     steps:
