@@ -9,8 +9,9 @@ jobs:
 
     steps:
       - run:
-          name: Get current dir
-          command: pwd
+          name: Get image ver
+          command: |
+            lsb_release -a
 
 
   # - run:
