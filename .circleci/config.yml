@@ -14,7 +14,7 @@ jobs:
             lsb_release -a
             php -v
 
-  php-7.4.23:
+  php-7-4-23:
     docker:
       - image: cimg/php:7.4.23
     resource_class: medium
@@ -26,7 +26,7 @@ jobs:
             lsb_release -a
             php -v
 
-  php-7.4.24:
+  php-7-4-24:
     docker:
       - image: cimg/php:7.4.24
     resource_class: medium
@@ -38,7 +38,7 @@ jobs:
             lsb_release -a
             php -v
 
-  php-7.4.25:
+  php-7-4-25:
     docker:
       - image: cimg/php:7.4.25
     resource_class: medium
@@ -50,7 +50,7 @@ jobs:
             lsb_release -a
             php -v
 
-  php-7.4.26:
+  php-7-4-26:
     docker:
       - image: cimg/php:7.4.26
     resource_class: medium
