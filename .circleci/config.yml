@@ -110,6 +110,8 @@ jobs:
 workflows:
   build-test:
     jobs:
-      - php1
-      - php2
-      - php3
+      - php-pinned
+      - php-7-4-23
+      - php-7-4-24
+      - php-7-4-25
+      - php-7-4-26
