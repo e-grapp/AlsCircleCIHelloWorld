@@ -16,7 +16,7 @@ jobs:
 
   php2:
     docker:
-      - image: cimg/php@7.4.23
+      - image: cimg/php:7.4.23
     resource_class: medium
 
     steps:
@@ -28,7 +28,7 @@ jobs:
 
   php3:
     docker:
-      - image: cimg/php@7.4.24
+      - image: cimg/php:7.4.24
     resource_class: medium
 
     steps:
