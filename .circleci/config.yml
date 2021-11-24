@@ -10,8 +10,8 @@ jobs:
 
     steps:
       - run:
-          name: Get ubuntu ver
-          command: lsb_release -a
+          name: Get Pip ver
+          command: pip3 -V
 
 
   # - run:
