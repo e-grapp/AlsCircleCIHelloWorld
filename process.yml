@@ -1,0 +1,180 @@
+version: 2
+jobs:
+  php-pinned:
+    docker:
+    - image: cimg/php@sha256:ee2a0a49e56f81b676f6ba72691149ebde700571e659af27227f723a65efa767
+    resource_class: medium
+    steps:
+    - run:
+        name: Get image ver
+        command: |
+          lsb_release -a
+          php -v
+  php-7-4-23:
+    docker:
+    - image: cimg/php:7.4.23
+    resource_class: medium
+    steps:
+    - run:
+        name: Get image ver
+        command: |
+          lsb_release -a
+          php -v
+  php-7-4-24:
+    docker:
+    - image: cimg/php:7.4.24
+    resource_class: medium
+    steps:
+    - run:
+        name: Get image ver
+        command: |
+          lsb_release -a
+          php -v
+  php-7-4-25:
+    docker:
+    - image: cimg/php:7.4.25
+    resource_class: medium
+    steps:
+    - run:
+        name: Get image ver
+        command: |
+          lsb_release -a
+          php -v
+  php-7-4-26:
+    docker:
+    - image: cimg/php:7.4.26
+    resource_class: medium
+    steps:
+    - run:
+        name: Get image ver
+        command: |
+          lsb_release -a
+          php -v
+workflows:
+  build-test:
+    jobs:
+    - php-pinned
+    - php-7-4-23
+    - php-7-4-24
+    - php-7-4-25
+    - php-7-4-26
+  version: 2
+
+# Original config.yml file:
+# version: 2.1
+# 
+# jobs:
+# 
+#   php-pinned:
+#     docker:
+#       - image: cimg/php@sha256:ee2a0a49e56f81b676f6ba72691149ebde700571e659af27227f723a65efa767
+#     resource_class: medium
+# 
+#     steps:
+#       - run:
+#           name: Get image ver
+#           command: |
+#             lsb_release -a
+#             php -v
+# 
+#   php-7-4-23:
+#     docker:
+#       - image: cimg/php:7.4.23
+#     resource_class: medium
+# 
+#     steps:
+#       - run:
+#           name: Get image ver
+#           command: |
+#             lsb_release -a
+#             php -v
+# 
+#   php-7-4-24:
+#     docker:
+#       - image: cimg/php:7.4.24
+#     resource_class: medium
+# 
+#     steps:
+#       - run:
+#           name: Get image ver
+#           command: |
+#             lsb_release -a
+#             php -v
+# 
+#   php-7-4-25:
+#     docker:
+#       - image: cimg/php:7.4.25
+#     resource_class: medium
+# 
+#     steps:
+#       - run:
+#           name: Get image ver
+#           command: |
+#             lsb_release -a
+#             php -v
+# 
+#   php-7-4-26:
+#     docker:
+#       - image: cimg/php:7.4.26
+#     resource_class: medium
+# 
+#     steps:
+#       - run:
+#           name: Get image ver
+#           command: |
+#             lsb_release -a
+#             php -v
+# 
+# 
+#   # - run:
+#   #     name: Get current dir
+#   #     command: |
+#   #       sudo apt-get update
+#   #       sudo apt-get -y install net-tools
+# 
+#   # - run:
+#   #     name: Poll netstat for debugging LY-1536
+#   #     command: |
+#   #       while true; do
+#   #         sudo netstat -atupn
+#   #         sleep 1
+#   #       done
+#   #     background: true
+# 
+#   # - run:
+#   #     name: Save env vars to file
+#   #     command: |
+#   #       echo $MYPASS >> ~/myenvvarpass.txt
+#   #       echo $MYCONTEXTPASS >> ~/mycontextpass.txt
+#   #       echo $MYNEWCONTEXTPASS >> ~/mynewcontextpass.txt
+#       
+#   #     - store_artifacts:
+#   #         path: ~/myenvvarpass.txt
+#           
+#   #     - store_artifacts:
+#   #         path: ~/mycontextpass.txt
+# 
+#   #     - store_artifacts:
+#   #         path: ~/mynewcontextpass.txt
+# 
+#       # - run:
+#       #     name: Set environment variable 1
+#       #     command: echo 'export TFPLAN1=$(pwd)' >> $BASH_ENV
+#       # - run:
+#       #     name: Echo env var 1
+#       #     command: echo $TFPLAN1
+#       # - run:
+#       #     name: Set environment variable 2
+#       #     command: echo 'export TFPLAN2=`pwd`' >> $BASH_ENV
+#       # - run:
+#       #     name: Echo env var 2
+#       #     command: echo $TFPLAN2
+# 
+# workflows:
+#   build-test:
+#     jobs:
+#       - php-pinned
+#       - php-7-4-23
+#       - php-7-4-24
+#       - php-7-4-25
+#       - php-7-4-26
