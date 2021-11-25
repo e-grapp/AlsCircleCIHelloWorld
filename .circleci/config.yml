@@ -1,9 +1,11 @@
 version: 2.1
+
 orbs:
   android: circleci/android@1.0.3
   flutter: circleci/flutter@1.0
+
 jobs:
-  stuff:
+  build:
     executor:
       name: android/android-machine
     steps:
@@ -15,7 +17,8 @@ jobs:
       # - run:
       #     command: bundle exec fastlane distribute
       #     working_directory: ios
+
 workflows:
-  dostuff:
+  build-and-test:
     jobs:
-      - stuff
+      - build
