@@ -15,6 +15,6 @@ jobs:
           command: bundle exec fastlane distribute
           working_directory: ios
 workflows:
-  build:
+  distribute:
     jobs:
-      - distribute
+      - build
