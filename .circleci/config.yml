@@ -5,10 +5,6 @@ orbs:
 
 workflows:
   build-test:
-    executors:
-      - aws-ecr/default:
-          image: 'ubuntu-2004:201111-01'
-      
     jobs:
       - aws-ecr/build-and-push-image:
           account-url: AWS_ECR_ACCOUNT_URL
