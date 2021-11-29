@@ -3,10 +3,9 @@ version: 2.1
 orbs:
   aws-ecr: circleci/aws-ecr@7.3.0
 
-# executors:
-#   aws-ecr/default:
-#     parameters:
-#       image: ubuntu-2004:202111-01
+executors:
+  parameters:
+    image: ubuntu-2004:202111-01
 
 workflows:
   build-test:
@@ -16,4 +15,5 @@ workflows:
           aws-access-key-id: ECR_AWS_ACCESS_KEY_ID
           aws-secret-access-key: ECR_AWS_SECRET_ACCESS_KEY
           repo: al-test
-          image: ubuntu-2004:202111-01
+          executor:
+            image: ubuntu-2004:202111-01
