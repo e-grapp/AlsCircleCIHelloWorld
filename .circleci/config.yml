@@ -6,9 +6,9 @@ orbs:
 workflows:
   build-test:
     jobs:
+      - aws-ecr/default:
+          image: ubuntu-2004:202111-01
       - aws-ecr/build-and-push-image:
-          machine:
-            image: ubuntu-2004:202111-01
           account-url: AWS_ECR_ACCOUNT_URL
           aws-access-key-id: ECR_AWS_ACCESS_KEY_ID
           aws-secret-access-key: ECR_AWS_SECRET_ACCESS_KEY
