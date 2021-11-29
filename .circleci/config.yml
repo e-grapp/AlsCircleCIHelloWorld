@@ -4,8 +4,8 @@ orbs:
   aws-ecr: circleci/aws-ecr@7.3.0
 
 executors:
-  - aws-ecr/default:
-      image: ubuntu-2004:202111-01
+  aws-ecr/default:
+    image: ubuntu-2004:202111-01
 
 workflows:
   build-test:
