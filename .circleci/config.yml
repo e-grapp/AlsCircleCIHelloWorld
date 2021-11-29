@@ -5,13 +5,13 @@ jobs:
 
   build:
     docker:
-      - image: cimg/php:7.4-node
+      - image: cimg/node:4.5.1
     resource_class: medium
 
     steps:
       - run:
-          name: Get Python ver
-          command: python -V
+          name: Current working dir
+          command: pwd
 
 
   # - run:
