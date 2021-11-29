@@ -5,8 +5,7 @@ orbs:
 
 jobs:
   build:
-    parameters:
-      default:
+    - aws-ecr/default:
         image: 'ubuntu-2004:201111-01'
     - aws-ecr/build-and-push-image:
         machine:
