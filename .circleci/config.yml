@@ -3,50 +3,10 @@ version: 2.1
 orbs:
   aws-ecr: circleci/aws-ecr@7.3.0
 
-
-  # - run:
-  #     name: Get current dir
-  #     command: |
-  #       sudo apt-get update
-  #       sudo apt-get -y install net-tools
-
-  # - run:
-  #     name: Poll netstat for debugging LY-1536
-  #     command: |
-  #       while true; do
-  #         sudo netstat -atupn
-  #         sleep 1
-  #       done
-  #     background: true
-
-  # - run:
-  #     name: Save env vars to file
-  #     command: |
-  #       echo $MYPASS >> ~/myenvvarpass.txt
-  #       echo $MYCONTEXTPASS >> ~/mycontextpass.txt
-  #       echo $MYNEWCONTEXTPASS >> ~/mynewcontextpass.txt
-      
-  #     - store_artifacts:
-  #         path: ~/myenvvarpass.txt
-          
-  #     - store_artifacts:
-  #         path: ~/mycontextpass.txt
-
-  #     - store_artifacts:
-  #         path: ~/mynewcontextpass.txt
-
-      # - run:
-      #     name: Set environment variable 1
-      #     command: echo 'export TFPLAN1=$(pwd)' >> $BASH_ENV
-      # - run:
-      #     name: Echo env var 1
-      #     command: echo $TFPLAN1
-      # - run:
-      #     name: Set environment variable 2
-      #     command: echo 'export TFPLAN2=`pwd`' >> $BASH_ENV
-      # - run:
-      #     name: Echo env var 2
-      #     command: echo $TFPLAN2
+executors:
+  202111-ubuntu:
+    machine:
+      image: ubuntu-2004:202111-01
 
 workflows:
   build-test:
@@ -56,3 +16,4 @@ workflows:
           aws-access-key-id: ECR_AWS_ACCESS_KEY_ID
           aws-secret-access-key: ECR_AWS_SECRET_ACCESS_KEY
           repo: al-test
+          executor: 202111-ubuntu
