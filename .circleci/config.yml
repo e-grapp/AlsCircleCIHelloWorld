@@ -5,8 +5,7 @@ orbs:
 
 executors:
   aws-ecr/default:
-    machine:
-      image: ubuntu-2004:202111-01
+    image: ubuntu-2004:202111-01
 
 workflows:
   build-test:
