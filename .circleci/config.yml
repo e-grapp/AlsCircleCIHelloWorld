@@ -11,7 +11,7 @@ jobs:
     steps:
       - run:
           name: Check location of Pip
-          command: ls -Ral / | pip3
+          command: ls -Ral / | grep pip3
       - run:
           name: Check Pip
           command:  pip3 --version
@@ -25,7 +25,7 @@ jobs:
           command: pip3 --version
       - run:
           name: Check location of Pip
-          command: ls -Ral / | pip3
+          command: ls -Ral / | grep pip3
       - run:
           name: Set path for Pip
           command: export PATH="$PATH:/home/circleci/.local/bin"
