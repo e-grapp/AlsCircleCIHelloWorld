@@ -11,14 +11,21 @@ jobs:
     steps:
       - run:
           name: Check location of Pip
+          command: find -name "pip3"
+      - run:
+          name: Check Pip
+          command:  pip3 --version
+      - run:
+          name: Install fresh pip3
           command: |
-            ls -al ~/.pyenv/shims | grep pip
+            curl https://bootstrap.pypa.io/get-pip.py --output get-pip.py
+            python3 get-pip.py
       - run:
           name: Check Pip
           command: pip3 --version
       - run:
           name: Set path for Pip
-          command: export PATH="$PATH:~/.pyenv/shims"
+          command: export PATH="$PATH:/home/circleci/.local/bin"
       - run:
           name: Check Pip again
           command: pip3 --version
