@@ -9,7 +9,7 @@ jobs:
     machine:
       image: ubuntu-2004:202111-01
     steps:
-      - aws-cli/install-aws-cli:
+      - aws-cli/setup:
           override-installed: yes
           # version: '2.4.3'
       - aws-ecr/build-and-push-image:
