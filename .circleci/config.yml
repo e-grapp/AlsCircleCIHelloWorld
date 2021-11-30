@@ -13,9 +13,9 @@ jobs:
       #     override-installed: yes
       #     version: '2.4.3'
       - aws-ecr/build-and-push-image:
-          account-url: AWS_ECR_ACCOUNT_URL
-          aws-access-key-id: AWS_ACCESS_KEY_ID
-          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+          # account-url: AWS_ECR_ACCOUNT_URL
+          # aws-access-key-id: AWS_ACCESS_KEY_ID
+          # aws-secret-access-key: AWS_SECRET_ACCESS_KEY
           repo: al-test
 
 workflows:
