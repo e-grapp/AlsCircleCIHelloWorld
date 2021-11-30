@@ -1,23 +1,41 @@
 version: 2.1
 
-orbs:
-  aws-ecr: circleci/aws-ecr@7.3.0
-  aws-cli: circleci/aws-cli@2.0.6
+# orbs:
+#   aws-ecr: circleci/aws-ecr@7.3.0
+#   aws-cli: circleci/aws-cli@2.0.6
 
 jobs:
   build:
-    machine:
-      image: ubuntu-2004:202111-01
+    docker:
+      - image: cimg/python:3.8.12-browsers
     steps:
-      - aws-cli/setup:
-          override-installed: yes
-          # version: '2.4.3'
-      - aws-ecr/build-and-push-image:
-          # account-url: AWS_ECR_ACCOUNT_URL
-          # aws-access-key-id: AWS_ACCESS_KEY_ID
-          # aws-secret-access-key: AWS_SECRET_ACCESS_KEY
-          profile-name: ""
-          repo: al-test
+      - run:
+          name: Check location of Pip
+          command: |
+            ls -al /home/circleci/.local/bin | grep pip
+      - run:
+          name: Check Pip
+          command: pip3 --version
+      - run:
+          name: Set path for Pip
+          command: export PATH="$PATH:/home/circleci/.local/bin"
+      - run:
+          name: Check Pip again
+          command: pip3 --version
+
+
+    # machine:
+    #   image: ubuntu-2004:202111-01
+    # steps:
+    #   - aws-cli/setup:
+    #       override-installed: yes
+    #       # version: '2.4.3'
+    #   - aws-ecr/build-and-push-image:
+    #       # account-url: AWS_ECR_ACCOUNT_URL
+    #       # aws-access-key-id: AWS_ACCESS_KEY_ID
+    #       # aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+    #       profile-name: ""
+    #       repo: al-test
 
 workflows:
   build-test:
