@@ -2,12 +2,16 @@ version: 2.1
 
 orbs:
   aws-ecr: circleci/aws-ecr@7.3.0
+  aws-cli: circleci/aws-cli@2.0.6
 
 jobs:
   build:
     machine:
       image: ubuntu-2004:202111-01
     steps:
+      - aws-cli/install-aws-cli:
+          override-installed: yes
+          version: '2.4.3'
       - aws-ecr/build-and-push-image:
           account-url: AWS_ECR_ACCOUNT_URL
           aws-access-key-id: ECR_AWS_ACCESS_KEY_ID
