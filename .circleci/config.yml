@@ -1,37 +1,63 @@
 version: 2.1
 
+orbs:
+  browser-tools: circleci/browser-tools@1.2.1
+  node: circleci/node@4.0.0
+
 # orbs:
 #   aws-ecr: circleci/aws-ecr@7.3.0
 #   aws-cli: circleci/aws-cli@2.0.6
+
+installpip3: &installpip3
+  name: install pip3
+  command: |
+    curl https://bootstrap.pypa.io/get-pip.py --output get-pip.py
+    python3 get-pip.py
 
 jobs:
   build:
     docker:
       - image: cimg/python:3.8.12-browsers
     steps:
+
+      - node/install:
+          install-npm: false
+          install-yarn: true
+          node-version: 12.22.6
+
       - run:
-          name: Check location of Pip
-          command: find -name "pip3"
-      - run:
-          name: Check Pip
-          command:  pip3 --version
-      - run:
-          name: Install fresh pip3
+          name: install pip3
           command: |
             curl https://bootstrap.pypa.io/get-pip.py --output get-pip.py
             python3 get-pip.py
+
       - run:
-          name: Check Pip
-          command: pip3 --version
-      - run:
-          name: Check location of Pip
-          command: find -name "pip3"
-      - run:
-          name: Set path for Pip
+          name: update PATH
           command: export PATH="$PATH:/home/circleci/.local/bin"
-      - run:
-          name: Check Pip again
-          command: pip3 --version
+
+      # - run:
+      #     name: Check location of Pip
+      #     command: find -name "pip3"
+      # - run:
+      #     name: Check Pip
+      #     command:  pip3 --version
+      # - run:
+      #     name: Install fresh pip3
+      #     command: |
+      #       curl https://bootstrap.pypa.io/get-pip.py --output get-pip.py
+      #       python3 get-pip.py
+      # - run:
+      #     name: Check Pip
+      #     command: pip3 --version
+      # - run:
+      #     name: Check location of Pip
+      #     command: find -name "pip3"
+      # - run:
+      #     name: Set path for Pip
+      #     command: export PATH="$PATH:/home/circleci/.local/bin"
+      # - run:
+      #     name: Check Pip again
+      #     command: pip3 --version
 
 
     # machine:
