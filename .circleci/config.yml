@@ -1,60 +1,60 @@
 version: 2.1
 
 orbs:
-  browser-tools: circleci/browser-tools@1.2.1
-  node: circleci/node@4.0.0
-
-jobs:
-  build:
-    docker:
-      - image: circleci/node@4.7.0
-
-    steps:
-      - run:
-          name: Check yarn
-          command: yarn -v
-
-
-
-      # - run:
-      #     name: Check location of Pip
-      #     command: find -name "pip3"
-      # - run:
-      #     name: Check Pip
-      #     command:  pip3 --version
-      # - run:
-      #     name: Install fresh pip3
-      #     command: |
-      #       curl https://bootstrap.pypa.io/get-pip.py --output get-pip.py
-      #       python3 get-pip.py
-      # - run:
-      #     name: Check Pip
-      #     command: pip3 --version
-      # - run:
-      #     name: Check location of Pip
-      #     command: find -name "pip3"
-      # - run:
-      #     name: Set path for Pip
-      #     command: export PATH="$PATH:/home/circleci/.local/bin"
-      # - run:
-      #     name: Check Pip again
-      #     command: pip3 --version
-
-
-    # machine:
-    #   image: ubuntu-2004:202111-01
-    # steps:
-    #   - aws-cli/setup:
-    #       override-installed: yes
-    #       # version: '2.4.3'
-    #   - aws-ecr/build-and-push-image:
-    #       # account-url: AWS_ECR_ACCOUNT_URL
-    #       # aws-access-key-id: AWS_ACCESS_KEY_ID
-    #       # aws-secret-access-key: AWS_SECRET_ACCESS_KEY
-    #       profile-name: ""
-    #       repo: al-test
+  node: circleci/node@4.7.0
+  iora-deploy: iorahealth/iora-deployment@dev:jo-update-base-images
 
 workflows:
-  build-test:
+  test:
+    # branch protection guarantees tests have already run on master;
+    # we elect not to test staging or preproduction merges
+    unless:
+      or:
+      - equal: [ staging, << pipeline.git.branch >> ]
+      - equal: [ master, << pipeline.git.branch >>]
     jobs:
-      - build
+    - test
+
+  deploy-staging:
+    when:
+      equal: [ staging, << pipeline.git.branch >> ]
+    jobs:
+    - iora-deploy/deploy-s3-website:
+        context:
+        - slack-secrets
+        - deployer-secrets
+        deployment_environment: staging
+        deployment_bucket: agents-staging.ioraprimarycare.com
+        application_name: bond
+        application_framework: glimmer
+
+  deploy-master:
+    when:
+      equal: [ master, << pipeline.git.branch >> ]
+    jobs:
+    - iora-deploy/deploy-s3-website:
+        context:
+        - slack-secrets
+        - deployer-secrets
+        deployment_environment: production
+        deployment_bucket: agents.ioraprimarycare.com
+        application_name: bond
+        application_framework: glimmer
+
+jobs:
+  test:
+    docker:
+    - image: circleci/node:12-browsers
+    steps:
+    - checkout
+    - node/install-packages:
+        pkg-manager: yarn
+        include-branch-in-cache-key: false
+    - run:
+        name: Run tests
+        command: yarn test -c testem-circleci.js
+    - store_test_results:
+        path: /tmp/test-results
+    - store_artifacts:
+        path: /tmp/test-results
+        destination: test-results
