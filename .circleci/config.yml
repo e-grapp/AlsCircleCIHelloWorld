@@ -2,7 +2,7 @@ version: 2.1
 
 orbs:
   node: circleci/node@4.7.0
-  iora-deploy: iorahealth/iora-deployment@0.3.13
+  iora-deployment: iorahealth/iora-deployment@0.3.13
 
 workflows:
   test:
