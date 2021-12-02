@@ -47,6 +47,10 @@ jobs:
           name: Check Pip
           command: pip3 --version
 
+      - run:
+          name: Install SQLFluff
+          command: pip3 install sqlfluff
+
       # - run:
       #     name: Check location of Pip
       #     command: find -name "pip3"
