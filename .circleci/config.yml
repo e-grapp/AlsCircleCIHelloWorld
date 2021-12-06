@@ -10,7 +10,7 @@ jobs:
     steps:
       - run:
           name: Check drive space
-          command: df
+          command: df -hl
 
 workflow:
   build:
