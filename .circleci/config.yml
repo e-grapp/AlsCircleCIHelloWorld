@@ -8,9 +8,9 @@ jobs:
     macos:
       xcode: 11.7.0
     steps:
-      run:
-        name: Check drive space
-        command: df
+      - run:
+          name: Check drive space
+          command: df
 
 workflow:
   build:
