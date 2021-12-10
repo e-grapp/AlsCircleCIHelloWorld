@@ -1,60 +1,18 @@
 version: 2.1
 
-orbs:
-  node: circleci/node@4.7.0
-  iora-deployment: iorahealth/iora-deployment@0.3.13
+jobs:
+  test:
+    docker:
+      - image: circleci/python:3.9
+    steps:
+      - checkout
+      - run:
+          name: Run coverage
+          command: coverage
 
 workflows:
   test:
     # branch protection guarantees tests have already run on master;
     # we elect not to test staging or preproduction merges
-    unless:
-      or:
-      - equal: [ staging, << pipeline.git.branch >> ]
-      - equal: [ master, << pipeline.git.branch >>]
     jobs:
-    - test
-
-  deploy-staging:
-    when:
-      equal: [ staging, << pipeline.git.branch >> ]
-    jobs:
-    - iora-deploy/deploy-s3-website:
-        context:
-        - slack-secrets
-        - deployer-secrets
-        deployment_environment: staging
-        deployment_bucket: agents-staging.ioraprimarycare.com
-        application_name: bond
-        application_framework: glimmer
-
-  deploy-master:
-    when:
-      equal: [ master, << pipeline.git.branch >> ]
-    jobs:
-    - iora-deploy/deploy-s3-website:
-        context:
-        - slack-secrets
-        - deployer-secrets
-        deployment_environment: production
-        deployment_bucket: agents.ioraprimarycare.com
-        application_name: bond
-        application_framework: glimmer
-
-jobs:
-  test:
-    docker:
-    - image: circleci/node:12-browsers
-    steps:
-    - checkout
-    - node/install-packages:
-        pkg-manager: yarn
-        include-branch-in-cache-key: false
-    - run:
-        name: Run tests
-        command: yarn test -c testem-circleci.js
-    - store_test_results:
-        path: /tmp/test-results
-    - store_artifacts:
-        path: /tmp/test-results
-        destination: test-results
+      - test
