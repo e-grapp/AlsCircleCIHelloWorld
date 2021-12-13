@@ -9,7 +9,7 @@ jobs:
       - run:
           name: Commandy command
           command: |
-            cd project
+            cd ~/project
             git diff --name-only origin/master...HEAD
 
 workflows:
