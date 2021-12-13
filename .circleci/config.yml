@@ -8,7 +8,9 @@ jobs:
       - checkout
       - run:
           name: Commandy command
-          command: git diff --name-only origin/master...HEAD
+          command: |
+            cd project
+            git diff --name-only origin/master...HEAD
 
 workflows:
   test:
