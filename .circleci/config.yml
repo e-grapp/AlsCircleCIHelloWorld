@@ -3,12 +3,12 @@ version: 2.1
 jobs:
   test:
     docker:
-      - image: circleci/python:3.9
+      - image: cimg/php:8.0.10
     steps:
       - checkout
       - run:
-          name: Run coverage
-          command: coverage
+          name: Commandy command
+          command: git diff --name-only origin/master...HEAD
 
 workflows:
   test:
