@@ -22,7 +22,7 @@ jobs:
       - run:
           name: Check make using bash
           command: |
-            bash -c '/Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -sdk '' -find make 2> /dev/null'
+            bash -c '/Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -sdk '' -find make 2> /dev/null' || :
       - run:
           name: Check using bash default
           command: /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -sdk '' -find make 2> /dev/null
