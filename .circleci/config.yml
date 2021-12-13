@@ -6,11 +6,11 @@ orbs:
 jobs:
   build:
     macos:
-      xcode: 11.7.0
+      xcode: 12.5.0
     steps:
       - run:
-          name: Check drive space
-          command: df -hl
+          name: Check shell
+          command: echo $SHELL
 
 workflow:
   build:
