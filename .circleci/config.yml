@@ -11,6 +11,15 @@ jobs:
       - run:
           name: Check shell
           command: echo $SHELL
+      - run:
+          name: Check make using `zsh`
+          command: zsh -c '/Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -sdk '' -find make 2> /dev/null'
+      - run:
+          name: Check make using `sh`
+          command sh -c '/Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -sdk '' -find make 2> /dev/null'
+      - run:
+          name: Check make using `bash`
+          command bash -c '/Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -sdk '' -find make 2> /dev/null'
 
 workflow:
   build:
