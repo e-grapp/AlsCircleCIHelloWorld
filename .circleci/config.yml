@@ -15,8 +15,8 @@ workflows:
     # branch protection guarantees tests have already run on master;
     # we elect not to test staging or preproduction merges
     jobs:
-      - approval:
+      - hold:
           type: approval
       - test
           requires:
-            - approval
+            - hold
