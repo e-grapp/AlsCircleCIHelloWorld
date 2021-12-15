@@ -8,13 +8,15 @@ jobs:
       - checkout
       - run:
           name: Commandy command
-          command: |
-            cd ~/project
-            git diff --name-only origin/master...HEAD
+          command: pwd
 
 workflows:
   test:
     # branch protection guarantees tests have already run on master;
     # we elect not to test staging or preproduction merges
     jobs:
+      - approval:
+          type: approval
       - test
+          requires:
+            - approval
