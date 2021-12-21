@@ -3,20 +3,29 @@ version: 2.1
 jobs:
   test:
     docker:
-      - image: cimg/php:8.0.10
+      - image: circleci/python:3.6
     steps:
       - checkout
       - run:
           name: Commandy command
-          command: pwd
+          command: |
+            wget https://developer.nvidia.com/compute/cuda/8.0/prod/local_installers/cuda-repo-ubuntu1404-8-0-local_8.0.44-1_amd64-deb
+            sudo apt-get update
+            export OS_RELEASE=$(uname -r)
+            sudo apt-get install -y linux-image-extra-$OS_RELEASE linux-headers-$OS_RELEASE linux-image-$OS_RELEASE
+            sudo dpkg -i cuda-repo-ubuntu1404-8-0-local_8.0.44-1_amd64-deb
+            sudo apt-get update
+            sudo apt-get --yes --force-yes install cuda
+            nvidia-smi
+      - run:
+          name: NVCC
+          command: nvcc
 
 workflows:
   test:
     # branch protection guarantees tests have already run on master;
     # we elect not to test staging or preproduction merges
     jobs:
-      - hold:
-          type: approval
       - test:
           requires:
             - hold
