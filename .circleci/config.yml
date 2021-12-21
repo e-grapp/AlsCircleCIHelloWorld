@@ -8,10 +8,6 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Commandy command
-          command: |
-            nvidia-smi
-      - run:
           name: NVCC
           command: nvcc
 
