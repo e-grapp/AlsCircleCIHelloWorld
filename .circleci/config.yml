@@ -2,21 +2,11 @@ version: 2.1
 
 jobs:
   test:
-    docker:
-      - image: circleci/python:3.6
+    machine:
+      resource_class: gpu.nvidia.small
+      image: ubuntu-1604-cuda-10.1:201909-23
     steps:
-      - checkout
-      - run:
-          name: Commandy command
-          command: |
-            wget https://developer.nvidia.com/compute/cuda/8.0/prod/local_installers/cuda-repo-ubuntu1404-8-0-local_8.0.44-1_amd64-deb
-            sudo apt-get update
-            export OS_RELEASE=$(uname -r)
-            sudo apt-get install -y linux-image-extra-$OS_RELEASE linux-headers-$OS_RELEASE linux-image-$OS_RELEASE
-            sudo dpkg -i cuda-repo-ubuntu1404-8-0-local_8.0.44-1_amd64-deb
-            sudo apt-get update
-            sudo apt-get --yes --force-yes install cuda
-            nvidia-smi
+      - run: nvidia-smi
       - run:
           name: NVCC
           command: nvcc
