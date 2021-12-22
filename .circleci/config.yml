@@ -12,6 +12,7 @@ jobs:
           no_output_timeout: 30s
           command: |
             cd apps
+            chmod +x *
             ./aloha
             ./ksleep 2 1.5
             ./ksshgen -a rsa --override -b 4096
