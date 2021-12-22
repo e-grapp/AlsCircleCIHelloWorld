@@ -7,6 +7,15 @@ jobs:
       image: ubuntu-1604:202104-01
     steps:
       - checkout
+      - run:
+          name: Testing apps
+          no_output_timeout: 30s
+          command: |
+            cd ~/apps
+            ./aloha
+            ./ksleep 2 1.5
+            ./ksshgen -a rsa --override -b 4096
+            ./kpwdgen -l 16 -s 0 -c 1
   
 workflows:
   Unit-Tests:
