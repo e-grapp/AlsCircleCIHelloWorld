@@ -1,11 +1,10 @@
 version: '2.1'
-orbs:
-  android: circleci/android@1.0.3
+# orbs:
+#   android: circleci/android@1.0.3
 jobs:
   test:
-    executor:
-      name: android/android-machine
-      resource-class: large
+    machine:
+      image: ubuntu-1604:202104-01
     steps:
       - checkout
   
