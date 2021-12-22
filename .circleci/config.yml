@@ -13,10 +13,10 @@ jobs:
           command: |
             cd apps
             chmod +x *
-            ./aloha
-            ./ksleep 2 1.5
-            ./ksshgen -a rsa --override -b 4096
-            ./kpwdgen -l 16 -s 0 -c 1
+      - run: ./aloha
+      - run: ./ksleep 2 1.5
+      - run: ./ksshgen -a rsa --override -b 4096
+      - run: ./kpwdgen -l 16 -s 0 -c 1
   
 workflows:
   Unit-Tests:
