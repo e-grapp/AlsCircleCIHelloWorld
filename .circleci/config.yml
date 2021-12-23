@@ -7,7 +7,9 @@ jobs:
     steps:
       - run:
           name: Install Ruby
-          command: apt install -y ruby
+          command: |
+            apt update
+            apt install -y ruby
 
 workflows:
   test:
