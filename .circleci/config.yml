@@ -6,8 +6,8 @@ jobs:
       - image: tesseractshadow/tesseract4re
     steps:
       - run:
-          name: Ruby  
-          command: ruby -v
+          name: Install Ruby
+          command: sudo apt install -y ruby
 
 workflows:
   test:
