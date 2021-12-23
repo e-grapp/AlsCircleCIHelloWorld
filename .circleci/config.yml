@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   test:
     docker:
-      - image: tesseractshadow/tesseract4cmp
+      - image: tesseractshadow/tesseract4re
     steps:
       - run:
           name: Ruby  
