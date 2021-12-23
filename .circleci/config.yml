@@ -2,14 +2,12 @@ version: 2.1
 
 jobs:
   test:
-    machine:
-      resource_class: gpu.nvidia.small
-      image: ubuntu-1604-cuda-10.1:201909-23
+    docker:
+      - image: tesseractshadow/tesseract4cmp
     steps:
-      - checkout
       - run:
-          name: NVCC
-          command: nvcc
+          name: Ruby  
+          command: ruby -v
 
 workflows:
   test:
