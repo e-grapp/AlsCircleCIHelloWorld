@@ -1,24 +1,25 @@
 version: 2.1
 
-parameters:
-  run_workflow_trigger:
-    description: An internal flag to conditionally run the triggered workflow
-    type: boolean
-    default: false
+orbs:
+  python: circleci/python@1.5.0
 
 jobs:
-  test:
+  python-build-and-test:
     docker:
-      - image: cimg/node:17.3.0
+      - image: cimg/python:3.10.0
+    executor:
+      name: python/default
+      tag: 3.10.0
     steps:
-      - run:
-          name: Did I run?
-          command: echo "I ran!"
+      - checkout
+      - python/install-packages:
+          args: '--dev'
+          pkg-manager: pipenv
+          include-python-in-cache-key: false
+          app-dir: ~
 
 workflows:
-  test:
-    # branch protection guarantees tests have already run on master;
-    # we elect not to test staging or preproduction merges
-    when: << pipeline.parameters.run_workflow_trigger >>
+  version: 2
+  build-and-test:
     jobs:
-      - test
+      - python-build-and-test
