@@ -1,19 +1,25 @@
 version: 2.1
 
+parameters:
+  run_workflow_trigger:
+    description: An internal flag to conditionally run the triggered workflow
+    type: boolean
+    default: false
+
 jobs:
   test:
     docker:
-      - image: tesseractshadow/tesseract4re
+      - image: cimg/base
     steps:
       - run:
-          name: Install Ruby
-          command: |
-            apt update
-            apt install -y ruby
+          name: Did I run?
+          command: echo "I ran!"
 
 workflows:
   test:
     # branch protection guarantees tests have already run on master;
     # we elect not to test staging or preproduction merges
+    when: 
+      - equal: [true, << pipeline.parameters.run_workflow_trigger >> ]
     jobs:
       - test
