@@ -3,7 +3,7 @@ version: 2.1
 parameters:
   run_workflow_trigger:
     description: An internal flag to conditionally run the triggered workflow
-    type: string
+    type: boolean
     default: false
 
 jobs:
@@ -19,7 +19,6 @@ workflows:
   test:
     # branch protection guarantees tests have already run on master;
     # we elect not to test staging or preproduction merges
-    when: 
-      - equal: [true, << pipeline.parameters.run_workflow_trigger >> ]
+    when: << pipeline.parameters.run_workflow_trigger >>
     jobs:
       - test
