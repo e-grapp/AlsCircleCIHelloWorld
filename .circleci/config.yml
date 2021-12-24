@@ -18,6 +18,8 @@ jobs:
           include-python-in-cache-key: false
           app-dir: ~
 
+  python/work-with-pipenv
+
 workflows:
   version: 2
   build-and-test:
