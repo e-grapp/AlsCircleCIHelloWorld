@@ -9,7 +9,7 @@ parameters:
 jobs:
   test:
     docker:
-      - image: cimg/base
+      - image: cimg/node:latest
     steps:
       - run:
           name: Did I run?
