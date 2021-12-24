@@ -3,7 +3,7 @@ version: 2.1
 parameters:
   run_workflow_trigger:
     description: An internal flag to conditionally run the triggered workflow
-    type: boolean
+    type: string
     default: false
 
 jobs:
