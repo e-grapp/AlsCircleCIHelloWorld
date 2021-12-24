@@ -17,8 +17,7 @@ jobs:
           pkg-manager: pipenv
           include-python-in-cache-key: false
           app-dir: ~
-  python-pipenv-orb:
-    - python/work-with-pipenv
+  python/work-with-pipenv
 
 workflows:
   version: 2
