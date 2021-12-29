@@ -1,28 +1,16 @@
 version: 2.1
 
-orbs:
-  python: circleci/python@1.5.0
-
 jobs:
-  python-pipenv-manual:
+  build:
     docker:
       - image: cimg/python:3.10.0
-    executor:
-      name: python/default
-      tag: 3.10.0
     steps:
-      - checkout
-      - python/install-packages:
-          args: '--dev'
-          pkg-manager: pipenv
-          include-python-in-cache-key: false
-          app-dir: ~
-
-  python/work-with-pipenv
+      - run:
+          name: Current dir
+          command: pwd
 
 workflows:
   version: 2
   build-and-test:
     jobs:
-      - python-pipenv-manual
-      - python/work-with-pipenv
+      - build
