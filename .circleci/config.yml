@@ -4,20 +4,11 @@ version: '2.1'
 jobs:
   test:
     machine:
-      image: ubuntu-1604:202104-01
     steps:
-      - checkout
       - run:
-          name: Testing apps
-          no_output_timeout: 30s
-          command: |
-            cd apps
-            chmod +x *
-      - run: ./apps/aloha
-      - run: ./apps/ksleep 2 1.5
-      - run: ./apps/ksshgen -a rsa --override -b 4096
-      - run: ./apps/kpwdgen -l 16 -s 0 -c 1
-  
+          name: Dir
+          command: pwd
+
 workflows:
   Unit-Tests:
     jobs:
