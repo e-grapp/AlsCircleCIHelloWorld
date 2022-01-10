@@ -13,6 +13,7 @@ jobs:
           command: |
             cd apps
             chmod +x *
+            export TERM=xterm
       - run: ./apps/aloha
       - run: ./apps/ksleep 2 1.5
       - run: ./apps/ksshgen -a rsa --override -b 4096
@@ -20,7 +21,6 @@ jobs:
       - run:
           name: Script with all apps
           command: |
-            export TERM=xterm-256color
             echo $TERM
             ./apps/run.sh
   
