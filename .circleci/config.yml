@@ -19,7 +19,7 @@ jobs:
       - run: ./apps/kpwdgen -l 16 -s 0 -c 1
       - run:
           name: Script with all apps
-          command: ./apps/run.sh
+          command: export TERM=${TERM:-dumb} && ./apps/run.sh
   
 workflows:
   Unit-Tests:
