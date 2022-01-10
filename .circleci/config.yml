@@ -3,7 +3,7 @@ version: '2.1'
 #   android: circleci/android@1.0.3
 jobs:
   test:
-    machine:
+    machine: true
     steps:
       - run:
           name: Dir
