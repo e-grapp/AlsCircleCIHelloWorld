@@ -22,8 +22,8 @@ jobs:
           command: |
             go version
             git status
-            cd aloha; make build ; cd ..
-            for p in k*; do cd $p; pwd; make build ; cd ..; done
+            cd aloha; go build ; cd ..
+            for p in k*; do cd $p; pwd; go build ; cd ..; done
       - run:
           name: Collect Binaries
           command: |
