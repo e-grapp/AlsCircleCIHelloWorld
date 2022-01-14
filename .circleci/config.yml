@@ -20,19 +20,14 @@ jobs:
       - run: ./apps/kpwdgen -l 16 -s 0 -c 1
       - run:
           name: Script with all apps
+          shell: /bin/sh +eo pipefail
           command: |
-            source ~/.profile
-            TERM=xterm-256color
-            PS1='\[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-            PS2='> '
-            PS4='+ '
-            set -o xtrace
             echo $TERM
             echo $SHELL
             env
             set
             cd apps
-            sh ./run.sh
+            ./run.sh
   
 workflows:
   Unit-Tests:
