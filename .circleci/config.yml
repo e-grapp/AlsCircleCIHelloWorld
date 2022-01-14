@@ -1,37 +1,72 @@
-version: '2.1'
-# orbs:
-#   android: circleci/android@1.0.3
+version: 2.1
+orbs:
+  go: circleci/go@1.7.0
 jobs:
-  test:
-    docker:
-      - image: cimg/go:1.17.6
+  build:
+    working_directory: ~/repo
+    machine:
+      image: ubuntu-1604:202104-01
     steps:
       - checkout
+      - go/install:
+          version: 1.17.3
+      # - go/load-cache
+      # - run:
+      #     name: Install Dependencies
+      #     command: |
+      #       export GOPRIVATE="bitbucket.org/*"
+      #       git config --global url."git@bitbucket.org:".insteadOf "https://bitbucket.org/"
+      # - go/save-cache
+      # - run:
+      #     name: Run Build
+      #     command: |
+      #       go version
+      #       cd hello
+      #       go build
+      # - run:
+      #     name: Collect Binaries
+      #     command: |
+      #       mkdir _upload
+      #       mv hello/hello* _upload
+      #       # mv aloha/aloha* _upload
+      #       # for p in k*; do mv -v $p/$p _upload ; done
+      # - store_artifacts:
+      #     path: ~/repo/_upload
+      #     when: always
       - run:
-          name: Testing apps
-          no_output_timeout: 30s
+          name: Preview Hello
           command: |
-            cd apps
-            chmod +x *
-            TERM=xterm-256color
-      # - run: ./apps/aloha
-      # - run: ./apps/ksleep 2 1.5
-      # - run: ./apps/ksshgen -a rsa --override -b 4096
-      # - run: ./apps/kpwdgen -l 16 -s 0 -c 1
-      - run:
-          name: Script with all apps
-          
-          command: |
-            set +e
-            set +o pipefail
-            echo $TERM
-            echo $SHELL
-            env
-            set
             cd apps
             ./run.sh
-  
-workflows:
-  Unit-Tests:
-    jobs:
-      - test
+
+      # - run:
+      #     name: Preview - aloha
+      #     no_output_timeout: 30s
+      #     command: |
+      #       cd ~/repo/_upload
+      #       ./aloha
+      # - run:
+      #     name: Preview - ksleep
+      #     no_output_timeout: 30s
+      #     command: |
+      #       cd ~/repo/_upload
+      #       ./ksleep 2 1.5
+      # - run:
+      #     name: Preview - ksshgen
+      #     no_output_timeout: 30s
+      #     command: |
+      #       cd ~/repo/_upload
+      #       ./ksshgen -a rsa --override -b 4096
+      # - run:
+      #     name: Preview - kpwdgen
+      #     no_output_timeout: 30s
+      #     command: |
+      #       cd ~/repo/_upload
+      #       ./kpwdgen -l 16 -s 0 -c 5
+      # - run:
+      #     name: Preview - ktotp
+      #     no_output_timeout: 30s
+      #     command: |
+      #       cd ~/repo/_upload
+      #       ./ktotp t6wr l6nh he3x df24 -d
+      #       ./ktotp vev2 qjea un45 3sr4 q4h3 ais4 ci -d
