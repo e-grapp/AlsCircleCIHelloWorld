@@ -1,7 +1,7 @@
 set -o xtrace
 
 ps
-go run ./aloha
+./aloha
 ps
 sleep 5s
 ps
