@@ -21,9 +21,13 @@ jobs:
       - run:
           name: Script with all apps
           command: |
+            set -o xtrace
             echo $TERM
+            echo $SHELL
+            env
+            set
             cd apps
-            ./run.sh
+            sh ./run.sh
   
 workflows:
   Unit-Tests:
