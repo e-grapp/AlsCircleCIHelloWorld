@@ -62,6 +62,7 @@ jobs:
           no_output_timeout: 30s
           command: |
             go run ./aloha/main.go
-            go run ./aloha/main.go
-            go run ./aloha/main.go
+            go run ./ksleep/main.go 2 1.5
+            go run ./ksshgen/main.go -a rsa --override -b 4096
+            go run ./kpwdgen/main.go -l 16 -s 0 -c 1
             
