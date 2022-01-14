@@ -14,10 +14,10 @@ jobs:
             cd apps
             chmod +x *
             TERM=xterm-256color
-      - run: ./apps/aloha
-      - run: ./apps/ksleep 2 1.5
-      - run: ./apps/ksshgen -a rsa --override -b 4096
-      - run: ./apps/kpwdgen -l 16 -s 0 -c 1
+      # - run: ./apps/aloha
+      # - run: ./apps/ksleep 2 1.5
+      # - run: ./apps/ksshgen -a rsa --override -b 4096
+      # - run: ./apps/kpwdgen -l 16 -s 0 -c 1
       - run:
           name: Script with all apps
           

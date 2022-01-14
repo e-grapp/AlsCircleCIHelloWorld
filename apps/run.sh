@@ -1,11 +1,11 @@
 set -o xtrace
 
+go run ./aloha
+go run ./aloha
+go run ./aloha
+go run ./aloha
 ./aloha
-sleep 5s
 ./aloha
-sleep 5s
-./aloha
-sleep 5s
 ./aloha
 ./ksleep 2 1.5
 # ./ksshgen -a rsa --override -b 4096
