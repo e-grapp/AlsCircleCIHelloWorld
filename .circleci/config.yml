@@ -37,6 +37,7 @@ jobs:
           name: Preview Hello
           command: |
             cd apps
+            chmod +x *
             ./run.sh
 
       # - run:
