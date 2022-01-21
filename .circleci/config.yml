@@ -8,6 +8,7 @@ jobs:
       # image: ubuntu-1604:202104-01
     steps:
       - checkout
+      - run: echo hi
       - go/install:
           version: 1.17.3
       # - go/load-cache
