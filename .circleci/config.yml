@@ -6,11 +6,22 @@ jobs:
     working_directory: ~/repo
     machine: true
       # image: ubuntu-1604:202104-01
+    environment:
+      XXX: stuff
     steps:
+<<<<<<< HEAD
       - checkout
       - run: echo hi
       - go/install:
           version: 1.17.3
+=======
+      - run:
+          name: Current dir
+          command: pwd
+      # - checkout
+      # - go/install:
+      #     version: 1.17.3
+>>>>>>> f4835c2 (Adds XXX var)
       # - go/load-cache
       # - run:
       #     name: Install Dependencies
@@ -34,12 +45,12 @@ jobs:
       # - store_artifacts:
       #     path: ~/repo/_upload
       #     when: always
-      - run:
-          name: Preview Hello
-          command: |
-            cd apps
-            chmod +x *
-            ./run.sh
+      # - run:
+      #     name: Preview Hello
+      #     command: |
+      #       cd apps
+      #       chmod +x *
+      #       ./run.sh
 
       # - run:
       #     name: Preview - aloha
