@@ -4,8 +4,8 @@ orbs:
 jobs:
   build:
     working_directory: ~/repo
-    machine:
-      image: ubuntu-1604:202104-01
+    machine: true
+      # image: ubuntu-1604:202104-01
     steps:
       - checkout
       - go/install:
