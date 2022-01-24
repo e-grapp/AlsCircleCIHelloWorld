@@ -1,16 +1,79 @@
 version: 2.1
-
+orbs:
+  node: circleci/node@5.0.0
 jobs:
   build:
+    working_directory: ~/repo
     docker:
-      - image: cimg/python:latest
+      - image: cimg/php:7.4-node
+      # image: ubuntu-1604:202104-01
     steps:
       - run:
           name: Current dir
-          command: echo $CIRCLE_PROJECT_REPONAME
+          command: |
+            sudo apt-get update && sudo apt-get install subversion
+            sudo apt install docker-php-ext-install
+      # - checkout
+      # - go/install:
+      #     version: 1.17.3
+      # - go/load-cache
+      # - run:
+      #     name: Install Dependencies
+      #     command: |
+      #       export GOPRIVATE="bitbucket.org/*"
+      #       git config --global url."git@bitbucket.org:".insteadOf "https://bitbucket.org/"
+      # - go/save-cache
+      # - run:
+      #     name: Run Build
+      #     command: |
+      #       go version
+      #       cd hello
+      #       go build
+      # - run:
+      #     name: Collect Binaries
+      #     command: |
+      #       mkdir _upload
+      #       mv hello/hello* _upload
+      #       # mv aloha/aloha* _upload
+      #       # for p in k*; do mv -v $p/$p _upload ; done
+      # - store_artifacts:
+      #     path: ~/repo/_upload
+      #     when: always
+      # - run:
+      #     name: Preview Hello
+      #     command: |
+      #       cd apps
+      #       chmod +x *
+      #       ./run.sh
 
-workflows:
-  version: 2
-  build-and-test:
-    jobs:
-      - build
+      # - run:
+      #     name: Preview - aloha
+      #     no_output_timeout: 30s
+      #     command: |
+      #       cd ~/repo/_upload
+      #       ./aloha
+      # - run:
+      #     name: Preview - ksleep
+      #     no_output_timeout: 30s
+      #     command: |
+      #       cd ~/repo/_upload
+      #       ./ksleep 2 1.5
+      # - run:
+      #     name: Preview - ksshgen
+      #     no_output_timeout: 30s
+      #     command: |
+      #       cd ~/repo/_upload
+      #       ./ksshgen -a rsa --override -b 4096
+      # - run:
+      #     name: Preview - kpwdgen
+      #     no_output_timeout: 30s
+      #     command: |
+      #       cd ~/repo/_upload
+      #       ./kpwdgen -l 16 -s 0 -c 5
+      # - run:
+      #     name: Preview - ktotp
+      #     no_output_timeout: 30s
+      #     command: |
+      #       cd ~/repo/_upload
+      #       ./ktotp t6wr l6nh he3x df24 -d
+      #       ./ktotp vev2 qjea un45 3sr4 q4h3 ais4 ci -d
