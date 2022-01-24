@@ -11,13 +11,8 @@ jobs:
       - run:
           name: Current dir
           command: |
-            sudo apt-get update && sudo apt-get install subversion
-            sudo apt-get update && apt-get install -y \
-              libfreetype6-dev \
-              libjpeg62-turbo-dev \
-              libpng-dev \
-            && docker-php-ext-configure gd --with-freetype --with-jpeg \
-            && docker-php-ext-install -j$(nproc) gd
+            sudo apt update && sudo apt install subversion
+            sudo apt install docker-php-ext-install
       # - checkout
       # - go/install:
       #     version: 1.17.3
