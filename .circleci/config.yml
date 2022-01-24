@@ -11,8 +11,7 @@ jobs:
       - run:
           name: Current dir
           command: |
-            sudo apt update && sudo apt install subversion
-            sudo apt install docker-php-ext-install
+            docker-php-ext-install
       # - checkout
       # - go/install:
       #     version: 1.17.3
