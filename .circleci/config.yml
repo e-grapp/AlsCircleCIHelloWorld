@@ -11,8 +11,8 @@ jobs:
       - run:
           name: Current dir
           command: |
-            sudo apt-get update && sudo apt-get install subversion
-            sudo -E docker-php-ext-install
+            sudo apt update && sudo apt install subversion
+            sudo -E docker-php-ext-install mysqli
       # - checkout
       # - go/install:
       #     version: 1.17.3
