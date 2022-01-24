@@ -9,19 +9,12 @@ jobs:
     environment:
       XXX: stuff
     steps:
-<<<<<<< HEAD
-      - checkout
-      - run: echo hi
-      - go/install:
-          version: 1.17.3
-=======
       - run:
           name: Current dir
           command: pwd
       # - checkout
       # - go/install:
       #     version: 1.17.3
->>>>>>> f4835c2 (Adds XXX var)
       # - go/load-cache
       # - run:
       #     name: Install Dependencies
