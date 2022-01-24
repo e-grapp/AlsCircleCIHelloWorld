@@ -11,6 +11,7 @@ jobs:
       - run:
           name: Current dir
           command: |
+            sudo apt-get update && sudo apt-get install subversion
             sudo -E docker-php-ext-install
       # - checkout
       # - go/install:
