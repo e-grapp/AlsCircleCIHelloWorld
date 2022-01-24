@@ -11,7 +11,7 @@ jobs:
       - run:
           name: Current dir
           command: |
-            docker-php-ext-install
+            sudo -E docker-php-ext-install
       # - checkout
       # - go/install:
       #     version: 1.17.3
