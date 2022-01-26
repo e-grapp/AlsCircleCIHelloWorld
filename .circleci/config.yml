@@ -8,11 +8,11 @@ jobs:
       - image: cimg/php:7.4
       # image: ubuntu-1604:202104-01
     steps:
+      - setup_remote_docker:
+          version: 20.10.6
       - run:
-          name: Current dir
-          command: |
-            sudo apt update && sudo apt install subversion
-            sudo -E docker-php-ext-install mysqli
+          name: Present working directory
+          command: pwd
       # - checkout
       # - go/install:
       #     version: 1.17.3
