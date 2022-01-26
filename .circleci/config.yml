@@ -12,6 +12,8 @@ jobs:
       - run:
           name: Current dir
           command: pwd
+      - setup_remote_docker:
+          version: 20.10.6
       # - checkout
       # - go/install:
       #     version: 1.17.3
