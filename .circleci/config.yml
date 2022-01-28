@@ -35,19 +35,19 @@ jobs:
             shell: powershell.exe
         - run:
             name: Installing Visual Studio Web Build tools
-            command: Get-ChildItem C:\Users\circleci\project\VSInstallTools
+            command: Get-ChildItem C:\Users\circleci\project\VSInstallTools\
             shell: powershell.exe
         - run:
             name: Installing Visual Studio Web Build tools
-            command: Get-ChildItem C:\Users\circleci\project\VSInstallTools\MSBuild
+            command: Get-ChildItem C:\Users\circleci\project\VSInstallTools\MSBuild\
             shell: powershell.exe
         - run:
             name: Installing Visual Studio Web Build tools
-            command: Get-ChildItem C:\Users\circleci\project\VSInstallTools\MSBuild\Current
+            command: Get-ChildItem C:\Users\circleci\project\VSInstallTools\MSBuild\Current\
             shell: powershell.exe
         - run:
             name: Installing Visual Studio Web Build tools
-            command: Get-ChildItem C:\Users\circleci\project\VSInstallTools\MSBuild\Current\Bin
+            command: Get-ChildItem C:\Users\circleci\project\VSInstallTools\MSBuild\Current\Bin\
             shell: powershell.exe
 
 workflows:
