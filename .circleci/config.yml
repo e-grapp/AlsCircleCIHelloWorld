@@ -1,17 +1,57 @@
-version: 2.1 # Use version 2.1 to enable orb usage.
+version: 2.1
 
 orbs:
-  win: circleci/windows@2.4.0 # The Windows orb give you everything you need to start using the Windows executor.
+    win: circleci/windows@2.2.0
 
 jobs:
-  build: # name of your job
-    executor:
-      name: win/default # executor type
-      size: "medium" # resource class, can be "medium", "large", "xlarge", "2xlarge", defaults to "medium" if not specified
-      version: stable
+    build:
+      executor: win/default     
 
-    steps:
-      # Commands are run in a Windows virtual machine environment
-      - run:
-          name: Download InstallerProjects VSIX
-          command: Invoke-WebRequest -Uri https://visualstudioclient.gallerycdn.vsassets.io/extensions/visualstudioclient/microsoftvisualstudio2017installerprojects/1.0.0/1620063166533/InstallerProjects.vsix -Outfile ~/project/InstallerProjects.vsix
+      steps:
+        - checkout
+        - run:
+            name: Downloading AWS CLI Installer
+            command: |
+              $ProgressPreference = "SilentlyContinue"
+              Invoke-WebRequest "https://awscli.amazonaws.com/AWSCLIV2.msi" -OutFile "AWSCLIV2.msi" -PassThru -UseBasicParsing
+            shell: powershell.exe
+        - run:
+            name: Installing AWS CLI
+            command: .\AWSCLIV2.msi /quiet
+            shell: powershell.exe
+        - run:
+            name: Downloading Visual Studio build tools
+            command: |
+              $ProgressPreference = "SilentlyContinue"
+              Invoke-WebRequest "https://download.visualstudio.microsoft.com/download/pr/df6c2f11-eae3-4d3c-a0a8-9aec3421235b/3ffead472d6a0ce57e828a21392e323e0a65ef0d8ffd8af9c2654fa26f19cae0/vs_BuildTools.exe" -OutFile "vs_BuildTools.exe" -PassThru -UseBasicParsing
+            shell: powershell.exe
+        - run:
+            name: Installing Visual Studio build tools
+            command: .\vs_BuildTools.exe --add Microsoft.VisualStudio.Workload.ManagedDesktopBuildTools --wait --Installpath C:\Users\circleci\project\VSInstallTools -q
+            shell: powershell.exe
+        - run:
+            name: Installing Visual Studio Web Build tools
+            command: .\vs_BuildTools.exe --add Microsoft.VisualStudio.Workload.WebBuildTools --wait --Installpath C:\Users\circleci\project\VSInstallTools -q
+            shell: powershell.exe
+        - run:
+            name: Installing Visual Studio Web Build tools
+            command: Get-ChildItem C:\Users\circleci\project\VSInstallTools
+            shell: powershell.exe
+        - run:
+            name: Installing Visual Studio Web Build tools
+            command: Get-ChildItem C:\Users\circleci\project\VSInstallTools\MSBuild
+            shell: powershell.exe
+        - run:
+            name: Installing Visual Studio Web Build tools
+            command: Get-ChildItem C:\Users\circleci\project\VSInstallTools\MSBuild\Current
+            shell: powershell.exe
+        - run:
+            name: Installing Visual Studio Web Build tools
+            command: Get-ChildItem C:\Users\circleci\project\VSInstallTools\MSBuild\Current\Bin
+            shell: powershell.exe
+
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build
