@@ -11,7 +11,10 @@ jobs:
     steps:
       - run:
           name: Current dir
-          command: sudo apt update && sudo apt upgrade -y
+          command: |
+            CHANGED_SPECS=$(git diff --name-only | grep .spec.js)
+            echo "Checking which .spec.js files changed in the last commit"
+            echo $CHANGED_SPECS
       # - checkout
       # - go/install:
       #     version: 1.17.3
