@@ -10,7 +10,7 @@ jobs:
     steps:
       - run:
           name: Add VNC user
-      	  command: sudo /usr/sbin/sysadminctl -addUser vncuser -fullName "VNC User" -password tomorrow -admin
+          command: sudo /usr/sbin/sysadminctl -addUser vncuser -fullName "VNC User" -password tomorrow -admin
       - run:
           name: Check shell
           command: echo $SHELL
