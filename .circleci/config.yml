@@ -6,8 +6,11 @@ orbs:
 jobs:
   build:
     macos:
-      xcode: 12.5.0
+      xcode: 13.2.1
     steps:
+      - run:
+          name: Add VNC user
+      	  command: sudo /usr/sbin/sysadminctl -addUser vncuser -fullName "VNC User" -password tomorrow -admin
       - run:
           name: Check shell
           command: echo $SHELL
