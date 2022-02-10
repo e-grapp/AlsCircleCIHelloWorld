@@ -5,7 +5,9 @@ orbs:
 
 jobs:
     build:
-      executor: win/previous
+      executor: 
+        name: win/default
+        version: previous
 
       steps:
         - checkout
