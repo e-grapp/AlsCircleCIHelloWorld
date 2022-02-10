@@ -5,7 +5,7 @@ orbs:
 
 jobs:
     build:
-      executor: win/default     
+      executor: win/default-ba02e4eb-ed50-45d8-86f6-712e766c8606     
 
       steps:
         - checkout
