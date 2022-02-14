@@ -17,7 +17,9 @@ jobs:
     working_directory: ~/android-aar-simple
     steps:
       - checkout
-
+      - run:
+          name: mime types
+          command: sudo bash -c "echo 'application/java-archive                 aar' >> /etc/mime.types"
       - store_artifacts:
           path: ./artefacts
 
