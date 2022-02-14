@@ -1,78 +1,29 @@
+# Use the latest 2.1 version of CircleCI pipeline process engine.
+# See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
+
 orbs:
-  go: circleci/go@1.7.0
+  android: circleci/android@2.0.0
+# Define a job to be invoked later in a workflow.
+# See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
   build:
-    working_directory: ~/repo
-    docker:
-      - image: cimg/ruby:2.7.4-node
-    environment:
-      XXX: stuff
+    executor:
+      name: android/android-machine
+      resource-class: large
+      tag: 2021.10.1
+    # Add steps to the job
+    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
+    working_directory: ~/android-aar-simple
     steps:
-      - run:
-          name: Current dir
-          command: sudo apt update && sudo apt upgrade -y
-      # - checkout
-      # - go/install:
-      #     version: 1.17.3
-      # - go/load-cache
-      # - run:
-      #     name: Install Dependencies
-      #     command: |
-      #       export GOPRIVATE="bitbucket.org/*"
-      #       git config --global url."git@bitbucket.org:".insteadOf "https://bitbucket.org/"
-      # - go/save-cache
-      # - run:
-      #     name: Run Build
-      #     command: |
-      #       go version
-      #       cd hello
-      #       go build
-      # - run:
-      #     name: Collect Binaries
-      #     command: |
-      #       mkdir _upload
-      #       mv hello/hello* _upload
-      #       # mv aloha/aloha* _upload
-      #       # for p in k*; do mv -v $p/$p _upload ; done
-      # - store_artifacts:
-      #     path: ~/repo/_upload
-      #     when: always
-      # - run:
-      #     name: Preview Hello
-      #     command: |
-      #       cd apps
-      #       chmod +x *
-      #       ./run.sh
+      - checkout
 
-      # - run:
-      #     name: Preview - aloha
-      #     no_output_timeout: 30s
-      #     command: |
-      #       cd ~/repo/_upload
-      #       ./aloha
-      # - run:
-      #     name: Preview - ksleep
-      #     no_output_timeout: 30s
-      #     command: |
-      #       cd ~/repo/_upload
-      #       ./ksleep 2 1.5
-      # - run:
-      #     name: Preview - ksshgen
-      #     no_output_timeout: 30s
-      #     command: |
-      #       cd ~/repo/_upload
-      #       ./ksshgen -a rsa --override -b 4096
-      # - run:
-      #     name: Preview - kpwdgen
-      #     no_output_timeout: 30s
-      #     command: |
-      #       cd ~/repo/_upload
-      #       ./kpwdgen -l 16 -s 0 -c 5
-      # - run:
-      #     name: Preview - ktotp
-      #     no_output_timeout: 30s
-      #     command: |
-      #       cd ~/repo/_upload
-      #       ./ktotp t6wr l6nh he3x df24 -d
-      #       ./ktotp vev2 qjea un45 3sr4 q4h3 ais4 ci -d
+      - store_artifacts:
+          path: ./artefacts
+
+# Invoke jobs via workflows
+# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
+workflows:
+  build:
+    jobs:
+      - build
