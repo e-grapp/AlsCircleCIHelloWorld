@@ -4,6 +4,7 @@ version: 2.1
 
 orbs:
   android: circleci/android@2.0.0
+  cxflow: checkmarx-ts/cxflow@1.0.5
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
@@ -28,4 +29,10 @@ jobs:
 workflows:
   build:
     jobs:
-      - build
+      - cxflow/scan:
+          name: checkmarx_integration
+          pre-steps:
+            - run:
+                name: Install git and OpenSSH
+                command: |
+                  apt-get update && apt-get --no-install-recommends -y install git openssh-client
