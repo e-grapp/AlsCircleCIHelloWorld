@@ -1,38 +1,27 @@
-# Use the latest 2.1 version of CircleCI pipeline process engine.
-# See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
-
-orbs:
-  android: circleci/android@2.0.0
-  cxflow: checkmarx-ts/cxflow@1.0.5
-# Define a job to be invoked later in a workflow.
-# See: https://circleci.com/docs/2.0/configuration-reference/#jobs
+  
 jobs:
-  build:
-    executor:
-      name: android/android-machine
-      resource-class: large
-      tag: 2021.10.1
-    # Add steps to the job
-    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
-    working_directory: ~/android-aar-simple
+  cimg:
+    docker:
+      - image: cimg/ruby:2.6.6-node
     steps:
-      - checkout
       - run:
-          name: mime types
-          command: sudo bash -c "echo 'application/java-archive                 aar' >> /etc/mime.types"
-      - store_artifacts:
-          path: ./artefacts
+          command: gem install bundler -v 2.2.17
+          
+      - run: ls -al /home/circleci
+      
+  circleci:
+    docker:
+      - image: circleci/ruby:2.6.6-node
+    steps:
+      - run:
+          command: gem install bundler -v 2.2.17
+          
+      - run: ls -al /home/circleci
 
-# Invoke jobs via workflows
-# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
+          
 workflows:
-  build:
+  build-deploy:
     jobs:
-      - cxflow/scan:
-          name: checkmarx_integration
-          pre-steps:
-            - run:
-                name: Install git and OpenSSH
-                command: |
-                  apt-get update && apt-get --no-install-recommends -y install git openssh-client
+      - cimg
+      - circleci
