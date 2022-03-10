@@ -7,49 +7,23 @@ jobs:
     build:
       executor: 
         name: win/default
-        version: previous
+        version: stable
 
       steps:
         - checkout
         - run:
-            name: Downloading AWS CLI Installer
-            command: |
-              $ProgressPreference = "SilentlyContinue"
-              Invoke-WebRequest "https://awscli.amazonaws.com/AWSCLIV2.msi" -OutFile "AWSCLIV2.msi" -PassThru -UseBasicParsing
+            name: Check Windows 10 SDK version
+            command: $(Get-Item "hklm:\SOFTWARE\Microsoft\Microsoft SDKs\Windows").GetValue("CurrentVersion")
             shell: powershell.exe
+
         - run:
-            name: Installing AWS CLI
-            command: .\AWSCLIV2.msi /quiet
+            name: Install new Windows 10 SDK version with choco
+            command: choco install windows-sdk-10.0 --version 10.0.19041
             shell: powershell.exe
+
         - run:
-            name: Downloading Visual Studio build tools
-            command: |
-              $ProgressPreference = "SilentlyContinue"
-              Invoke-WebRequest "https://download.visualstudio.microsoft.com/download/pr/df6c2f11-eae3-4d3c-a0a8-9aec3421235b/3ffead472d6a0ce57e828a21392e323e0a65ef0d8ffd8af9c2654fa26f19cae0/vs_BuildTools.exe" -OutFile "vs_BuildTools.exe" -PassThru -UseBasicParsing
-            shell: powershell.exe
-        - run:
-            name: Installing Visual Studio build tools
-            command: .\vs_BuildTools.exe --add Microsoft.VisualStudio.Workload.ManagedDesktopBuildTools --wait --Installpath C:\Users\circleci\project\VSInstallTools -q
-            shell: powershell.exe
-        - run:
-            name: Installing Visual Studio Web Build tools
-            command: .\vs_BuildTools.exe --add Microsoft.VisualStudio.Workload.WebBuildTools --wait --Installpath C:\Users\circleci\project\VSInstallTools -q
-            shell: powershell.exe
-        - run:
-            name: Installing Visual Studio Web Build tools
-            command: Get-ChildItem C:\Users\circleci\project\VSInstallTools\
-            shell: powershell.exe
-        - run:
-            name: Installing Visual Studio Web Build tools
-            command: Get-ChildItem C:\Users\circleci\project\VSInstallTools\MSBuild\
-            shell: powershell.exe
-        - run:
-            name: Installing Visual Studio Web Build tools
-            command: Get-ChildItem C:\Users\circleci\project\VSInstallTools\MSBuild\Current\
-            shell: powershell.exe
-        - run:
-            name: Installing Visual Studio Web Build tools
-            command: Get-ChildItem C:\Users\circleci\project\VSInstallTools\MSBuild\Current\Bin\
+            name: Check Windows 10 SDK version again
+            command: $(Get-Item "hklm:\SOFTWARE\Microsoft\Microsoft SDKs\Windows").GetValue("CurrentVersion")
             shell: powershell.exe
 
 workflows:
