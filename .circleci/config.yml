@@ -13,7 +13,7 @@ jobs:
         - checkout
         - run:
             name: Check Windows 10 SDK version
-            command: $(Get-Item "hklm:SOFTWARE\Microsoft\Windows Kits").GetValue("CurrentVersion")
+            command: $(Get-Item "hklm:\SOFTWARE\Microsoft\Windows Kits").GetValue("CurrentVersion")
             shell: powershell.exe
 
         - run:
@@ -23,7 +23,7 @@ jobs:
 
         - run:
             name: Check Windows 10 SDK version again
-            command: $(Get-Item "hklm:SOFTWARE\Microsoft\Windows Kits").GetValue("CurrentVersion")
+            command: $(Get-Item "hklm:\SOFTWARE\Microsoft\Windows Kits").GetValue("CurrentVersion")
             shell: powershell.exe
 
 workflows:
