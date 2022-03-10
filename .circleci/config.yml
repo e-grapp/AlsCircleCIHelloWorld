@@ -13,7 +13,11 @@ jobs:
         - checkout
         - run:
             name: Check Windows 10 SDK version
-            command: $(Get-Item "hklm:\SOFTWARE\Microsoft\Windows Kits").GetValue("CurrentVersion")
+            command: |
+              $WindowsSdkToolsPath = gci 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Microsoft SDKs\NETFXSDK' |
+                select -Last 1 |
+                gci | ? { $_.PSChildName -eq 'WinSDK-NetFx40Tools' } |
+                Get-ItemPropertyValue -Name InstallationFolder
             shell: powershell.exe
 
         - run:
@@ -21,9 +25,11 @@ jobs:
             command: choco install windows-sdk-10.0 --version 10.0.19041.0 --force
             shell: powershell.exe
 
-        - run:
-            name: Check Windows 10 SDK version again
-            command: $(Get-Item "hklm:\SOFTWARE\Microsoft\Windows Kits").GetValue("CurrentVersion")
+            command: |
+              $WindowsSdkToolsPath = gci 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Microsoft SDKs\NETFXSDK' |
+                select -Last 1 |
+                gci | ? { $_.PSChildName -eq 'WinSDK-NetFx40Tools' } |
+                Get-ItemPropertyValue -Name InstallationFolder
             shell: powershell.exe
 
 workflows:
