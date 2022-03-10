@@ -18,7 +18,7 @@ jobs:
 
         - run:
             name: Install new Windows 10 SDK version with choco
-            command: choco install windows-sdk-10.0 --version 10.0.19041 --force
+            command: choco install windows-sdk-10.0 --version 10.0.19041.0 --force
             shell: powershell.exe
 
         - run:
