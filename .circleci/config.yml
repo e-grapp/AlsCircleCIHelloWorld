@@ -10,9 +10,14 @@ jobs:
         version: stable
 
       steps:
+
+        - run:
+            name: Check dotnet versions
+            command: dotnet --list-sdks
+
         - run:
             name: Install dotnet 4.8
-            command: choco install netfx-4.8-devpack
+            command: choco install netfx-4.8-devpack --force
 
         - run:
              name: Check dotnet versions
