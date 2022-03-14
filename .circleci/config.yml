@@ -18,8 +18,8 @@ jobs:
         - run:
             name: Install dotnet 4.8
             command: |
-              mkdir c:\Temp
-              Start-BitsTransfer -Source 'https://go.microsoft.com/fwlink/?linkid=2088631'  -Destination "C:\Temp\Net4.8.exe"; & "C:\Temp\Net4.8.exe" /q /norestart
+              # Run a separate PowerShell process because the script calls exit, so it will end the current PowerShell session.
+              &powershell -NoProfile -ExecutionPolicy unrestricted -Command "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; &([scriptblock]::Create((Invoke-WebRequest -UseBasicParsing 'https://dot.net/v1/dotnet-install.ps1'))) -Channel 4.8"
             shell: powershell.exe
 
         - run:
