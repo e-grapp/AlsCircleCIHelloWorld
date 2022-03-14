@@ -10,28 +10,13 @@ jobs:
         version: stable
 
       steps:
-        - checkout
         - run:
-            name: Check Windows 10 SDK version
-            command: |
-              $WindowsSdkToolsPath = gci 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Microsoft SDKs\NETFXSDK' |
-                select -Last 1 |
-                gci | ? { $_.PSChildName -eq 'WinSDK-NetFx40Tools' } |
-                Get-ItemPropertyValue -Name InstallationFolder
-            shell: powershell.exe
+            name: Install dotnet 4.8
+            command: choco install netfx-4.8-devpack
 
         - run:
-            name: Install new Windows 10 SDK version with choco
-            command: choco install windows-sdk-10.0 --version 10.0.19041.0 --force
-            shell: powershell.exe
-
-        - run:
-            command: |
-              $WindowsSdkToolsPath = gci 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Microsoft SDKs\NETFXSDK' |
-                select -Last 1 |
-                gci | ? { $_.PSChildName -eq 'WinSDK-NetFx40Tools' } |
-                Get-ItemPropertyValue -Name InstallationFolder
-            shell: powershell.exe
+             name: Check dotnet versions
+             command: dotnet --list-sdks
 
 workflows:
   version: 2
