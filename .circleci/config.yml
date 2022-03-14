@@ -17,7 +17,9 @@ jobs:
 
         - run:
             name: Install dotnet 4.8
-            command: Start-BitsTransfer -Source 'https://go.microsoft.com/fwlink/?linkid=2088631'  -Destination "$Env:Temp\Net4.8.exe"; & "$Env:Temp\Net4.8.exe" /q /norestart
+            command: |
+              mkdir c:\Temp
+              Start-BitsTransfer -Source 'https://go.microsoft.com/fwlink/?linkid=2088631'  -Destination "C:\Temp\Net4.8.exe"; & "C:\Temp\Net4.8.exe" /q /norestart
             shell: powershell.exe
 
         - run:
