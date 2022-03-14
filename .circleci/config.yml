@@ -19,7 +19,7 @@ jobs:
             name: Install dotnet 4.8
             command: |
               # Run a separate PowerShell process because the script calls exit, so it will end the current PowerShell session.
-              &powershell -NoProfile -ExecutionPolicy unrestricted -Command "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; &([scriptblock]::Create((Invoke-WebRequest -UseBasicParsing 'https://dot.net/v1/dotnet-install.ps1'))) -Channel 4.8.0xx -Quality signed"
+              &powershell -NoProfile -ExecutionPolicy unrestricted -Command "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; &([scriptblock]::Create((Invoke-WebRequest -UseBasicParsing 'https://dot.net/v1/dotnet-install.ps1'))) -Channel 4.8.0 -Quality signed"
             shell: powershell.exe
 
         - run:
