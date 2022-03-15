@@ -7,7 +7,7 @@ jobs:
     build:
       executor: 
         name: win/default
-        version: stable
+        version: edge
 
       steps:
 
