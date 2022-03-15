@@ -14,6 +14,7 @@ jobs:
         - run:
             name: Check python version
             command: python --version
+            shell: powershell.exe
 
         - run:
             name: Switch Python version
@@ -23,6 +24,7 @@ jobs:
         - run:
              name: Check python versions
              command: python --version
+             shell: powershell.exe
 
 workflows:
   version: 2
