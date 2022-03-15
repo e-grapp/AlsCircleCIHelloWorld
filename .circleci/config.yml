@@ -12,19 +12,17 @@ jobs:
       steps:
 
         - run:
-            name: Check dotnet versions
-            command: dotnet --list-sdks
+            name: Check python version
+            command: python --version
 
         - run:
-            name: Install dotnet 4.8
-            command: |
-              # Run a separate PowerShell process because the script calls exit, so it will end the current PowerShell session.
-              &powershell -NoProfile -ExecutionPolicy unrestricted -Command "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; &([scriptblock]::Create((Invoke-WebRequest -UseBasicParsing 'https://dot.net/v1/dotnet-install.ps1'))) -Channel 4.8.0 -Quality signed"
+            name: Switch Python version
+            command: py -3.9
             shell: powershell.exe
 
         - run:
-             name: Check dotnet versions
-             command: dotnet --list-sdks
+             name: Check python versions
+             command: python --version
 
 workflows:
   version: 2
