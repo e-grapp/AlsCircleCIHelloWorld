@@ -5,7 +5,7 @@ jobs:
   build:
     working_directory: ~/repo
     machine: true
-      # image: ubuntu-1604:202104-01
+      image: ubuntu-2004:202010-01
     environment:
       XXX: stuff
     steps:
