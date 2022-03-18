@@ -14,6 +14,12 @@ jobs:
           command: pwd
       - setup_remote_docker:
           version: 20.10.6
+
+workflows:
+  build:
+    jobs:
+      - build
+
       # - checkout
       # - go/install:
       #     version: 1.17.3
