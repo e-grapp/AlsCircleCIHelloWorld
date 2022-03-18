@@ -24,8 +24,8 @@ workflows:
   build-deploy:
     jobs:
       - cimg
-      - hold
+      - hold:
           type: approval
           requires: cimg
-      - circleci
+      - circleci:
           requires: hold
