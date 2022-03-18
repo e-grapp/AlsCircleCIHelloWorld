@@ -5,7 +5,7 @@ jobs:
   build:
     working_directory: ~/repo
     machine:
-      image: default-03aa7c4f-4d37-4e92-9103-c57c5cb93a0d
+      image: ubuntu-2004:default-03aa7c4f-4d37-4e92-9103-c57c5cb93a0d
     environment:
       XXX: stuff
     steps:
