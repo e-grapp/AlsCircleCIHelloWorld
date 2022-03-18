@@ -26,6 +26,8 @@ workflows:
       - cimg
       - hold:
           type: approval
-          requires: cimg
+          requires:
+            - cimg
       - circleci:
-          requires: hold
+          requires:
+            - hold
