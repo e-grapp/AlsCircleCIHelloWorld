@@ -13,7 +13,6 @@ jobs:
           name: Current dir
           command: pwd
 
-
 workflows:
   build:
     jobs:
