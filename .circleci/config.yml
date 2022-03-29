@@ -6,16 +6,15 @@ orbs:
 jobs:
     build:
       executor: 
-        name: win/default
+        name: win/server-2022
         version: edge
 
       steps:
 
         - run:
-            name: Check python version
+            name: Check .NET versions
             command: |
-              py -3.9
-              python --version
+              dotnet --list-sdks
             shell: powershell.exe
 
 workflows:
