@@ -5,9 +5,8 @@ jobs:
     docker:
       - image: cimg/ruby:2.7.5-node
     steps:
-      - run: sudo apt install -y minimagick
+      - run: which identify
 
-      - run: dpkg -s minimagick
           
 workflows:
   build-deploy:
