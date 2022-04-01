@@ -3,9 +3,11 @@ version: 2.1
 jobs:
   cimg:
     docker:
-      - image: cimg/ruby:2.7.5-node
+      - image: cimg/node:16.14.2
     steps:
-      - run: which identify
+      - run: java -version
+
+      - run: npm install -g appium
 
           
 workflows:
