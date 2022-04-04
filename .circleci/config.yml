@@ -1,35 +1,17 @@
 version: 2.1
 
 orbs:
-  mac: circleci/macos@2.0.1
+  mac: circleci/macos@2.1.0
 
 jobs:
   build:
     macos:
-      xcode: 13.2.1
+      xcode: 13.3.0
     resource_class: macos.x86.medium.gen2
     steps:
       - run:
-          name: Add VNC user
-          command: sudo /usr/sbin/sysadminctl -addUser vncuser -fullName "VNC User" -password tomorrow -admin
-      - run:
-          name: Check shell
-          command: echo $SHELL
-      # - run:
-      #     name: Check make using zsh
-      #     command: |
-      #       zsh -c '/Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -sdk '' -find make 2> /dev/null'
-      # - run:
-      #     name: Check make using sh
-      #     command: |
-      #       sh -c '/Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -sdk '' -find make 2> /dev/null'
-      - run:
-          name: Check make using bash
-          command: |
-            bash -c '/Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -sdk '' -find make 2> /dev/null' || :
-      - run:
-          name: Check using bash default
-          command: /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -sdk '' -find make 2> /dev/null
+          name: Install gradle
+          command: brew install gradle
 workflow:
   build:
     jobs:
