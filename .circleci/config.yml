@@ -9,7 +9,7 @@ jobs:
     steps:
       - checkout
       - store_test_results:
-          path: bazel-testlogs
+          path: ~/project/bazel-testlogs
 
 workflows:
   build-deploy:
