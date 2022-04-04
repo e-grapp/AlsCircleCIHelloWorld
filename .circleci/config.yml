@@ -1,22 +1,38 @@
 version: 2.1
-  
+
 jobs:
-  build:
+
+  test:
     machine: 
       image: ubuntu-2004:202111-02
     resource_class: medium
-    
+
     steps:
       - checkout
       - run:
-          name: Schema generator
+          name: setup bazel
           command: |
-            chmod +x bazel-bin/glossary/schema-exporter/binary
-            ./bazel-bin/glossary/schema-exporter/binary
+            wget https://github.com/bazelbuild/bazelisk/releases/download/v1.11.0/bazelisk-linux-amd64
+            sudo mv bazelisk-linux-amd64 /usr/local/bin/bazel
+            sudo chmod +x /usr/local/bin/bazel
+            bazel version
+            
+      - restore_cache:
+          key: bazel-cache-{{ .Branch }}
+      - run:
+          name: Run tests
+          command:  |
+            bazel test ...
+
       - store_test_results:
-          path: ~/project/bazel-testlogs
+          path: bazel-testlogs/
+
+      - save_cache:
+          key: bazel-cache-{{ .Branch }}
+          paths:
+            - ~/.cache/bazel
 
 workflows:
-  build-deploy:
+  push:
     jobs:
-      - build
+      - test
