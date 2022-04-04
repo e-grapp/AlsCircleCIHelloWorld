@@ -6,6 +6,8 @@ jobs:
       - image: cimg/ruby:2.6.6-node
     steps:
       - run: nvm ls
+      - store_test_results:
+          path: ~/project/bazel-testlogs
 
 workflows:
   build-deploy:
