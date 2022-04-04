@@ -1,9 +1,11 @@
 version: 2.1
   
 jobs:
-  cimg:
-    docker:
-      - image: cimg/ruby:2.6.6-node
+  build:
+    machine: 
+      image: ubuntu-2004:202111-02
+    resource_class: medium
+    
     steps:
       - checkout
       - store_test_results:
@@ -12,4 +14,4 @@ jobs:
 workflows:
   build-deploy:
     jobs:
-      - cimg
+      - build
