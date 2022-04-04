@@ -19,10 +19,6 @@ jobs:
             
       - restore_cache:
           key: bazel-cache-{{ .Branch }}
-      - run:
-          name: Run tests
-          command:  |
-            bazel test ...
 
       - store_test_results:
           path: bazel-testlogs/
