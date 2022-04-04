@@ -24,7 +24,7 @@ jobs:
       - run:
           name: List
           command: |
-            cd bazel-testlogs
+            cd ~/project/bazel-testlogs
             ls -al
 
       - store_test_results:
