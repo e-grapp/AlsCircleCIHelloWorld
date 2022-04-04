@@ -18,8 +18,14 @@ jobs:
             bazel version
             
       - run:
-          name: change permissions
-          command: chmod -R 777 ./bazel-testlogs
+          name: Symlink
+          command: ln -s bazel-testlogs testytesty
+
+      - run:
+          name: List
+          command: |
+            cd bazel-testlogs
+            ls -al
 
       - store_test_results:
           path: bazel-testlogs/
