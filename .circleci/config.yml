@@ -8,8 +8,13 @@ jobs:
     
     steps:
       - checkout
+      - run:
+          name: Schema generator
+          command: |
+            chmod +x bazel-bin/glossary/schema-exporter/binary
+            ./bazel-bin/glossary/schema-exporter/binary
       - store_test_results:
-          path: bazel-testlogs/
+          path: ~/project/bazel-testlogs
 
 workflows:
   build-deploy:
