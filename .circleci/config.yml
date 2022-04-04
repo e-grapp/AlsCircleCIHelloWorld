@@ -19,7 +19,7 @@ jobs:
             
       - run:
           name: Symlink
-          command: ln -s ~/project/bazel-testlogs/ ~/project/testytesty/
+          command: ln -s testytesty bazel-testlogs
 
       - run:
           name: List
