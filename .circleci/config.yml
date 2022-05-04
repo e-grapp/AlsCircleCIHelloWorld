@@ -10,8 +10,8 @@ jobs:
     steps:
       - checkout
       - run:
-          name: setup bazel
-          command: /usr/lib/node_modules/npm --version
+          name: npm check
+          command: nvm use 6.12.1 && npm --version
             
 workflows:
   push:
