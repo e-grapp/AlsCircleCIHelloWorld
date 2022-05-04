@@ -11,7 +11,7 @@ jobs:
       - checkout
       - run:
           name: setup bazel
-          command: npm --version
+          command: /usr/lib/node_modules/npm --version
             
 workflows:
   push:
