@@ -3,34 +3,16 @@ version: 2.1
 jobs:
 
   test:
-    machine: 
-      image: ubuntu-2004:202111-02
+    docker:
+      - image: cimg/node:12.13
     resource_class: medium
 
     steps:
       - checkout
       - run:
           name: setup bazel
-          command: |
-            wget https://github.com/bazelbuild/bazelisk/releases/download/v1.11.0/bazelisk-linux-amd64
-            sudo mv bazelisk-linux-amd64 /usr/local/bin/bazel
-            sudo chmod +x /usr/local/bin/bazel
-            bazel version
+          command: npm --version
             
-      - run:
-          name: Symlink
-          command: ln -s testytesty bazel-testlogs
-
-      - run:
-          name: List
-          command: |
-            cd ~/project/bazel-testlogs
-            ls -al
-
-      - store_test_results:
-          path: bazel-testlogs/
-
-
 workflows:
   push:
     jobs:
