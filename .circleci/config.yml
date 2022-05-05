@@ -4,14 +4,20 @@ jobs:
 
   test:
     docker:
-      - image: cimg/node:12.13.0
+      - image: cimg/php:7.4-browsers
     resource_class: medium
 
     steps:
       - checkout
       - run:
-          name: npm check
-          command: npm --version
+          name: python extensions check
+          command: |
+            sudo apt-get update
+            sudo apt-get install libmagickwand-dev libpng-dev libjpeg-dev
+            (yes '' || true) | sudo pecl install mongodb
+            (yes '' || true) | sudo pecl install redis
+            (yes '' || true) | sudo pecl install imagick
+            sudo -E docker-php-ext-configure gd --with-jpeg
             
 workflows:
   push:
