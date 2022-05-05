@@ -17,7 +17,7 @@ jobs:
             # (yes '' || true) | sudo pecl install mongodb
             # (yes '' || true) | sudo pecl install redis
             # (yes '' || true) | sudo pecl install imagick
-            sudo -E docker-php-ext-configure gd --with-jpeg
+            docker-php-ext-configure gd --with-jpeg
             
 workflows:
   push:
