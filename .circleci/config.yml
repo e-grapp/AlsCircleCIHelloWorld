@@ -4,7 +4,7 @@ jobs:
 
   test:
     docker:
-      - image: cimg/php:8.0.18-browsers
+      - image: cimg/php:7.4.29
     resource_class: medium
 
     steps:
@@ -12,11 +12,11 @@ jobs:
       - run:
           name: python extensions check
           command: |
-            sudo apt-get update
-            sudo apt-get install libmagickwand-dev libpng-dev libjpeg-dev
-            (yes '' || true) | sudo pecl install mongodb
-            (yes '' || true) | sudo pecl install redis
-            (yes '' || true) | sudo pecl install imagick
+            # sudo apt-get update
+            # sudo apt-get install libmagickwand-dev libpng-dev libjpeg-dev
+            # (yes '' || true) | sudo pecl install mongodb
+            # (yes '' || true) | sudo pecl install redis
+            # (yes '' || true) | sudo pecl install imagick
             sudo -E docker-php-ext-configure gd --with-jpeg
             
 workflows:
