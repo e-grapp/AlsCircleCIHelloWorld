@@ -4,7 +4,7 @@ jobs:
 
   test:
     docker:
-      - image: php/php:7.4.29
+      - image: php/php:7.4.29-zts-buster
     resource_class: medium
 
     steps:
