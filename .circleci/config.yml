@@ -4,7 +4,7 @@ jobs:
 
   test:
     docker:
-      - image: circleci/android:api-30-node
+      - image: cimg/android:2022.04.1-node
     resource_class: medium
 
     steps:
