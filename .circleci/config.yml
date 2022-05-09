@@ -4,20 +4,14 @@ jobs:
 
   test:
     docker:
-      - image: cimg/php:7.4.29
+      - image: circleci/android:api-30-node
     resource_class: medium
 
     steps:
       - checkout
       - run:
-          name: python extensions check
-          command: |
-            # sudo apt-get update
-            # sudo apt-get install libmagickwand-dev libpng-dev libjpeg-dev
-            # (yes '' || true) | sudo pecl install mongodb
-            # (yes '' || true) | sudo pecl install redis
-            # (yes '' || true) | sudo pecl install imagick
-            docker-php-ext-configure gd --with-jpeg
+          name: Check gcloud
+          command: gcloud --version
             
 workflows:
   push:
