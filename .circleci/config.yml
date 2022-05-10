@@ -1,21 +1,20 @@
 version: 2.1
 
 orbs:
-  win: circleci/windows@4.0.0
+  win: circleci/windows@4.1
 
 jobs:
   build:
     executor: 
       name: win/server-2022
       size: xlarge
-      # version: edge
-
-  steps:
-    - run:
-        name: Check .NET versions
-        command: |
-          dotnet --list-sdks
-        shell: powershell.exe
+    # version: edge
+    steps:
+      - run:
+          name: Check .NET versions
+          command: |
+            dotnet --list-sdks
+          shell: powershell.exe
 
 workflows:
   version: 2
