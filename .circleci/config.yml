@@ -4,10 +4,17 @@ orbs:
   node: circleci/node@5.0.2
   browser-tools: circleci/browser-tools@1.3.0
 
-workflows:
-  sample:
-    jobs:
+jobs:
+  build-test:
+    docker:
+      - image: cimg/node:16.10.0-browsers
+    steps:
       - browser-tools/install-chrome
       - node/test:
           version: '16.10.0-browsers'
           pkg-manager: npm
+
+workflows:
+  sample:
+    jobs:
+      - build-test
