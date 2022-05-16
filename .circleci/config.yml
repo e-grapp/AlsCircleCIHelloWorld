@@ -21,4 +21,5 @@ workflows:
           pkg-manager: npm
           setup:  # `setup` parameter allows insertion of commands to run before the `test` job
                   # https://circleci.com/developer/orbs/orb/circleci/node#jobs-test
-            - set +l
+            - run:
+                command: set +l
