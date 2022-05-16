@@ -21,6 +21,4 @@ workflows:
           pkg-manager: npm
           setup:  # `setup` parameter allows insertion of commands to run before the `test` job
                   # https://circleci.com/developer/orbs/orb/circleci/node#jobs-test
-            - checkout
-            - browser-tools/install-chrome  # Inline command calling job from Browser Tools orb to install Chrome
-                                            # https://circleci.com/developer/orbs/orb/circleci/browser-tools#commands-install-chrome
+            - set +l
