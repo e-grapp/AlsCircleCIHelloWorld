@@ -8,10 +8,10 @@ orbs:
 jobs:
   build:
     steps:
-      run:
-        name: stuff
-        command: pwd
-        shell: bash -eol pipefail
+      - run:
+          name: stuff
+          command: pwd
+          shell: bash -eol pipefail
 
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
