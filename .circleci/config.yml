@@ -9,7 +9,7 @@ jobs:
 
       - run:
           name: Check OpenSSL Version
-          command: openssl version
+          command: node -e "console.log(process.versions)" | grep openssl
       
       - run:
           name: 'Install Project Node'
@@ -23,7 +23,7 @@ jobs:
 
       - run:
           name: Check OpenSSL Version
-          command: openssl version
+          command: node -e "console.log(process.versions)" | grep openssl
 
 workflows:
   build:
