@@ -6,10 +6,6 @@ jobs:
     machine:
       image: ubuntu-2204:2022.04.1
     steps:
-
-      - run:
-          name: Check OpenSSL Version
-          command: node -e "console.log(process.versions)" | grep openssl
       
       - run:
           name: 'Install Project Node'
@@ -24,7 +20,7 @@ jobs:
 
       - run:
           name: Check OpenSSL Version
-          command: node -e "console.log(process.versions)" | grep openssl
+          command: openssl version
 
 workflows:
   build:
