@@ -4,38 +4,26 @@ jobs:
   build:
     working_directory: ~/repo
     machine:
-      image: ubuntu-2004:202111-01
+      image: ubuntu-2204:2022.04.1
     steps:
+
       - run:
-          name: Install MongoDB
+          name: Check OpenSSL Version
+          command: openssl version
+      
+      - run:
+          name: 'Install Project Node'
           command: |
-            sudo apt update && sudo apt install build-essential curl file git
-            sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
+            set +x
+            source ~/.bashrc
 
-            # echo 'export PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin/:$PATH"' >> $BASH_ENV
-            # echo 'export MANPATH="/home/linuxbrew/.linuxbrew/share/man:$MANPATH"' >> $BASH_ENV
-            # echo 'export INFOPATH="/home/linuxbrew/.linuxbrew/share/info:$INFOPATH"' >> $BASH_ENV
+            nvm install 12
+            NODE_DIR=$(dirname $(which node))
+            echo "export PATH=$NODE_DIR:\$PATH" >> $BASH_ENV
 
-            # /home/linuxbrew/.linuxbrew/bin/brew untap mongodb/brew && /home/linuxbrew/.linuxbrew/bin/brew tap mongodb/brew
-            # /home/linuxbrew/.linuxbrew/bin/brew install mongodb-community@5.0
-            # /home/linuxbrew/.linuxbrew/bin/brew services start mongodb-community@5.0
-
-            # /bin/bash -c "mongoimport strategy.json -d feature-toggle -c strategy --drop"
-            # /bin/bash -c "mongoimport feature.json -d feature-toggle -c feature --drop"
-            # /bin/bash -c "mongoimport feature-config.json -d feature-toggle -c feature-config --drop"
-
-            # #/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-            # #eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-            # #echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> "$BASH_ENV"
-            # #/home/linuxbrew/.linuxbrew/bin/brew install gcc
-            # # eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-            # #/home/linuxbrew/.linuxbrew/bin/brew install mongodb-community@5.0
-            # #/home/linuxbrew/.linuxbrew/bin/brew services start mongodb-community@5.0 &
-
-            # # Import Database and start Feature Toggle Service.
-            # # mongoimport strategy.json -d feature-toggle -c strategy --drop
-            # # mongoimport feature.json -d feature-toggle -c feature --drop
-            # # mongoimport feature-config.json -d feature-toggle -c feature-config --drop
+      - run:
+          name: Check OpenSSL Version
+          command: openssl version
 
 workflows:
   build:
