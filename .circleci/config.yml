@@ -9,16 +9,12 @@ jobs:
       - image: cimg/android:2021.10.1-ndk
     steps:
       - run:
-          name: install brew
+          name: download bundletool
           command: |
-            /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" || true
-            echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /home/circleci/.profile
-            eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-            echo "Brew version ..."
-            brew --version
+            curl https://github.com/google/bundletool/releases/download/1.10.0/bundletool-all-1.10.0.jar --output ~/bundletool
       - run:
-          name: brew
-          command: brew --version
+          name: run bundletool
+          command: ~/bundletool --version
 
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
