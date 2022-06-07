@@ -11,7 +11,7 @@ jobs:
       - run:
           name: download bundletool
           command: |
-            curl https://github.com/google/bundletool/releases/download/1.10.0/bundletool-all-1.10.0.jar --output ~/bundletool.jar
+            wget -O bundletool.jar https://github.com/google/bundletool/releases/download/1.10.0/bundletool-all-1.10.0.jar
             chmod 755 ~/bundletool.jar
       - run:
           name: run bundletool
