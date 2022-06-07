@@ -12,7 +12,8 @@ jobs:
           name: install brew
           command: |
             /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" || true
-            echo 'export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"' >> $BASH_ENV
+            echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /home/circleci/.profile
+            eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
             echo "Brew version ..."
             brew --version
       - run:
