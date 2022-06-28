@@ -7,7 +7,7 @@ orbs:
 jobs:
   build:
     macos:
-      xcode: 13.4.0
+      xcode: 10.0.1337
     # resource_class: macos.x86.medium.gen2
     steps:
       - browser/install-chrome:
