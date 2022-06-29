@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  mac: circleci/macos@dev:57045e1bf47e478579cefcd9ca8fdad86ad9d17d
+  mac: circleci/macos@dev:20758105bf04a1fb756a623352dcfdca1c27ec81
   browser: circleci/browser-tools@1.2.5
 
 jobs:
