@@ -1,15 +1,16 @@
 version: 2.1
 
 orbs:
-  mac: circleci/macos@2.1.0
+  mac: circleci/macos@dev:57045e1bf47e478579cefcd9ca8fdad86ad9d17d
   browser: circleci/browser-tools@1.2.5
 
 jobs:
   build:
     macos:
-      xcode: 10.0.1337
+      xcode: 13.4.1
     # resource_class: macos.x86.medium.gen2
     steps:
+      - mac/enable-vnc
       - browser/install-chrome:
           chrome-version: latest
       
