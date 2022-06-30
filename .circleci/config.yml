@@ -3,11 +3,11 @@ version: 2.1
 jobs:
   deploy_to_environment:
     docker:
-      - image: google/cloud-sdk:390.0.0
+      - image: cimg/base:current
     steps:
-      - checkout
-      - run: which gsutil
-      - run: gsutil --help
+      - run:
+          name: Testing env var not exist
+          command: echo $MYENVVAR
 
 workflows:
   fusedocs-deploy-integ:
