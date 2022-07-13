@@ -12,8 +12,7 @@ jobs:
     steps:
       - run:
           name: Check .NET versions
-          command: |
-            dotnet --list-sdks
+          command: ls
           shell: powershell.exe
 
 workflows:
