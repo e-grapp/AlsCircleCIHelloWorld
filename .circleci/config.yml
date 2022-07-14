@@ -11,7 +11,7 @@ jobs:
             sleep 10
             curl --request POST \
               --url https://circleci.com/api/v2/project/gh/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME/job/$CIRCLE_BUILD_NUM/cancel \
-              -H “Circle-Token: $CIRCLE_TOKEN"
+              -H "Circle-Token: $CIRCLE_TOKEN"
           background: true
             
       - run:
