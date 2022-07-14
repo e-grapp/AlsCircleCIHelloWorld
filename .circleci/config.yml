@@ -9,6 +9,11 @@ jobs:
           name: Testing env var not exist
           command: |
             circleci-agent step halt
+            
+      - run:
+          name: env var
+          command: |
+            sleep 20
             echo $MYENVVAR
 
 workflows:
