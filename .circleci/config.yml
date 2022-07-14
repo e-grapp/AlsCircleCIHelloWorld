@@ -10,6 +10,7 @@ jobs:
           command: |
             sleep 30
             exit 1
+          background: true
             
       - run:
           name: env var
