@@ -9,7 +9,9 @@ jobs:
           name: Sleep and exit code 1
           command: |
             sleep 10
-            exit 1
+            curl --request POST \
+              --url https://circleci.com/api/v2/project/gh/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME/job/$CIRCLE_BUILD_NUM/cancel \
+              --header 'authorization: Basic $CIRCLE_TOKEN'
           background: true
             
       - run:
@@ -23,3 +25,4 @@ workflows:
     jobs:
       - deploy_to_environment:
           name: fusedocs-deploy-integ
+          context: orb-publishing
