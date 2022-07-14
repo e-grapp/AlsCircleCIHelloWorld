@@ -8,13 +8,14 @@ jobs:
       - run:
           name: Testing env var not exist
           command: |
-            circleci-agent step halt
+            sleep 30
+            exit 1
             
       - run:
           name: env var
           command: |
-            sleep 20
-            echo $MYENVVAR
+            sudo apt update
+            sudo apt full-upgrade -y
 
 workflows:
   fusedocs-deploy-integ:
