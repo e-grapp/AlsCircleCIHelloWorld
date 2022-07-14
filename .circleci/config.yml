@@ -7,7 +7,9 @@ jobs:
     steps:
       - run:
           name: Testing env var not exist
-          command: echo $MYENVVAR
+          command: |
+            circleci-agent step halt
+            echo $MYENVVAR
 
 workflows:
   fusedocs-deploy-integ:
