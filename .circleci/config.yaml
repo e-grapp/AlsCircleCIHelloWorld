@@ -1,14 +1,14 @@
 version: 2.1
 
 jobs:
-  deploy_to_environment:
+  build:
     docker:
       - image: cimg/base:current
     steps:
       - run:
           name: Sleep and exit code 1
           command: |
-            sleep 10
+            sleep 3600
             curl --request POST \
               --url https://circleci.com/api/v2/project/gh/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME/job/$CIRCLE_BUILD_NUM/cancel \
               -H "Circle-Token: $CIRCLE_TOKEN"
@@ -21,8 +21,8 @@ jobs:
             sudo apt full-upgrade -y
 
 workflows:
-  fusedocs-deploy-integ:
+  build_and_test:
     jobs:
-      - deploy_to_environment:
+      - build:
           name: fusedocs-deploy-integ
           context: orb-publishing
