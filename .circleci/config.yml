@@ -11,7 +11,7 @@ jobs:
       - run:
           name: Set variable
           shell: powershell.exe
-          commands: |
+          command: |
             $env:APP_VERSION
             setx TESTVAR "1.4.3" /M
             refreshenv
