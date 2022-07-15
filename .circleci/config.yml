@@ -17,6 +17,10 @@ jobs:
             refreshenv
             $env:APP_VERSION
             Get-ItemPropertyValue -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Environment' -Name APP_VERSION
+      - run:
+          name: recall var
+          shell: powershell.exe
+          command: Get-ItemPropertyValue -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Environment' -Name APP_VERSION
 
 workflows:
   whatos:
