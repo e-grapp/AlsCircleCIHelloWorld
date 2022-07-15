@@ -68,15 +68,15 @@ jobs:
           command: |
             $env:APP_VERSION
             
-      - run:
-          name: Delete APP_VERSION env var
-          command: |  
-            $uri = "https://circleci.com/api/v2/context/3186eab8-d7f9-4018-b326-37559f0f6bc6/environment-variable/APP_VERSION"
-            $headers = @{
-                "Circle-Token" = "$env:CIRCLE_TOKEN"
-            }
+      # - run:
+      #     name: Delete APP_VERSION env var
+      #     command: |  
+      #       $uri = "https://circleci.com/api/v2/context/3186eab8-d7f9-4018-b326-37559f0f6bc6/environment-variable/APP_VERSION"
+      #       $headers = @{
+      #           "Circle-Token" = "$env:CIRCLE_TOKEN"
+      #       }
 
-            Invoke-RestMethod -Method Delete -Uri $uri -Headers $headers
+      #       Invoke-RestMethod -Method Delete -Uri $uri -Headers $headers
 
 workflows:
   whatos:
