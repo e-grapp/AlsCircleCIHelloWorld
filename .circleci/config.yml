@@ -12,13 +12,13 @@ jobs:
           name: Set APP_VERSION default valueeeeee
 #           shell: bash
 #           command: |
-#             curl --request PUT --url https://circleci.com/api/v2/context/b5816bcd-239a-49e2-a45c-fd9026fea393/environment-variable/APP_VERSION \
+#             curl --request PUT --url https://circleci.com/api/v2/context/3186eab8-d7f9-4018-b326-37559f0f6bc6/environment-variable/APP_VERSION \
 #             --header 'content-type: application/json' \
-#             --header "Circle-Token: $API_TOKI" \
+#             --header "Circle-Token: $CIRLCE_TOKEN" \
 #             --data '{"value":"4.5.0"}'
             
           command: |  
-            $uri = "https://circleci.com/api/v2/context/b5816bcd-239a-49e2-a45c-fd9026fea393/environment-variable/APP_VERSION"
+            $uri = "https://circleci.com/api/v2/context/3186eab8-d7f9-4018-b326-37559f0f6bc6/environment-variable/APP_VERSION"
             $headers = @{
                 "Circle-Token" = "$env:CIRCLE_TOKEN"
                 "content-type" = "application/json"
@@ -35,9 +35,9 @@ jobs:
 
       - run:
 #           command: |
-#             $TOKEN = $env:API_TOKI
+#             $TOKEN = $env:CIRLCE_TOKEN
 #             $CurlArgument = '--request', 'PUT',
-#                '--url', 'https://circleci.com/api/v2/context/b5816bcd-239a-49e2-a45c-fd9026fea393/environment-variable/APP_VERSION',
+#                '--url', 'https://circleci.com/api/v2/context/3186eab8-d7f9-4018-b326-37559f0f6bc6/environment-variable/APP_VERSION',
 #                '--header', 'content-type=application/json',
 #                '--header', 'Circle-Token=$TOKEN',
 #                '--data', 'value="1.2.3"'
@@ -46,7 +46,7 @@ jobs:
 
           command: |
             $APP_VER = "1.2.3"
-            $uri = "https://circleci.com/api/v2/context/b5816bcd-239a-49e2-a45c-fd9026fea393/environment-variable/APP_VERSION"
+            $uri = "https://circleci.com/api/v2/context/3186eab8-d7f9-4018-b326-37559f0f6bc6/environment-variable/APP_VERSION"
             $headers = @{
                 "Circle-Token" = "$env:CIRCLE_TOKEN"
                 "content-type" = "application/json"
@@ -59,9 +59,9 @@ jobs:
 
 #           shell: bash
 #           command: |
-#             curl --request PUT --url "https://circleci.com/api/v2/context/b5816bcd-239a-49e2-a45c-fd9026fea393/environment-variable/APP_VERSION" \
+#             curl --request PUT --url "https://circleci.com/api/v2/context/3186eab8-d7f9-4018-b326-37559f0f6bc6/environment-variable/APP_VERSION" \
 #             --header 'content-type: application/json' \
-#             --header "Circle-Token: $API_TOKI" \
+#             --header "Circle-Token: $CIRLCE_TOKEN" \
 #             --data '{"value":"1.2.3"}'
 
       - run:
@@ -71,7 +71,7 @@ jobs:
       - run:
           name: Delete APP_VERSION env var
           command: |  
-            $uri = "https://circleci.com/api/v2/context/b5816bcd-239a-49e2-a45c-fd9026fea393/environment-variable/APP_VERSION"
+            $uri = "https://circleci.com/api/v2/context/3186eab8-d7f9-4018-b326-37559f0f6bc6/environment-variable/APP_VERSION"
             $headers = @{
                 "Circle-Token" = "$env:CIRCLE_TOKEN"
             }
