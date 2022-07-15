@@ -1,28 +1,85 @@
 version: 2.1
 
+orbs:
+  win: circleci/windows@2.2.0
+
 jobs:
   build:
-    docker:
-      - image: cimg/base:current
+    executor:
+      name: win/default
     steps:
       - run:
-          name: Sleep and exit code 1
+          name: Set APP_VERSION default valueeeeee
+#           shell: bash
+#           command: |
+#             curl --request PUT --url https://circleci.com/api/v2/context/b5816bcd-239a-49e2-a45c-fd9026fea393/environment-variable/APP_VERSION \
+#             --header 'content-type: application/json' \
+#             --header "Circle-Token: $API_TOKI" \
+#             --data '{"value":"4.5.0"}'
+            
+          command: |  
+            $uri = "https://circleci.com/api/v2/context/b5816bcd-239a-49e2-a45c-fd9026fea393/environment-variable/APP_VERSION"
+            $headers = @{
+                "Circle-Token" = "$env:CIRCLE_TOKEN"
+                "content-type" = "application/json"
+            };
+            $body = @{
+                value = "4.5.0"
+            }
+
+            Invoke-RestMethod -Method Put -Uri $uri -Headers $headers -Body ($body| ConvertTo-Json) -ContentType 'application/json'
+
+      - run:
           command: |
-            sleep 3600
-            curl --request POST \
-              --url https://circleci.com/api/v2/project/gh/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME/job/$CIRCLE_BUILD_NUM/cancel \
-              -H "Circle-Token: $CIRCLE_TOKEN"
-          background: true
+            $env:APP_VERSION
+
+      - run:
+#           command: |
+#             $TOKEN = $env:API_TOKI
+#             $CurlArgument = '--request', 'PUT',
+#                '--url', 'https://circleci.com/api/v2/context/b5816bcd-239a-49e2-a45c-fd9026fea393/environment-variable/APP_VERSION',
+#                '--header', 'content-type=application/json',
+#                '--header', 'Circle-Token=$TOKEN',
+#                '--data', 'value="1.2.3"'
+                
+#             curl.exe @CurlArgument
+
+          command: |
+            $APP_VER = "1.2.3"
+            $uri = "https://circleci.com/api/v2/context/b5816bcd-239a-49e2-a45c-fd9026fea393/environment-variable/APP_VERSION"
+            $headers = @{
+                "Circle-Token" = "$env:CIRCLE_TOKEN"
+                "content-type" = "application/json"
+            };
+            $body = @{
+                value = "$APP_VER"
+            }
+
+            Invoke-RestMethod -Method Put -Uri $uri -Headers $headers -Body ($body| ConvertTo-Json) -ContentType 'application/json'
+
+#           shell: bash
+#           command: |
+#             curl --request PUT --url "https://circleci.com/api/v2/context/b5816bcd-239a-49e2-a45c-fd9026fea393/environment-variable/APP_VERSION" \
+#             --header 'content-type: application/json' \
+#             --header "Circle-Token: $API_TOKI" \
+#             --data '{"value":"1.2.3"}'
+
+      - run:
+          command: |
+            $env:APP_VERSION
             
       - run:
-          name: apt update and upgrade
-          command: |
-            sudo apt update
-            sudo apt full-upgrade -y
+          name: Delete APP_VERSION env var
+          command: |  
+            $uri = "https://circleci.com/api/v2/context/b5816bcd-239a-49e2-a45c-fd9026fea393/environment-variable/APP_VERSION"
+            $headers = @{
+                "Circle-Token" = "$env:CIRCLE_TOKEN"
+            }
+
+            Invoke-RestMethod -Method Delete -Uri $uri -Headers $headers
 
 workflows:
-  build_and_test:
+  whatos:
     jobs:
       - build:
-          name: fusedocs-deploy-integ
           context: orb-publishing
