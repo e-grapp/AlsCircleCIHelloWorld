@@ -12,10 +12,8 @@ jobs:
       - run:
           name: Set variable
           shell: powershell.exe
-          parameters:
-            parallelism_qty:
-              type: string
-              default: 1.2.3
+          environment:
+            APP_VERSION: 1.2.3
           command: |
             $env:APP_VERSION
             setx APP_VERSION "5.4.90" /M
