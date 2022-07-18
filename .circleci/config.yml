@@ -69,7 +69,7 @@ jobs:
 
               echo $sha1
 
-              $APP_VERSION_NAME = "APP_VERSION_$CIRCLE_SHA1"
+              $APP_VERSION_NAME = "APP_VERSION_$env:CIRCLE_SHA1"
 
               $env:APP_VERSION_NAME
 
