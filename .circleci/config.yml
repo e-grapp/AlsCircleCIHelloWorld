@@ -39,6 +39,7 @@ jobs:
             $env:APP_VERSION
             # refreshenv
             $env:APP_VERSION_CONTEXT
+            $env:ONETWOTHREE
         
       - run:
           name: Retrieve context
