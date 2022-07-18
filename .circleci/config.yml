@@ -37,7 +37,7 @@ jobs:
             Invoke-RestMethod -Method Put -Uri $uri -Headers $headers -Body ($body| ConvertTo-Json) -ContentType 'application/json'
 
             $env:APP_VERSION
-            refreshenv
+            # refreshenv
             $env:APP_VERSION_CONTEXT
         
       - run:
