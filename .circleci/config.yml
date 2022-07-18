@@ -26,11 +26,8 @@ jobs:
           command: |
             $env:CIRCLE_WORKFLOW_ID
             $env:APP_VERSION
-            $wfid = $env:CIRCLE_WORKFLOW_ID
-            $uri = @(
-              "https://circleci.com/api/v2/context/3186eab8-d7f9-4018-b326-37559f0f6bc6/environment-variable/"
-              $env:CIRCLE_WORKFLOW_ID
-            )
+            $wfid = $CIRCLE_WORKFLOW_ID
+            $uri = "https://circleci.com/api/v2/context/3186eab8-d7f9-4018-b326-37559f0f6bc6/environment-variable/{0}" -f $wfid
             $headers = @{
               "Circle-Token" = "$env:CIRCLE_TOKEN"
               "content-type" = "application/json"
@@ -39,7 +36,7 @@ jobs:
               value = "$env:APP_VERSION"
             }
 
-            Invoke-RestMethod -Method Put -Uri $uri -join -Headers $headers -Body ($body| ConvertTo-Json) -ContentType 'application/json'
+            Invoke-RestMethod -Method Put -Uri $uri -Headers $headers -Body ($body| ConvertTo-Json) -ContentType 'application/json'
 
   print-var:
     executor:
