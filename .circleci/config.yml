@@ -55,7 +55,7 @@ jobs:
             shell: powershell.exe
             command: |
               $env:APP_VERSION
-              setx APP_VERSION $APP_VERSION_CONTEXT /M
+              setx APP_VERSION $APP_VERSION_CONTEXT
               $env:APP_VERSION_CONTEXT
               refreshenv
               $env:APP_VERSION_CONTEXT
