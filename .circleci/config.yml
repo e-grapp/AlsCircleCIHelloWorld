@@ -71,6 +71,7 @@ jobs:
 
 
               $APP_VERSION = New-Variable APP_VERSION_$CIRCLE_SHA1 -Value @{} -PassThru
+              $APP_VERSION.Add(APP_VERSION_$CIRCLE_SHA1)
 
               # $sha1 = $env:CIRCLE_SHA1
               # $tempvar = "APP_VERSION_$sha1"
