@@ -9,6 +9,9 @@ jobs:
       name: win/default
     steps:
       - run:
+          name: Set cmd var
+          
+      - run:
           name: Set variable
           shell: powershell.exe
           command: |
@@ -17,10 +20,16 @@ jobs:
             refreshenv
             $env:APP_VERSION
             Get-ItemPropertyValue -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Environment' -Name APP_VERSION
+
       - run:
           name: recall var
           shell: powershell.exe
           command: Get-ItemPropertyValue -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Environment' -Name APP_VERSION
+
+      - run: 
+          name: Set as context env var
+          shell: powershell.exe
+          command: ls
 
 workflows:
   whatos:
