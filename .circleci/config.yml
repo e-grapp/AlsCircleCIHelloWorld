@@ -9,16 +9,16 @@ jobs:
       name: win/default
     steps:
           
-      # - run:
-      #     name: Set variable
-      #     shell: powershell.exe
-      #     environment:
-      #       APP_VERSION: 1.2.3
-      #     command: |
-      #       $env:APP_VERSION
-      #       setx APP_VERSION "5.4.91" /M
-      #       refreshenv
-      #       $env:APP_VERSION
+      - run:
+          name: Set variable
+          shell: powershell.exe
+          environment:
+            APP_VERSION: 1.2.3
+          command: |
+            $env:APP_VERSION
+            setx APP_VERSION "5.4.91" /M
+            refreshenv
+            $env:APP_VERSION
 
       - run: 
           name: Set as context env var
@@ -27,14 +27,13 @@ jobs:
             $env:CIRCLE_WORKFLOW_ID
             $env:APP_VERSION
             refreshenv
-            # $uri = "https://circleci.com/api/v2/context/3186eab8-d7f9-4018-b326-37559f0f6bc6/environment-variable/APP_VERSION_$env:CIRCLE_SHA1"
-            $uri = "https://circleci.com/api/v2/context/3186eab8-d7f9-4018-b326-37559f0f6bc6/environment-variable/BLAH_BLAH"
+            $uri = "https://circleci.com/api/v2/context/3186eab8-d7f9-4018-b326-37559f0f6bc6/environment-variable/APP_VERSION_$env:CIRCLE_SHA1"
             $headers = @{
               "Circle-Token" = "$env:CIRCLE_TOKEN"
               "content-type" = "application/json"
             };
             $body = @{
-              value = "$env:APP_VERSION"
+              value = "$APP_VERSION"
             }
 
             Invoke-RestMethod -Method Put -Uri $uri -Headers $headers -Body ($body| ConvertTo-Json) -ContentType 'application/json'
@@ -42,7 +41,6 @@ jobs:
             # echo $uri
 
             # $APP_VERSION_NAME = "APP_VERSION_$env:CIRCLE_SHA1"
-            # $APP_VERSION_NAME = "BLAH_BLAH"
             
             # echo $APP_VERSION_NAME
 
