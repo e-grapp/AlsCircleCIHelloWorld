@@ -64,7 +64,12 @@ jobs:
             # echo $APP_VERSION_NAME
 
             $APP_VERSION_NAME = "APP_VERSION_$env:CIRCLE_SHA1"
-            [System.Environment]::SetEnvironmentVariable($APP_VERSION_NAME,"TEST",[System.EnvironmentVariableTarget]::MACHINE)
+            $CONTEXT= $env:APP_VERSION
+            [System.Environment]::SetEnvironmentVariable($APP_VERSION_NAME,$CONTEXT,[System.EnvironmentVariableTarget]::MACHINE)
+            refreshenv
+            Get-ItemPropertyValue 'registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Environment' $APP_VERSION_NAME
+            # now reset CONTEXT
+            [System.Environment]::SetEnvironmentVariable($APP_VERSION_NAME,"NEWVALUE",[System.EnvironmentVariableTarget]::MACHINE)
             refreshenv
             Get-ItemPropertyValue 'registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Environment' $APP_VERSION_NAME
 
