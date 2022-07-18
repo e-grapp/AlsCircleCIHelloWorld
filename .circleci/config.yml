@@ -65,7 +65,8 @@ jobs:
             command: |
               $env:CIRCLE_SHA1
 
-              setx APP_VERSION_NAME APP_VERSION_$env:CIRCLE_SHA1 /M
+              $sha1 = $env:CIRCLE_SHA1
+              setx APP_VERSION_NAME 'APP_VERSION_'$sha1 /M
 
               $env:APP_VERSION_NAME
 
