@@ -14,23 +14,26 @@ jobs:
           shell: powershell.exe
           command: |
             $env:APP_VERSION
-            setx APP_VERSION "1.4.3" /M
+            setx APP_VERSION "3.2.1" /M
             refreshenv
             $env:APP_VERSION
-            Get-ItemPropertyValue -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Environment' -Name APP_VERSION
-
-      - run:
-          name: recall var
-          shell: powershell.exe
-          command: Get-ItemPropertyValue -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Environment' -Name APP_VERSION
 
       - run: 
           name: Set as context env var
           shell: powershell.exe
-          command: ls
+          command: |
+            $uri = "https://circleci.com/api/v2/context/3186eab8-d7f9-4018-b326-37559f0f6bc6/environment-variable/APP_VERSION"
+            $headers = @{
+              "Circle-Token" = "$env:CIRCLE_TOKEN"
+              "content-type" = "application/json"
+            };
+            $body = @{
+              value = "$APP_VER"
+            }
+
 
 workflows:
   whatos:
     jobs:
       - build:
-          context: orb-publishing
+          context: aea
