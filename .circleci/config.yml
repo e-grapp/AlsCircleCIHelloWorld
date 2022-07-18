@@ -50,7 +50,11 @@ jobs:
         - run:
             name: Print var
             shell: powershell.exe
-            command: $env:APP_VERSION_CONTEXT
+            command: |
+              setx APP_VERSION $APP_VERSION_CONTEXT /M
+              $env:APP_VERSION_CONTEXT
+              refreshenv
+              $env:APP_VERSION_CONTEXT
 
 workflows:
   whatos:
