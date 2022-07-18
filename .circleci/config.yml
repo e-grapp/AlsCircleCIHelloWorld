@@ -52,29 +52,29 @@ jobs:
 
             echo $uri
 
-  # print-var:
-  #   executor:
-  #     name: win/default
-  #   steps:
+  print-var:
+    executor:
+      name: win/default
+    steps:
 
-  #       - run:
-  #           name: Print var
-  #           shell: powershell.exe
-  #           environment:
-  #             APP_VERSION: 1.2.3
-  #           command: |
-  #             $env:APP_VERSION
-  #             setx APP_VERSION $env:APP_VERSION_CONTEXT
-  #             $env:APP_VERSION
-  #             refreshenv
-  #             $env:APP_VERSION
+        - run:
+            name: Print var
+            shell: powershell.exe
+            environment:
+              APP_VERSION: 1.2.3
+            command: |
+              $env:APP_VERSION
+              setx APP_VERSION $env:APP_VERSION_CONTEXT
+              $env:APP_VERSION
+              refreshenv
+              $env:APP_VERSION
 
 workflows:
   whatos:
     jobs:
       - build:
           context: aea
-      # - print-var:
-      #     context: aea
-      #     requires:
-      #       - build
+      - print-var:
+          context: aea
+          requires:
+            - build
