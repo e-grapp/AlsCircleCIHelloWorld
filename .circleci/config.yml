@@ -30,7 +30,8 @@ jobs:
             $body = @{
               value = "$APP_VERSION"
             }
-
+            $env:APP_VERSION
+            $env:APP_VERSION_CONTEXT
 
 workflows:
   whatos:
