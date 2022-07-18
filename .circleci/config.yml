@@ -27,7 +27,7 @@ jobs:
             $env:CIRCLE_WORKFLOW_ID
             $env:APP_VERSION
             $wfid = $env:CIRCLE_WORKFLOW_ID
-            $uri = 'https://circleci.com/api/v2/context/3186eab8-d7f9-4018-b326-37559f0f6bc6/environment-variable/{0}' -f $env:CIRCLE_WORKFLOW_ID
+            $uri = 'https://circleci.com/api/v2/context/3186eab8-d7f9-4018-b326-37559f0f6bc6/environment-variable/{0}' -f $CIRCLE_WORKFLOW_ID
             $headers = @{
               "Circle-Token" = "$env:CIRCLE_TOKEN"
               "content-type" = "application/json"
