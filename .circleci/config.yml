@@ -24,6 +24,7 @@ jobs:
           name: Set as context env var
           shell: powershell.exe
           command: |
+            $env:APP_VERSION
             $uri = "https://circleci.com/api/v2/context/3186eab8-d7f9-4018-b326-37559f0f6bc6/environment-variable/APP_VERSION_CONTEXT"
             $headers = @{
               "Circle-Token" = "$env:CIRCLE_TOKEN"
@@ -35,7 +36,7 @@ jobs:
 
             Invoke-RestMethod -Method Put -Uri $uri -Headers $headers -Body ($body| ConvertTo-Json) -ContentType 'application/json'
 
-            # $env:APP_VERSION
+            $env:APP_VERSION
             refreshenv
             $env:APP_VERSION_CONTEXT
         
