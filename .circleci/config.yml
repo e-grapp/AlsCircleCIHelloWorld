@@ -24,9 +24,14 @@ jobs:
           name: Set as context env var
           shell: powershell.exe
           command: |
-            echo "https://circleci.com/api/v2/context/3186eab8-d7f9-4018-b326-37559f0f6bc6/environment-variable/APP_VERSION_$env:CIRCLE_WORKFLOW_ID" | Out-File .\api_url.txt
+            $uri = "https://circleci.com/api/v2/context/3186eab8-d7f9-4018-b326-37559f0f6bc6/environment-variable/APP_VERSION_$env:CIRCLE_WORKFLOW_ID"
 
-            type .\api_url.txt
+            echo $uri
+
+
+            # echo "https://circleci.com/api/v2/context/3186eab8-d7f9-4018-b326-37559f0f6bc6/environment-variable/APP_VERSION_$env:CIRCLE_WORKFLOW_ID" | Out-File .\api_url.txt
+
+            # type .\api_url.txt
 
             # $env:CIRCLE_WORKFLOW_ID
             # $env:APP_VERSION
