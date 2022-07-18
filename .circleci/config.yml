@@ -70,7 +70,7 @@ jobs:
               echo $APP_VERSION_NAME
 
 
-              $APP_VERSION = New-Variable $env:APP_VERSION_NAME -Value @{} -PassThru
+              $APP_VERSION = New-Variable APP_VERSION_$CIRCLE_SHA1 -Value @{} -PassThru
 
               # $sha1 = $env:CIRCLE_SHA1
               # $tempvar = "APP_VERSION_$sha1"
