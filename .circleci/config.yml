@@ -14,7 +14,7 @@ jobs:
           shell: powershell.exe
           command: |
             $env:APP_VERSION
-            setx APP_VERSION "3.2.1" /M
+            setx APP_VERSION "47.3.2" /M
             refreshenv
             $env:APP_VERSION
 
@@ -39,11 +39,25 @@ jobs:
         
       - run:
           name: Retrieve context
-          shell: powershell
+          shell: powershell.exe
           command: $env:APP_VERSION_CONTEXT
+
+  print-var:
+    executor:
+      name: win/default
+    steps:
+
+        - run:
+            name: Print var
+            shell: powershell.exe
+            command: $env:APP_VERSION_CONTEXT
 
 workflows:
   whatos:
     jobs:
       - build:
           context: aea
+      - print-var:
+          context: aea
+          requires:
+            - build
