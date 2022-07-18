@@ -33,6 +33,11 @@ jobs:
             # $env:APP_VERSION
             refreshenv
             $env:APP_VERSION_CONTEXT
+        
+      - run:
+          name: Retrieve context
+          shell: powershell
+          command: $env:APP_VERSION_CONTEXT
 
 workflows:
   whatos:
