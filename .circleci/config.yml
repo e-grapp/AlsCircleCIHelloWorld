@@ -67,7 +67,7 @@ jobs:
 
               $env:APP_VERSION_NAME
 
-              setx APP_VERSION APPVERSION_NAME
+              setx APP_VERSION APP_VERSION_NAME
 
               $env:APP_VERSION
 
