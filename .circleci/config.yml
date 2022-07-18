@@ -39,14 +39,14 @@ jobs:
 
             Invoke-RestMethod -Method Put -Uri $uri -Headers $headers -Body ($body| ConvertTo-Json) -ContentType 'application/json'
 
-            echo $uri
+            # echo $uri
 
             # $APP_VERSION_NAME = "APP_VERSION_$env:CIRCLE_SHA1"
-            $APP_VERSION_NAME = "BLAH_BLAH"
+            # $APP_VERSION_NAME = "BLAH_BLAH"
             
-            echo $APP_VERSION_NAME
+            # echo $APP_VERSION_NAME
 
-            $APP_VERSION = (Get-Variable -name $APP_VERSION_NAME).Value
+            # $APP_VERSION = (Get-Variable -name $APP_VERSION_NAME).Value
 
   print-var:
     executor:
