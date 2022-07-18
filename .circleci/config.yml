@@ -24,9 +24,9 @@ jobs:
           name: Set as context env var
           shell: powershell.exe
           command: |
-            $env:CIRCLE_WORKFLOW_ID | Out-File .\circle_workflow_id.txt
+            echo "https://circleci.com/api/v2/context/3186eab8-d7f9-4018-b326-37559f0f6bc6/environment-variable/APP_VERSION_${CIRCLE_WORKFLOW_ID}" | Out-File .\api_url.txt
 
-            type .\circle_workflow_id.txt
+            type .\api_url.txt
 
             # $env:CIRCLE_WORKFLOW_ID
             # $env:APP_VERSION
