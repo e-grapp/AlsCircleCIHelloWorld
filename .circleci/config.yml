@@ -63,6 +63,8 @@ jobs:
             environment:
               APP_VERSION: 1.2.3
             command: |
+              $env:CIRCLE_SHA1
+
               setx APP_VERSION_NAME APP_VERSION_$env:CIRCLE_SHA1 /M
 
               $env:APP_VERSION_NAME
