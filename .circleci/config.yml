@@ -51,53 +51,59 @@ jobs:
 
             echo $uri
 
+            $APP_VERSION_NAME = "APP_VERSION_$env:CIRCLE_SHA1"
+            
+            echo $APP_VERSION_NAME
+
+            $APP_VERSION = (Get-Variable -name $APP_VERSION_NAME).Value
+
   print-var:
     executor:
       name: win/default
     steps:
 
-        - run:
-            name: Print var
-            shell: powershell.exe
-            environment:
-              APP_VERSION: 1.2.3
-            command: |
-              $env:CIRCLE_SHA1
+      - run:
+          name: Print var
+          shell: powershell.exe
+          environment:
+            APP_VERSION: 1.2.3
+          command: |
+            $env:CIRCLE_SHA1
 
-              ## This works to get the name of the variable.
-              $APP_VERSION_NAME = "APP_VERSION_$env:CIRCLE_SHA1"
-              
-              echo $APP_VERSION_NAME
+            ## This works to get the name of the variable.
+            $APP_VERSION_NAME = "APP_VERSION_$env:CIRCLE_SHA1"
+            
+            echo $APP_VERSION_NAME
 
-              $APP_VERSION = (Get-Variable -name $APP_VERSION_NAME).Value
+            $APP_VERSION = (Get-Variable -name $APP_VERSION_NAME).Value
 
-              echo $APP_VERSION
+            echo $APP_VERSION
 
-              # $sha1 = $env:CIRCLE_SHA1
-              # $tempvar = "APP_VERSION_$sha1"
-              # echo $tempvar
+            # $sha1 = $env:CIRCLE_SHA1
+            # $tempvar = "APP_VERSION_$sha1"
+            # echo $tempvar
 
-              # refreshenv
+            # refreshenv
 
-              # $env:APP_VERSION
+            # $env:APP_VERSION
 
-              # setx APP_VERSION APP_VERSION_NAME
+            # setx APP_VERSION APP_VERSION_NAME
 
-              # $env:APP_VERSION
+            # $env:APP_VERSION
 
 
-              # $env:APP_VERSION_$env:CIRCLEC_SHA1
+            # $env:APP_VERSION_$env:CIRCLEC_SHA1
 
-              # $env:APP_VERSION_NEW = "$env:APP_VERSION_$env:CIRCLE_SHA1"
-              # $env:APP_VERSION_NEW
-              
-              # $env:APP_VERSION_$env:CIRCLE_SHA
+            # $env:APP_VERSION_NEW = "$env:APP_VERSION_$env:CIRCLE_SHA1"
+            # $env:APP_VERSION_NEW
+            
+            # $env:APP_VERSION_$env:CIRCLE_SHA
 
-              # $env:APP_VERSION
-              # setx APP_VERSION $env:APP_VERSION_$env:CIRCLE_SHA1
-              # $env:APP_VERSION
-              # refreshenv
-              # $env:APP_VERSION
+            # $env:APP_VERSION
+            # setx APP_VERSION $env:APP_VERSION_$env:CIRCLE_SHA1
+            # $env:APP_VERSION
+            # refreshenv
+            # $env:APP_VERSION
 
 workflows:
   whatos:
