@@ -25,7 +25,8 @@ jobs:
           shell: powershell.exe
           command: |
             $env:APP_VERSION
-            $uri = "https://circleci.com/api/v2/context/3186eab8-d7f9-4018-b326-37559f0f6bc6/environment-variable/APP_VERSION_CONTEXT"
+            $uri = "https://circleci.com/api/v2/context/3186eab8-d7f9-4018-b326-37559f0f6bc6/environment-variable/"
+            $cev = "APP_VERSION_CONTEXT"
             $headers = @{
               "Circle-Token" = "$env:CIRCLE_TOKEN"
               "content-type" = "application/json"
@@ -34,19 +35,7 @@ jobs:
               value = "$env:APP_VERSION"
             }
 
-            Invoke-RestMethod -Method Put -Uri $uri -Headers $headers -Body ($body| ConvertTo-Json) -ContentType 'application/json'
-
-            # $env:APP_VERSION
-            # refreshenv
-            # $env:APP_VERSION_CONTEXT
-            # $env:ONETWOTHREE
-        
-      - run:
-          name: Retrieve context
-          shell: powershell.exe
-          command: |
-            refreshenv
-            $env:APP_VERSION_CONTEXT
+            Invoke-RestMethod -Method Put -Uri $uri $CIRCLE_WORKFLOW_ID $cev -Headers $headers -Body ($body| ConvertTo-Json) -ContentType 'application/json'
 
   print-var:
     executor:
