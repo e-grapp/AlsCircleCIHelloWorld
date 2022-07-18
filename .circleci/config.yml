@@ -68,7 +68,7 @@ jobs:
               $APP_VERSION_NAME = "APP_VERSION_$env:CIRCLE_SHA1"
               echo $APP_VERSION_NAME
 
-              $APP_VERSION = $($APP_VERSION_NAME)
+              $APP_VERSION = $(%APP_VERSION_NAME%)
 
               # $sha1 = $env:CIRCLE_SHA1
               # $tempvar = "APP_VERSION_$sha1"
