@@ -69,7 +69,7 @@ jobs:
 
               echo $APP_VERSION_NAME
 
-              setx APP_VERSION $env:"$APP_VERSION_NAME"
+              setx APP_VERSION $env:${APP_VERSION_NAME}
 
               refreshenv
 
