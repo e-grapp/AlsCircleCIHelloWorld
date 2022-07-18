@@ -65,9 +65,12 @@ jobs:
             command: |
               $env:CIRCLE_SHA1
 
+              ## This works to get the name of the variable.
               $APP_VERSION_NAME = "APP_VERSION_$env:CIRCLE_SHA1"
-
               echo $APP_VERSION_NAME
+
+
+              setx APP_VERSION $env:{$APP_VERSION_NAME} /M
 
               # $sha1 = $env:CIRCLE_SHA1
               # $tempvar = "APP_VERSION_$sha1"
