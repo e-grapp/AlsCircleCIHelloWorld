@@ -69,7 +69,7 @@ jobs:
 
               # echo $APP_VERSION_NAME
 
-              setx APP_VERSION ${APP_VERSION_$env:CIRCLE_SHA1}
+              $APP_VERSION = ${APP_VERSION_$env:CIRCLE_SHA1}
 
               refreshenv
 
