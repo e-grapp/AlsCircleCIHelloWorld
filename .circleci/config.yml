@@ -50,6 +50,8 @@ jobs:
 
             Invoke-RestMethod -Method Put -Uri $uri -Headers $headers -Body ($body| ConvertTo-Json) -ContentType 'application/json'
 
+            echo $uri
+
   # print-var:
   #   executor:
   #     name: win/default
