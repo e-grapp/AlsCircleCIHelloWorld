@@ -65,11 +65,11 @@ jobs:
             command: |
               $env:CIRCLE_SHA1
 
-              $APP_VERSION_NAME = "APP_VERSION_$env:CIRCLE_SHA1"
+              # $APP_VERSION_NAME = "APP_VERSION_$env:CIRCLE_SHA1"
 
-              echo $APP_VERSION_NAME
+              # echo $APP_VERSION_NAME
 
-              setx APP_VERSION ${0} -f $APP_VERSION_NAME
+              New-Variable APP_VERSION -Value @{ value = $APP_VERSION_$env:CIRCLE_SHA1 }
 
               refreshenv
 
