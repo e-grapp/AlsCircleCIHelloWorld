@@ -16,7 +16,7 @@ jobs:
             APP_VERSION: 1.2.3
           command: |
             $env:APP_VERSION
-            setx APP_VERSION "5.4.90" /M
+            setx APP_VERSION "5.4.91" /M
             refreshenv
             $env:APP_VERSION
 
@@ -36,10 +36,10 @@ jobs:
 
             Invoke-RestMethod -Method Put -Uri $uri -Headers $headers -Body ($body| ConvertTo-Json) -ContentType 'application/json'
 
-            $env:APP_VERSION
+            # $env:APP_VERSION
             # refreshenv
-            $env:APP_VERSION_CONTEXT
-            $env:ONETWOTHREE
+            # $env:APP_VERSION_CONTEXT
+            # $env:ONETWOTHREE
         
       - run:
           name: Retrieve context
@@ -56,12 +56,14 @@ jobs:
         - run:
             name: Print var
             shell: powershell.exe
+            environment:
+              APP_VERSION: 1.2.3
             command: |
               $env:APP_VERSION
-              setx APP_VERSION $APP_VERSION_CONTEXT
-              $env:APP_VERSION_CONTEXT
+              setx APP_VERSION $env:APP_VERSION_CONTEXT
+              $env:APP_VERSION
               refreshenv
-              $env:APP_VERSION_CONTEXT
+              $env:APP_VERSION
 
 workflows:
   whatos:
