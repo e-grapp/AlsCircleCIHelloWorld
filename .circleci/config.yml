@@ -67,7 +67,7 @@ workflows:
     jobs:
       - build:
           context: aea
-      - print-var:
-          context: aea
-          requires:
-            - build
+      # - print-var:
+      #     context: aea
+      #     requires:
+      #       - build
