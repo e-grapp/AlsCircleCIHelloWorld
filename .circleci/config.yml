@@ -9,22 +9,22 @@ jobs:
       name: win/default
     steps:
           
-      - run:
-          name: Set variable
-          shell: powershell.exe
-          environment:
-            APP_VERSION: 1.2.3
-          command: |
-            $env:APP_VERSION
-            setx APP_VERSION "5.4.91" /M
-            refreshenv
-            $env:APP_VERSION
+      # - run:
+      #     name: Set variable
+      #     shell: powershell.exe
+      #     environment:
+      #       APP_VERSION: 1.2.3
+      #     command: |
+      #       $env:APP_VERSION
+      #       setx APP_VERSION "5.4.91" /M
+      #       refreshenv
+      #       $env:APP_VERSION
 
       - run: 
           name: Set as context env var
           shell: powershell.exe
           command: |
-            echo "https://circleci.com/api/v2/context/3186eab8-d7f9-4018-b326-37559f0f6bc6/environment-variable/APP_VERSION_${CIRCLE_WORKFLOW_ID}" | Out-File .\api_url.txt
+            echo "https://circleci.com/api/v2/context/3186eab8-d7f9-4018-b326-37559f0f6bc6/environment-variable/APP_VERSION_$env:CIRCLE_WORKFLOW_ID" | Out-File .\api_url.txt
 
             type .\api_url.txt
 
@@ -45,22 +45,22 @@ jobs:
 
             # Invoke-RestMethod -Method Put -Uri $uri -Headers $headers -Body ($body| ConvertTo-Json) -ContentType 'application/json'
 
-  print-var:
-    executor:
-      name: win/default
-    steps:
+  # print-var:
+  #   executor:
+  #     name: win/default
+  #   steps:
 
-        - run:
-            name: Print var
-            shell: powershell.exe
-            environment:
-              APP_VERSION: 1.2.3
-            command: |
-              $env:APP_VERSION
-              setx APP_VERSION $env:APP_VERSION_CONTEXT
-              $env:APP_VERSION
-              refreshenv
-              $env:APP_VERSION
+  #       - run:
+  #           name: Print var
+  #           shell: powershell.exe
+  #           environment:
+  #             APP_VERSION: 1.2.3
+  #           command: |
+  #             $env:APP_VERSION
+  #             setx APP_VERSION $env:APP_VERSION_CONTEXT
+  #             $env:APP_VERSION
+  #             refreshenv
+  #             $env:APP_VERSION
 
 workflows:
   whatos:
