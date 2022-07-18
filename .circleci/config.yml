@@ -67,11 +67,11 @@ jobs:
 
               $APP_VERSION_NAME = "APP_VERSION_$env:CIRCLE_SHA1"
 
-              $env:APP_VERSION_NAME
+              echo APP_VERSION_NAME
 
-              setx APP_VERSION APP_VERSION_NAME
+              # setx APP_VERSION APP_VERSION_NAME
 
-              $env:APP_VERSION
+              # $env:APP_VERSION
 
 
               # $env:APP_VERSION_$env:CIRCLEC_SHA1
