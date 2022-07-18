@@ -34,8 +34,7 @@ jobs:
               "content-type" = "application/json"
             };
             $body = @{
-              # value = "$env:APP_VERSION"
-              value = "$env:BLAH_BLAH"
+              value = "$env:APP_VERSION"
             }
 
             Invoke-RestMethod -Method Put -Uri $uri -Headers $headers -Body ($body| ConvertTo-Json) -ContentType 'application/json'
