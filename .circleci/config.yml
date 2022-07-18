@@ -43,7 +43,9 @@ jobs:
       - run:
           name: Retrieve context
           shell: powershell.exe
-          command: $env:APP_VERSION_CONTEXT
+          command: |
+            refreshenv
+            $env:APP_VERSION_CONTEXT
 
   print-var:
     executor:
