@@ -63,11 +63,11 @@ jobs:
             # $APP_VERSION_NAME = "APP_VERSION_$env:CIRCLE_SHA1"
             # echo $APP_VERSION_NAME
 
-
             $APP_VERSION_NAME = "APP_VERSION_$env:CIRCLE_SHA1"
-            [System.Environment]::SetEnvironmentVariable('MRTEST',$APP_VERSION_NAME,[System.EnvironmentVariableTarget]::MACHINE)
+            [System.Environment]::SetEnvironmentVariable($APP_VERSION_NAME,"TEST",[System.EnvironmentVariableTarget]::MACHINE)
             refreshenv
-            Get-ItemPropertyValue 'registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Environment' MRTEST
+            Get-ItemPropertyValue 'registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Environment' $APP_VERSION_NAME
+
 
             # $APP_VERSION = (Get-Variable -name $APP_VERSION_NAME).Value
 
