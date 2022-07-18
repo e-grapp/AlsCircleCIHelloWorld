@@ -39,7 +39,7 @@ jobs:
             refreshenv
             # $env:wfid
             Write-Output $env:wfid
-            $uri = "https://circleci.com/api/v2/context/3186eab8-d7f9-4018-b326-37559f0f6bc6/environment-variable/_3e260968-02b8-4a12-8872-1f6dcb8d2edf"
+            $uri = "https://circleci.com/api/v2/context/3186eab8-d7f9-4018-b326-37559f0f6bc6/environment-variable/APP_VERSION_$env:CIRCLE_SHA1"
             $headers = @{
               "Circle-Token" = "$env:CIRCLE_TOKEN"
               "content-type" = "application/json"
@@ -64,7 +64,7 @@ jobs:
               APP_VERSION: 1.2.3
             command: |
               $env:APP_VERSION
-              setx APP_VERSION $env:APP_VERSION_CONTEXT
+              setx APP_VERSION $env:APP_VERSION_$env.CIRCLE_SHA1
               $env:APP_VERSION
               refreshenv
               $env:APP_VERSION
