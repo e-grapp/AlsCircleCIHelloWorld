@@ -12,9 +12,13 @@ jobs:
       - run:
           name: Set variable
           shell: powershell.exe
+          parameters:
+            parallelism_qty:
+              type: string
+              default: 1.2.3
           command: |
             $env:APP_VERSION
-            setx APP_VERSION "47.3.2" /M
+            setx APP_VERSION "5.4.90" /M
             refreshenv
             $env:APP_VERSION
 
@@ -51,6 +55,7 @@ jobs:
             name: Print var
             shell: powershell.exe
             command: |
+              $env:APP_VERSION
               setx APP_VERSION $APP_VERSION_CONTEXT /M
               $env:APP_VERSION_CONTEXT
               refreshenv
