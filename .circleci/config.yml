@@ -11,9 +11,12 @@ jobs:
       # resource_class: macos.x86.medium.gen2
     steps:
       - run:
-          name: Download firebase
+          name: Check Docker version
           # command: curl --connect-timeout 20.0 --max-time 20.0 -Lo ./firebase_bin https://firebase.tools/bin/macos/latest
-          command: curl -sL https://firebase.tools | bash
+          command: docker --version
+      - run:
+          name: Update Docker
+          command: sudo apt update && sudo apt --only-upgrade install docker
       # - mac/enable-vnc
       # - browser/install-chrome:
       #     chrome-version: latest
