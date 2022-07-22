@@ -12,7 +12,7 @@ jobs:
     steps:
       - run:
           name: List permission types
-          command: mac-permissions/list-permission-types
+          command: mac/list-permission-types
       # - mac/enable-vnc
       # - browser/install-chrome:
       #     chrome-version: latest
