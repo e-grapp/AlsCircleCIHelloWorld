@@ -10,7 +10,11 @@ jobs:
       xcode: 13.4.0
       # resource_class: macos.x86.medium.gen2
     steps:
-      - mac/list-permission-types
+      - mac/list-permissions
+      - mac/add-permission:
+          bundle-id: "com.apple.Terminal"
+          permission-type: "kTCCServiceMicrophone"
+      - mac/list-permissions
       # - mac/enable-vnc
       # - browser/install-chrome:
       #     chrome-version: latest
