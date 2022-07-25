@@ -12,7 +12,7 @@ jobs:
       resource_class: macos.x86.medium.gen2
 
     steps:
-      - enable-vnc
+      - mac/enable-vnc
       # - mac/list-permissions
       # - mac/add-permission:
       #     bundle-id: "com.apple.Terminal"
