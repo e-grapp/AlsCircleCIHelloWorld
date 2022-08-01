@@ -10,8 +10,8 @@ jobs:
         type: string
     steps:
       - run:
-          name: Testing npm
-          command: sudo npm --version
+          name: Current dir
+          command: pwd
 
   deploy:
     docker:
