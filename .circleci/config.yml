@@ -6,7 +6,7 @@ jobs:
     docker:
       - image: cimg/node:18.4.0
     parameters:
-      version:
+      docker_name:
         type: string
     steps:
       - run:
@@ -17,42 +17,25 @@ jobs:
     docker:
       - image: cimg/node:18.4.0
     parameters:
-      version:
+      docker_name:
         type: string
     steps:
       - run:
           name: Current dir
           command: pwd
 
-
-# workflows:
-#   build_and_deploy:
-#     jobs:
-#       - build:
-#           name: Build
-#           matrix:
-#             parameters:
-#               docker_name:
-#                 - one
-#                 - two
-#                 - three
-#       - deploy:
-#           name: Deploy
-#           requires:
-#             - Build<<matrix.docker_name>>
-
 workflows:
-  workflow:
+  build_and_deploy:
     jobs:
       - build:
-          name: build-v<< matrix.version >>
+          name: build-v<< matrix.docker_name >>
           matrix:
             parameters:
-              version: ["0.1", "0.2"]
+              docker_name: ["one", "two", "three"]
       - deploy:
-          name: deploy-v<< matrix.version >>
+          name: deploy-v<< matrix.docker_name >>
           matrix:
             parameters:
-              version: ["0.1", "0.2"]
+              docker_name: ["one", "two", "three"]
           requires:
-            - build-v<< matrix.version >>
+            - build-v<< matrix.docker_name >>
