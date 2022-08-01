@@ -1,16 +1,58 @@
 version: 2.1
 
 jobs:
+
   build:
     docker:
       - image: cimg/node:18.4.0
+    parameters:
+      version:
+        type: string
     steps:
       - run:
           name: Testing npm
           command: sudo npm --version
 
+  deploy:
+    docker:
+      - image: cimg/node:18.4.0
+    parameters:
+      version:
+        type: string
+    steps:
+      - run:
+          name: Current dir
+          command: pwd
+
+
+# workflows:
+#   build_and_deploy:
+#     jobs:
+#       - build:
+#           name: Build
+#           matrix:
+#             parameters:
+#               docker_name:
+#                 - one
+#                 - two
+#                 - three
+#       - deploy:
+#           name: Deploy
+#           requires:
+#             - Build<<matrix.docker_name>>
 
 workflows:
-  whatos:
+  workflow:
     jobs:
-      - build
+      - build:
+          name: build-v<< matrix.version >>
+          matrix:
+            parameters:
+              version: ["0.1", "0.2"]
+      - deploy:
+          name: deploy-v<< matrix.version >>
+          matrix:
+            parameters:
+              version: ["0.1", "0.2"]
+          requires:
+            - build-v<< matrix.version >>
