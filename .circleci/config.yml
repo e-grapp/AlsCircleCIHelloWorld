@@ -1,17 +1,7 @@
 version: 2.1
 
 jobs:
-  build1:
-    docker:
-      - image: cimg/node:18.4.0
-    parameters:
-      docker_name:
-        type: string
-    steps:
-      - run:
-          command: pwd
-
-  build2:
+  build:
     docker:
       - image: cimg/node:18.4.0
     parameters:
