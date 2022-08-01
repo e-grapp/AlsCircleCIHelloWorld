@@ -1,7 +1,16 @@
 version: 2.1
 
 jobs:
-  build:
+  build1:
+    docker:
+      - image: cimg/node:18.4.0
+    parameters:
+      docker_name:
+        type: string
+    steps:
+      - run:
+          command: pwd
+  build2:
     docker:
       - image: cimg/node:18.4.0
     parameters:
@@ -21,12 +30,12 @@ jobs:
 workflows:
   build_and_deploy:
     jobs:
-      - build:
+      - build1:
           name: build 1
           matrix:
             parameters:
               docker_name: ["one", "two", "three"]
-      - build:
+      - build2:
           name: build 2
           matrix:
             parameters:
