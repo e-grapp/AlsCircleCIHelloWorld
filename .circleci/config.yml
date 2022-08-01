@@ -4,9 +4,6 @@ jobs:
   build:
     docker:
       - image: cimg/php:7.4.30-browsers
-    parameters:
-      docker_name:
-        type: string
     steps:
       - run:
           command: pwd
