@@ -25,26 +25,14 @@ workflows:
   build_and_deploy:
     jobs:
       - build:
-<<<<<<< HEAD
           name: build-<< matrix.docker_name >>
-=======
-          name: build-v<< matrix.docker_name >>
->>>>>>> c89b64bfc413afe61d9f6abdd9c9c6c4f2f7dea3
           matrix:
             parameters:
               docker_name: ["one", "two", "three"]
       - deploy:
-<<<<<<< HEAD
           name: deploy-<< matrix.docker_name >>
-=======
-          name: deploy-v<< matrix.docker_name >>
->>>>>>> c89b64bfc413afe61d9f6abdd9c9c6c4f2f7dea3
           matrix:
             parameters:
               docker_name: ["one", "two", "three"]
           requires:
-<<<<<<< HEAD
             - build-<< matrix.docker_name >>
-=======
-            - build-v<< matrix.docker_name >>
->>>>>>> c89b64bfc413afe61d9f6abdd9c9c6c4f2f7dea3
