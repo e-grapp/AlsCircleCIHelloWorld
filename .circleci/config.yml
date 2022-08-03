@@ -10,9 +10,34 @@ jobs:
       size: xlarge
     # version: edge
     steps:
+
+      # - run:
+          
+      #     name: Soln build
+      #     command: | 
+      #       & "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\VSIXInstaller.exe" /q /a --wait "$env:CIRCLE_WORKING_DIRECTORY\Tools\InstallerProjects.vsix"
+      #       $pathtoVsixFile = "$env:CIRCLE_WORKING_DIRECTORY\Tools\InstallerProjects.vsix"
+      #       $args = '/quiet "{0}InstallerProjects.vsix"' -f $pathtoVsixFile;
+      #       $result = Start-Process -FilePath "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\VSIXInstaller.exe" -ArgumentList $args -Wait -PassThru     
+      #       & "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\devenv.com" "$env:CIRCLE_WORKING_DIRECTORY\Project\PathWandGUI\PathWandGUI.sln" /build Debug
+      #       cd "$env:CIRCLE_WORKING_DIRECTORY\Project\PathWandGUI\$env:SOLN_CONFIG"
+      #       dir
+            
+      #     shell: powershell.exe
+
+
       - run:
           name: Check .NET versions
-          command: ls
+          command: |
+            Invoke-WebRequest -Uri https://visualstudioclient.gallerycdn.vsassets.io/extensions/visualstudioclient/microsoftvisualstudio2022installerprojects/2.0.0/1641503017035/InstallerProjects.vsix -Outfile ~/project/MyProject/InstallerProjects.vsix
+          shell: powershell.exe
+      - run:
+          name: Install Extension
+          command: Start-Process VSIXInstaller.exe -ArgumentList "C:\Users\circleci\project\MyProject\InstallerProjects.vsix /quiet /force" -Verb RunAs
+          shell: powershell.exe
+      - run:
+          name: Pause for 1 minute
+          command: Start-Sleep -s 60
           shell: powershell.exe
 
 workflows:
