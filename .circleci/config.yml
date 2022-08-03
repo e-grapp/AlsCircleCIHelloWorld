@@ -16,8 +16,11 @@ jobs:
       #     system-image: system-images;android-32;google_apis;x86_64
       #     # post-emulator-launch-assemble-command: ./gradlew assembleDemoDebugAndroidTest
           # test-command: ./gradlew connectedDemoDebugAndroidTest
-      - android/start-emulator:
+      - android/create-avd:
+          avd-name: android_12
+          install: true
           system-image: system-images;android-32;google_apis;x86_64
+      - android/start-emulator:
           avd-name: android_12
           camera-back: emulated
           camera-front: emulated
