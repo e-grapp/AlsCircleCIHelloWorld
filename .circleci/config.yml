@@ -29,11 +29,12 @@ jobs:
       - run:
           name: Check .NET versions
           command: |
+            New-Item -Path "~\project" -Name "MyProject" -ItemType "directory"
             Invoke-WebRequest -Uri https://visualstudioclient.gallerycdn.vsassets.io/extensions/visualstudioclient/microsoftvisualstudio2022installerprojects/2.0.0/1641503017035/InstallerProjects.vsix -Outfile ~/project/MyProject/InstallerProjects.vsix
           shell: powershell.exe
       - run:
           name: Install Extension
-          command: Start-Process VSIXInstaller.exe -ArgumentList "C:\Users\circleci\project\MyProject\InstallerProjects.vsix /quiet /force" -Verb RunAs
+          command: Start-Process VSIXInstaller.exe -ArgumentList "~\project\MyProject\InstallerProjects.vsix /quiet /force" -Verb RunAs
           shell: powershell.exe
       - run:
           name: Pause for 1 minute
