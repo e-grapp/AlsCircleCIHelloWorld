@@ -1,22 +1,32 @@
 version: 2.1
 
 orbs:
-  android: circleci/android@2.1.1
+  android: circleci/android@2.1.2
 
 jobs:
 
   ui-tests:
     executor:
       name: android/android-machine
-      resource-class: xlarge
-      tag: 2021.10.1
+      resource-class: large
+      tag: 2022.06.2
     steps:
       - checkout
       - android/start-emulator-and-run-tests:
-          system-image: system-images;android-29;default;arm64-v8a
-          post-emulator-launch-assemble-command: ./gradlew assembleDemoDebugAndroidTest
-          test-command: ./gradlew connectedDemoDebugAndroidTest
-
+          system-image: system-images;android-32;google_apis;x86_64
+          # post-emulator-launch-assemble-command: ./gradlew assembleDemoDebugAndroidTest
+          # test-command: ./gradlew connectedDemoDebugAndroidTest
+      - android/start-emulator:
+          avd-name: android_12
+          camera-back: emulated
+          camera-front: emulated
+          post-emulator-launch-assemble-command: ''
+          wait-for-emulator: false
+          no-window: false
+          additional-args: -skin 415x830
+      - run:
+          name: wait for emulator startup
+          command: adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 5; done;'
 
   # build:
   #   executor:
