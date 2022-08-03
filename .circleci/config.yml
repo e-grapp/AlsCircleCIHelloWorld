@@ -30,7 +30,7 @@ jobs:
           name: Check .NET versions
           command: |
             New-Item -Path "%CIRCLE_WORKING_DIRECTORY%" -Name "MyProject" -ItemType "directory"
-            Invoke-WebRequest -Uri https://visualstudioclient.gallerycdn.vsassets.io/extensions/visualstudioclient/microsoftvisualstudio2022installerprojects/2.0.0/1641503017035/InstallerProjects.vsix -Outfile %CIRCLE_WORKING_DIRECTORY%\MyProject\InstallerProjects.vsix
+            Invoke-WebRequest -Uri https://visualstudioclient.gallerycdn.vsassets.io/extensions/visualstudioclient/microsoftvisualstudio2022installerprojects/2.0.0/1641503017035/InstallerProjects.vsix -Outfile InstallerProjects.vsix
           shell: powershell.exe
       - run:
           name: Install Extension
