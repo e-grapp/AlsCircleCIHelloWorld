@@ -11,7 +11,7 @@ jobs:
       resource-class: large
       tag: 2022.06.2
     steps:
-      - checkout
+      # - checkoutas
       - android/start-emulator-and-run-tests:
           system-image: system-images;android-32;google_apis;x86_64
           # post-emulator-launch-assemble-command: ./gradlew assembleDemoDebugAndroidTest
