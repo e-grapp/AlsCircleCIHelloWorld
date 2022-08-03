@@ -11,7 +11,7 @@ jobs:
       resource-class: large
       tag: 2022.06.2
     steps:
-      # - checkoutas
+      # - checkout
       - android/start-emulator-and-run-tests:
           system-image: system-images;android-32;google_apis;x86_64
           # post-emulator-launch-assemble-command: ./gradlew assembleDemoDebugAndroidTest
@@ -27,6 +27,9 @@ jobs:
       - run:
           name: wait for emulator startup
           command: adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 5; done;'
+      - run:
+          name: Sleep
+          command: sleep 600
 
   # build:
   #   executor:
