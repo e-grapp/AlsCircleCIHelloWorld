@@ -12,11 +12,12 @@ jobs:
       tag: 2022.06.2
     steps:
       # - checkout
-      - android/start-emulator-and-run-tests:
-          system-image: system-images;android-32;google_apis;x86_64
-          # post-emulator-launch-assemble-command: ./gradlew assembleDemoDebugAndroidTest
+      # - android/start-emulator-and-run-tests:
+      #     system-image: system-images;android-32;google_apis;x86_64
+      #     # post-emulator-launch-assemble-command: ./gradlew assembleDemoDebugAndroidTest
           # test-command: ./gradlew connectedDemoDebugAndroidTest
       - android/start-emulator:
+          system-image: system-images;android-32;google_apis;x86_64
           avd-name: android_12
           camera-back: emulated
           camera-front: emulated
