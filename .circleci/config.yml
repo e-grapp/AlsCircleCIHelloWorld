@@ -1,39 +1,115 @@
 version: 2.1
 
-orbs:
-  android: circleci/android@2.1.2
+# orbs:
+#   android: circleci/android@2.1.2
+
+references:
+  defaults: &defaults
+    working_directory: ~/code
+    docker:
+      - image: cimg/android:2022.06
+    environment:
+      JVM_OPTS: -Xmx2048m
+      GRADLE_OPTS: -Xmx1536m -XX:+HeapDumpOnOutOfMemoryError -Dorg.gradle.caching=true -Dorg.gradle.configureondemand=true -Dkotlin.compiler.execution.strategy=in-process -Dkotlin.incremental=false
+
+commands:
+  create-gradle-file:
+    description: "Create gradle file with default values and required keys"
+    steps:
+      - run:
+          command: |
+            touch ./gradle.properties
 
 jobs:
 
-  ui-tests:
-    executor:
-      name: android/android-machine
-      resource-class: large
-      tag: 2022.06.2
+  androidTest:
+    <<: *defaults
     steps:
-      # - checkout
-      # - android/start-emulator-and-run-tests:
-      #     system-image: system-images;android-32;google_apis;x86_64
-      #     # post-emulator-launch-assemble-command: ./gradlew assembleDemoDebugAndroidTest
-          # test-command: ./gradlew connectedDemoDebugAndroidTest
-      - android/create-avd:
-          avd-name: android_12
-          install: true
-          system-image: system-images;android-32;google_apis;x86_64
-      - android/start-emulator:
-          avd-name: android_12
-          camera-back: emulated
-          camera-front: emulated
-          post-emulator-launch-assemble-command: ''
-          wait-for-emulator: false
-          no-window: false
-          additional-args: -skin 415x830
+      - checkout
+      - *cache_restore
+      - create-gradle-file
       - run:
-          name: wait for emulator startup
-          command: adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 5; done;'
+          name: chmod permissions
+          command: chmod +x ./gradlew
       - run:
-          name: Sleep
-          command: sleep 600
+          name: Create avd
+          command: |
+            sdkmanager "system-images;android-16;default;armeabi-v7a" && echo "no" | avdmanager create avd -n test -k "system-images;android-16;default;armeabi-v7a"
+      - run:
+          name: Launch emulator
+          command: |
+            export LD_LIBRARY_PATH=${ANDROID_HOME}/emulator/lib64:${ANDROID_HOME}/emulator/lib64/qt/lib && emulator64-arm -avd test -noaudio -no-boot-anim -no-window -accel auto -verbose
+          background: true
+      - run:
+          # run in parallel with the emulator starting up, to optimize build time
+          name: Run androidTest task
+          command: |
+            ./gradlew --init-script circleci.gradle androidTest
+      - run:
+          name: Wait for emulator to start
+          command: |
+            circle-android wait-for-boot
+      - run:
+          name: Disable emulator animations
+          command: |
+            adb shell settings put global window_animation_scale 0.0
+            adb shell settings put global transition_animation_scale 0.0
+            adb shell settings put global animator_duration_scale 0.0
+      - run:
+          name: Run UI tests (with retry)
+          command: |
+            MAX_TRIES=2
+            run_with_retry() {
+               n=1
+               until [ $n -gt $MAX_TRIES ]
+               do
+                  echo "Starting test attempt $n"
+                  ./gradlew --init-script circleci.gradle androidTest && break
+                  n=$[$n+1]
+                  sleep 5
+               done
+               if [ $n -gt $MAX_TRIES ]; then
+                 echo "Max tries reached ($MAX_TRIES)"
+                 exit 1
+               fi
+            }
+            run_with_retry
+      - *cache_save
+      - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
+          path: app/build/reports
+          destination: reports
+      - store_test_results: # for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
+          path: app/build/test-results
+
+  # ui-tests:
+  #   executor:
+  #     name: android/android-machine
+  #     resource-class: large
+  #     tag: 2022.06.2
+  #   steps:
+  #     # - checkout
+  #     # - android/start-emulator-and-run-tests:
+  #     #     system-image: system-images;android-32;google_apis;x86_64
+  #     #     # post-emulator-launch-assemble-command: ./gradlew assembleDemoDebugAndroidTest
+  #         # test-command: ./gradlew connectedDemoDebugAndroidTest
+  #     - android/create-avd:
+  #         avd-name: android_12
+  #         install: true
+  #         system-image: system-images;android-32;google_apis;x86_64
+  #     - android/start-emulator:
+  #         avd-name: android_12
+  #         camera-back: emulated
+  #         camera-front: emulated
+  #         post-emulator-launch-assemble-command: ''
+  #         wait-for-emulator: false
+  #         no-window: false
+  #         additional-args: -skin 415x830
+  #     - run:
+  #         name: wait for emulator startup
+  #         command: adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 5; done;'
+  #     - run:
+  #         name: Sleep
+  #         command: sleep 600
 
   # build:
   #   executor:
@@ -59,4 +135,4 @@ jobs:
 workflows:
   build-and-test:
     jobs:
-      - ui-tests
+      - androidTest
