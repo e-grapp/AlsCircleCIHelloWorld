@@ -73,7 +73,6 @@ jobs:
                fi
             }
             run_with_retry
-      - *cache_save
       - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
           path: app/build/reports
           destination: reports
