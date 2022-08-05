@@ -26,9 +26,9 @@ jobs:
     <<: *defaults
     steps:
       - create-gradle-file
-      - run:
-          name: chmod permissions
-          command: chmod +x ./gradlew
+      # - run:
+      #     name: chmod permissions
+      #     command: chmod +x ./gradlew
       - run:
           name: Create avd
           command: |
