@@ -26,7 +26,6 @@ jobs:
     <<: *defaults
     steps:
       - checkout
-      - *cache_restore
       - create-gradle-file
       - run:
           name: chmod permissions
