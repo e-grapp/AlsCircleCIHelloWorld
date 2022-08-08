@@ -9,6 +9,13 @@ jobs:
         type: integer
     steps:
       - run:
+          name: Setup apt-fast
+          command: |
+            sudo add-apt-repository ppa:apt-fast/stable
+            sudo apt-get update
+            sudo apt-get install apt-fast
+
+      - run:
           name: Install all the things
           command: |
             sudo apt -qq update
