@@ -3,39 +3,40 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: cimg/node:18.4.0
+      - image: cimg/python:3.8
     parameters:
-      docker_name:
-        type: string
+      version:
+        type: integer
     steps:
       - run:
-          command: pwd
+          name: Install all the things
+          command: |
+            sudo apt -qq update
+            sudo apt install -y \
+              inkscape \
+              ffmpeg \
+              dvipng \
+              lmodern \
+              cm-super \
+              texlive-latex-base \
+              texlive-latex-extra \
+              texlive-fonts-recommended \
+              texlive-latex-recommended \
+              texlive-pictures \
+              texlive-xetex \
+              ttf-wqy-zenhei \
+              graphviz \
+              fonts-crosextra-carlito \
+              fonts-freefont-otf \
+              fonts-humor-sans \
+              fonts-noto-cjk \
+              optipng
 
-
-  deploy:
-    docker:
-      - image: cimg/node:18.4.0
-    steps:
-      - run:
-          command: pwd
 
 workflows:
   build_and_deploy:
     jobs:
       - build:
-          name: build_1
           matrix:
             parameters:
-              docker_name: ["one", "two", "three"]
-      - build:
-          name: build_2
-          matrix:
-            parameters:
-              docker_name: ["one", "two", "three"]
-      - deploy:
-          name: deploy
-          # matrix:
-          #   parameters:
-          #     docker_name: ["one", "two", "three"]
-          requires:
-            - build_1
+              version: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
