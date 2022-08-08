@@ -16,7 +16,7 @@ jobs:
     steps:
       - run:
           name: GH API test
-          command: curl https://api.github.com/zen
+          command: curl -i -u alanjclark:$gh_7daytoken https://api.github.com/users/octocat
       # - mac/add-safari-permissions
       # - mac/enable-vnc
       # - mac/list-permissions
