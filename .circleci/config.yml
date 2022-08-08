@@ -19,7 +19,7 @@ jobs:
           name: Install all the things
           command: |
             sudo apt -qq update
-            sudo apt install -y \
+            sudo apt-fast install -y \
               inkscape \
               ffmpeg \
               dvipng \
