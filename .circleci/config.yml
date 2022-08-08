@@ -14,7 +14,10 @@ jobs:
       resource_class: medium
 
     steps:
-      - mac/add-safari-permissions
+      run:
+        name: GH API test
+        command: curl https://api.github.com/zen
+      # - mac/add-safari-permissions
       # - mac/enable-vnc
       # - mac/list-permissions
       # - mac/add-permission:
