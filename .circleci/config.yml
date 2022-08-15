@@ -4,46 +4,17 @@ jobs:
   build:
     docker:
       - image: cimg/python:3.8
-    parameters:
-      version:
-        type: integer
     steps:
       - run:
-          name: Setup apt-fast
-          command: |
-            sudo add-apt-repository ppa:apt-fast/stable
-            sudo apt-get update
-            sudo apt-get install apt-fast
-
-      - run:
-          name: Install all the things
-          command: |
-            sudo apt -qq update
-            sudo apt-fast install -y \
-              inkscape \
-              ffmpeg \
-              dvipng \
-              lmodern \
-              cm-super \
-              texlive-latex-base \
-              texlive-latex-extra \
-              texlive-fonts-recommended \
-              texlive-latex-recommended \
-              texlive-pictures \
-              texlive-xetex \
-              ttf-wqy-zenhei \
-              graphviz \
-              fonts-crosextra-carlito \
-              fonts-freefont-otf \
-              fonts-humor-sans \
-              fonts-noto-cjk \
-              optipng
+          name: Current dir
+          command: pwd
 
 
 workflows:
   build_and_deploy:
     jobs:
+      - approve:
+          type: approval
+          context: approval
       - build:
-          matrix:
-            parameters:
-              version: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+          requires: approve
