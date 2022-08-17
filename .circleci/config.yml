@@ -6,7 +6,7 @@ orbs:
 jobs:
   build:
     executor: 
-      name: win/server-2022
+      name: win/default
       size: xlarge
     # version: edge
     environment:
