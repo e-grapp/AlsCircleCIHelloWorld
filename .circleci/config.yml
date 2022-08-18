@@ -14,7 +14,7 @@ jobs:
           # setx APP_VERSION svcFile /m
           # refreshenv
           echo $svcFile
-          echo $Env:APP_VERSION
+          echo $APP_VERSION
 
 
 workflows:
