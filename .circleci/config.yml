@@ -11,12 +11,15 @@ jobs:
     environment:
       - APP_VERSION: 3.2.1
     steps:
-      - run: |
-          setx APP_VERSION $env:svcFile /m
-          refreshenv
-          echo $Env:svcFile
-          echo $Env:APP_VERSION
-          $PSVersionTable
+      - run:
+          shell: powershell.exe
+          name: setx
+          command: |
+            setx APP_VERSION $env:svcFile /m
+            refreshenv
+            echo $Env:svcFile
+            echo $Env:APP_VERSION
+            $PSVersionTable
 
       - run: |
           echo $Env:svcFile
