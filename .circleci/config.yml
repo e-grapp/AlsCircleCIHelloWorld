@@ -15,13 +15,13 @@ jobs:
           shell: powershell.exe
           name: setx
           command: |
-            setx APP_VERSION $env:svcFile /m
-            # refreshenv
-            Update-SessionEnvironment
-            # echo $Env:svcFile
-            echo $Env:APP_VERSION
+            echo "APP_VERSION is $Env:APP_VERSION"
+            $APP_VERSION = $Env:svcFile /m
+            refreshenv
+            echo "svcFile is $Env:svcFile"
+            echo "APP_VERSION is $Env:APP_VERSION"
             # Get-ItemPropertyValue 'registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Environment' svcFile
-            Get-ItemPropertyValue 'registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Environment' APP_VERSION
+            # Get-ItemPropertyValue 'registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Environment' APP_VERSION
       - run: |
           echo $Env:svcFile
           echo $Env:APP_VERSION
