@@ -17,9 +17,9 @@ jobs:
           command: |
             setx APP_VERSION $env:svcFile /m
             refreshenv
-            echo $Env:svcFile
+            # echo $Env:svcFile
             echo $Env:APP_VERSION
-            Get-ItemPropertyValue 'registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Environment' svcFile
+            # Get-ItemPropertyValue 'registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Environment' svcFile
             Get-ItemPropertyValue 'registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Environment' APP_VERSION
       - run: |
           echo $Env:svcFile
