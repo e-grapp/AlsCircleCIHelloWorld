@@ -17,7 +17,7 @@ jobs:
           command: |
             echo "svcFile is $Env:svcFile"
             echo "APP_VERSION is $Env:APP_VERSION"
-            $APP_VERSION = $Env:svcFile
+            $APP_VERSION = $svcFile
             refreshenv
             echo "svcFile is $Env:svcFile"
             echo "APP_VERSION is $Env:APP_VERSION"
