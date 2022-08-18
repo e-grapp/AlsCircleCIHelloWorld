@@ -21,7 +21,7 @@ jobs:
             echo "svcFile is $Env:svcFile"
             echo "APP_VERSION is $Env:APP_VERSION"
 
-            # setx APP_VERSION $svcFile /m
+            $Env:APP_VERSION = $Env:svcFile
             [Environment]::SetEnvironmentVariable('APP_VERSION', $Env:svcFile, 'Machine')
 
             echo "svcFile is $Env:svcFile"
