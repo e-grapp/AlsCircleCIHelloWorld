@@ -6,7 +6,7 @@ orbs:
 jobs:
   build:
     executor: 
-      name: win/server-2019
+      name: win/server-2022
     environment:
       - APP_VERSION: 3.2.1
     steps:
