@@ -19,7 +19,7 @@ jobs:
             $Env:svcFile = Get-Content -Path "$Env:CIRCLE_WORKING_DIRECTORY\testfile.txt"
             echo "svcFile is $Env:svcFile"
             echo "APP_VERSION is $Env:APP_VERSION"
-            $APP_VERSION = $svcFile
+            $Env:APP_VERSION = $Env:svcFile
             refreshenv
             echo "svcFile is $Env:svcFile"
             echo "APP_VERSION is $Env:APP_VERSION"
