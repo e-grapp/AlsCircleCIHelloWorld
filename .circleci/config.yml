@@ -15,7 +15,7 @@ jobs:
           refreshenv
           echo $Env:svcFile
           echo $Env:APP_VERSION
-          powershell --version
+          $PSVersionTable
 
       - run: |
           echo $Env:svcFile
