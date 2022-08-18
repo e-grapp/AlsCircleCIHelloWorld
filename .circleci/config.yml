@@ -7,9 +7,9 @@ jobs:
   build:
     executor: 
       name: win/server-2022
+      shell: powershell.exe
     environment:
       - APP_VERSION: 3.2.1
-    shell: powershell.exe
     steps:
       - run: |
           setx APP_VERSION $env:svcFile /m
