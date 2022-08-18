@@ -30,7 +30,6 @@ jobs:
 
       - run:
           command: |
-            Get-ItemPropertyValue 'registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Environment' svcFile
             Get-ItemPropertyValue 'registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Environment' APP_VERSION
 
 
