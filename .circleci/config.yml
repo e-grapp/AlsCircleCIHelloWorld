@@ -15,6 +15,7 @@ jobs:
           shell: powershell.exe
           name: setx
           command: |
+            $svcFile = Get-Content -Path ".\testfile.txt"
             echo "svcFile is $Env:svcFile"
             echo "APP_VERSION is $Env:APP_VERSION"
             $APP_VERSION = $svcFile
