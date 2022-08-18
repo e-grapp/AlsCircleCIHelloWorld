@@ -19,8 +19,8 @@ jobs:
             refreshenv
             echo $Env:svcFile
             echo $Env:APP_VERSION
-            $PSVersionTable
-
+            Get-ItemPropertyValue 'registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Environment' svcFile
+            Get-ItemPropertyValue 'registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Environment' APP_VERSION
       - run: |
           echo $Env:svcFile
           echo $Env:APP_VERSION
