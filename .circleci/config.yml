@@ -13,6 +13,10 @@ jobs:
       - run: |
           setx APP_VERSION $env:svcFile /m
           refreshenv
+          $Env:svcFile
+          $Env:APP_VERSION
+
+      - run: |
           echo $Env:svcFile
           echo $Env:APP_VERSION
 
