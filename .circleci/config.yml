@@ -21,7 +21,7 @@ jobs:
             echo "svcFile is $Env:svcFile"
             echo "APP_VERSION is $Env:APP_VERSION"
 
-            $Env:APP_VERSION = $Env:svcFile
+            setx APP_VERSION $Env:svcFile /m
 
             echo "svcFile is $Env:svcFile"
             echo "APP_VERSION is $Env:APP_VERSION"
