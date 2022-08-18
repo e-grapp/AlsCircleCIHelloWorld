@@ -20,14 +20,15 @@ jobs:
             echo "svcFile is $Env:svcFile"
             echo "APP_VERSION is $Env:APP_VERSION"
             $Env:APP_VERSION = $Env:svcFile
-            # refreshenv
+            refreshenv
             echo "svcFile is $Env:svcFile"
             echo "APP_VERSION is $Env:APP_VERSION"
+          
 
 
-      # - run: |
-      #     echo $Env:svcFile
-      #     echo $Env:APP_VERSION
+      - run: |
+          echo "svcFile is $Env:svcFile"
+          echo "APP_VERSION is $Env:APP_VERSION"
 
 
 workflows:
