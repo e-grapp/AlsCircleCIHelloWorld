@@ -9,7 +9,7 @@ jobs:
       name: win/server-2022
       shell: powershell.exe
     environment:
-      - APP_VERSION: 3.2.1
+      - APP_VERSION: 'wrong'
     steps:
       - run:
           shell: powershell.exe
