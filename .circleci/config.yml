@@ -11,7 +11,7 @@ jobs:
       - APP_VERSION: 3.2.1
     steps:
       - run: |
-          setx APP_VERSION $svcFile /m
+          setx APP_VERSION svcFile /m
           refreshenv
           echo $svcFile
           echo $Env:APP_VERSION
