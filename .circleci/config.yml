@@ -19,11 +19,15 @@ jobs:
 workflows:
   build_and_deploy:
     jobs:
-      - hold:
+      - hold1:
           type: approval
+      - hold2:
+          type: approval
+          requires:
+            - hold1
       - build:
           matrix:
             parameters:
               sleep: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
           requires:
-            - hold
+            - hold2
