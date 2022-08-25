@@ -11,7 +11,7 @@ jobs:
       - run:
           name: Random fail
           command: |
-            sleep $sleep
+            # sleep $sleep
             exit $((RANDOM % 2))
             echo $?
 
