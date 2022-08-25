@@ -6,7 +6,7 @@ jobs:
       - image: cimg/python:3.8
     parameters:
       version:
-        type: integer
+        type: string
     steps:
       - run:
           name: Current dir
