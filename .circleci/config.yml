@@ -11,7 +11,7 @@ jobs:
       - run:
           name: Current dir
           command: |
-            return $((RANDOM % 2))
+            exit $((RANDOM % 2))
             echo $?
 
 
