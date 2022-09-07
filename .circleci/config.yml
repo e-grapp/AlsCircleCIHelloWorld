@@ -14,9 +14,8 @@ jobs:
       resource_class: medium
 
     steps:
-      - run:
-          - browser/install-chrome:
-              chrome-version: "103.0.5060.134"
+      - browser/install-chrome:
+          chrome-version: "103.0.5060.134"
       # - mac/add-safari-permissions
       # - mac/enable-vnc
       # - mac/list-permissions
