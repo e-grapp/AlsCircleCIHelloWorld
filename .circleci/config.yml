@@ -3,7 +3,7 @@ version: 2.1
 orbs:
   mac: circleci/macos@2.3.0
   # mac: circleci/macos@dev:60b9d34b9bdfbc6c7eff90de81d70d7d059f31be
-  browser: circleci/browser-tools@1.2.5
+  browser: circleci/browser-tools@1.4.0
 
 jobs:
 
@@ -15,8 +15,8 @@ jobs:
 
     steps:
       - run:
-          name: GH API test
-          command: curl -i -u alanjclark:$gh_7daytoken https://api.github.com/users/octocat
+          - browser/install-chrome:
+              chrome-version: "103.0.5060.134"
       # - mac/add-safari-permissions
       # - mac/enable-vnc
       # - mac/list-permissions
