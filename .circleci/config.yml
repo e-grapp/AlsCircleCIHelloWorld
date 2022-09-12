@@ -4,9 +4,6 @@ jobs:
   build:
     docker:
       - image: cimg/python:3.8
-    parameters:
-      sleep:
-        type: integer
     steps:
       - run:
           name: Set var
