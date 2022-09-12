@@ -14,7 +14,7 @@ jobs:
           name: retreive var and export var
           command: |
             echo $VERSION
-            export VERSION="321"
+            echo 'export VERSION="321"' >> "$BASH_ENV"
       - run:
           name: retrieve exported var
           command: echo $VERSION
