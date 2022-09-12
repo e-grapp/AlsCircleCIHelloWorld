@@ -1,9 +1,12 @@
 version: 2.1
 
+orbs:
+  shellcheck: circleci/shellcheck@3.1.1
+
 jobs:
   build:
     docker:
-      - image: cimg/python:3.8
+      - image: cimg/node:18.8.0-browsers
     steps:
       - run:
           name: Set var
@@ -23,4 +26,9 @@ jobs:
 workflows:
   build_and_deploy:
     jobs:
-      - build
+      - shellcheck/check:
+          name: my_check
+      - build:
+          name: my_build
+          requires:
+            - my_check
