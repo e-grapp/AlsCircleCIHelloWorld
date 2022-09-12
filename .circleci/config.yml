@@ -7,12 +7,14 @@ jobs:
     steps:
       - run:
           name: Set var
-          command: VERSION=123
+          command: |
+            VERSION="123"
+            echo $VERSION
       - run:
           name: retreive var and export var
           command: |
             echo $VERSION
-            export VERSION=321
+            export VERSION="321"
       - run:
           name: retrieve exported var
           command: echo $VERSION
