@@ -9,25 +9,19 @@ jobs:
         type: integer
     steps:
       - run:
-          name: Random fail
+          name: Set var
+          command: VERSION=123
+      - run:
+          name: retreive var and export var
           command: |
-            sleep << parameters.sleep >>
-            exit $((RANDOM % 2))
-            echo $?
+            echo $VERSION
+            export VERSION=321
+      - run:
+          name: retrieve exported var
+          command: echo $VERSION
 
 
 workflows:
   build_and_deploy:
     jobs:
-      - hold1:
-          type: approval
-      - hold2:
-          type: approval
-          requires:
-            - hold1
-      - build:
-          matrix:
-            parameters:
-              sleep: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-          requires:
-            - hold2
+      - build
