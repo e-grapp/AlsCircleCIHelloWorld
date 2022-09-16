@@ -20,7 +20,7 @@ jobs:
     steps:
       - run:
           name: Download AgoraRtcEngine_iOS
-          commands: /usr/bin/curl -f -L -o /var/folders/bl/wbxjgtzx7j5_mjsmfr3ynlc00000gp/T/d20220914-4948-o0h3q9/file.zip https://download.agora.io/sdk/release/AgoraRtcEngine_iOS-3.7.0.3.zip --create-dirs --netrc-optional --retry 2 -A 'CocoaPods/1.11.3 cocoapods-downloader/1.6.2'
+          command: /usr/bin/curl -f -L -o /var/folders/bl/wbxjgtzx7j5_mjsmfr3ynlc00000gp/T/d20220914-4948-o0h3q9/file.zip https://download.agora.io/sdk/release/AgoraRtcEngine_iOS-3.7.0.3.zip --create-dirs --netrc-optional --retry 2 -A 'CocoaPods/1.11.3 cocoapods-downloader/1.6.2'
       
       # - browser/install-chrome:
       #     chrome-version: "103.0.5060.134"
