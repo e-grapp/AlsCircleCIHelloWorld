@@ -7,33 +7,34 @@ orbs:
 
 jobs:
 
-  build:
-    macos:
-      xcode: 13.4.0
-      # resource_class: macos.x86.medium.gen2
-      resource_class: macos.x86.medium.gen2
+  - build:
+      name: build-<< matrix.attempt >>
+      macos:
+        xcode: 13.4.0
+        # resource_class: macos.x86.medium.gen2
+        resource_class: macos.x86.medium.gen2
 
-    parameters:
-      attempt:
-        type: string
+      parameters:
+        attempt:
+          type: string
 
-    steps:
-      - run:
-          name: Download AgoraRtcEngine_iOS
-          command: /usr/bin/curl -f -L -o /var/folders/bl/wbxjgtzx7j5_mjsmfr3ynlc00000gp/T/d20220914-4948-o0h3q9/file.zip https://download.agora.io/sdk/release/AgoraRtcEngine_iOS-3.7.0.3.zip --create-dirs --netrc-optional --retry 2 -A 'CocoaPods/1.11.3 cocoapods-downloader/1.6.2'
-      
-      # - browser/install-chrome:
-      #     chrome-version: "103.0.5060.134"
-      # - mac/add-safari-permissions
-      # - mac/enable-vnc
-      # - mac/list-permissions
-      # - mac/add-permission:
-      #     bundle-id: "com.apple.Terminal"
-      #     permission-type: "kTCCServiceMicrophone"
-      # - mac/list-permissions
-      # - mac/enable-vnc
-      # - browser/install-chrome:
-      #     chrome-version: latest
+      steps:
+        - run:
+            name: Download AgoraRtcEngine_iOS
+            command: /usr/bin/curl -f -L -o /var/folders/bl/wbxjgtzx7j5_mjsmfr3ynlc00000gp/T/d20220914-4948-o0h3q9/file.zip https://download.agora.io/sdk/release/AgoraRtcEngine_iOS-3.7.0.3.zip --create-dirs --netrc-optional --retry 2 -A 'CocoaPods/1.11.3 cocoapods-downloader/1.6.2'
+        
+        # - browser/install-chrome:
+        #     chrome-version: "103.0.5060.134"
+        # - mac/add-safari-permissions
+        # - mac/enable-vnc
+        # - mac/list-permissions
+        # - mac/add-permission:
+        #     bundle-id: "com.apple.Terminal"
+        #     permission-type: "kTCCServiceMicrophone"
+        # - mac/list-permissions
+        # - mac/enable-vnc
+        # - browser/install-chrome:
+        #     chrome-version: latest
       
 workflow:
   build:
