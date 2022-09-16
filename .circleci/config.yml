@@ -35,7 +35,7 @@ jobs:
       # - browser/install-chrome:
       #     chrome-version: latest
       
-workflow:
+workflows:
   build:
     jobs:
       - build:
