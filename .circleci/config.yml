@@ -7,13 +7,11 @@ orbs:
 jobs:
   build:
     parameters:
-    node-version:
-      type: string
+      node-version:
+        type: string
     executor: 
-      name: win/server-2022
+      name: win/default
       shell: powershell.exe
-    environment:
-      - APP_VERSION: 'unchanged'
     steps:
       - checkout
       - node/install:
