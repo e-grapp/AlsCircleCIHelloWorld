@@ -14,13 +14,13 @@ jobs:
       shell: powershell.exe
     steps:
       - checkout
-      - node/install:
-          node-version: << parameters.node-version >>
-          install-yarn: true
+      # - node/install:
+      #     node-version: << parameters.node-version >>
+      #     install-yarn: true
       - run:
           shell: powershell.exe
           name: setx
-          command: npm install --legacy-peer-deps --verbose
+          command: nvm --versopm
 
 
 workflows:
