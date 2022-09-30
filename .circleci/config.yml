@@ -1,10 +1,14 @@
 version: 2.1
 
 orbs:
+  node: circleci/node@5.0.2
   win: circleci/windows@5.0
 
 jobs:
   build:
+    parameters:
+    node-version:
+      type: string
     executor: 
       name: win/server-2022
       shell: powershell.exe
@@ -12,29 +16,20 @@ jobs:
       - APP_VERSION: 'unchanged'
     steps:
       - checkout
+      - node/install:
+          node-version: << parameters.node-version >>
+          install-yarn: true
       - run:
           shell: powershell.exe
           name: setx
-          command: |
-            $Env:svcFile = Get-Content -Path "$Env:CIRCLE_WORKING_DIRECTORY\testfile.txt"
-
-            echo "svcFile is $Env:svcFile"
-            echo "APP_VERSION is $Env:APP_VERSION"
-
-            $Env:APP_VERSION = $Env:svcFile
-            [Environment]::SetEnvironmentVariable('APP_VERSION', $Env:svcFile, 'Machine')
-
-            echo "svcFile is $Env:svcFile"
-            echo "APP_VERSION is $Env:APP_VERSION"
-
-
-      - run:
-          command: |
-            Get-ItemPropertyValue 'registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Environment' APP_VERSION
+          command: npm install --legacy-peer-deps --verbose
 
 
 workflows:
   version: 2
   build-deploy:
     jobs:
-      - build
+      - build:
+          matrix:
+            parameters:
+              node-version: ["14.18.0", "14.18.2", "14.19.2", "14.20.1", "15.14.0", "16.17.1", "17.9.1", "18.9.1"]
