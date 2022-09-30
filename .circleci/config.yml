@@ -17,10 +17,18 @@ jobs:
       # - node/install:
       #     node-version: << parameters.node-version >>
       #     install-yarn: true
+
       - run:
           shell: powershell.exe
-          name: setx
-          command: nvm --versopm
+          name: install node
+          command: |
+            nvm install << parameters.node-version >>
+            nvm use << parameters.node-version >>
+
+      - run:
+          shell: powershell.exe
+          name: npm install
+          command: npm install --legacy-peer-deps --verbose
 
 
 workflows:
