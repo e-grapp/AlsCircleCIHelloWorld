@@ -7,8 +7,8 @@ jobs:
       image: ubuntu-2004:202008-01
     steps:
       - run:
-          name: Check Docker version
-          command: docker --version
+          name: Create dir
+          command: sudo mkdir /canton
 
 workflows:
   build:
