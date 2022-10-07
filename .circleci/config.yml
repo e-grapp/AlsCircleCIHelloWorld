@@ -10,7 +10,9 @@ jobs:
     steps:
       - run:
           name: Currect dir
-          command: ls -al
+          command: |
+            ls -al
+            pwd
 
       # - run:
       #     name: create dir
