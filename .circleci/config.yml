@@ -2,12 +2,18 @@ version: 2.1
 
 jobs:
   build_and_test:
-    working_directory: ~/repo
     machine:
       image: ubuntu-2004:202008-01
+      resource_class: large
+    working_directory: /canton
+
     steps:
       - run:
-          name: Create dir
+          name: Currect dir
+          command: pwd
+
+      - run:
+          name: create dir
           command: sudo mkdir /canton
 
 workflows:
