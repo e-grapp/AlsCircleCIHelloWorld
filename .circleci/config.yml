@@ -5,16 +5,16 @@ jobs:
     machine:
       image: ubuntu-2004:202008-01
       resource_class: large
-    working_directory: /canton
+    working_directory: ~/stuff
 
     steps:
       - run:
           name: Currect dir
-          command: pwd
+          command: ls -al
 
-      - run:
-          name: create dir
-          command: sudo mkdir /canton
+      # - run:
+      #     name: create dir
+      #     command: sudo mkdir /canton
 
 workflows:
   build:
