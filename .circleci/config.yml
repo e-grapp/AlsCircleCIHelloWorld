@@ -22,7 +22,6 @@ jobs:
           name: retrieve exported var
           command: echo $VERSION
 
-
 workflows:
   build_and_deploy:
     jobs:
