@@ -12,7 +12,7 @@ jobs:
           command: |
             echo $TEST1
             # echo $TEST2
-            export $TEST1=CHANGED
+            export TEST1=CHANGED
             # setenv $TEST2=CHANGED
             echo $TEST1
             # echo $TEST2
