@@ -6,7 +6,7 @@ jobs:
       image: ubuntu-2004:202010-01
       resource_class: large
 
-    working_directory: ~/canton
+    working_directory: /canton
 
     steps:
       - run:
@@ -31,4 +31,7 @@ jobs:
 workflows:
   build:
     jobs:
-      - build_and_test
+      - build_and_test:
+          pre-steps:
+            - run:
+                command: sudo chmod u=rw /
