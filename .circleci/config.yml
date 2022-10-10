@@ -11,9 +11,10 @@ jobs:
           name: Set and retrieve vars
           command: |
             echo $TEST1
-            export TEST1=CHANGED
-            echo $TEST1
-            export TEST1
+            # export TEST1=CHANGED
+            # echo $TEST1
+            # export TEST1
+            echo 'export TEST1="CHANGED"' >> "$BASH_ENV"
       - run:
           name: Retreive var
           command: echo $TEST1
