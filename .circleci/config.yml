@@ -11,15 +11,15 @@ jobs:
           name: Set and retrieve vars
           command: |
             sudo mkdir /canton
-            echo 'export "TEST1=CHANGED"' >> $BASH_ENV
+            echo 'export "CIRCLE_WORKING_DIRECTORY=/canton"' >> $BASH_ENV
             source $BASH_ENV
-            echo $TEST1
+            echo $CIRCLE_WORKING_DIRECTORY
 
       - run:
           name: Retreive var
           command: |
-            pwd
-            set | grep TEST1
+            echo $CIRCLE_WORKING_DIRECTORY
+            # set | grep TEST1
             
       # - run:
       #     name: create dir
