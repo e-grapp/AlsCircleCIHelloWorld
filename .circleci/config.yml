@@ -20,6 +20,7 @@ jobs:
           command: |
             echo $CIRCLE_WORKING_DIRECTORY
             # set | grep TEST1
+            pwd
             
       # - run:
       #     name: create dir
