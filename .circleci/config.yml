@@ -11,11 +11,11 @@ jobs:
           name: Set and retrieve vars
           command: |
             echo $TEST1
-            echo $TEST2
+            # echo $TEST2
             export $TEST1=CHANGED
-            setenv $TEST2=CHANGED
+            # setenv $TEST2=CHANGED
             echo $TEST1
-            echo $TEST2
+            # echo $TEST2
             
       # - run:
       #     name: create dir
