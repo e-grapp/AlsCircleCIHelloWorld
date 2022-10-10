@@ -12,7 +12,7 @@ jobs:
           command: |
             sudo mkdir /canton
             echo 'export "CIRCLE_WORKING_DIRECTORY=/canton"' >> $BASH_ENV
-            echo 'export "CIRCLECI_BUILD_NUM=123"' >> $BASH_ENV
+            echo 'export "CIRCLE_BUILD_NUM=123"' >> $BASH_ENV
             source $BASH_ENV
             echo $CIRCLE_WORKING_DIRECTORY
             echo $CIRCLE_BUILD_NUM
