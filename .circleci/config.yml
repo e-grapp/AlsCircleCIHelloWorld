@@ -23,7 +23,9 @@ jobs:
 
       - run:
           name: Retreive var
-          command: pwd
+          command: |
+            pwd
+            set | grep CIRCLE_WORKING_DIRECTORY
             
       # - run:
       #     name: create dir
