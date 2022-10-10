@@ -6,13 +6,13 @@ jobs:
       image: ubuntu-2004:202010-01
       resource_class: large
 
-    working_directory: /canton
+    # working_directory: /canton
 
     steps:
       - run:
           name: Set and retrieve vars
           command: |
-            # sudo mkdir /canton
+            sudo mkdir /canton
             # echo 'export "CIRCLE_WORKING_DIRECTORY=/canton"' >> $BASH_ENV
             # echo 'export "CIRCLE_BUILD_NUM=123"' >> $BASH_ENV
             # source $BASH_ENV
@@ -20,6 +20,7 @@ jobs:
             
       - run:
           name: Retreive var
+          working_directory: /canton
           command: |
             echo $CIRCLE_WORKING_DIRECTORY
             pwd
@@ -31,7 +32,4 @@ jobs:
 workflows:
   build:
     jobs:
-      - build_and_test:
-          pre-steps:
-            - run:
-                command: sudo chmod u=rw /
+      - build_and_test
