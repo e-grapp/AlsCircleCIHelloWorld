@@ -22,7 +22,7 @@ jobs:
 
       - run:
           name: Retreive var
-          command: echo $TEST1
+          command: pwd
             
       # - run:
       #     name: create dir
