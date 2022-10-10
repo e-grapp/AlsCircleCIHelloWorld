@@ -11,7 +11,9 @@ jobs:
           name: Set and retrieve vars
           command: |
             sudo mkdir /canton
-            echo 'export CIRCLE_WORKING_DIRECTORY="/canton"' >> $BASH_ENV
+            echo 'export "CIRCLE_WORKING_DIRECTORY=/canton"' >> $BASH_ENV
+            source $BASH_ENV
+            echo $CIRCLE_WORKING_DIRECTORY
 
       - run:
           name: Retreive var
