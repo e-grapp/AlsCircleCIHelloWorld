@@ -16,6 +16,9 @@ jobs:
             # setenv $TEST2=CHANGED
             echo $TEST1
             # echo $TEST2
+      - run:
+          name: Retreive var
+          command: echo $TEST1
             
       # - run:
       #     name: create dir
