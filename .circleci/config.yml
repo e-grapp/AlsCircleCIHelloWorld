@@ -18,7 +18,8 @@ jobs:
             # echo $TEST1
 
             sudo mkdir /canton
-            echo 'export CIRCLE_WORKING_DIRECTORY="/canton"' >> $BASH_ENV
+            # echo 'export CIRCLE_WORKING_DIRECTORY="/canton"' >> $BASH_ENV
+            echo 'export PATH="$CIRCLE_WORKING_DIRECTORY"/canton:"$PATH"' >> "$BASH_ENV"
 
       - run:
           name: Retreive var
