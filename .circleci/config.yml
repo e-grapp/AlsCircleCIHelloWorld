@@ -15,6 +15,7 @@ jobs:
             # echo $TEST1
             # export TEST1
             echo 'export TEST1="CHANGED"' >> "$BASH_ENV"
+            echo $TEST1
       - run:
           name: Retreive var
           command: echo $TEST1
