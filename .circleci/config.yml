@@ -14,17 +14,9 @@ jobs:
           command: |
             pwd
             echo "*************************"
-            cd ..
-            pwd 
+            cd ../..
             echo "*************************"
-            cd circleci/project
-            pwd
-            echo "*************************"
-            cd ..
-            cd ..
-            pwd
-            echo "*************************"
-            cd $CONTEXT_JWT_KEY_FILE_ENC
+            cd $TEST_PATH
             pwd
 
     # steps:
@@ -51,4 +43,5 @@ jobs:
 workflows:
   build:
     jobs:
-      - build_and_test
+      - build_and_test:
+          context: test_path
