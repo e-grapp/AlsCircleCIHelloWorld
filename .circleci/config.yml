@@ -4,26 +4,45 @@ jobs:
   build_and_test:
     machine:
       image: ubuntu-2004:202010-01
-      resource_class: large
+      resource_class: medium
 
     # working_directory: /canton
 
     steps:
+      - run: echo "hello world"
       - run:
-          name: Set and retrieve vars
           command: |
-            sudo mkdir /canton
-            # echo 'export "CIRCLE_WORKING_DIRECTORY=/canton"' >> $BASH_ENV
-            # echo 'export "CIRCLE_BUILD_NUM=123"' >> $BASH_ENV
-            # source $BASH_ENV
-            echo $CIRCLE_WORKING_DIRECTORY
-            
-      - run:
-          name: Retreive var
-          working_directory: /canton
-          command: |
-            echo $CIRCLE_WORKING_DIRECTORY
             pwd
+            echo "*************************"
+            cd ..
+            pwd 
+            echo "*************************"
+            cd circleci/project
+            pwd
+            echo "*************************"
+            cd ..
+            cd ..
+            pwd
+            echo "*************************"
+            cd $CONTEXT_JWT_KEY_FILE_ENC
+            pwd
+
+    # steps:
+    #   - run:
+    #       name: Set and retrieve vars
+    #       command: |
+    #         sudo mkdir /canton
+    #         # echo 'export "CIRCLE_WORKING_DIRECTORY=/canton"' >> $BASH_ENV
+    #         # echo 'export "CIRCLE_BUILD_NUM=123"' >> $BASH_ENV
+    #         # source $BASH_ENV
+    #         echo $CIRCLE_WORKING_DIRECTORY
+            
+    #   - run:
+    #       name: Retreive var
+    #       working_directory: /canton
+    #       command: |
+    #         echo $CIRCLE_WORKING_DIRECTORY
+    #         pwd
             
       # - run:
       #     name: create dir
