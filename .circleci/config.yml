@@ -1,41 +1,26 @@
 version: 2.1
 
-orbs:
-  node: circleci/node@5.0.2
-  win: circleci/windows@5.0
-
 jobs:
   build:
-    parameters:
-      node-version:
-        type: string
-    executor: 
-      name: win/default
-      shell: powershell.exe
+    machine:
+      image: 'windows-server-2019-cuda:current'
+      resource_class: windows.gpu.nvidia.medium
+      shell: powershell.exe -ExecutionPolicy Bypass
+      
     steps:
       - checkout
-      # - node/install:
-      #     node-version: << parameters.node-version >>
-      #     install-yarn: true
-
+      - run: systeminfo
       - run:
+          name: "Check docker"
           shell: powershell.exe
-          name: install node
           command: |
-            nvm install << parameters.node-version >>
-            nvm use << parameters.node-version >>
-
-      - run:
-          shell: powershell.exe
-          name: npm install
-          command: npm install --legacy-peer-deps --verbose
+            docker info
+            docker pull public.ecr.aws/docker/library/hello-world:nanoserver-ltsc2022
+            docker run public.ecr.aws/docker/library/hello-world:nanoserver-ltsc2022
 
 
 workflows:
   version: 2
   build-deploy:
     jobs:
-      - build:
-          matrix:
-            parameters:
-              node-version: ["14.18.0", "14.18.2", "14.19.2", "14.20.1", "15.14.0", "16.17.1", "17.9.1", "18.9.1"]
+      - build
