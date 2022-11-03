@@ -6,21 +6,19 @@ jobs:
       - image: cimg/node:16.15
     steps:
       - run:
-          name: Set var
-          command: |
-            VERSION="123"
-            echo $VERSION
-      - run:
-          name: retreive var and export var
-          command: |
-            echo $VERSION
-            echo 'export VERSION="321"' >> "$BASH_ENV"
-      - run:
-          name: retrieve exported var
-          command: echo $VERSION
+          name: Steppy-step
+          command: echo "This is a steppy-step" && sleep 60
 
 workflows:
   build_and_deploy:
     jobs:
       - build:
           name: my_build
+          pre-steps:
+            - run:
+                name: Pre-step
+                command: echo "This is a pre-step"
+          post-steps:
+            - run:
+                name: Post-step
+                command: echo "This is a post-step"
