@@ -20,3 +20,10 @@ workflows:
     jobs:
       - build:
           name: my_build
+          filters:
+            branches:
+              only:
+                - dev
+                - /releases\/.*/
+
+# VS Code Extension Version: 1.2.0
