@@ -6,11 +6,12 @@ jobs:
       - image: cimg/node:12.20
     steps:
       - run:
-          name: node version
-          command: node --version
+          name: Check top
+          command: top
+          background: true
       - run:
-          name: npm version
-          command: npm --version
+          name: Sleep
+          command: sleep 30
 
 
 workflows:
