@@ -7,7 +7,7 @@ jobs:
     steps:
       - run:
           name: Check top
-          command: freemem
+          command: vmstat
           background: true
       - run:
           name: Sleep
