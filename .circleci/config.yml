@@ -9,9 +9,9 @@ jobs:
           name: Check top
           command: freemem
           background: true
-      # - run:
-      #     name: Sleep
-      #     command: sleep 30
+      - run:
+          name: Sleep
+          command: sleep 30
 
 
 workflows:
