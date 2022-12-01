@@ -7,7 +7,7 @@ jobs:
     steps:
       - run:
           name: Check top
-          command: htop
+          command: top
           background: true
       - run:
           name: Sleep
