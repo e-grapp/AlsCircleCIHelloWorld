@@ -5,10 +5,10 @@ jobs:
     docker:
       - image: circleci/node:lts
     steps:
-      - run:
-          name: Check top
-          command: top
-          background: true
+      # - run:
+      #     name: Check top
+      #     command: top
+      #     background: true
       - run:
           name: Profile CPU and memory every 5s (background)
           command: |
