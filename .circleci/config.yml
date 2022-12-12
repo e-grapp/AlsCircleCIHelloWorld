@@ -12,16 +12,20 @@ jobs:
       - run:
           name: Profile CPU and memory every 5s (background)
           command: |
-            while true; do
-              sleep 5
-              printf "\n\n$(date)\n"
-              top -b -c -n 1
-              echo "======"
-            done
-          background: true
-      - run:
-          name: Sleep
-          command: sleep 30
+            # Generate a random number between 0 and 1
+            RANDOM_NUM=$(( $RANDOM % 2 ))
+
+            # Exit with either exit code 0 or 1, depending on the random number
+            if [ $RANDOM_NUM -eq 0 ]; then
+              exit 0
+            else
+              exit 1
+            fi
+              
+          # background: true
+      # - run:
+      #     name: Sleep
+      #     command: sleep 30
 
 
 workflows:
