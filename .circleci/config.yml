@@ -32,6 +32,6 @@ workflows:
       - build:
           matrix:
             parameters:
-              version: [1..50]
+              name: [1..50]
 
 # VS Code Extension Version: 1.4.0
