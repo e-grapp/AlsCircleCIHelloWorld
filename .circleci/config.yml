@@ -9,16 +9,9 @@ jobs:
     # working_directory: /canton
 
     steps:
-      - run: echo "hello world"
       - run:
-          command: |
-            pwd
-            echo "*************************"
-            cd ../..
-            pwd
-            echo "*************************"
-            cd $TEST_PATH
-            pwd
+          name: xvfb
+          command: xvfb --version
 
     # steps:
     #   - run:
