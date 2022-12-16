@@ -11,7 +11,7 @@ jobs:
     steps:
       - run:
           name: xvfb
-          command: xvfb --version
+          command: which Xvfb
 
     # steps:
     #   - run:
