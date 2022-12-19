@@ -1,0 +1,28 @@
+{
+    "version": 2.1,
+    "jobs": {
+      "build": {
+        "docker": [
+          {
+            "image": "cimg/openjdk:13.0"
+          }
+        ],
+        "resource_class": "medium",
+        "steps": [
+          {
+            "run": {
+              "name": "xvfb",
+              "command": "which Xvfb"
+            }
+          }
+        ]
+      }
+    },
+    "workflows": {
+      "build_and_deploy": {
+        "jobs": [
+          "build"
+        ]
+      }
+    }
+  }
