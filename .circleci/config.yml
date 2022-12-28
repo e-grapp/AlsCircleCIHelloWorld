@@ -9,7 +9,7 @@ jobs:
 
   build:
     macos:
-      xcode: 13.4.1
+      xcode: 14.0.0
       # resource_class: macos.x86.medium.gen2
     resource_class: macos.x86.medium.gen2
 
@@ -20,6 +20,14 @@ jobs:
 
       - macos/switch-ruby:
           version: "2.7"
+
+      - run:
+          name: Check Ruby
+          command: ruby --version
+
+
+      - macos/switch-ruby:
+          version: "3.0"
 
       - run:
           name: Check Ruby
