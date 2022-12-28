@@ -15,8 +15,15 @@ jobs:
 
     steps:
       - run:
-          name: Check chruby
+          name: Check Ruby
+
+      - run:
+          name: Set chruby
           command: sed -i '' 's/^chruby.*/chruby ruby-3.0/g' ~/.bash_profile
+
+      - run:
+          name: Check Ruby
+
       
 workflows:
   build_and_test:
