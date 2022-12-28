@@ -19,7 +19,7 @@ jobs:
           command: ruby --version
 
       - macos/switch-ruby:
-          version: "3.0"
+          version: "2.7"
 
       - run:
           name: Check Ruby
