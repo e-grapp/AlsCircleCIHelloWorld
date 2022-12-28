@@ -16,6 +16,7 @@ jobs:
     steps:
       - run:
           name: Check Ruby
+          command: ruby --version
 
       - run:
           name: Set chruby
@@ -23,6 +24,7 @@ jobs:
 
       - run:
           name: Check Ruby
+          command: ruby --version
 
       
 workflows:
