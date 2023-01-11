@@ -4,7 +4,7 @@
       "build": {
         "docker": [
           {
-            "image": "cimg/node:18.3.0-browsers"
+            "image": "cimg/node:18.13.0-browsers"
           }
         ],
         "resource_class": "medium",
