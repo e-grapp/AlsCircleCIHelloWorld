@@ -24,14 +24,11 @@ jobs:
           name: Check latest stable versions
           command: rbenv install -l
       - run:
-          name: Check latest local versions
-          command: rbenv install -L
-      - run:
           name: Install Ruby 3.2.0
           command: rbenv install 3.2.0
       - run:
-          name: Set Ruby 3.2.0-rc1
-          command: rbenv global 3.2.0-rc1
+          name: Set Ruby 3.2.0
+          command: rbenv global 3.2.0
 
       
 workflows:
