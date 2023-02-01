@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  macos: circleci/macos@2.3.4
+  # macos: circleci/macos@2.3.4
   # mac: circleci/macos@dev:60b9d34b9bdfbc6c7eff90de81d70d7d059f31be
   # browser: circleci/browser-tools@1.4.0
 
@@ -15,10 +15,20 @@ jobs:
 
     steps:
       - run:
-          name: Check Xcodes
-          command: |
-            cd /Applications
-            ls -al
+          name: Check Ruby versions
+          command: rbenv versions
+      - run:
+          name: Check latest stable versions
+          command: rbenv install -l
+      - run:
+          name: Check latest local versions
+          command: rbenv install -L
+      - run:
+          name: Install Ruby 3.2.0
+          command: rbenv install 3.2.0
+      - run:
+          name: Set Ruby 3.2.0
+          command: rbenv global 3.2.0
 
       
 workflows:
