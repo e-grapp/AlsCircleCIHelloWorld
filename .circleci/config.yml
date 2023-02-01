@@ -18,6 +18,9 @@ jobs:
           name: Update ruby-build
           command: brew update && brew upgrade ruby-build && brew install libyaml
       - run:
+          name: Check default Ruby
+          command: ruby --version
+      - run:
           name: Check Ruby versions
           command: rbenv versions
       - run:
@@ -29,7 +32,9 @@ jobs:
       - run:
           name: Set Ruby 3.2.0
           command: rbenv global 3.2.0
-
+      - run:
+          name: Check default Ruby
+          command: ruby --version
       
 workflows:
   build_and_test:
