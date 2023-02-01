@@ -15,6 +15,9 @@ jobs:
 
     steps:
       - run:
+          name: Update ruby-build
+          command: brew update && brew upgrade ruby-build
+      - run:
           name: Check Ruby versions
           command: rbenv versions
       - run:
@@ -27,8 +30,8 @@ jobs:
           name: Install Ruby 3.2.0
           command: rbenv install 3.2.0
       - run:
-          name: Set Ruby 3.2.0
-          command: rbenv global 3.2.0
+          name: Set Ruby 3.2.0-rc1
+          command: rbenv global 3.2.0-rc1
 
       
 workflows:
