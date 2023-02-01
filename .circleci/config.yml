@@ -16,7 +16,7 @@ jobs:
     steps:
       - run:
           name: Update ruby-build
-          command: brew update && brew upgrade ruby-build
+          command: brew update && brew upgrade ruby-build && brew install libyaml
       - run:
           name: Check Ruby versions
           command: rbenv versions
