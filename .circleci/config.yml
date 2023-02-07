@@ -6,6 +6,7 @@ workflows:
 jobs:
   runner-test:
     machine: true
+    shell: powershell.exe
     resource_class: alanjclark/windows-new-runner
     steps:
       - run: echo "Hi I'm on Runners!"
