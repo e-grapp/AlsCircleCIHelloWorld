@@ -6,6 +6,6 @@ workflows:
 jobs:
   runner-test:
     machine: true
-    resource_class: alanjclark/win-runner
+    resource_class: alanjclark/windows-new-runner
     steps:
       - run: echo "Hi I'm on Runners!"
