@@ -9,4 +9,4 @@ jobs:
     shell: powershell.exe
     resource_class: alanjclark/windows-new-runner
     steps:
-      - run: echo "Hi I'm in Runners!"
+      - run: echo "Hi I'm on Runners!"
