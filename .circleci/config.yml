@@ -1,28 +1,11 @@
-{
-    "version": 2.1,
-    "jobs": {
-      "build": {
-        "docker": [
-          {
-            "image": "cimg/node:18.13.0-browsers"
-          }
-        ],
-        "resource_class": "medium",
-        "steps": [
-          {
-            "run": {
-              "name": "xvfb",
-              "command": "which Xvfb"
-            }
-          }
-        ]
-      }
-    },
-    "workflows": {
-      "build_and_deploy": {
-        "jobs": [
-          "build"
-        ]
-      }
-    }
-  }
+version: 2.1
+workflows:
+  testing:
+    jobs:
+      - runner-test
+jobs:
+  runner-test:
+    machine: true
+    resource_class: alanjclark/win-runner
+    steps:
+      - run: echo "Hi I'm on Runners!"
