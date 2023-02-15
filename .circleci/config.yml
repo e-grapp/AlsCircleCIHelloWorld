@@ -1,28 +1,18 @@
-{
-    "version": 2.1,
-    "jobs": {
-      "build": {
-        "docker": [
-          {
-            "image": "cimg/node:18.13.0-browsers"
-          }
-        ],
-        "resource_class": "small",
-        "steps": [
-          {
-            "run": {
-              "name": "xvfb",
-              "command": "which Xvfb"
-            }
-          }
-        ]
-      }
-    },
-    "workflows": {
-      "build_and_deploy": {
-        "jobs": [
-          "build"
-        ]
-      }
-    }
-  }
+version: 2.1
+
+jobs: 
+  build:
+    docker:
+      - image: cimg/base:current
+    resource_class: medium
+    steps: 
+      - run: 
+          name: xvfb
+          command: |
+            curl -s get.sdkman.io | bash
+            source "$HOME/.sdkman/bin/sdkman-init.sh"
+          
+workflows:
+  build_and_deploy:
+    jobs:
+      - build
