@@ -7,9 +7,9 @@ jobs:
     resource_class: medium
     steps: 
       - run: 
-          name: xvfb
+          name: Install sdkman
           command: |
-            curl -s get.sdkman.io | bash
+            curl -s "https://get.sdkman.io" | bash
             source "$HOME/.sdkman/bin/sdkman-init.sh"
           
 workflows:
