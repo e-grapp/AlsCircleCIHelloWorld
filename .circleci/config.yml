@@ -9,7 +9,7 @@ jobs:
       - run:
           name: Background Disk Space
           command: |
-            white true; do
+            while true; do
               sleep 5
               df -h
               echo "\n===========\n"
