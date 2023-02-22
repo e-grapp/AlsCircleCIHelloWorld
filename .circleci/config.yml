@@ -1,11 +1,11 @@
 version: 2.1
 
+orbs:
+  win: circleci/windows@5.0.0
+
 jobs:
   build:
-    machine:
-      image: 'windows-server-2019-cuda:current'
-      resource_class: windows.gpu.nvidia.medium
-      shell: powershell.exe -ExecutionPolicy Bypass
+    executor: win/server-2022
       
     steps:
       - checkout
