@@ -7,20 +7,12 @@ jobs:
     resource_class: macos.x86.medium.gen2
     steps: 
       - run:
-          name: Background Disk Space
-          command: |
-            while true; do
-              sleep 5
-              df -h
-              printf "\n===========\n"
-            done
-          background: true
+          name: Brew install
+          command: brew install --cask android-commandlinetools
+          # background: true
       - run: 
           name: Install sdkman
-          command: |
-            sleep 20
-            curl -s "https://get.sdkman.io" | bash
-            source "$HOME/.sdkman/bin/sdkman-init.sh"
+          command: ls -al ~/Library/Caches/Homebrew
           
 workflows:
   build_and_deploy:
