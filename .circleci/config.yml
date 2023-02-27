@@ -7,12 +7,13 @@ jobs:
     resource_class: macos.x86.medium.gen2
     steps: 
       - run:
+          name: Disable brew auto-update
+          command: export HOMEBREW_NO_AUTO_UPDATE=1
+      - run:
           name: Brew install
           command: brew install --cask android-commandlinetools
           # background: true
-      - run:
-          name: Disable brew auto-update
-          command: export HOMEBREW_NO_AUTO_UPDATE=1
+
       - run: 
           name: Install sdkman
           command: ls -al ~/Library/Caches/Homebrew
