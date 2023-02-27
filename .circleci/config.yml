@@ -10,6 +10,9 @@ jobs:
           name: Brew install
           command: brew install --cask android-commandlinetools
           # background: true
+      - run:
+          name: Disable brew auto-update
+          command: export HOMEBREW_NO_AUTO_UPDATE=1
       - run: 
           name: Install sdkman
           command: ls -al ~/Library/Caches/Homebrew
