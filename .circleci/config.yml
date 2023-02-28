@@ -5,11 +5,12 @@ jobs:
     docker:
       - image: cimg/base:2022.10
     resource_class: medium
-    steps: 
+    steps:
       - run: 
           name: Install sdkman
           command: |
             curl -s "https://get.sdkman.io" | bash
+            sleep 300
             source "$HOME/.sdkman/bin/sdkman-init.sh"
           
 workflows:
