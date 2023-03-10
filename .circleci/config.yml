@@ -1,23 +1,23 @@
 version: 2.1
 
 jobs:
-  mac-os:
+  build:
     parameters:
       version:
-        default: "14.0.0"
+        default: "14.2.0"
         type: string
     macos:
       xcode: << parameters.version >>
     resource_class: macos.x86.medium.gen2
     steps:
       - checkout
-      - run: sysctl machdep.cpu.brand_string
-      - run: brew list -l
-      - run: openssl version
+      - run: brew update
+      - run: brew install node@16.13
+      - run: brew switch node 16.13
 workflows:
   workflow-mac:
     jobs:
-      - mac-os:
+      - build:
           matrix:
             parameters:
-              version: ["14.1.0", "14.0.1" ,"14.2.0", "14.3.0"]
+              version: ["14.2.0", "14.3.0"]
