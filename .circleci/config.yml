@@ -11,9 +11,8 @@ jobs:
     resource_class: macos.x86.medium.gen2
     steps:
       - checkout
-      - run: brew update
-      - run: brew install node@16.13
-      - run: brew switch node 16.13
+      - run: nvm install 16.13
+      - run: nvm alias default 16.13
 workflows:
   workflow-mac:
     jobs:
