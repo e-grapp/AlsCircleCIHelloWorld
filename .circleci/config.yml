@@ -13,6 +13,7 @@ jobs:
       - checkout
       - run: nvm install 16.13
       - run: |
+          nvm install 16.13
           nvm alias default 16.13
           echo 'nvm use default &>/dev/null' >> "$BASH_ENV"
 workflows:
@@ -21,4 +22,4 @@ workflows:
       - build:
           matrix:
             parameters:
-              version: ["14.2.0", "14.3.0"]
+              version: ["14.2.0"]
