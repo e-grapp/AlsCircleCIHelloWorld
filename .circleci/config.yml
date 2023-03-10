@@ -12,7 +12,9 @@ jobs:
     steps:
       - checkout
       - run: nvm install 16.13
-      - run: nvm alias default 16.13
+      - run: |
+          nvm alias default 16.13
+          echo 'nvm use default &>/dev/null' >> "$BASH_ENV"
 workflows:
   workflow-mac:
     jobs:
