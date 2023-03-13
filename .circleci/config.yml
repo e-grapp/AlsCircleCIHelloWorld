@@ -12,10 +12,13 @@ jobs:
       - checkout
       - run: systeminfo
       - run:
-          name: "Check docker"
+          name: Check VS version
           shell: powershell.exe
-          command: |
-            msbuild /ver
+          command: devenv /ver
+      - run:
+          name: Check MSBuild version
+          shell: powershell.exe
+          command: msbuild /ver
 
 workflows:
   version: 2
