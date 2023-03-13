@@ -5,7 +5,8 @@ orbs:
 
 jobs:
   build:
-    executor: win/server-2022
+    executor:
+      name: win/default
       
     steps:
       - checkout
@@ -14,10 +15,7 @@ jobs:
           name: "Check docker"
           shell: powershell.exe
           command: |
-            docker info
-            docker pull public.ecr.aws/docker/library/hello-world:nanoserver-ltsc2022
-            docker run public.ecr.aws/docker/library/hello-world:nanoserver-ltsc2022
-
+            msbuild /ver
 
 workflows:
   version: 2
