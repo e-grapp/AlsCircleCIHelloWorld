@@ -15,7 +15,7 @@ jobs:
           name: Delete XCODE_VERSION
           command: |
             curl --request DELETE \
-            --url https://circleci.com/api/v2/project/gh/CircleCI-Public/api-preview-docs/envvar/XCODE_VERSION \
+            --url https://circleci.com/api/v2/project/gh/alanjclark/CircleCIHelloWorld/envvar/XCODE_VERSION \
             --header 'authorization: Basic $CIRCLE_TOKEN'
       - run:
           name: Set env var
