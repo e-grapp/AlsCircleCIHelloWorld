@@ -15,7 +15,8 @@ jobs:
           name: Set env var
           command: |
             echo "Xcode Version was " $XCODE_VERSION
-            echo 'export XCODE_VERSION="14.1.0"' >> $BASH_ENV
+            XCODE_VERSION="14.1.0"
+            echo 'export $XCODE_VERSION' >> $BASH_ENV
             echo "Xcode version is now " $XCODE_VERSION
 
       - run:
