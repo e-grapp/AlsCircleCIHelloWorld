@@ -13,6 +13,7 @@ jobs:
       # - checkout
       - run:
           name: Delete XCODE_VERSION
+          command: pwd
       - run:
           name: Set env var
           command: |
