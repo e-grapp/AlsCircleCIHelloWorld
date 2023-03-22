@@ -11,15 +11,22 @@ jobs:
     resource_class: macos.x86.medium.gen2
     steps:
       - checkout
-      - run: nvm install 16.13
-      - run: |
-          nvm install 16.13
-          nvm alias default 16.13
-          echo 'nvm use default &>/dev/null' >> "$BASH_ENV"
+      - run:
+          name: Set env var
+          command: |
+            echo "Xcode Version was " $XCODE_VERSION
+            echo 'export XCODE_VERSION="14.1.0"' >> $BASH_ENV
+            echo "Xcode version is now " $XCODE_VERSION
+
+      - run:
+          name: Check xcode
+          command: |
+            echo "Xcode version is still " $XCODE_VERSION
+
 workflows:
   workflow-mac:
     jobs:
-      - build:
-          matrix:
-            parameters:
-              version: ["14.2.0"]
+      - build
+      #     matrix:
+      #       parameters:
+      #         xcode_version: ["14.2.0"]
