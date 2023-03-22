@@ -10,13 +10,15 @@ jobs:
       xcode: << parameters.version >>
     resource_class: macos.x86.medium.gen2
     steps:
-      - checkout
+      # - checkout
+      - run:
+          name: Delete XCODE_VERSION
       - run:
           name: Set env var
           command: |
             echo "Xcode Version was " $XCODE_VERSION
             XCODE_VERSION="14.1.0"
-            echo 'export $XCODE_VERSION' >> $BASH_ENV
+            echo 'export XCODE_VERSION=14.1.0' >> $BASH_ENV
             echo "Xcode version is now " $XCODE_VERSION
 
       - run:
