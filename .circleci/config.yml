@@ -1,18 +1,23 @@
 version: 2.1
 
+orbs:
+  circle: circleci/circleci-cli@0.1.9
+
 jobs: 
   build:
     docker:
-      - image: cimg/base:2022.10
+      - image: circleci/python:3.7.4
+      # - image: cimg/base:2022.10
     resource_class: medium
     steps:
-      - run: 
-          name: Install sdkman
-          command: |
-            curl -s "https://get.sdkman.io" | bash
-            sleep 300
-            source "$HOME/.sdkman/bin/sdkman-init.sh"
-          
+      - run:
+          name: Check CCI CLI Version
+          command: circleci --version
+      - circle/install
+      - run:
+          name: Check CCI CLI Version
+          command: circleci --version
+
 workflows:
   build_and_deploy:
     jobs:
