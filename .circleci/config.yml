@@ -12,11 +12,11 @@ jobs:
     steps:
       - run:
           name: Check CCI CLI Version
-          command: circleci --version
+          command: circleci version
       - circle/install
       - run:
           name: Check CCI CLI Version
-          command: circleci --version
+          command: circleci version
 
 workflows:
   build_and_deploy:
