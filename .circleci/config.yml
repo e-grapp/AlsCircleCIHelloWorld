@@ -13,8 +13,11 @@ jobs:
       - run:
           name: Check CCI CLI Version
           command: circleci version
-      - circle/install:
-          version: v0.1.23845
+      # - circle/install:
+      #     version: v0.1.23845
+      - run:
+          name: Install CLI w/ Brew
+          command: brew install circleci@0.1.23845
       - run:
           name: Check CCI CLI Version
           command: circleci version
