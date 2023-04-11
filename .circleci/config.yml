@@ -13,7 +13,8 @@ jobs:
       - run:
           name: Check CCI CLI Version
           command: circleci version
-      - circle/install
+      - circle/install:
+          version: v0.1.23845
       - run:
           name: Check CCI CLI Version
           command: circleci version
