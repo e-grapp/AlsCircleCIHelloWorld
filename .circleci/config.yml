@@ -1,26 +1,29 @@
 version: 2.1
 
-orbs:
-  circle: circleci/circleci-cli@0.1.9
+# orbs:
+  # circle: circleci/circleci-cli@0.1.9
 
 jobs: 
   build:
     docker:
-      - image: circleci/python:3.7.4
+      - image: cimgs/node:lts
       # - image: cimg/base:2022.10
     resource_class: medium
     steps:
       - run:
-          name: Check CCI CLI Version
-          command: circleci version
-      # - circle/install:
-      #     version: v0.1.23845
-      - run:
-          name: Install CLI w/ Brew
-          command: brew install circleci@0.1.23845
-      - run:
-          name: Check CCI CLI Version
-          command: circleci version
+          name: check for nvm
+          command: which nvm
+      # - run:
+      #     name: Check CCI CLI Version
+      #     command: circleci version
+      # # - circle/install:
+      # #     version: v0.1.23845
+      # - run:
+      #     name: Install CLI w/ Brew
+      #     command: brew install circleci@0.1.23845
+      # - run:
+      #     name: Check CCI CLI Version
+      #     command: circleci version
 
 workflows:
   build_and_deploy:
