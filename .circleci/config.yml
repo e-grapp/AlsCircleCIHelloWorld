@@ -16,7 +16,7 @@
     "base": {
       "docker": [
         {"image": "cimg/python:<< pipeline.parameters.tag >>"},
-        {"image": "redis:latest"}
+        <<#pipeline.parameters.use-redis>>{"image": "redis:latest"}<</pipeline.parameters.use-redis>>
       ]
     }
   },
@@ -25,7 +25,7 @@
       "executor": "base",
       "steps": [
         {
-          "run": "echo <<#pipeline.parameters.use-redis>>hello<</pipeline.parameters.use-redis>>"
+          "run": "echo hello"
         }
       ]
     }
