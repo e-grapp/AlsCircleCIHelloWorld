@@ -18,9 +18,7 @@
         {
           "image": "cimg/python:<< pipeline.parameters.tag >>"
         },
-        {
-          "image": "redis:latest"
-        }
+        <<#pipeline.parameters.use-redis>>{"image": "redis:latest"<</pipeline.parameters.use-redis>>}<</pipeline.parameters.use-redis>>
       ]
     }
   },
