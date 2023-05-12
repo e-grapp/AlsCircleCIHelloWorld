@@ -13,9 +13,7 @@ executors:
         type: boolean
     docker:
       - image: cimg/python:<< parameters.tag >>
-      # <<#parameters.use-redis>>
-      - image: redis:latest
-      # <</parameters.use-redis>>
+      << #parameters.use-redis  >>- image: redis:latest<< /parameters.use-redis >>
 
 jobs:
   build:
