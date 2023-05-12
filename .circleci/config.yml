@@ -22,4 +22,4 @@ jobs:
     executor: base
     steps:
       - run: echo hello
-      - run: <<#pipeline.parameters.use-redis>>- image: redis:latest<</pipeline.parameters.use-redis>>
+      # - run: <<#pipeline.parameters.use-redis>>- image: redis:latest<</pipeline.parameters.use-redis>>
