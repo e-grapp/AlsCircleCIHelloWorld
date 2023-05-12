@@ -6,7 +6,7 @@ parameters:
     description: The `cimg/python` Docker image version tag.
     type: string
   use-redis:
-    default: false
+    default: true
     description: Sidecar Redis container if required
     type: boolean
 
@@ -23,4 +23,3 @@ jobs:
     executor: base
     steps:
       - run: echo hello
-      
