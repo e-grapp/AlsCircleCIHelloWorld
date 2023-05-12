@@ -7,7 +7,7 @@
       "type": "string"
     },
     "use-redis": {
-      "default": false,
+      "default": true,
       "description": "Sidecar Redis container if required",
       "type": "boolean"
     }
