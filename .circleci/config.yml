@@ -16,10 +16,11 @@ executors:
     parameters:
     docker:
       - image: cimg/python:<< pipeline.parameters.tag >>
-      << #pipeline.parameters.use-redis  >>- image: redis:latest<< /pipeline.parameters.use-redis >>
+      # << #pipeline.parameters.use-redis  >>- image: redis:latest<< /pipeline.parameters.use-redis >>
 
 jobs:
   build:
     executor: base
     steps:
       - run: echo hello
+      - run: << #pipeline.parameters.use-redis  >>- image: redis:latest<< /pipeline.parameters.use-redis >>
