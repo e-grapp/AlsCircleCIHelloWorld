@@ -22,4 +22,4 @@ jobs:
     executor: base
     steps:
       - run: echo hello
-      - run: echo "- image: redis:latest"
+      - run: echo "\- image: redis:latest"
