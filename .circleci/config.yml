@@ -1,19 +1,22 @@
 version: 2.1
 
+parameters:
+  tag:
+    default: '3.8'
+    description: The `cimg/python` Docker image version tag.
+    type: string
+  use-redis:
+    default: false
+    description: Sidecar Redis container if required
+    type: boolean
+
+
 executors:
   base:
     parameters:
-      tag:
-        default: '3.8'
-        description: The `cimg/python` Docker image version tag.
-        type: string
-      use-redis:
-        default: false
-        description: Sidecar Redis container if required
-        type: boolean
     docker:
-      - image: cimg/python:<< parameters.tag >>
-      << #parameters.use-redis  >>- image: redis:latest<< /parameters.use-redis >>
+      - image: cimg/python:<< pipeline.parameters.tag >>
+      << #pipeline.parameters.use-redis  >>- image: redis:latest<< /pipeline.parameters.use-redis >>
 
 jobs:
   build:
