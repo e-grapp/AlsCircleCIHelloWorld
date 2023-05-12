@@ -1,31 +1,24 @@
 version: 2.1
 
-# orbs:
-  # circle: circleci/circleci-cli@0.1.9
-
-jobs: 
-  build:
+executors:
+  base:
+    parameters:
+      tag:
+        default: '3.8'
+        description: The `cimg/python` Docker image version tag.
+        type: string
+      use-redis:
+        default: false
+        description: Sidecar Redis container if required
+        type: boolean
     docker:
-      - image: cimg/node:lts
-      # - image: cimg/base:2022.10
-    resource_class: medium
-    steps:
-      - run:
-          name: check for nvm
-          command: which nvm
-      # - run:
-      #     name: Check CCI CLI Version
-      #     command: circleci version
-      # # - circle/install:
-      # #     version: v0.1.23845
-      # - run:
-      #     name: Install CLI w/ Brew
-      #     command: brew install circleci@0.1.23845
-      # - run:
-      #     name: Check CCI CLI Version
-      #     command: circleci version
+      - image: cimg/python:<< parameters.tag >>
+      # <<#parameters.use-redis>>
+      - image: redis:latest
+      # <</parameters.use-redis>>
 
-workflows:
-  build_and_deploy:
-    jobs:
-      - build
+jobs:
+  build:
+    executor: base
+    steps:
+      - run: echo hello
