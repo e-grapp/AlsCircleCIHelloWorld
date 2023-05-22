@@ -13,7 +13,7 @@ jobs:
           name: xvfb
           command: |
             sudo apt install xvfb -y
-            xvfb --version
+            which xvfb-run
 
     # steps:
     #   - run:
