@@ -4,14 +4,14 @@ jobs:
   build_and_test:
     machine:
       image: ubuntu-2004:202010-01
-      resource_class: medium
+    resource_class: medium
 
     # working_directory: /canton
 
     steps:
       - run:
           name: xvfb
-          command: which Xvfb
+          command: xvfb --version
 
     # steps:
     #   - run:
@@ -37,5 +37,4 @@ jobs:
 workflows:
   build:
     jobs:
-      - build_and_test:
-          context: test_path
+      - build_and_test
