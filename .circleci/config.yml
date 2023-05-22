@@ -12,8 +12,9 @@ jobs:
       - run:
           name: xvfb
           command: |
-            sudo apt install xvfb -y
+            # sudo apt install xvfb -y
             which xvfb-run
+            xvfb --version
 
     # steps:
     #   - run:
