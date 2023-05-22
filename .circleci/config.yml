@@ -11,7 +11,9 @@ jobs:
     steps:
       - run:
           name: xvfb
-          command: xvfb --version
+          command: |
+            apt install xvfb -y
+            xvfb --version
 
     # steps:
     #   - run:
