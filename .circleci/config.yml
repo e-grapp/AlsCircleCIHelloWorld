@@ -6,7 +6,7 @@ orbs:
 parameters:
   number:
     type: integer
-    default: "1"
+    default: 1
 
 jobs:
   build_and_test:
