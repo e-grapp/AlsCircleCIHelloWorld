@@ -1,22 +1,22 @@
 version: 2.1
 
 parameters:
-  workflow_name:
-    type: string
-    default: "first_workflow"
+  number:
+    type: integer
+    default: "1"
 
 jobs:
   build_and_test:
-    machine:
-      image: ubuntu-2004:202010-01
-    resource_class: medium
+    docker:
+      - image: cimg/openjdk:11.0
+    resource_class: small
 
     # working_directory: /canton
 
     steps:
       - run:
-          name: Present working directory
-          command: pwd
+          name: Download snyk
+          command: |
 
     # steps:
     #   - run:
@@ -40,6 +40,9 @@ jobs:
       #     command: sudo mkdir /canton
 
 workflows:
-  build <<#pipeline.git.tag>>Sometext<</pipeline.git.tag>>:
+  build:
     jobs:
-      - build_and_test
+      - build_and_test:
+          matrix:
+            parameters:
+              number: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
