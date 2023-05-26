@@ -40,6 +40,6 @@ jobs:
       #     command: sudo mkdir /canton
 
 workflows:
-  build<<#pipeline.paramters.workflow_name>>_Sometext<</pipeline.paramters.workflow_name>>:
+  build<<#pipeline.git.tag>>Sometext<</pipeline.git.tag>>:
     jobs:
       - build_and_test
