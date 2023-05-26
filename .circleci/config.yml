@@ -1,5 +1,10 @@
 version: 2.1
 
+parameters:
+  workflow_name:
+    type: string
+    default: "first_workflow"
+
 jobs:
   build_and_test:
     machine:
@@ -10,11 +15,8 @@ jobs:
 
     steps:
       - run:
-          name: xvfb
-          command: |
-            # sudo apt install xvfb -y
-            which xvfb-run
-            xvfb-run --version
+          name: Present working directory
+          command: pwd
 
     # steps:
     #   - run:
@@ -40,4 +42,5 @@ jobs:
 workflows:
   build:
     jobs:
-      - build_and_test
+      - build_and_test:
+          name: build_and_test_<< parameters.workflow_name >>
