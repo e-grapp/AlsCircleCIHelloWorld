@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  snyk: snyk/snyk@1.5.2
+
 parameters:
   number:
     type: integer
@@ -14,9 +17,7 @@ jobs:
     # working_directory: /canton
 
     steps:
-      - run:
-          name: Download snyk
-          command: |
+      - snyk/install
 
     # steps:
     #   - run:
