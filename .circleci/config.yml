@@ -40,6 +40,6 @@ jobs:
       #     command: sudo mkdir /canton
 
 workflows:
-  build<< parameters.workflow_name >>:
+  build<< pipeline.parameters.workflow_name >>:
     jobs:
       - build_and_test
