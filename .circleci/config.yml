@@ -14,7 +14,9 @@ jobs:
       image: ubuntu-2204:current
       resource_class: arm.large
     steps:
-      - run: sudo mkdir -p /mnt/ramdisk
+      - run: 
+          name: Create RAMDisk
+          command: sudo mkdir -p /mnt/ramdisk
 
   implode_rvm:
     machine:
@@ -28,6 +30,6 @@ jobs:
 workflows:
   build:
     jobs:
-      - rm_rvm
+      # - rm_rvm
       - keep_rvm
       - implode_rvm
