@@ -1,13 +1,13 @@
 version: 2.1
 
 jobs:
-  rm_rvm:
-    machine:
-      image: ubuntu-2204:current
-      resource_class: arm.large
-    steps:
-      - run: sudo rm -rf /opt/circleci/.rvm
-      - run: sudo mkdir -p /mnt/ramdisk
+  # rm_rvm:
+  #   machine:
+  #     image: ubuntu-2204:current
+  #     resource_class: arm.large
+  #   steps:
+  #     - run: sudo rm -rf /opt/circleci/.rvm
+  #     - run: sudo mkdir -p /mnt/ramdisk
 
   keep_rvm:
     machine:
