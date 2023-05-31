@@ -30,3 +30,4 @@ workflows:
     jobs:
       - rm_rvm
       - keep_rvm
+      - implode_rvm
