@@ -1,51 +1,32 @@
 version: 2.1
 
-orbs:
-  snyk: snyk/snyk@1.5.2
-
-
-
 jobs:
-  build_and_test:
-    docker:
-      - image: cimg/openjdk:11.0
-    resource_class: small
-
-    parameters:
-      number:
-        type: string
-        default: "1"
-
-    # working_directory: /canton
-
+  rm_rvm:
+    machine:
+      image: ubuntu-2204:current
+      resource_class: arm.large
     steps:
-      - snyk/install
+      - run: sudo rm -rf /opt/circleci/.rvm
+      - run: sudo mkdir -p /mnt/ramdisk
 
-    # steps:
-    #   - run:
-    #       name: Set and retrieve vars
-    #       command: |
-    #         sudo mkdir /canton
-    #         # echo 'export "CIRCLE_WORKING_DIRECTORY=/canton"' >> $BASH_ENV
-    #         # echo 'export "CIRCLE_BUILD_NUM=123"' >> $BASH_ENV
-    #         # source $BASH_ENV
-    #         echo $CIRCLE_WORKING_DIRECTORY
-            
-    #   - run:
-    #       name: Retreive var
-    #       working_directory: /canton
-    #       command: |
-    #         echo $CIRCLE_WORKING_DIRECTORY
-    #         pwd
-            
-      # - run:
-      #     name: create dir
-      #     command: sudo mkdir /canton
+  keep_rvm:
+    machine:
+      image: ubuntu-2204:current
+      resource_class: arm.large
+    steps:
+      - run: sudo mkdir -p /mnt/ramdisk
+
+  implode_rvm:
+    machine:
+      image: ubuntu-2204:current
+      resource_class: arm-large
+    steps:
+      - run: rvm implode --force
+      - run: sudo mkdir -p /mnt/ramdisk
+
 
 workflows:
   build:
     jobs:
-      - build_and_test:
-          matrix:
-            parameters:
-              number: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"]
+      - rm_rvm
+      - keep_rvm
