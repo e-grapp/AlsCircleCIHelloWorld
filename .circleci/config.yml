@@ -14,7 +14,7 @@ jobs:
       - run:
           name: PWD
           command: |
-            cd /Users
+            cd /home
             ls -al
 
 workflows:
