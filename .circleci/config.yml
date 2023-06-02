@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   build:
     parameters:
-      version:
+      xcode_version:
         default: "14.3.1"
         type: string
     macos:
@@ -20,7 +20,7 @@ jobs:
 workflows:
   workflow-mac:
     jobs:
-      - build
+      - build:
           matrix:
             parameters:
               xcode_version: ["14.2.0", "14.3.1"]
