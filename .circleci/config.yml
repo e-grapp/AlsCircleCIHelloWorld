@@ -13,12 +13,14 @@ jobs:
       - checkout
       - run:
           name: PWD
-          command: pwd
+          command: |
+            cd /Users
+            ls -al
 
 workflows:
   workflow-mac:
     jobs:
       - build
-      #     matrix:
-      #       parameters:
-      #         xcode_version: ["14.2.0"]
+          matrix:
+            parameters:
+              xcode_version: ["14.2.0", "14.3.1"]
