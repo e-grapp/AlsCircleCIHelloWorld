@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  python: circleci/python@2.1.1
+
 jobs:
   build:
     parameters:
@@ -10,13 +13,7 @@ jobs:
       xcode: << parameters.xcode_version >>
     resource_class: macos.x86.medium.gen2
     steps:
-      - checkout
-      - run:
-          name: PWD
-          command: |
-            cd /home
-            ls -al
-            mkdir -p /home/circleci
+      - python/install-packages
 
 workflows:
   workflow-mac:
