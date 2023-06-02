@@ -12,23 +12,8 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Delete XCODE_VERSION
-          command: |
-            curl --request DELETE \
-            --url https://circleci.com/api/v2/project/gh/alanjclark/CircleCIHelloWorld/envvar/XCODE_VERSION \
-            --header 'authorization: $CIRCLE_TOKEN'
-      - run:
-          name: Set env var
-          command: |
-            echo "Xcode Version was " $XCODE_VERSION
-            XCODE_VERSION=<< parameters.version >>
-            
-            echo "Xcode version is now " $XCODE_VERSION
-
-      - run:
-          name: Check xcode
-          command: |
-            echo "Xcode version is still " $XCODE_VERSION
+          name: PWD
+          command: pwd
 
 workflows:
   workflow-mac:
