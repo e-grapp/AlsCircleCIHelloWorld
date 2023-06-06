@@ -9,27 +9,30 @@ jobs:
   #     - run: sudo rm -rf /opt/circleci/.rvm
   #     - run: sudo mkdir -p /mnt/ramdisk
 
-  keep_rvm:
+  build:
     machine:
       image: ubuntu-2204:current
-      resource_class: arm.large
+    resource_class: medium
     steps:
       - run: 
-          name: Create RAMDisk
-          command: sudo mkdir -p /mnt/ramdisk
+          name: Limit Docker to 1 concurrent download
+          command: |
+            sudo service docker stop
+            sudo dockerd --max-concurrent-downloads 1
+            sudo service docker start
 
-  implode_rvm:
-    machine:
-      image: ubuntu-2204:current
-      resource_class: arm-large
-    steps:
-      - run: rvm implode --force
-      - run: sudo mkdir -p /mnt/ramdisk
+  # implode_rvm:
+  #   machine:
+  #     image: ubuntu-2204:current
+  #   resource_class: medium
+  #   steps:
+  #     - run: rvm implode --force
+  #     - run: sudo mkdir -p /mnt/ramdisk
 
 
 workflows:
-  build:
+  build_and_deploy:
     jobs:
       # - rm_rvm
-      - keep_rvm
-      - implode_rvm
+      - build
+      # - implode_rvm
