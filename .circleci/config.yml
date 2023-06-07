@@ -16,6 +16,13 @@ jobs:
           name: Present Working Directory
           command: pwd
       - snyk/install
+
+  test:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run: pwd
           
 workflows:
   build_and_deploy:
@@ -23,3 +30,7 @@ workflows:
       - build:
           context:
             - dockerhub
+      - test:
+          filters:
+            branches:
+              only: /MICROSVCS(?:-.+)?$/
