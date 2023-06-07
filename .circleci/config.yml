@@ -35,7 +35,7 @@ workflows:
       # - test
   build_and_deploy_webhook:
     when:
-        equal: [ webhook, << pipeline.trigger_source >> ]
+      equal: [ webhook, << pipeline.trigger_source >> ]
     jobs:
       - build:
           context:
