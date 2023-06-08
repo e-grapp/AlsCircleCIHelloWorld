@@ -9,16 +9,21 @@ jobs:
         #   password: $DOCKERHUB_PASS
     resource_class: small
     steps:
-      - run: 
-          name: traceroute
-          command: |
-            sudo apt update
-            sudo apt install traceroute
-            traceroute www.google.com
-          background: true
-      - run:
-          name: sleep
-          command: sleep 30
+      - when:
+          condition:
+            equal: [ master, << pipeline.git.branch >> ]
+          steps:
+            - run: 
+                name: Main
+                command: echo "This is on main"
+                # background: true
+      - when:
+          condition:
+            equal: [ false, equal: [ master, << pipeline.git.branch >> ]]
+          steps:
+            - run:
+                name: Not Main
+                command: echo "This is not on main"
       # - snyk/install
 
   # test:
