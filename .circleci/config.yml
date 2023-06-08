@@ -28,9 +28,24 @@ jobs:
             # ./gradlew
 
       - run: 
-          name: Gradle
+          name: Create a file
           command: |
-            which gradlew
+            touch file.txt
+            echo "this is some text" >> ./file.txt
+
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+
+  deploy:
+    executor: android-executor
+    steps:
+      - attach_workspace:
+          at: ~/gelato-os-flutter
+      - run:
+          name: List
+          command: ls -al
   # implode_rvm:
   #   machine:
   #     image: ubuntu-2204:current
@@ -45,4 +60,7 @@ workflows:
     jobs:
       # - rm_rvm
       - build
+      - deploy:
+          requires:
+            - build
       # - implode_rvm
