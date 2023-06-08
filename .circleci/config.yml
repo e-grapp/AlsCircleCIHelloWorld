@@ -10,31 +10,35 @@ jobs:
     resource_class: small
     steps:
       - run: 
-          name: Present Working Directory
-          command: pwd
+          name: traceroute
+          command: traceroute www.google.com
+          background: true
+      - run:
+          name: sleep
+          command: sleep 30
       # - snyk/install
 
-  test:
-    docker:
-      - image: cimg/base:current
-    resource_class: small
-    steps:
-      - run: pwd
+  # test:
+  #   docker:
+  #     - image: cimg/base:current
+  #   resource_class: small
+  #   steps:
+  #     - run: pwd
           
 workflows:
   build_and_deploy_api:
-    when:
-      equal: [ api, << pipeline.trigger_source >> ]
+    # when:
+    #   equal: [ api, << pipeline.trigger_source >> ]
     jobs:
-      - build:
-          context:
-            - dockerhub
+      - build
+      #     context:
+      #       - dockerhub
       # - test
-  build_and_deploy_webhook:
-    when:
-      equal: [ webhook, << pipeline.trigger_source >> ]
-    jobs:
-      - build:
-          context:
-            - dockerhub
-      - test
+  # build_and_deploy_webhook:
+  #   when:
+  #     equal: [ webhook, << pipeline.trigger_source >> ]
+  #   jobs:
+  #     - build:
+  #         context:
+  #           - dockerhub
+  #     - test
