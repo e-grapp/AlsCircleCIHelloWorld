@@ -30,7 +30,7 @@ jobs:
       - run: 
           name: Gradle
           command: |
-            gradlew
+            which gradlew
   # implode_rvm:
   #   machine:
   #     image: ubuntu-2204:current
