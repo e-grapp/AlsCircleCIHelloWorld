@@ -1,4 +1,10 @@
-version: 2
+version: 2.1
+
+executors:
+  android-executor:
+    machine:
+      image: android:2022.12.1
+    working_directory: ~/gelato-os-flutter
 
 jobs:
   # rm_rvm:
@@ -10,17 +16,21 @@ jobs:
   #     - run: sudo mkdir -p /mnt/ramdisk
 
   build:
-    machine:
-      image: ubuntu-2204:current
-    resource_class: medium
+    executor: android-executor
+    # machine:
+    #   image: ubuntu-2204:current
+    # resource_class: medium
     steps:
       - run: 
-          name: Limit Docker to 1 concurrent download
+          name: Gradle pwd
           command: |
-            sudo service docker stop
-            sudo dockerd --max-concurrent-downloads 1
-            sudo service docker start
+            pwd
+            ./gradlew
 
+      - run: 
+          name: Gradle
+          command: |
+            gradlew
   # implode_rvm:
   #   machine:
   #     image: ubuntu-2204:current
