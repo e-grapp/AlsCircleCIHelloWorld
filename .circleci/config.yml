@@ -29,7 +29,7 @@ jobs:
 
       - run: 
           name: Create a file
-          command: df -h
+          command: df -h /dev/root
 
   deploy:
     executor: android-executor
