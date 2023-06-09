@@ -1,5 +1,8 @@
 version: 2.1
 
+check-should-build-for-prod: &check-should-build-for-prod 
+  equal: [ false, equal: [ master, << pipeline.git.branch >> ]]
+
 jobs: 
   build:
     docker:
@@ -19,7 +22,7 @@ jobs:
                 # background: true
       - when:
           condition:
-            equal: [ false, equal: [ master, << pipeline.git.branch >> ]]
+            not: *check-should-build-for-prod
           steps:
             - run:
                 name: Not Main
