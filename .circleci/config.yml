@@ -15,7 +15,8 @@ jobs:
         default: MY_CONDITION
     steps:
       - when:
-          condition: << parameters.is_it_true >>
+          condition:
+            equal: [ true, << parameters.is_it_true >> ]
           steps:
             - run: 
                 name: "True"
