@@ -16,7 +16,7 @@ jobs:
     steps:
       - when:
           condition:
-            equal: [ true, << parameters.is_it_true >> ]
+            equal: [ true, << parameter.is_it_true >> ]
           steps:
             - run: 
                 name: "True"
