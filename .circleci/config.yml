@@ -11,7 +11,7 @@ jobs:
     resource_class: small
     parameters:
       is_it_true:
-        type: boolean
+        type: env_var_name
         default: $MY_CONDITION
     steps:
       - when:
