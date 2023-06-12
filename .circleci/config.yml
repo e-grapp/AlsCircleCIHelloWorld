@@ -12,7 +12,7 @@ jobs:
     parameters:
       is_it_true:
         type: env_var_name
-        default: $MY_CONDITION
+        default: MY_CONDITION
     steps:
       - when:
           condition: << parameters.is_it_true >>
