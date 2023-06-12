@@ -10,13 +10,13 @@ jobs:
         #   password: $DOCKERHUB_PASS
     resource_class: small
     parameters:
-      my_condition:
+      my-condition:
         type: env_var_name
         default: MY_CONDITION
     steps:
       - when:
           condition:
-            equal: [ true, << parameter.my_condition >> ]
+            equal: [ true, << parameter.my-condition >> ]
           steps:
             - run: 
                 name: "True"
