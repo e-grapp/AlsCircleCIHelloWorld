@@ -1,7 +1,5 @@
 version: 2.1
 
-check-should-build-for-prod: &check-should-build-for-prod 
-  equal: [ false, equal: [ master, << pipeline.git.branch >> ]]
 
 jobs: 
   build:
@@ -11,22 +9,18 @@ jobs:
         #   username: $DOCKERHUB_USER
         #   password: $DOCKERHUB_PASS
     resource_class: small
+    parameters:
+      is_it_true:
+        type: boolean
+        default: MY_CONDITION
     steps:
       - when:
-          condition:
-            equal: [ master, << pipeline.git.branch >> ]
+          condition: << parameters.is_it_true >>
           steps:
             - run: 
-                name: Main
-                command: echo "This is on main"
+                name: "True"
+                command: echo "This is true"
                 # background: true
-      - when:
-          condition:
-            not: *check-should-build-for-prod
-          steps:
-            - run:
-                name: Not Main
-                command: echo "This is not on main"
       # - snyk/install
 
   # test:
