@@ -12,7 +12,7 @@ jobs:
     parameters:
       is_it_true:
         type: boolean
-        default: MY_CONDITION
+        default: $MY_CONDITION
     steps:
       - when:
           condition: << parameters.is_it_true >>
