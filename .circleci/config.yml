@@ -1,50 +1,21 @@
 version: 2.1
 
-
-jobs: 
+jobs:
   build:
     docker:
-      - image: cimg/base:current
-        # auth:
-        #   username: $DOCKERHUB_USER
-        #   password: $DOCKERHUB_PASS
+      - image: cimg/base:2022.12
     resource_class: small
-    # parameters:
-    #   my-condition:
-    #     type: env_var_name
-    #     default: MY_CONDITION
-    steps:
-      - when:
-          condition: << parameter.my-condition >>
-          steps:
-            - run: 
-                name: "True"
-                command: echo "This is true"
-                # background: true
-      # - snyk/install
 
-  # test:
-  #   docker:
-  #     - image: cimg/base:current
-  #   resource_class: small
-  #   steps:
-  #     - run: pwd
-          
+    steps:
+      - run:
+          name: top
+          command: top
+          background: true
+
 workflows:
-  workflow:
+  build_and_deploy:
     jobs:
       - build:
           matrix:
             parameters:
-              version: ["0.1", "0.2", "0.3"]
-      #     context:
-      #       - dockerhub
-      # - test
-  # build_and_deploy_webhook:
-  #   when:
-  #     equal: [ webhook, << pipeline.trigger_source >> ]
-  #   jobs:
-  #     - build:
-  #         context:
-  #           - dockerhub
-  #     - test
+              name: ["1", "2", "3"]
