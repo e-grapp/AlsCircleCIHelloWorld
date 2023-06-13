@@ -9,10 +9,10 @@ jobs:
         #   username: $DOCKERHUB_USER
         #   password: $DOCKERHUB_PASS
     resource_class: small
-    parameters:
-      my-condition:
-        type: env_var_name
-        default: MY_CONDITION
+    # parameters:
+    #   my-condition:
+    #     type: env_var_name
+    #     default: MY_CONDITION
     steps:
       - when:
           condition: << parameter.my-condition >>
@@ -31,11 +31,12 @@ jobs:
   #     - run: pwd
           
 workflows:
-  build_and_deploy_api:
-    # when:
-    #   equal: [ api, << pipeline.trigger_source >> ]
+  workflow:
     jobs:
-      - build
+      - build:
+          matrix:
+            parameters:
+              version: ["0.1", "0.2", "0.3"]
       #     context:
       #       - dockerhub
       # - test
