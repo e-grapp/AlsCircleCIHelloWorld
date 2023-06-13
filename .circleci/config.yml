@@ -25,4 +25,3 @@ workflows:
           matrix:
             parameters:
               version: [ "1", "2", "3", "4", "5" ]
-              # orb-version: [ "2.4.0", "5.0.0" ]
