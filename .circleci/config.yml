@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  win: circleci/windows@2.4.0
+  win: circleci/windows@<< matrix.orb-version >>
 
 jobs:
   build:
@@ -21,6 +21,8 @@ workflows:
   build-deploy:
     jobs:
       - build:
+          name: build-<< matrix.version >>
           matrix:
             parameters:
               version: [ "1", "2", "3", "4", "5" ]
+              orb-version: [ "2.4.0", "5.0.0" ]
