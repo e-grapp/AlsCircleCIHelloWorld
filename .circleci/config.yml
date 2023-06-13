@@ -21,7 +21,6 @@ workflows:
   build-deploy:
     jobs:
       - build:
-          name: build-<< matrix.version >>
           matrix:
             parameters:
               version: [ "1", "2", "3", "4", "5" ]
