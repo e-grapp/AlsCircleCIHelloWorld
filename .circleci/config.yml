@@ -1,7 +1,8 @@
 version: 2.1
 
 orbs:
-  python: circleci/python@2.1.1
+  # python: circleci/python@2.1.1
+  mac: circleci/macos@2.3.4
 
 jobs:
   build:
@@ -13,8 +14,9 @@ jobs:
       xcode: << parameters.xcode_version >>
     resource_class: macos.x86.medium.gen2
     steps:
-      - python/install-packages
-
+      # - python/install-packages
+      - mac/enable-vnc
+      
 workflows:
   workflow-mac:
     jobs:
