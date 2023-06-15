@@ -10,10 +10,11 @@ jobs:
       
     steps:
       # - checkout
-      - run: systeminfo
+      - run:
+          name: Install node with NVM
+          command: nvm install 14.18.1 64 && nvm use 14.18.1 64
       - run:
           name: Check NPM version
-          # shell: powershell.exe
           command: npm --version
       - run:
           name: Check Node version
@@ -24,8 +25,7 @@ workflows:
   workflow:
     jobs:
       - build:
-          name: Build
-          # name: Build << matrix.name >>
-          # matrix:
-          #   parameters:
-          #     name: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"]
+          name: Build << matrix.name >>
+          matrix:
+            parameters:
+              name: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"]
