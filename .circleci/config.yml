@@ -3,8 +3,8 @@ version: 2.1
 executors:
   android-executor:
     machine:
-      image: android:2022.12.1
-    working_directory: ~/gelato-os-flutter
+      image: ubuntu-2004:202107-02
+    # working_directory: ~/gelato-os-flutter
 
 jobs:
   # rm_rvm:
@@ -17,36 +17,10 @@ jobs:
 
   build:
     executor: android-executor
-    # machine:
-    #   image: ubuntu-2204:current
-    # resource_class: medium
     steps:
-      # - run: 
-      #     name: Gradle pwd
-      #     command: |
-      #       pwd
-            # ./gradlew
-
       - run: 
-          name: Create a file
-          command: df -h /dev/root
-
-  deploy:
-    executor: android-executor
-    steps:
-      - attach_workspace:
-          at: ~/gelato-os-flutter
-      - run:
-          name: List
-          command: ls -al
-  # implode_rvm:
-  #   machine:
-  #     image: ubuntu-2204:current
-  #   resource_class: medium
-  #   steps:
-  #     - run: rvm implode --force
-  #     - run: sudo mkdir -p /mnt/ramdisk
-
+          name: Check docker version
+          command: docker --version
 
 workflows:
   build_and_deploy:
