@@ -13,7 +13,22 @@ jobs:
       # - checkout
       - run:
           name: Install node with NVM
-          command: nvm install 14.18.1 64 && nvm use 14.18.1 64
+          command: |
+            if ! command -v node &> /dev/null; then
+                echo "Node 14.18.1 is not installed"
+                # Install Node 14.18.1 with NVM
+                nvm install 14.18.1
+                # Loop until Node 14.18.1 is installed
+                while ! command -v node &> /dev/null; do
+                    echo "Waiting for Node 14.18.1 to be installed..."
+                    sleep 1
+                done
+                echo "Node 14.18.1 is now installed"
+            else
+                echo "Node 14.18.1 is already installed"
+            fi
+
+
       - run:
           name: Check NPM version
           command: npm --version
