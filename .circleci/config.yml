@@ -12,16 +12,20 @@ jobs:
       # - checkout
       - run: systeminfo
       - run:
-          name: Check for NPM
-          shell: powershell.exe
+          name: Check NPM version
+          # shell: powershell.exe
           command: npm --version
+      - run:
+          name: Check Node version
+          command: node --version
 
 
 workflows:
   workflow:
     jobs:
       - build:
-          name: Build << matrix.name >>
-          matrix:
-            parameters:
-              name: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"]
+          name: Build
+          # name: Build << matrix.name >>
+          # matrix:
+          #   parameters:
+          #     name: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"]
