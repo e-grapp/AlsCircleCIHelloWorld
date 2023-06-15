@@ -14,12 +14,13 @@ jobs:
       - run:
           name: Install node with NVM
           command: |
-            if ! command -v node &> /dev/null; then
+            # Check if Node 14.18.1 is installed
+            if ! command -v node &> /dev/null || ! node -v | grep -q "v14.18.1"; then
                 echo "Node 14.18.1 is not installed"
                 # Install Node 14.18.1 with NVM
                 nvm install 14.18.1
                 # Loop until Node 14.18.1 is installed
-                while ! command -v node &> /dev/null; do
+                while ! command -v node &> /dev/null || ! node -v | grep -q "v14.18.1"; do
                     echo "Waiting for Node 14.18.1 to be installed..."
                     sleep 1
                 done
@@ -41,7 +42,8 @@ workflows:
   workflow:
     jobs:
       - build:
-          name: Build << matrix.name >>
-          matrix:
-            parameters:
-              name: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"]
+          name: Build
+          #  << matrix.name >>
+          # matrix:
+          #   parameters:
+          #     name: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"]
