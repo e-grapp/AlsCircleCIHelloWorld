@@ -18,7 +18,7 @@ jobs:
             if ! command -v node &> /dev/null || [[ $(node -v) != "v14.18.1" ]]; then
                 echo "Node 14.18.1 is not installed"
                 # Install Node 14.18.1 with NVM
-                nvm install 14.18.1
+                nvm install 14.18.1 64 && nvm use 14.18.1 64
                 # Loop until Node 14.18.1 is installed
                 while ! command -v node &> /dev/null || [[ $(node -v) != "v14.18.1" ]]; do
                     echo "Waiting for Node 14.18.1 to be installed..."
