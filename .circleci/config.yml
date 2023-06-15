@@ -15,12 +15,12 @@ jobs:
           name: Install node with NVM
           command: |
             # Check if Node 14.18.1 is installed
-            if ! command -v node &> /dev/null || ! node -v | grep -q "v14.18.1"; then
+            if ! command -v node &> /dev/null || [[ $(node -v) != "v14.18.1" ]]; then
                 echo "Node 14.18.1 is not installed"
                 # Install Node 14.18.1 with NVM
                 nvm install 14.18.1
                 # Loop until Node 14.18.1 is installed
-                while ! command -v node &> /dev/null || ! node -v | grep -q "v14.18.1"; do
+                while ! command -v node &> /dev/null || [[ $(node -v) != "v14.18.1" ]]; do
                     echo "Waiting for Node 14.18.1 to be installed..."
                     sleep 1
                 done
