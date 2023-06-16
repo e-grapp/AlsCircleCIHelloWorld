@@ -1,33 +1,22 @@
 version: 2.1
 
-executors:
-  android-executor:
-    machine:
-      image: ubuntu-2004:202107-02
-    # working_directory: ~/gelato-os-flutter
-
 jobs:
-  # rm_rvm:
-  #   machine:
-  #     image: ubuntu-2204:current
-  #     resource_class: arm.large
-  #   steps:
-  #     - run: sudo rm -rf /opt/circleci/.rvm
-  #     - run: sudo mkdir -p /mnt/ramdisk
-
   build:
-    executor: android-executor
+    machine:
+      image: ubuntu-2204:2023.04.2
+      
     steps:
-      - run: 
-          name: Check docker version
+      # - checkout
+      - run:
+          name: Check Docker version
           command: docker --version
 
 workflows:
-  build_and_deploy:
+  workflow:
     jobs:
-      # - rm_rvm
-      - build
-      # - deploy:
-      #     requires:
-      #       - build
-      # - implode_rvm
+      - build:
+          name: Build
+          #  << matrix.name >>
+          # matrix:
+          #   parameters:
+          #     name: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"]
