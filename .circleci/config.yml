@@ -11,11 +11,21 @@ jobs:
           name: Check Docker version
           command: docker --version
 
+  unittest:
+    machine:
+      image: ubuntu-2004:202111-02
+      docker_layer_caching: true
+    working_directory: ~/hotpie
+
+    steps:
+      - checkout
+
 workflows:
   workflow:
     jobs:
       - build:
           name: Build
+      - unittest
           #  << matrix.name >>
           # matrix:
           #   parameters:
