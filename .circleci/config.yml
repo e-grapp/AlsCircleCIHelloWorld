@@ -18,6 +18,11 @@ jobs:
     working_directory: ~/hotpie
 
     steps:
+      - run:
+          name: Check working directory
+          command: |
+            pwd
+            ls -al
       - checkout
 
 workflows:
