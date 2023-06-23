@@ -8,7 +8,7 @@ jobs:
   build:
     macos:
       xcode: 14.2.0
-    resource_class: macos.m1.large.gen1
+    resource_class: macos.x86.medium.gen2
     steps:
       - run: xcrun simctl list
       - mac/preboot-simulator:
