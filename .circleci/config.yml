@@ -9,6 +9,7 @@ jobs:
     parameters:
       device:
         type: string
+        default: "iPhone 13 Pro Max"
     macos:
       xcode: 14.2.0
     resource_class: macos.m1.large.gen1
