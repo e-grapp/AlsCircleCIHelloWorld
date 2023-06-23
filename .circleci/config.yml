@@ -19,7 +19,7 @@ jobs:
     steps:
       - run: xcrun simctl list
       - mac/preboot-simulator:
-          version: '14.2'
+          version: '14.5'
           device: << parameters.device_version >>
       - run: xcrun simctl list
       # - run:
