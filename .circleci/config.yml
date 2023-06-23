@@ -6,10 +6,6 @@ orbs:
 
 jobs:
   build:
-    parameters:
-      device:
-        type: string
-        default: "iPhone 13 Pro Max"
     macos:
       xcode: 14.2.0
     resource_class: macos.m1.large.gen1
@@ -17,7 +13,7 @@ jobs:
       - run: xcrun simctl list
       - mac/preboot-simulator:
           version: '16.2'
-          device: << parameters.device >>      
+          device: "iPhone 13 Pro Max"     
       - run: xcrun simctl list
       - run:
           command: xcrun simctl bootstatus "${MACOS_ORB_DEVICE_UDID}"
@@ -27,4 +23,3 @@ workflows:
     jobs:
       - build
 
-      
