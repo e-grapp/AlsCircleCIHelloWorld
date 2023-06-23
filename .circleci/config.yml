@@ -9,15 +9,17 @@ jobs:
     parameters:
       xcode_version:
         type: string
+        default: "13.4.1"
       device_version:
         type: string
+        default: "iPhone 13 Pro Max"
     macos:
       xcode: << parameters.xcode_version >>
     resource_class: macos.x86.medium.gen2
     steps:
       - run: xcrun simctl list
       - mac/preboot-simulator:
-          version: '16.2'
+          version: '14.2'
           device: << parameters.device.version >>
       - run: xcrun simctl list
       # - run:
