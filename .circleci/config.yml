@@ -7,20 +7,21 @@ orbs:
 jobs:
   build:
     parameters:
-      xcode_version:
-        default: "14.3.1"
+      device:
         type: string
     macos:
-      xcode: << parameters.xcode_version >>
-    resource_class: macos.x86.medium.gen2
+      xcode: 14.2.0
+    resource_class: macos.m1.large.gen1
     steps:
-      # - python/install-packages
-      - mac/enable-vnc
-      
+      - run: xcrun simctl list
+      - mac/preboot-simulator:
+          version: '16.2'
+          device: << parameters.device >>      
+      - run: xcrun simctl list
+      - run:
+          command: xcrun simctl bootstatus "${MACOS_ORB_DEVICE_UDID}"
+      - mac/wait-until-simulator-booted # doesnt work on m1
 workflows:
   workflow-mac:
     jobs:
-      - build:
-          matrix:
-            parameters:
-              xcode_version: ["14.2.0", "14.3.1"]
+      - build
