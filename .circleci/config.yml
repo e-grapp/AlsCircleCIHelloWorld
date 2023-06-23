@@ -6,14 +6,19 @@ orbs:
 
 jobs:
   build:
+    parameters:
+      xcode_version:
+        type: string
+      device_version:
+        type: string
     macos:
-      xcode: 13.4.1
+      xcode: << parameters.xcode_version >>
     resource_class: macos.x86.medium.gen2
     steps:
       - run: xcrun simctl list
       - mac/preboot-simulator:
           version: '16.2'
-          device: "iPhone 13 Pro Max"     
+          device: << parameters.device.version >>
       - run: xcrun simctl list
       # - run:
       #     command: xcrun simctl bootstatus "${MACOS_ORB_DEVICE_UDID}"
@@ -21,5 +26,8 @@ jobs:
 workflows:
   workflow-mac:
     jobs:
-      - build
-
+      - build:
+          matrix:
+            parameters:
+              xcode_version: ["13.4.1", "14.2.0", "14.3.1"]
+              device_version: ["iPhone 13 Pro Max", "iPhone 14 Pro Max"]
