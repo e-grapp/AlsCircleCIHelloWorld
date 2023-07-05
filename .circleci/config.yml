@@ -8,16 +8,20 @@ jobs:
 
     steps:
       - run:
+          shell: /bin/sh
           name: Create script
           command: touch script.sh && echo "echo \"Hello world!\"" >> script.sh
           background: false
       - run:
+          shell: /bin/sh
           name: Set executable
           command: chmod 755 script.sh
       - run:
+          shell: /bin/sh
           name: Current dir
           command: ls -al
       - run:
+          shell: /bin/sh
           name: Run script
           command: ./script.sh
 
