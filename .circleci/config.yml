@@ -19,7 +19,9 @@ jobs:
       - run:
           shell: /bin/sh
           name: Current dir
-          command: ls -al
+          command: |
+            pwd
+            ls -al
       - run:
           shell: /bin/sh
           name: Run script
