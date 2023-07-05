@@ -8,24 +8,27 @@ jobs:
 
     steps:
       - run:
-          shell: /bin/sh
           name: Create script
           command: touch script.sh && echo "echo \"Hello world!\"" >> script.sh
           background: false
       - run:
-          shell: /bin/sh
-          name: Set executable
-          command: chmod 755 script.sh
+          name: Set executable for file, not exec for directory
+          command: |
+            chmod 755 script.sh
+            chmod 744 .
       - run:
-          shell: /bin/sh
           name: Current dir
           command: |
             pwd
             ls -al
       - run:
-          shell: /bin/sh
           name: Run script
           command: ./script.sh
+      - run:
+          name: fix perm and run
+          command: |
+            chmod 755 .
+            ./script.sh
 
 workflows:
   build_and_deploy:
