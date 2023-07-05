@@ -9,7 +9,7 @@ jobs:
     steps:
       - run:
           name: Create script
-          command: touch script.sh && echo "Hello world!" >> script.sh
+          command: touch script.sh && echo "echo \"Hello world!\"" >> script.sh
           background: false
       - run:
           name: Set executable
