@@ -15,6 +15,9 @@ jobs:
           name: Set executable
           command: chmod 755 script.sh
       - run:
+          name: Current dir
+          command: ls -al
+      - run:
           name: Run script
           command: ./script.sh
 
