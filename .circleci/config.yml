@@ -11,7 +11,7 @@ jobs:
           background: true
       - run:
           name: Sleep
-          command: sleep 30
+          command: sleep 300
 
 
 workflows:
@@ -19,10 +19,5 @@ workflows:
     jobs:
       - build:
           name: my_build
-          filters:
-            branches:
-              only:
-                - dev
-                - /releases\/.*/
 
 # VS Code Extension Version: 1.2.0
