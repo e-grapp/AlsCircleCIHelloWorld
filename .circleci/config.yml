@@ -13,7 +13,6 @@ jobs:
           name: Sleep
           command: sleep 300
 
-
 workflows:
   build_and_deploy:
     jobs:
