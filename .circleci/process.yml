@@ -1,5 +1,5 @@
-version: 2
 jobs:
+version: 2
   build:
     docker:
     - image: cimg/base:2021.10
@@ -26,6 +26,8 @@ workflows:
     - build:
         context: my-context
   version: 2
+
+
 
 # Original config.yml file:
 # version: 2.1
