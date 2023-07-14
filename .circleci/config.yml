@@ -31,8 +31,9 @@ jobs:
       - run:
           name: fix perm and run
           command: |
-            chmod 755 .
-            ./script.py
+            print('Hello from Python!')
+            # chmod 755 .
+            # ./script.py
           shell: '/usr/bin/env python'
 
 workflows:
