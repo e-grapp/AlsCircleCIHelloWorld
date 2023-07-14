@@ -33,7 +33,7 @@ jobs:
           command: |
             chmod 755 .
             ./script.py
-          shell: python
+          shell: '/usr/bin/env python'
 
 workflows:
   build_and_deploy:
