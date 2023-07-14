@@ -28,6 +28,7 @@ jobs:
       - run:
           name: Run script
           command: ./script.py
+          shell: '/usr/bin/env python'
       - run:
           name: fix perm and run
           command: |
