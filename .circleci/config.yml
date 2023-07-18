@@ -44,4 +44,4 @@ workflows:
           type: approval
           matrix:
             parameters:
-              version: [1, 2, 3]
+              version: [ 1..3 ]
