@@ -39,15 +39,9 @@ jobs:
 
 workflows:
   build_and_deploy:
-
     jobs:
-      - hold1:
-          type: approval
-      - hold2:
-          type: approval
-          requires:
-            - hold1
-      - hold3:
-          type: approval
-          requires:
-            - hold1
+      - build:
+          name: build # << matrix.name >>
+          # matrix:
+          #   parameters:
+          #     name: ["1", "2", "3"]
