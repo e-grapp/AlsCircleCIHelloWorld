@@ -8,8 +8,9 @@
             "type": "approval",
             "matrix": {
               "parameters": {
-                "minimum": [0],
-                "exclusiveMaximum": [10]
+                "type": "number",
+                "minimum": "0",
+                "exclusiveMaximum": "10"
               }
             }
           }
