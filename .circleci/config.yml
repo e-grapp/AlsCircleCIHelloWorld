@@ -40,8 +40,8 @@ jobs:
 workflows:
   build_and_deploy:
     jobs:
-      - build:
-          name: build # << matrix.name >>
-          # matrix:
-          #   parameters:
-          #     name: ["1", "2", "3"]
+      - hold1:
+          type: approval
+          matrix:
+            parameters:
+              version: ["1", "2", "3"]
