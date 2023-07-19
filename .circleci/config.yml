@@ -14,8 +14,8 @@ jobs:
             # current_value=$(curl -sS -u $CIRCLE_TOKEN: -X GET https://circleci.com/api/v2/project/:vcs-type/:username/:project/envvar/ANDROID_VERSION | jq -r '.value')
 
             # Increment the value
-            export NEW_VERSION=($ANDROID_VERSION + 1)
-            echo $NEW_VERSION
+            ((ANDROID_VERSION++))
+            echo $ANDROID_VERSION
 
             # Update the environment variable with the new value
             # curl -sS -H "Circle_Token:$CIRCLE_TOKEN" -X POST https://circleci.com/api/v2/project/gh/alanjclark/CircleCIHelloWorld/envvar/ANDROID_VERSION -H "Content-Type: application/json" -d '{"name": "ANDROID_VERSION", "value": "$new_value"}'
@@ -23,7 +23,7 @@ jobs:
               --url https://circleci.com/api/v2/project/gh/alanjclark/CircleCIHelloWorld/envvar \
               --header "Circle-Token:$CIRCLE_TOKEN" \
               --header 'content-type: application/json' \
-              --data '{"name":"ANDROID_VERSION","value":"$NEW_VERSION"}'
+              --data '{"name":"ANDROID_VERSION","value":"$ANDROID_VERSION"}'
 
       # # - setup_remote_docker:
       # #     version: 20.10.23
