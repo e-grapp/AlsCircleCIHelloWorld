@@ -22,7 +22,7 @@ jobs:
               --url https://circleci.com/api/v2/project/gh/alanjclark/CircleCIHelloWorld/envvar \
               --header "Circle-Token:$CIRCLE_TOKEN" \
               --header 'content-type: application/json' \
-              --data '{"name":"foodoo","value":"$new_value"}'
+              --data '{"name":"ANDROID_VERSION","value":"$new_value"}'
 
       # # - setup_remote_docker:
       # #     version: 20.10.23
