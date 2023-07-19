@@ -17,7 +17,7 @@ jobs:
             new_value=($ANDROID_VERSION + 1)
 
             # Update the environment variable with the new value
-            curl -sS -u $CIRCLE_TOKEN: -X PUT https://circleci.com/api/v2/project/:vcs-type/:username/:project/envvar/ANDROID_VERSION -H "Content-Type: application/json" -d '{"name": "ANDROID_VERSION", "value": '$new_value'}'
+            curl -sS -u $CIRCLE_TOKEN: -X POST https://circleci.com/api/v2/project/:vcs-type/:username/:project/envvar/ANDROID_VERSION -H "Content-Type: application/json" -d '{"name": "ANDROID_VERSION", "value": '$new_value'}'
 
       # # - setup_remote_docker:
       # #     version: 20.10.23
