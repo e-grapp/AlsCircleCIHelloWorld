@@ -1,50 +1,53 @@
 version: 2.1
 
+version: 2
 jobs:
   build:
     docker:
-      - image: cimg/python:3.11.4
-    resource_class: small
-
-
+    - image: bastiandoetsch209/cli-build-arm64:latest
+    working_directory: /mnt/ramdisk/snyk
+    resource_class: arm.medium
     steps:
-      # - setup_remote_docker:
-      #     version: 20.10.23
-      #     docker_layer_caching: true
-      - run:
-          name: Create script
-          command: touch script.sh && echo "print('Hello from Python!')" >> script.py
-          background: false
-      - run:
-          name: Set executable for file, not exec for directory
-          command: |
-            chmod 755 script.py
-            chmod 744 .
-      - run:
-          name: Current dir
-          command: |
-            pwd
-            ls -al
-      - run:
-          name: Run script
-          command: ./script.py
-          shell: '/usr/bin/env python'
-      - run:
-          name: fix perm and run
-          command: |
-            print('Hello from Python!')
-            # chmod 755 .
-            # ./script.py
-          shell: '/usr/bin/env python'
+    - checkout
+    - run: pwd
+
+      # # - setup_remote_docker:
+      # #     version: 20.10.23
+      # #     docker_layer_caching: true
+      # - run:
+      #     name: Create script
+      #     command: touch script.sh && echo "print('Hello from Python!')" >> script.py
+      #     background: false
+      # - run:
+      #     name: Set executable for file, not exec for directory
+      #     command: |
+      #       chmod 755 script.py
+      #       chmod 744 .
+      # - run:
+      #     name: Current dir
+      #     command: |
+      #       pwd
+      #       ls -al
+      # - run:
+      #     name: Run script
+      #     command: ./script.py
+      #     shell: '/usr/bin/env python'
+      # - run:
+      #     name: fix perm and run
+      #     command: |
+      #       print('Hello from Python!')
+      #       # chmod 755 .
+      #       # ./script.py
+      #     shell: '/usr/bin/env python'
 
 workflows:
   build_and_deploy:
     jobs:
-      - hold:
-          type: approval
-          matrix:
-            parameters:
-              1-array: [0,1]
-              2-array: [0,1]
-              3-array: [0,1]
-              4-array: [0,1]
+      - build
+          # type: approval
+          # matrix:
+          #   parameters:
+          #     1-array: [0,1]
+          #     2-array: [0,1]
+          #     3-array: [0,1]
+          #     4-array: [0,1]
