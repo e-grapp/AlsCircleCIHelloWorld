@@ -2,12 +2,12 @@ version: 2.1
 jobs:
   build:
     docker:
-    - image: bastiandoetsch209/cli-build-arm64:latest
-    working_directory: /mnt/ramdisk/snyk
+      - image: cimg/base:2023.06
+    # working_directory: /mnt/ramdisk/snyk
     resource_class: arm.medium
     steps:
-    - checkout
-    - run: pwd
+      # - checkout
+      - run: pwd
 
       # # - setup_remote_docker:
       # #     version: 20.10.23
