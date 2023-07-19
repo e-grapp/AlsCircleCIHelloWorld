@@ -1,13 +1,23 @@
 version: 2.1
+
 jobs:
   build:
     docker:
-      - image: cimg/base:2023.06
-    # working_directory: /mnt/ramdisk/snyk
-    resource_class: arm.medium
+      - image: circleci/python:3.8
+
     steps:
-      # - checkout
-      - run: pwd
+      - run:
+          name: Increment Environment Variable
+          command: |
+            echo $ANDROID_VERSION
+            # Get the current value of the environment variable
+            current_value=$(curl -sS -u $CIRCLE_TOKEN: -X GET https://circleci.com/api/v2/project/:vcs-type/:username/:project/envvar/ANDROID_VERSION | jq -r '.value')
+
+            # Increment the value
+            new_value=$((current_value + 1))
+
+            # Update the environment variable with the new value
+            curl -sS -u $CIRCLE_TOKEN: -X PUT https://circleci.com/api/v2/project/:vcs-type/:username/:project/envvar/ANDROID_VERSION -H "Content-Type: application/json" -d '{"name": "MY_VARIABLE", "value": '$new_value'}'
 
       # # - setup_remote_docker:
       # #     version: 20.10.23
