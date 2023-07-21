@@ -3,10 +3,10 @@ version: 2.1
 parameters:
   run_workflow:
     type: boolean
-    default: true
+    default: false
   run-setup:
     type: boolean
-    default: false
+    default: true
 
 jobs:
   build:
