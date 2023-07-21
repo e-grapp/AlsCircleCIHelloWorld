@@ -1,5 +1,13 @@
 version: 2.1
 
+parameters:
+  run_workflow:
+    type: boolean
+    default: false
+  run-setup:
+    type: boolean
+    default: false
+
 jobs:
   build:
     docker:
@@ -7,57 +15,13 @@ jobs:
 
     steps:
       - run:
-          name: Increment Environment Variable
-          command: |
-            echo $ANDROID_VERSION
-            # Get the current value of the environment variable
-            # current_value=$(curl -sS -u $CIRCLE_TOKEN: -X GET https://circleci.com/api/v2/project/:vcs-type/:username/:project/envvar/ANDROID_VERSION | jq -r '.value')
+          name: PWD
+          command: pwd
 
-            # Increment the value
-            ((ANDROID_VERSION++))
-            echo $ANDROID_VERSION
-
-            # Update the environment variable with the new value
-            # curl -sS -H "Circle_Token:$CIRCLE_TOKEN" -X POST https://circleci.com/api/v2/project/gh/alanjclark/CircleCIHelloWorld/envvar/ANDROID_VERSION -H "Content-Type: application/json" -d '{"name": "ANDROID_VERSION", "value": "$new_value"}'
-            curl --request POST \
-              --url https://circleci.com/api/v2/project/gh/alanjclark/CircleCIHelloWorld/envvar \
-              --header "Circle-Token:$CIRCLE_TOKEN" \
-              --header 'content-type: application/json' \
-              --data "{\"name\":\"ANDROID_VERSION\",\"value\":\"$ANDROID_VERSION\"}"
-
-      # # - setup_remote_docker:
-      # #     version: 20.10.23
-      # #     docker_layer_caching: true
-      # - run:
-      #     name: Create script
-      #     command: touch script.sh && echo "print('Hello from Python!')" >> script.py
-      #     background: false
-      # - run:
-      #     name: Set executable for file, not exec for directory
-      #     command: |
-      #       chmod 755 script.py
-      #       chmod 744 .
-      # - run:
-      #     name: Current dir
-      #     command: |
-      #       pwd
-      #       ls -al
-      # - run:
-      #     name: Run script
-      #     command: ./script.py
-      #     shell: '/usr/bin/env python'
-      # - run:
-      #     name: fix perm and run
-      #     command: |
-      #       print('Hello from Python!')
-      #       # chmod 755 .
-      #       # ./script.py
-      #     shell: '/usr/bin/env python'
-
-workflows:
-  build_and_deploy:
-    jobs:
-      - build
+# workflows:
+#   build_and_deploy:
+#     jobs:
+#       - build
           # type: approval
           # matrix:
           #   parameters:
@@ -65,3 +29,12 @@ workflows:
           #     2-array: [0,1]
           #     3-array: [0,1]
           #     4-array: [0,1]
+
+workflows:
+  workflow:
+    when:
+      and:
+        - equal: [true, << pipeline.parameters.run-setup >>]
+        - equal: [true, << pipeline.parameters.run_workflow >>]
+    jobs:
+      - build
