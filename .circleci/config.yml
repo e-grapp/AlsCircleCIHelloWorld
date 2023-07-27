@@ -7,7 +7,7 @@ references:
   defaults: &defaults
     working_directory: ~/code
     docker:
-      - image: cimg/android:2022.06
+      - image: cimg/android:2023.02.1-node
     environment:
       JVM_OPTS: -Xmx2048m
       GRADLE_OPTS: -Xmx1536m -XX:+HeapDumpOnOutOfMemoryError -Dorg.gradle.caching=true -Dorg.gradle.configureondemand=true -Dkotlin.compiler.execution.strategy=in-process -Dkotlin.incremental=false
