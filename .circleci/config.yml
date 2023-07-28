@@ -11,14 +11,29 @@ parameters:
 jobs:
   build:
     docker:
-      - image: cimg/node:16.13.0
-    resource_class: medium
+      - image: cimg/base:2023.06
+    resource_class: small
 
     steps:
       # - setup_remote_docker
+      - checkout
       - run:
           name: PWD in remote docker
           command: ssh remote-docker "pwd"
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+
+  test:
+    docker:
+      - image: cimg/base:2023.06
+    resource_class: small
+
+    steps:
+      - attach_workspace:
+          at: .
+      - run: pwd
 
 # workflows:
 #   build_and_deploy:
@@ -40,3 +55,6 @@ workflows:
     #     - equal: [true, << pipeline.parameters.run_workflow >>]
     jobs:
       - build
+      - test:
+          requires:
+            - build
