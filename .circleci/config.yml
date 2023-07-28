@@ -18,8 +18,8 @@ jobs:
       # - setup_remote_docker
       - checkout
       - run:
-          name: PWD in remote docker
-          command: ssh remote-docker "pwd"
+          name: PWD
+          command: pwd
       - persist_to_workspace:
           root: .
           paths:
