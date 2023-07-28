@@ -26,8 +26,8 @@ jobs:
             - .
 
   test:
-    docker:
-      - image: cimg/base:2023.06
+    machine: true
+      # - image: cimg/base:2023.06
     resource_class: small
 
     steps:
