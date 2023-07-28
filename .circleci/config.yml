@@ -11,11 +11,11 @@ parameters:
 jobs:
   build:
     docker:
-      - image: cimg/base:2023.07
+      - image: cimg/node:16.13.0
     resource_class: medium
 
     steps:
-      - setup_remote_docker
+      # - setup_remote_docker
       - run:
           name: PWD in remote docker
           command: ssh remote-docker "pwd"
@@ -34,9 +34,9 @@ jobs:
 
 workflows:
   workflow:
-    when:
-      and:
-        - equal: [true, << pipeline.parameters.run-setup >>]
-        - equal: [true, << pipeline.parameters.run_workflow >>]
+    # when:
+    #   and:
+    #     - equal: [true, << pipeline.parameters.run-setup >>]
+    #     - equal: [true, << pipeline.parameters.run_workflow >>]
     jobs:
       - build
