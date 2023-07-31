@@ -25,7 +25,7 @@ jobs:
           command: ifconfig
       - run:
           name: ifconfig on remote docker
-          command: ssh remote-docker apt install net-tools -y && ssh remote-docker ifconfig
+          command: ssh remote-docker sudo apt install net-tools -y && ssh remote-docker ifconfig
       # - persist_to_workspace:
       #     root: .
       #     paths:
