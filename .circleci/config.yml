@@ -25,7 +25,7 @@ jobs:
           command: curl ifconfig.me
       - run:
           name: Remote Docker IP
-          command: ssh remote-docker curl ifconfig.me
+          command: ssh remote-docker curl -s ifconfig.me
       # - persist_to_workspace:
       #     root: .
       #     paths:
