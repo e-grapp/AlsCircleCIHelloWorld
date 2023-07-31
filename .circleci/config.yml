@@ -13,7 +13,8 @@ jobs:
     docker:
       - image: cimg/base:2023.06
     resource_class: small
-
+    circleci_ip_ranges: true
+    
     steps:
       - setup_remote_docker
       - checkout
