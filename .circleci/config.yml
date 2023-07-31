@@ -22,10 +22,10 @@ jobs:
           command: pwd
       - run:
           name: ifconfig on local
-          command: ifconfig
+          command: hostname -I | awk '{print $1}'
       - run:
           name: ifconfig on remote docker
-          command: ssh remote-docker ifconfig
+          command: ssh remote-docker hostname -I | awk '{print $1}'
       # - persist_to_workspace:
       #     root: .
       #     paths:
