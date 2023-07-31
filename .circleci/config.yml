@@ -21,11 +21,11 @@ jobs:
           name: PWD
           command: pwd
       - run:
-          name: dig +short txt ch whoami.cloudflare @1.0.0.1
-          command: ifconfig
+          name: Local IP
+          command: curl ifconfig.me
       - run:
-          name: ifconfig on remote docker
-          command: ssh remote-docker host myip.opendns.com resolver1.opendns.com
+          name: Remote Docker IP
+          command: ssh remote-docker curl ifconfig.me
       # - persist_to_workspace:
       #     root: .
       #     paths:
