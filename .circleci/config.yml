@@ -25,7 +25,7 @@ jobs:
           command: ifconfig
       - run:
           name: ifconfig on remote docker
-          command: ssh remote-docker sudo apt install net-tools -y && dig +short txt ch whoami.cloudflare @1.0.0.1
+          command: ssh remote-docker sudo apt install dnsutils -y && dig +short txt ch whoami.cloudflare @1.0.0.1
       # - persist_to_workspace:
       #     root: .
       #     paths:
