@@ -22,10 +22,10 @@ jobs:
           command: pwd
       - run:
           name: ifconfig on local
-          command: hostname -I | awk '{print $1}'
+          command: ifconfig
       - run:
           name: ifconfig on remote docker
-          command: ssh remote-docker hostname -I | awk '{print $1}'
+          command: ssh remote-docker apt install net-tools -y && ssh remote-docker ifconfig
       # - persist_to_workspace:
       #     root: .
       #     paths:
