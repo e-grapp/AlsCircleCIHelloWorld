@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   python:
     docker:
-      - image: cimg/base
+      - image: cimg/base:current
     resource_class: small
     steps:
       - run:
