@@ -1,69 +1,27 @@
 version: 2.1
 
-parameters:
-  run_workflow:
-    type: boolean
-    default: true
-  run-setup:
-    type: boolean
-    default: true
-
 jobs:
-  build:
-    docker:
-      - image: cimg/python:<< matrix.python_version >>
-    resource_class: small
-    circleci_ip_ranges: true
-    
+  python:
+    parameters:
+      python-version:
+        type: string
+    executor: << parameters.python-version >>
     steps:
-      - setup_remote_docker
-      - checkout
       - run:
-          name: PWD
-          command: pwd
-      # - run:
-      #     name: Local IP
-      #     command: curl ifconfig.me
-      # - run:
-      #     name: Remote Docker IP
-      #     command: ssh remote-docker curl -s ifconfig.me
-      # - persist_to_workspace:
-      #     root: .
-      #     paths:
-      #       - .
-
-  # test:
-  #   machine: true
-  #     # - image: cimg/base:2023.06
-  #   resource_class: small
-
-  #   steps:
-  #     - attach_workspace:
-  #         at: .
-  #     - run: pwd
-
-# workflows:
-#   build_and_deploy:
-#     jobs:
-#       - build
-          # type: approval
-          # matrix:
-          #   parameters:
-          #     1-array: [0,1]
-          #     2-array: [0,1]
-          #     3-array: [0,1]
-          #     4-array: [0,1]
+          name: install python << parameters.python-version >>
+          command: |
+            apt -y update
+            echo "Installing spc"
+            apt -y install software-properties-common
+            echo "Added deadsnakes"
+            add-apt-repository ppa:deadsnakes/ppa
+            echo "Installing Python"
+            apt -y install python<< parameters.python-version >>
 
 workflows:
-  workflow:
-    # when:
-    #   and:
-    #     - equal: [true, << pipeline.parameters.run-setup >>]
-    #     - equal: [true, << pipeline.parameters.run_workflow >>]
+  test:
     jobs:
-      - build:
-          name: Build << matrix.python_version >>
+      - python:
           matrix:
             parameters:
-              python_version: [ "3.7.17","3.10.12","3.11.4" ]
-          
+              python-version: ["3.8","3.9","3.10"]
