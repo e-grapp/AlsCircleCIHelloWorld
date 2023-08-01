@@ -11,7 +11,7 @@ parameters:
 jobs:
   build:
     docker:
-      - image: cimg/base:2023.06
+      - image: cimg/python:<< matrix.python_version >>
     resource_class: small
     circleci_ip_ranges: true
     
@@ -21,12 +21,12 @@ jobs:
       - run:
           name: PWD
           command: pwd
-      - run:
-          name: Local IP
-          command: curl ifconfig.me
-      - run:
-          name: Remote Docker IP
-          command: ssh remote-docker curl -s ifconfig.me
+      # - run:
+      #     name: Local IP
+      #     command: curl ifconfig.me
+      # - run:
+      #     name: Remote Docker IP
+      #     command: ssh remote-docker curl -s ifconfig.me
       # - persist_to_workspace:
       #     root: .
       #     paths:
@@ -61,9 +61,9 @@ workflows:
     #     - equal: [true, << pipeline.parameters.run-setup >>]
     #     - equal: [true, << pipeline.parameters.run_workflow >>]
     jobs:
-      - build
-      # - test:
-      #     requires:
-      #       - build
-      #     context: org-global
+      - build:
+          name: Build << matrix.python_version >>
+          matrix:
+            parameters:
+              python_version: [ "3.7.17","3.10.12","3.11.4" ]
           
