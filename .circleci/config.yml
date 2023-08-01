@@ -9,7 +9,7 @@ jobs:
           name: Fail Fast
           when: always
           command: |
-            if "${CIRCLE_BRANCH}" =~ "master"; then
+            if [[ "${CIRCLE_BRANCH}" =~ "master"]]; then
               echo "Not fast canceling - this is a major branch";
             else
               echo "Canceling workflow as a step resulted in failure"
