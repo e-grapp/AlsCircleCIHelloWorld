@@ -7,7 +7,7 @@ jobs:
     steps:
       - run:
           name: Fail Fast
-          when: on_fail
+          when: always
           command: |
             if [[ "${CIRCLE_BRANCH}" ~= "^master|sandbox|develop" ]]; then
               echo "Not fast canceling - this is a major branch";
