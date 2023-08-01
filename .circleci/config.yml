@@ -14,6 +14,7 @@ jobs:
           name: Install stuff
           command: |
             # $nrconf{restart} = 'i';
+            sudo sed -i 's/#$nrconf{restart} = '"'"'i'"'"';/$nrconf{restart} = '"'"'a'"'"';/g' /etc/needrestart/needrestart.conf
             sudo apt update && sudo apt install -y build-essential cmake clang clang-format esbuild shellcheck ninja-build hugo doxygen rapidjson-dev googletest libjavascriptcoregtk-4.0-dev
   
   # unittest:
