@@ -5,7 +5,8 @@ jobs:
     parameters:
       python-version:
         type: string
-    executor: << parameters.python-version >>
+    docker:
+      - image: ubuntu:22.04
     steps:
       - run:
           name: install python << parameters.python-version >>
