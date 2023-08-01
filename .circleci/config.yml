@@ -2,27 +2,21 @@ version: 2.1
 
 jobs:
   python:
-    parameters:
-      python-version:
-        type: string
     docker:
       - image: ubuntu:22.04
     steps:
       - run:
-          name: install python << parameters.python-version >>
+          name: Fail Fast
+          when: on_fail
           command: |
-            apt -y update
-            # echo "Installing spc"
-            # apt -y install software-properties-common
-            # echo "Added deadsnakes"
-            # add-apt-repository ppa:deadsnakes/ppa
-            echo "Installing Python"
-            apt -y install python<< parameters.python-version >>
+            if [[ "${CIRCLE_BRANCH}" ~= "^master|sandbox|develop" ]]; then
+              echo "Not fast canceling - this is a major branch";
+            else
+              echo "Canceling workflow as a step resulted in failure"
+              # curl -X POST --header "Content-Type: application/json" "https://circleci.com/api/v2/workflow/${CIRCLE_WORKFLOW_ID}/cancel?circle-token=${CIRCLE_TOKEN}"
+            fi;
 
 workflows:
   test:
     jobs:
-      - python:
-          matrix:
-            parameters:
-              python-version: ["3.8","3.9","3.10"]
+      - python
