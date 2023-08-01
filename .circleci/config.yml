@@ -12,10 +12,10 @@ jobs:
           name: install python << parameters.python-version >>
           command: |
             apt -y update
-            echo "Installing spc"
-            apt -y install software-properties-common
-            echo "Added deadsnakes"
-            add-apt-repository ppa:deadsnakes/ppa
+            # echo "Installing spc"
+            # apt -y install software-properties-common
+            # echo "Added deadsnakes"
+            # add-apt-repository ppa:deadsnakes/ppa
             echo "Installing Python"
             apt -y install python<< parameters.python-version >>
 
