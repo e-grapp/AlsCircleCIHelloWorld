@@ -18,6 +18,14 @@ jobs:
     resource_class: macos.x86.medium.gen2
     steps:
       - run: pws
+      - when:
+          condition:
+            equal: [true, true]
+          steps:
+            - persis_to_workspace:
+                root: .
+                paths:
+                  - .
 
       
   # deploy:
@@ -34,13 +42,7 @@ jobs:
 workflows:
   workflow-mac:
     jobs:
-      - build:
-          post-steps:
-            - persist_to_workspace:
-                root: .
-                paths:
-                  - .
-
+      - build
           # matrix:
           #   parameters:
           #     xcode_version: ["13.4.1"]
