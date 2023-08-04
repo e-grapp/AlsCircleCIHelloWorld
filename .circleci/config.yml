@@ -21,7 +21,6 @@ jobs:
           command: |
             set +e
             pws
-            set -e
       - when:
           condition:
             equal: [true, true]
