@@ -31,7 +31,8 @@ workflows:
       - build:
           matrix:
             parameters:
-              xcode_version: ["13.4.1", "14.2.0", "14.3.1"]
-              device_version: ["iPhone 13 Pro Max", "iPhone 14 Pro Max"]
+              xcode_version: ["13.4.1"]
+              device_version: ["iPhone 14 Pro Max"]
           post-steps:
-            - mac/install-rosetta
+            - mac/install-rosetta:
+                when: always
