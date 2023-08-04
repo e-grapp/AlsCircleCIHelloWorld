@@ -2,19 +2,19 @@ version: 2.1
 
 orbs:
   # python: circleci/python@2.1.1
-  mac: circleci/macos@2.3.4
+  # mac: circleci/macos@2.3.4
 
 jobs:
   build:
-    parameters:
-      xcode_version:
-        type: string
-        default: "14.3.1"
-      device_version:
-        type: string
-        default: "iPhone 13 Pro Max"
+    # parameters:
+    #   xcode_version:
+    #     type: string
+    #     default: "14.3.1"
+    #   device_version:
+    #     type: string
+    #     default: "iPhone 13 Pro Max"
     macos:
-      xcode: << parameters.xcode_version >>
+      xcode: "14.3.1"
     # resource_class: macos.x86.medium.gen2
     steps:
       - run: pwd
@@ -33,11 +33,11 @@ jobs:
 workflows:
   workflow-mac:
     jobs:
-      - build:
-          matrix:
-            parameters:
-              xcode_version: ["13.4.1"]
-              device_version: ["iPhone 14 Pro Max"]
-          post-steps:
-            - run: pwd
+      - build
+          # matrix:
+          #   parameters:
+          #     xcode_version: ["13.4.1"]
+          #     device_version: ["iPhone 14 Pro Max"]
+          # post-steps:
+          #   - run: pwd
       # - deploy
