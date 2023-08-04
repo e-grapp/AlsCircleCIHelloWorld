@@ -22,7 +22,7 @@ jobs:
           condition:
             equal: [true, true]
           steps:
-            - persis_to_workspace:
+            - persist_to_workspace:
                 root: .
                 paths:
                   - .
