@@ -1,6 +1,6 @@
 version: 2.1
 
-orbs:
+# orbs:
   # python: circleci/python@2.1.1
   # mac: circleci/macos@2.3.4
 
