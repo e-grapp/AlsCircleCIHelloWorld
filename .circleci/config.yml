@@ -1,15 +1,22 @@
 version: 2.1
 
-orbs:
-  win: circleci/windows@2.4.0
+# orbs:
+#   win: circleci/windows@2.4.0
+
+executors:
+  win_med:
+    machine:
+      image: windows-server-2019-vs2019:current
+    resource_class: windows.medium
 
 jobs:
   build:
-    executor:
-      name: win/default
-      shell: bash.exe
-      size: medium
-      
+    # executor:
+    #   name: win/default
+    #   shell: bash.exe
+    #   size: medium
+    executor: win_med
+
     steps:
       # - checkout
       - run:
