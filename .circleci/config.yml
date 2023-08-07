@@ -8,7 +8,7 @@ jobs:
     executor:
       name: win/default
       shell: bash.exe
-    resource_class: medium
+      size: medium
       
     steps:
       # - checkout
