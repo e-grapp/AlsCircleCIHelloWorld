@@ -6,7 +6,7 @@ version: 2.1
 executors:
   win_med:
     machine:
-      image: windows-server-2019-vs2019:current
+      image: windows-server-2019-vs2009:current
     resource_class: windows.medium
 
 jobs:
