@@ -15,20 +15,30 @@ jobs:
     #     default: "iPhone 13 Pro Max"
     macos:
       xcode: "14.3.1"
-    resource_class: macos.x86.medium.gen2
+    resource_class: macos.m1.large.gen1
     steps:
       - run:
           command: |
-            set +e
-            pws
-      - when:
-          condition:
-            equal: [true, true]
-          steps:
-            - persist_to_workspace:
-                root: .
-                paths:
-                  - .
+            brew update
+            brew install bash
+      - run: which bash
+      - run: echo $0
+      - run: ls -al /usr/local/bin
+      - run:
+          shell: /usr/loca/bin/bash --login --eo pipefail
+          command: |
+            which bash
+            echo $0
+            /usr/local/bin/bash -v
+
+      # - when:
+      #     condition:
+      #       equal: [true, true]
+      #     steps:
+      #       - persist_to_workspace:
+      #           root: .
+      #           paths:
+      #             - .
 
       
   # deploy:
