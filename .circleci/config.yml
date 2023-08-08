@@ -25,11 +25,11 @@ jobs:
       - run: echo $0
       - run: ls -al /usr/local/bin
       - run:
-          shell: /usr/loca/bin/bash --login --eo pipefail
+          shell: /opt/homebrew/bin/bash --login --eo pipefail
           command: |
             which bash
             echo $0
-            /usr/local/bin/bash -v
+            /opt/homebrew/bin/bash -v
 
       # - when:
       #     condition:
