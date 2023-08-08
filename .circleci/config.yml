@@ -17,6 +17,7 @@ jobs:
       xcode: "14.3.1"
     resource_class: macos.m1.large.gen1
     steps:
+      - run: bash --version
       - run:
           command: |
             brew update
@@ -27,7 +28,7 @@ jobs:
       - run: bash --version
       - run: ls -al /bin/bash
       - run:
-          shell: /opt/homebrew/bin/bash --login -eo pipefail
+          # shell: /opt/homebrew/bin/bash --login -eo pipefail
           command: |
             which bash
             echo $0
