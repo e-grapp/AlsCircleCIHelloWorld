@@ -33,6 +33,7 @@ jobs:
             which bash
             echo $0
             /opt/homebrew/bin/bash --version
+            /bin/bash --version
 
       # - when:
       #     condition:
