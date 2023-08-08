@@ -18,7 +18,7 @@ jobs:
     resource_class: macos.m1.large.gen1
     steps:
       - run:
-          shell: /opt/homebrew/bin/bash --login -eo pipefail
+          # shell: /opt/homebrew/bin/bash --login -eo pipefail
           command: |
             /opt/homebrew/bin/bash --version
             echo "==========================="
