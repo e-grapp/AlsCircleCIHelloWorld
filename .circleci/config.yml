@@ -25,6 +25,7 @@ jobs:
       - run: echo $0
       - run: ls -al /usr/local/bin
       - run: bash --version
+      - run: ls -al /bin/bash
       - run:
           shell: /opt/homebrew/bin/bash --login -eo pipefail
           command: |
