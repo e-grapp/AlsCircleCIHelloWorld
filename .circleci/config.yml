@@ -20,8 +20,8 @@ jobs:
       - run:
           # shell: /opt/homebrew/bin/bash --login -eo pipefail
           command: |
-            /opt/homebrew/bin/bash --version
-            echo "==========================="
+            # /opt/homebrew/bin/bash --version
+            # echo "==========================="
             /bin/bash --version
             echo "==========================="
             bash --version
