@@ -28,12 +28,20 @@ jobs:
       - run: bash --version
       - run: ls -al /bin/bash
       - run:
-          # shell: /opt/homebrew/bin/bash --login -eo pipefail
+          shell: /opt/homebrew/bin/bash --login -eo pipefail
           command: |
-            which bash
-            echo $0
             /opt/homebrew/bin/bash --version
+            echo "==========================="
             /bin/bash --version
+            echo "==========================="
+            bash --version
+      - run: 
+          command: |
+            /opt/homebrew/bin/bash --version
+            echo "==========================="
+            /bin/bash --version
+            echo "==========================="
+            bash --version
 
       # - when:
       #     condition:
