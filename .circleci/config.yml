@@ -18,38 +18,41 @@ jobs:
     resource_class: macos.m1.large.gen1
     steps:
       - run:
-          # shell: /opt/homebrew/bin/bash --login -eo pipefail
-          command: |
-            # /opt/homebrew/bin/bash --version
-            # echo "==========================="
-            /bin/bash --version
-            echo "==========================="
-            bash --version
-      - run: bash --version
-      - run:
-          command: |
-            brew update
-            brew install bash
-      - run: which bash
-      - run: echo $0
-      - run: ls -al /usr/local/bin
-      - run: bash --version
-      - run: ls -al /bin/bash
-      - run:
-          shell: /opt/homebrew/bin/bash --login -eo pipefail
-          command: |
-            /opt/homebrew/bin/bash --version
-            echo "==========================="
-            /bin/bash --version
-            echo "==========================="
-            bash --version
-      - run: 
-          command: |
-            /opt/homebrew/bin/bash --version
-            echo "==========================="
-            /bin/bash --version
-            echo "==========================="
-            bash --version
+          name: curl version
+          command: curl --version
+      # - run:
+      #     # shell: /opt/homebrew/bin/bash --login -eo pipefail
+      #     command: |
+      #       # /opt/homebrew/bin/bash --version
+      #       # echo "==========================="
+      #       /bin/bash --version
+      #       echo "==========================="
+      #       bash --version
+      # - run: bash --version
+      # - run:
+      #     command: |
+      #       brew update
+      #       brew install bash
+      # - run: which bash
+      # - run: echo $0
+      # - run: ls -al /usr/local/bin
+      # - run: bash --version
+      # - run: ls -al /bin/bash
+      # - run:
+      #     shell: /opt/homebrew/bin/bash --login -eo pipefail
+      #     command: |
+      #       /opt/homebrew/bin/bash --version
+      #       echo "==========================="
+      #       /bin/bash --version
+      #       echo "==========================="
+      #       bash --version
+      # - run: 
+      #     command: |
+      #       /opt/homebrew/bin/bash --version
+      #       echo "==========================="
+      #       /bin/bash --version
+      #       echo "==========================="
+      #       bash --version
 
       # - when:
       #     condition:
