@@ -46,7 +46,7 @@ jobs:
             git init
             git remote add origin https://github.com/arangodb/arangodb.git
             echo "Fetching stuff"
-            git fetch --depth 1 origin 4192013cb700a80cc14d5f0a629b391209b07677 -v
+            time git fetch --depth 1 origin 4192013cb700a80cc14d5f0a629b391209b07677 -v
             git checkout 4192013cb700a80cc14d5f0a629b391209b07677
           name: Checkout ArangoDB
       # Stop recording and save records
@@ -73,7 +73,7 @@ jobs:
             git init
             git remote add origin https://github.com/arangodb/arangodb.git
             echo "Fetching stuff"
-            git fetch --depth 1 origin 4192013cb700a80cc14d5f0a629b391209b07677
+            time git fetch --depth 1 origin 4192013cb700a80cc14d5f0a629b391209b07677 -v
             git checkout 4192013cb700a80cc14d5f0a629b391209b07677
           name: Checkout ArangoDB
       # Stop recording and save records
@@ -99,7 +99,7 @@ jobs:
             git init
             git remote add origin https://github.com/arangodb/arangodb.git
             echo "Fetching stuff"
-            git fetch --depth 1 origin 4192013cb700a80cc14d5f0a629b391209b07677
+            time git fetch --depth 1 origin 4192013cb700a80cc14d5f0a629b391209b07677 -v
             git checkout 4192013cb700a80cc14d5f0a629b391209b07677
           name: Checkout ArangoDB
       # Stop recording and save records
