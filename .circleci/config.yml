@@ -41,8 +41,13 @@ jobs:
       #     for-sec: 100
       #     split-by-sec: 60
       - run:
-          command: C:\Users\circleci.PACKER-648C8BAD\DiskSpd\amd64\diskspd.exe -d60 -W15 -C15 -c128M -t4 -o4 -b8k -L -r -Sh -w50 c:\disk-speed-test.dat
-          name: Disk Speed
+          command: |
+            git init
+            git remote add origin https://github.com/arangodb/arangodb.git
+            echo "Fetching stuff"
+            git fetch -v --depth 1 origin 4192013cb700a80cc14d5f0a629b391209b07677 -v
+            git checkout -v 4192013cb700a80cc14d5f0a629b391209b07677
+          name: Checkout ArangoDB
       # Stop recording and save records
       # - win-perf-diag/ensure-and-save-wpr
       # - win-perf-diag/stop-and-save-perflog
@@ -61,8 +66,13 @@ jobs:
       #     for-sec: 100
       #     split-by-sec: 60
       - run:
-          command: C:\Users\circleci.PACKER-648C8BAD\DiskSpd\amd64\diskspd.exe -d60 -W15 -C15 -c128M -t4 -o4 -b8k -L -r -Sh -w50 c:\disk-speed-test.dat
-          name: Disk Speed
+          command: |
+            git init
+            git remote add origin https://github.com/arangodb/arangodb.git
+            echo "Fetching stuff"
+            git fetch -v --depth 1 origin 4192013cb700a80cc14d5f0a629b391209b07677 -v
+            git checkout -v 4192013cb700a80cc14d5f0a629b391209b07677
+          name: Checkout ArangoDB
       # Stop recording and save records
       # - win-perf-diag/ensure-and-save-wpr
       # - win-perf-diag/stop-and-save-perflog
@@ -81,14 +91,19 @@ jobs:
       #     for-sec: 100
       #     split-by-sec: 60
       - run:
-          command: C:\Users\circleci.PACKER-648C8BAD\DiskSpd\amd64\diskspd.exe -d60 -W15 -C15 -c128M -t4 -o4 -b8k -L -r -Sh -w50 c:\disk-speed-test.dat
-          name: Disk Speed
+          command: |
+            git init
+            git remote add origin https://github.com/arangodb/arangodb.git
+            echo "Fetching stuff"
+            git fetch -v --depth 1 origin 4192013cb700a80cc14d5f0a629b391209b07677 -v
+            git checkout -v 4192013cb700a80cc14d5f0a629b391209b07677
+          name: Checkout ArangoDB
       # Stop recording and save records
       # - win-perf-diag/ensure-and-save-wpr
       # - win-perf-diag/stop-and-save-perflog
 
 workflows:
-  disk-speed:
+  check-this-out:
     jobs:
       - gitclone-1
       - gitclone-2
