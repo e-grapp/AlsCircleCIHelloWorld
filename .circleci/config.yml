@@ -43,7 +43,7 @@ jobs:
       - run:
           command: |
             git init
-            git remote add origin https://github.com/arangodb/arangodb.git
+            git remote add origin git@github.com:arangodb/arangodb.git
             echo "Fetching stuff"
             git fetch --depth 1 origin 4192013cb700a80cc14d5f0a629b391209b07677 -v
             git checkout 4192013cb700a80cc14d5f0a629b391209b07677
@@ -68,7 +68,7 @@ jobs:
       - run:
           command: |
             git init
-            git remote add origin https://github.com/arangodb/arangodb.git
+            git remote add origin git@github.com:arangodb/arangodb.git
             echo "Fetching stuff"
             git fetch --depth 1 origin 4192013cb700a80cc14d5f0a629b391209b07677
             git checkout 4192013cb700a80cc14d5f0a629b391209b07677
@@ -93,7 +93,7 @@ jobs:
       - run:
           command: |
             git init
-            git remote add origin https://github.com/arangodb/arangodb.git
+            git remote add origin git@github.com:arangodb/arangodb.git
             echo "Fetching stuff"
             git fetch --depth 1 origin 4192013cb700a80cc14d5f0a629b391209b07677
             git checkout 4192013cb700a80cc14d5f0a629b391209b07677
