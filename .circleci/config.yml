@@ -42,11 +42,12 @@ jobs:
       #     split-by-sec: 60
       - run:
           command: |
-            git init
-            git remote add origin git@github.com:arangodb/arangodb.git
-            echo "Fetching stuff"
-            git fetch --depth 1 origin 4192013cb700a80cc14d5f0a629b391209b07677 -v
-            git checkout 4192013cb700a80cc14d5f0a629b391209b07677
+            git --version
+            # git init
+            # git remote add origin git@github.com:arangodb/arangodb.git
+            # echo "Fetching stuff"
+            # git fetch --depth 1 origin 4192013cb700a80cc14d5f0a629b391209b07677 -v
+            # git checkout 4192013cb700a80cc14d5f0a629b391209b07677
           name: Checkout ArangoDB
       # Stop recording and save records
       # - win-perf-diag/ensure-and-save-wpr
@@ -60,6 +61,7 @@ jobs:
     #     type: executor
     # executor: << parameters.exec >>
     steps:
+      
       # Start recording
       # - win-perf-diag/start-perflog
       # - win-perf-diag/record-wpr-in-background:
@@ -67,11 +69,12 @@ jobs:
       #     split-by-sec: 60
       - run:
           command: |
-            git init
-            git remote add origin git@github.com:arangodb/arangodb.git
-            echo "Fetching stuff"
-            git fetch --depth 1 origin 4192013cb700a80cc14d5f0a629b391209b07677
-            git checkout 4192013cb700a80cc14d5f0a629b391209b07677
+            git --version
+            # git init
+            # git remote add origin git@github.com:arangodb/arangodb.git
+            # echo "Fetching stuff"
+            # git fetch --depth 1 origin 4192013cb700a80cc14d5f0a629b391209b07677
+            # git checkout 4192013cb700a80cc14d5f0a629b391209b07677
           name: Checkout ArangoDB
       # Stop recording and save records
       # - win-perf-diag/ensure-and-save-wpr
@@ -92,11 +95,12 @@ jobs:
       #     split-by-sec: 60
       - run:
           command: |
-            git init
-            git remote add origin git@github.com:arangodb/arangodb.git
-            echo "Fetching stuff"
-            git fetch --depth 1 origin 4192013cb700a80cc14d5f0a629b391209b07677
-            git checkout 4192013cb700a80cc14d5f0a629b391209b07677
+            git --version
+            # git init
+            # git remote add origin git@github.com:arangodb/arangodb.git
+            # echo "Fetching stuff"
+            # git fetch --depth 1 origin 4192013cb700a80cc14d5f0a629b391209b07677
+            # git checkout 4192013cb700a80cc14d5f0a629b391209b07677
           name: Checkout ArangoDB
       # Stop recording and save records
       # - win-perf-diag/ensure-and-save-wpr
