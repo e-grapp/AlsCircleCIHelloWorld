@@ -3,15 +3,15 @@ version: 2.1
 executors:
   win-med:
     machine:
-      image: 'windows-server-2022-gui:2023.06.1'
+      image: 'windows-server-2019:current'
     resource_class: 'windows.medium'
   win-xl:
     machine:
-      image: 'windows-server-2022-gui:2023.05.1'
+      image: 'windows-server-2019:current'
     resource_class: 'windows.xlarge'
   win-gpu:
     machine:
-      image: 'windows-server-2022-gui:2023.06.1'
+      image: 'windows-server-2019-cuda:current'
     resource_class: 'windows.gpu.nvidia.medium'
   # win-gui-2023-07:
   #   machine:
