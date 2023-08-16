@@ -1,57 +1,59 @@
 version: 2.1
 
-# orbs:
-#   win: circleci/windows@2.4.0
-
 executors:
-  win_med:
+  win-med:
     machine:
-      image: windows-server-2019-vs2019:previous
-      resource_class: windows.large
+      image: 'windows-server-2022-gui:2023.06.1'
+    resource_class: 'windows.medium'
+  win-xl:
+    machine:
+      image: 'windows-server-2022-gui:2023.05.1'
+    resource_class: 'windows.xlarge'
+  win-gpu:
+    machine:
+      image: 'windows-server-2022-gui:2023.06.1'
+    resource_class: 'windows.gpu.nvidia.medium'
+  # win-gui-2023-07:
+  #   machine:
+  #     image: 'windows-server-2022-gui:2023.06.1
+  #   resource_class: 'windows.medium'
+  # win-gui-2023-08:
+  #   machine:
+  #     image: 'windows-server-2022-gui:2023.06.1'
+  #   resource_class: 'windows.medium'
 
 jobs:
-  build:
-    # executor:
-    #   name: win/default
-    #   shell: bash.exe
-    #   size: medium
-    executor: win_med
 
+  gitclone:
+    parameters:
+      exec:
+        type: executor
+    executor: << parameters.exec >>
     steps:
-      # - checkout
+      # Start recording
+      # - win-perf-diag/start-perflog
+      # - win-perf-diag/record-wpr-in-background:
+      #     for-sec: 100
+      #     split-by-sec: 60
       - run:
-          name: Install node with NVM
           command: |
-            # Check if Node 14.18.1 is installed
-            if ! command -v node &> /dev/null || [[ $(node -v) != "v14.18.1" ]]; then
-                echo "Node 14.18.1 is not installed"
-                # Install Node 14.18.1 with NVM
-                nvm install 14.18.1 64 && nvm use 14.18.1 64
-                # Loop until Node 14.18.1 is installed
-                while ! command -v node &> /dev/null || [[ $(node -v) != "v14.18.1" ]]; do
-                    echo "Waiting for Node 14.18.1 to be installed..."
-                    sleep 1
-                done
-                echo "Node 14.18.1 is now installed"
-            else
-                echo "Node 14.18.1 is already installed"
-            fi
-
-
-      - run:
-          name: Check NPM version
-          command: npm --version
-      - run:
-          name: Check Node version
-          command: node --version
-
+            git init
+            git remote add origin https://github.com/arangodb/arangodb.git
+            echo "Fetching stuff"
+            git fetch --depth 1 origin 4192013cb700a80cc14d5f0a629b391209b07677
+            git checkout 4192013cb700a80cc14d5f0a629b391209b07677
+          name: Checkout ArangoDB
+      # Stop recording and save records
+      # - win-perf-diag/ensure-and-save-wpr
+      # - win-perf-diag/stop-and-save-perflog
 
 workflows:
-  workflow:
+  check-this-out:
     jobs:
-      - build:
-          name: Build
-          #  << matrix.name >>
-          # matrix:
-          #   parameters:
-          #     name: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"]
+      - gitclone:
+          matrix:
+            parameters:
+              exec:
+                - win-med
+                - win-xl
+                - win-gpu
