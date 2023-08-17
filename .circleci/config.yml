@@ -12,27 +12,27 @@ jobs:
       - run:
           name: set env var
           command: |
-            Env:PATH -split ";"
-            Env:PATH += ";C:\Program Files\LLVM\bin"
-            Env:PATH split ";"
+            $Env:PATH -split ";"
+            $Env:PATH += ";C:\Program Files\LLVM\bin"
+            $Env:PATH split ";"
 
       - run:
           name: recall env var
           command: |
-            Env:PATH -split ";"
+            $Env:PATH -split ";"
 
       - run:
           name: set env var again
           command: |
-            Env:PATH += ";C:\Program Files\LLVM\bin"
+            $Env:PATH += ";C:\Program Files\LLVM\bin"
             Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
             refreshenv
-            Env:PATH split ";"
+            $Env:PATH split ";"
 
       - run:
           name: recall env var
           command: |
-            Env:PATH -split ";"
+            $Env:PATH -split ";"
 
 workflows:
   check-this-out:
