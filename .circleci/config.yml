@@ -1,23 +1,18 @@
 version: 2.1
 
 jobs:
-  python:
+  build:
     docker:
-      - image: cimg/base:current
-    resource_class: small
+      # specify the version you desire here
+      - image: cimg/base:2022.06
+    working_directory: ~/repo
     steps:
-      - run:
-          name: Fail Fast
-          when: always
-          command: |
-            if [[ ${CIRCLE_BRANCH} =~ "^master|sandbox|develop" ]]; then
-              echo "Not fast canceling - this is a major branch";
-            else
-              echo "Canceling workflow as a step resulted in failure"
-              # curl -X POST --header "Content-Type: application/json" "https://circleci.com/api/v2/workflow/${CIRCLE_WORKFLOW_ID}/cancel?circle-token=${CIRCLE_TOKEN}"
-            fi;
+      - checkout
+      - setup_remote_docker:
+          version: 20.10.14
 
 workflows:
-  test:
+  version: 2
+  pre:
     jobs:
-      - python
+      - build
