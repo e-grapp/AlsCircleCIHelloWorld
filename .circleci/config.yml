@@ -3,115 +3,38 @@ version: 2.1
 orbs:
   windows: circleci/windows@5.0.0
 
-# executors:
-#   win-med:
-#     machine:
-#       image: 'windows-server-2019:current'
-#     resource_class: 'windows.medium'
-#   win-xl:
-#     machine:
-#       image: 'windows-server-2019:current'
-#     resource_class: 'windows.xlarge'
-#   win-gpu:
-#     machine:
-#       image: 'windows-server-2019-cuda:current'
-#     resource_class: 'windows.gpu.nvidia.medium'
-  # win-gui-2023-07:
-  #   machine:
-  #     image: 'windows-server-2022-gui:2023.06.1
-  #   resource_class: 'windows.medium'
-  # win-gui-2023-08:
-  #   machine:
-  #     image: 'windows-server-2022-gui:2023.06.1'
-  #   resource_class: 'windows.medium'
 
 jobs:
-
-  gitclone-1:
+  build:
     executor: 
       name: windows/server-2019
-    # parameters:
-    #   exec:
-    #     type: executor
-    # executor: << parameters.exec >>
     steps:
-      # Start recording
-      # - win-perf-diag/start-perflog
-      # - win-perf-diag/record-wpr-in-background:
-      #     for-sec: 100
-      #     split-by-sec: 60
       - run:
+          name: set env var
           command: |
-            git --version
-            git init
-            git remote add origin https://github.com/arangodb/arangodb.git
-            echo "Fetching stuff"
-            time git fetch --depth 1 origin 4192013cb700a80cc14d5f0a629b391209b07677 -v
-            git checkout 4192013cb700a80cc14d5f0a629b391209b07677
-          name: Checkout ArangoDB
-          shell: bash
-      # Stop recording and save records
-      # - win-perf-diag/ensure-and-save-wpr
-      # - win-perf-diag/stop-and-save-perflog
+            Env:PATH -split ";"
+            Env:PATH += ";C:\Program Files\LLVM\bin"
+            Env:PATH split ";"
 
-  gitclone-2:
-    executor: 
-      name: windows/server-2019-cuda
-    # parameters:
-    #   exec:
-    #     type: executor
-    # executor: << parameters.exec >>
-    steps:
-      
-      # Start recording
-      # - win-perf-diag/start-perflog
-      # - win-perf-diag/record-wpr-in-background:
-      #     for-sec: 100
-      #     split-by-sec: 60
       - run:
+          name: recall env var
           command: |
-            git --version
-            git init
-            git remote add origin https://github.com/arangodb/arangodb.git
-            echo "Fetching stuff"
-            time git fetch --depth 1 origin 4192013cb700a80cc14d5f0a629b391209b07677 -v
-            git checkout 4192013cb700a80cc14d5f0a629b391209b07677
-          name: Checkout ArangoDB
-          shell: bash
-      # Stop recording and save records
-      # - win-perf-diag/ensure-and-save-wpr
-      # - win-perf-diag/stop-and-save-perflog
+            Env:PATH -split ";"
 
-  gitclone-3:
-    executor: 
-      name: windows/server-2022
-    # parameters:
-    #   exec:
-    #     type: executor
-    # executor: << parameters.exec >>
-    steps:
-      # Start recording
-      # - win-perf-diag/start-perflog
-      # - win-perf-diag/record-wpr-in-background:
-      #     for-sec: 100
-      #     split-by-sec: 60
       - run:
+          name: set env var again
           command: |
-            git --version
-            git init
-            git remote add origin https://github.com/arangodb/arangodb.git
-            echo "Fetching stuff"
-            time git fetch --depth 1 origin 4192013cb700a80cc14d5f0a629b391209b07677 -v
-            git checkout 4192013cb700a80cc14d5f0a629b391209b07677
-          name: Checkout ArangoDB
-          shell: bash
-      # Stop recording and save records
-      # - win-perf-diag/ensure-and-save-wpr
-      # - win-perf-diag/stop-and-save-perflog
+            Env:PATH += ";C:\Program Files\LLVM\bin"
+            Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
+            refreshenv
+            Env:PATH split ";"
+
+      - run:
+          name: recall env var
+          command: |
+            Env:PATH -split ";"
 
 workflows:
   check-this-out:
     jobs:
-      - gitclone-1
-      - gitclone-2
-      - gitclone-3
+      - build
