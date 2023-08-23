@@ -32,5 +32,9 @@ workflows:
   buid-test-deploy:
     jobs:
       - build
-      - test
-      - deploy
+      - test:
+          requires:
+            - build
+      - deploy:
+          requires:
+            - test
