@@ -1,28 +1,44 @@
-{
-    "version": 2.1,
-    "jobs": {
-      "build": {
-        "docker": [
-          {
-            "image": "cimg/openjdk:13.0"
-          }
-        ],
-        "resource_class": "medium",
-        "steps": [
-          {
-            "run": {
-              "name": "xvfb",
-              "command": "which Xvfb"
-            }
-          }
-        ]
-      }
-    },
-    "workflows": {
-      "build_and_deploy": {
-        "jobs": [
-          "build"
-        ]
-      }
-    }
-  }
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: cimg/base:2022.06
+    steps:
+      - checkout
+      - run:
+          name: Build stuff
+          command: echo "Building stuff!"
+
+  test:
+    docker:
+      - image: cimg/base:2022.06
+    steps:
+      - checkout
+      - run:
+          name: Test stuff
+          command: echo "Testing stuff!"
+
+  deploy:
+    docker:
+      - image: cimg/base:2022.06
+    steps:
+      - checkout
+      - run:
+          name: Deploy stuff
+          command: echo "Deploying stuff!"
+
+workflows:
+  buid-test-deploy:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+      - deploy:
+          requires:
+            - test
+          filters:
+            branches:
+              only:
+                - master
