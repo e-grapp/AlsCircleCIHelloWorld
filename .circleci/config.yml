@@ -8,7 +8,7 @@ jobs:
       - checkout
       - run:
           name: Build stuff
-          command: dskjhfgdkjhg
+          command: echo "Building stuff!"
 
   test:
     docker:
