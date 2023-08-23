@@ -37,9 +37,11 @@ workflows:
             - build
       - approve:
           type: approval
-      - deploy:
           requires:
             - test
+      - deploy:
+          requires:
+            - approve
           filters:
             branches:
               only:
