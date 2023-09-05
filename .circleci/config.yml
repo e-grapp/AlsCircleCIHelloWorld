@@ -24,7 +24,7 @@ jobs:
             
             # $Env:VCPKG_ROOT = 'C:\Program Files\Microsoft Visual Studio\2022\Community\VC\vcpkg\'
             [Environment]::SetEnvironmentVariable("VCPKG_ROOT", $env:VCPKG_ROOT + "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\vcpkg\, 'User')
-            a$Env:VCPKG_ROOT
+            $Env:VCPKG_ROOT
             
 
 
