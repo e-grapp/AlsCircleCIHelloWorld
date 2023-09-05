@@ -12,6 +12,7 @@ jobs:
       - run:
           name: set env var
           command: |
+            New-Item -Path "C:\Temp" -Name "Temp" -ItemType "directory"
             New-Item -Path . -Name "job1-1.txt" -ItemType "file"
             New-Item -Path . -Name "job1-2.txt" -ItemType "file"
             New-Item -Path . -Name "job2.txt" -ItemType "file"
