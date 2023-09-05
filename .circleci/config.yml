@@ -12,36 +12,45 @@ jobs:
       - run:
           name: set env var
           command: |
-            New-Item -Path "C:\Temp" -Name "Temp" -ItemType "directory"
-            New-Item -Path . -Name "job1-1.txt" -ItemType "file"
-            New-Item -Path . -Name "job1-2.txt" -ItemType "file"
-            New-Item -Path . -Name "job2.txt" -ItemType "file"
-            New-Item -Path . -Name "job3.txt" -ItemType "file"
-            New-Item -Path . -Name "job4.txt" -ItemType "file"
-            $Env:PATH -split ";" | Out-String | Set-Content -Path C:\Temp\job1-1.txt
-            $Env:PATH += ";C:\Program Files\LLVM\bin"
-            $Env:PATH -split ";" | Out-String | Set-Content -Path C:\Temp\job1-2.txt
+            # New-Item -Path "C:\Temp" -Name "Temp" -ItemType "directory"
+            # New-Item -Path . -Name "job1-1.txt" -ItemType "file"
+            # New-Item -Path . -Name "job1-2.txt" -ItemType "file"
+            # New-Item -Path . -Name "job2.txt" -ItemType "file"
+            # New-Item -Path . -Name "job3.txt" -ItemType "file"
+            # New-Item -Path . -Name "job4.txt" -ItemType "file"
+            # $Env:PATH -split ";" | Out-String | Set-Content -Path C:\Temp\job1-1.txt
+            # $Env:PATH += ";C:\Program Files\LLVM\bin"
+            # $Env:PATH -split ";" | Out-String | Set-Content -Path C:\Temp\job1-2.txt
+            $Env:VCPKG_ROOT "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\vcpkg\"
+            echo "==========="
+            $Env:VCPKG_ROOT
 
       - run:
           name: recall env var
           command: |
-            $Env:PATH -split ";" | Out-String | Set-Content -Path C:\Temp\job2.txt
+            # $Env:PATH -split ";" | Out-String | Set-Content -Path C:\Temp\job2.txt
+            $Env:VCPKG_ROOT
 
       - run:
-          name: set env var again
+          name: set env var again with refreshenv
           command: |
-            $Env:PATH += ";C:\Program Files\LLVM\bin"
-            Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
+            # $Env:PATH += ";C:\Program Files\LLVM\bin"
+            # Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
+            # refreshenv
+            # $Env:PATH split ";" | Out-String | Set-Content -Path C:\Temp\job3.txt
+            $Env:VCPKG_ROOT "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\vcpkg\"
+            echo "==========="
+            $Env:VCPKG_ROOT
             refreshenv
-            $Env:PATH split ";" | Out-String | Set-Content -Path C:\Temp\job3.txt
 
       - run:
           name: recall env var
           command: |
-            $Env:PATH -split ";" | Out-String | Set-Content -Path C:\Temp\job4.txt
+            # $Env:PATH -split ";" | Out-String | Set-Content -Path C:\Temp\job4.txt
+            $Env:VCPKG_ROOT
 
-      - store_artifacts:
-          path: C:\Temp
+      # - store_artifacts:
+      #     path: C:\Temp
 
 workflows:
   check-this-out:
