@@ -21,7 +21,7 @@ jobs:
             # $Env:PATH -split ";" | Out-String | Set-Content -Path C:\Temp\job1-1.txt
             # $Env:PATH += ";C:\Program Files\LLVM\bin"
             # $Env:PATH -split ";" | Out-String | Set-Content -Path C:\Temp\job1-2.txt
-            $Env:VCPKG_ROOT "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\vcpkg\"
+            $Env:VCPKG_ROOT 'C:\Program Files\Microsoft Visual Studio\2022\Community\VC\vcpkg\'
             echo "==========="
             $Env:VCPKG_ROOT
 
@@ -38,7 +38,7 @@ jobs:
             # Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
             # refreshenv
             # $Env:PATH split ";" | Out-String | Set-Content -Path C:\Temp\job3.txt
-            $Env:VCPKG_ROOT "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\vcpkg\"
+            $Env:VCPKG_ROOT 'C:\Program Files\Microsoft Visual Studio\2022\Community\VC\vcpkg\'
             echo "==========="
             $Env:VCPKG_ROOT
             refreshenv
