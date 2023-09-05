@@ -21,14 +21,16 @@ jobs:
             # $Env:PATH -split ";" | Out-String | Set-Content -Path C:\Temp\job1-1.txt
             # $Env:PATH += ";C:\Program Files\LLVM\bin"
             # $Env:PATH -split ";" | Out-String | Set-Content -Path C:\Temp\job1-2.txt
+            Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
             $Env:VCPKG_ROOT = 'C:\Program Files\Microsoft Visual Studio\2022\Community\VC\vcpkg\'
-            echo "==========="
+            echo "Echoing a string we just set:"
             $Env:VCPKG_ROOT
 
       - run:
           name: recall env var
           command: |
             # $Env:PATH -split ";" | Out-String | Set-Content -Path C:\Temp\job2.txt
+            echo "Echoing the string we set in the previous step"
             $Env:VCPKG_ROOT
 
       - run:
@@ -39,7 +41,7 @@ jobs:
             # refreshenv
             # $Env:PATH split ";" | Out-String | Set-Content -Path C:\Temp\job3.txt
             $Env:VCPKG_ROOT = 'C:\Program Files\Microsoft Visual Studio\2022\Community\VC\vcpkg\'
-            echo "==========="
+            echo "Echoing the string we just set (if it didn't persist)"
             $Env:VCPKG_ROOT
             refreshenv
 
@@ -47,6 +49,7 @@ jobs:
           name: recall env var
           command: |
             # $Env:PATH -split ";" | Out-String | Set-Content -Path C:\Temp\job4.txt
+            echo "Echoing the string after a refreshenv:"
             $Env:VCPKG_ROOT
 
       # - store_artifacts:
