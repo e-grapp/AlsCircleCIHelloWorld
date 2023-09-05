@@ -23,7 +23,9 @@ jobs:
             # $Env:PATH -split ";" | Out-String | Set-Content -Path C:\Temp\job1-2.txt
             
             # $Env:VCPKG_ROOT = 'C:\Program Files\Microsoft Visual Studio\2022\Community\VC\vcpkg\'
-            [Environment]::SetEnvironmentVariable("VCPKG_ROOT", $env:VCPKG_ROOT + "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\vcpkg\, 'User')
+            # [Environment]::SetEnvironmentVariable("VCPKG_ROOT", $env:VCPKG_ROOT + "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\vcpkg\, 'User')
+
+            Add-Content -Path $Profile.CurrentUserAllHosts -Value '$Env:VCPKG_ROOT = "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\vcpkg\"'
             $Env:VCPKG_ROOT
             
 
