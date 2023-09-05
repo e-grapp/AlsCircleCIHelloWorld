@@ -28,8 +28,8 @@ jobs:
             # Add-Content -Path $Profile.CurrentUserAllHosts -Value '$Env:VCPKG_ROOT = "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\vcpkg\"'
 
             [Environment]::SetEnvironmentVariable('VCPKG_ROOT', 'C:\Program Files\Microsoft Visual Studio\2022\Community\VC\vcpkg\', 'Machine')
-            $Env:VCPKG_ROOT
-            
+            # $Env:VCPKG_ROOT
+            [Environment]::GetEnvironmentVariable('VCPKG_ROOT', 'Machine')
 
 
       - run:
@@ -37,7 +37,7 @@ jobs:
           command: |
             # $Env:PATH -split ";" | Out-String | Set-Content -Path C:\Temp\job2.txt
             # echo "Echoing the string we set in the previous step"
-            $Env:VCPKG_ROOT
+            [Environment]::GetEnvironmentVariable('VCPKG_ROOT', 'Machine')
 
       - run:
           name: set env var again with refreshenv
