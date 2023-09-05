@@ -51,8 +51,9 @@ jobs:
           command: |
             # $Env:PATH -split ";" | Out-String | Set-Content -Path C:\Temp\job4.txt
             echo "Echoing the string after a refreshenv:"
-            $Env:VCPKG_ROOT
-
+            [Environment]::GetEnvironmentVariables($VCPKG_ROOT)
+            # $Env:VCPKG_ROOT
+            
       # - store_artifacts:
       #     path: C:\Temp
 
