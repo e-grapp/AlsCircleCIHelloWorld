@@ -9,12 +9,12 @@ jobs:
     executor: 
       name: windows/server-2019
     steps:
-      - run:
-          name: set env var
-          command: |
-            $Env:PATH -split ";" | Out-File -Path C:\Temp\job1-1.txt
-            $Env:PATH += ";C:\Program Files\LLVM\bin"
-            $Env:PATH -split ";" | Out-File -Path C:\Temp\job1-2.txt
+      # - run:
+      #     name: set env var
+      #     command: |
+      #       $Env:PATH -split ";" | Out-File -Path C:\Temp\job1-1.txt
+      #       $Env:PATH += ";C:\Program Files\LLVM\bin"
+      #       $Env:PATH -split ";" | Out-File -Path C:\Temp\job1-2.txt
 
       - run:
           name: recall env var
