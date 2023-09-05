@@ -12,14 +12,19 @@ jobs:
       - run:
           name: set env var
           command: |
-            $Env:PATH -split ";" | Set-Content -Path C:\Temp\job1-1.txt
+            New-Item -Path . -Name "job1-1.txt" -ItemType "file"
+            New-Item -Path . -Name "job1-2.txt" -ItemType "file"
+            New-Item -Path . -Name "job2.txt" -ItemType "file"
+            New-Item -Path . -Name "job3.txt" -ItemType "file"
+            New-Item -Path . -Name "job4.txt" -ItemType "file"
+            $Env:PATH -split ";" | Out-String | Set-Content -Path C:\Temp\job1-1.txt
             $Env:PATH += ";C:\Program Files\LLVM\bin"
-            $Env:PATH -split ";" | Set-Content -Path C:\Temp\job1-2.txt
+            $Env:PATH -split ";" | Out-String | Set-Content -Path C:\Temp\job1-2.txt
 
       - run:
           name: recall env var
           command: |
-            $Env:PATH -split ";" | Set-Content -Path C:\Temp\job2.txt
+            $Env:PATH -split ";" | Out-String | Set-Content -Path C:\Temp\job2.txt
 
       - run:
           name: set env var again
@@ -27,12 +32,12 @@ jobs:
             $Env:PATH += ";C:\Program Files\LLVM\bin"
             Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
             refreshenv
-            $Env:PATH split ";" | Set-Content -Path C:\Temp\job3.txt
+            $Env:PATH split ";" | Out-String | Set-Content -Path C:\Temp\job3.txt
 
       - run:
           name: recall env var
           command: |
-            $Env:PATH -split ";" | Set-Content -Path C:\Temp\job4.txt
+            $Env:PATH -split ";" | Out-String | Set-Content -Path C:\Temp\job4.txt
 
       - store_artifacts:
           path: C:\Temp
