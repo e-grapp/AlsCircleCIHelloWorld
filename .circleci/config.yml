@@ -50,9 +50,9 @@ jobs:
           name: recall env var
           command: |
             # $Env:PATH -split ";" | Out-String | Set-Content -Path C:\Temp\job4.txt
+            Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
             echo "Echoing the string after a refreshenv:"
-            [Environment]::GetEnvironmentVariables($VCPKG_ROOT)
-            # $Env:VCPKG_ROOT
+            $Env:VCPKG_ROOT
             
       # - store_artifacts:
       #     path: C:\Temp
