@@ -24,7 +24,7 @@ jobs:
             
             # $Env:VCPKG_ROOT = 'C:\Program Files\Microsoft Visual Studio\2022\Community\VC\vcpkg\'
             [Environment]::SetEnvironmentVariable("VCPKG_ROOT", $env:VCPKG_ROOT + "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\vcpkg\, 'User')
-            echo "Echoing a string we just set:"
+            # echo "Echoing a string we just set:"
             $Env:VCPKG_ROOT
             
 
