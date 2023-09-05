@@ -33,7 +33,7 @@ jobs:
           name: recall env var
           command: |
             # $Env:PATH -split ";" | Out-String | Set-Content -Path C:\Temp\job2.txt
-            echo "Echoing the string we set in the previous step"
+            # echo "Echoing the string we set in the previous step"
             $Env:VCPKG_ROOT
 
       - run:
