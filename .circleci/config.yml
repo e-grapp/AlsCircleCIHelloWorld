@@ -1,8 +1,9 @@
 version: 2.1
 
-# orbs:
+orbs:
   # python: circleci/python@2.1.1
-  # mac: circleci/macos@2.3.4
+  mac: circleci/macos@2.3.4
+  slack: circleci/slack@4.12.5
 
 jobs:
   build:
@@ -24,6 +25,8 @@ jobs:
             Echo “TOTO”
             which bash
             bash --version
+            eval printf
+      - slack/notify
 
       # - run:
       #     # shell: /opt/homebrew/bin/bash --login -eo pipefail
