@@ -44,6 +44,8 @@ jobs:
       - run:
           name: recall without .net hack
           command: |
+            Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
+            refreshenv
             $Env:VCPKG_ROOT
 
       #       # $Env:PATH += ";C:\Program Files\LLVM\bin"
