@@ -42,25 +42,27 @@ jobs:
             # [Environment]::GetEnvironmentVariable('VCPKG_ROOT', 'Machine')
 
       - run:
-          name: set env var again with refreshenv
+          name: recall without .net hack
           command: |
-            # $Env:PATH += ";C:\Program Files\LLVM\bin"
-            # Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
-            # refreshenv
-            # $Env:PATH split ";" | Out-String | Set-Content -Path C:\Temp\job3.txt
-            Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
-            $Env:VCPKG_ROOT = 'C:\Program Files\Microsoft Visual Studio\2022\Community\VC\vcpkg\'
-            echo "Echoing the string we just set (if it didn't persist)"
             $Env:VCPKG_ROOT
-            refreshenv
 
-      - run:
-          name: recall env var
-          command: |
-            # $Env:PATH -split ";" | Out-String | Set-Content -Path C:\Temp\job4.txt
-            Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
-            echo "Echoing the string after a refreshenv:"
-            $Env:VCPKG_ROOT
+      #       # $Env:PATH += ";C:\Program Files\LLVM\bin"
+      #       # Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
+      #       # refreshenv
+      #       # $Env:PATH split ";" | Out-String | Set-Content -Path C:\Temp\job3.txt
+      #       Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
+      #       $Env:VCPKG_ROOT = 'C:\Program Files\Microsoft Visual Studio\2022\Community\VC\vcpkg\'
+      #       echo "Echoing the string we just set (if it didn't persist)"
+      #       $Env:VCPKG_ROOT
+      #       refreshenv
+
+      # - run:
+      #     name: recall env var
+      #     command: |
+      #       # $Env:PATH -split ";" | Out-String | Set-Content -Path C:\Temp\job4.txt
+      #       Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
+      #       echo "Echoing the string after a refreshenv:"
+      #       $Env:VCPKG_ROOT
             
       # - store_artifacts:
       #     path: C:\Temp
