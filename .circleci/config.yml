@@ -25,7 +25,8 @@ jobs:
             Echo “TOTO”
             which bash
             bash --version
-            eval printf
+            /bin/sh echo "something"
+            # eval printf
       # - slack/notify
 
       # - run:
