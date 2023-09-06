@@ -20,6 +20,8 @@ jobs:
       - run:
           name: bash ver
           command: |
+            #!/usr/bin/env sh
+            Echo “TOTO”
             which bash
             bash --version
 
