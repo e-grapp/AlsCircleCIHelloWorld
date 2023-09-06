@@ -37,8 +37,9 @@ jobs:
           command: |
             # $Env:PATH -split ";" | Out-String | Set-Content -Path C:\Temp\job2.txt
             # echo "Echoing the string we set in the previous step"
+            $env:VCPKG_ROOT = "[Environment]::GetEnvironmentVariable('VCPKG_ROOT', 'Machine')"
             $env:VCPKG_ROOT
-            [Environment]::GetEnvironmentVariable('VCPKG_ROOT', 'Machine')
+            # [Environment]::GetEnvironmentVariable('VCPKG_ROOT', 'Machine')
 
       - run:
           name: set env var again with refreshenv
