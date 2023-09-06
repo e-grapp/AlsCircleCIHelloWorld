@@ -1,9 +1,9 @@
 version: 2.1
 
-orbs:
-  # python: circleci/python@2.1.1
-  mac: circleci/macos@2.3.4
-  slack: circleci/slack@4.12.5
+# orbs:
+#   # python: circleci/python@2.1.1
+#   mac: circleci/macos@2.3.4
+#   slack: circleci/slack@4.12.5
 
 jobs:
   build:
@@ -21,12 +21,12 @@ jobs:
       - run:
           name: bash ver
           command: |
-            #!/usr/bin/env sh
+            #!/bin/sh
             Echo “TOTO”
             which bash
             bash --version
             eval printf
-      - slack/notify
+      # - slack/notify
 
       # - run:
       #     # shell: /opt/homebrew/bin/bash --login -eo pipefail
