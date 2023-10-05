@@ -4,7 +4,7 @@ jobs:
   build:
     docker:
       - image: cimg/base:2022.06
-    working_directory: mystuff
+    working_directory: ~/project/mystuff
     steps:
       - checkout
       - run:
