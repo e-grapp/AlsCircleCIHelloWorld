@@ -25,7 +25,7 @@ jobs:
           name: fail step
           command: asdasdsadf
       - when_step:
-          when: always
+          when: on_success
       - run:
           name: Build stuff
           command: echo "Building stuff!"
