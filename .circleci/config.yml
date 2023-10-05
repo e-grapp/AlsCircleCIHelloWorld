@@ -21,6 +21,9 @@ jobs:
     working_directory: ~/mystuff
     steps:
       - checkout
+      - run:
+          name: fail step
+          command: asdasdsadf
       - when_step:
           when: always
       - run:
