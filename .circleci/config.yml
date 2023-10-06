@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  jira: circleci/jira@2.0.1
+
 commands:
   when_step:
     parameters:
@@ -29,6 +32,7 @@ jobs:
       - run:
           name: Build stuff
           command: echo "Building stuff!"
+      - jira/notify
 
   test:
     docker:
@@ -51,7 +55,8 @@ jobs:
 workflows:
   buid-test-deploy:
     jobs:
-      - build
+      - build:
+          context: jira
       - test:
           requires:
             - build
