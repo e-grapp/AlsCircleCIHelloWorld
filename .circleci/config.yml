@@ -18,8 +18,7 @@ jobs:
       xcode: 14.3.1
     resource_class: macos.m1.medium.gen1
     steps:
-      - macos/enable-vnc:
-          password: 'mysecretpassword'
+      - macos/enable-vnc
       - run:
           name: bash ver
           command: |
