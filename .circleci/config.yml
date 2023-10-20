@@ -26,7 +26,7 @@ jobs:
     steps:
       - setup_remote_docker:
           docker_layer_caching: false
-          version: 20.10.23
+          # version: 20.10.23
       - run: docker --version
       - checkout
       - run:
