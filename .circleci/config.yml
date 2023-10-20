@@ -26,7 +26,7 @@ jobs:
     steps:
       - setup_remote_docker:
           docker_layer_caching: false
-          version: current
+          version: previous
       # - run: docker --version
       - checkout
       # - run:
@@ -65,14 +65,14 @@ workflows:
       - test:
           requires:
             - build
-      - approve:
-          type: approval
-          requires:
-            - test
-      - deploy:
-          requires:
-            - approve
-          filters:
-            branches:
-              only:
-                - master
+      # - approve:
+      #     type: approval
+      #     requires:
+      #       - test
+      # - deploy:
+      #     requires:
+      #       - approve
+      #     filters:
+      #       branches:
+      #         only:
+      #           - master
