@@ -26,7 +26,7 @@ jobs:
     steps:
       - setup_remote_docker:
           docker_layer_caching: false
-          version: edge
+          version: prev
       # - run: docker --version
       - checkout
       # - run:
