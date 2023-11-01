@@ -33,7 +33,7 @@ jobs:
 
 
       - run:
-          name: recall env var
+          name: recall env var from .NET
           command: |
             # $Env:PATH -split ";" | Out-String | Set-Content -Path C:\Temp\job2.txt
             # echo "Echoing the string we set in the previous step"
@@ -47,6 +47,10 @@ jobs:
             Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
             refreshenv
             $Env:VCPKG_ROOT
+
+      - run:
+          name: recall just env var
+          command: $Env:VCPKG_ROOT
 
       #       # $Env:PATH += ";C:\Program Files\LLVM\bin"
       #       # Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
