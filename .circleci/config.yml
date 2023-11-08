@@ -15,7 +15,7 @@ jobs:
     #     type: string
     #     default: "iPhone 13 Pro Max"
     macos:
-      xcode: 15.0.1
+      xcode: 15.0.0
     resource_class: macos.m1.medium.gen1
     steps:
       - macos/enable-vnc
