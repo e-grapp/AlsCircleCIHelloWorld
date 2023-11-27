@@ -20,12 +20,13 @@ jobs:
     steps:
       - macos/enable-vnc
       - run:
+          shell: /bin/zsh
           name: bash ver
           command: |
             #!/bin/sh
             Echo “TOTO”
-            which bash
-            bash --version
+            which `zsh`
+            zsh --version
             /bin/sh echo "something"
             # eval printf
       # - slack/notify
