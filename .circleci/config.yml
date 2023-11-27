@@ -23,11 +23,12 @@ jobs:
           shell: /bin/zsh
           name: bash ver
           command: |
+            echo $0
             #!/bin/sh
-            Echo “TOTO”
-            which `zsh`
-            zsh --version
-            /bin/sh echo "something"
+            # Echo “TOTO”
+            # which `zsh`
+            # zsh --version
+            # /bin/sh echo "something"
             # eval printf
       # - slack/notify
 
