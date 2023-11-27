@@ -16,7 +16,7 @@ jobs:
     #     default: "iPhone 13 Pro Max"
     macos:
       xcode: 15.1.0
-    resource_class: macos-m1.free
+    resource_class: m1-free
     # resource_class: macos.m1.medium.gen1
     steps:
       # - macos/enable-vnc
