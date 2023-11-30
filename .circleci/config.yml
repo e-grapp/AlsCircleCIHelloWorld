@@ -59,9 +59,9 @@ jobs:
       - run:
           name: First step that invokes shell
           command: |
-            touch /tmp/vars
-            echo "export BRANCH_NAMESPACE=uitest-xcresult" >> /tmp/vars
-      - run: cat /tmp/vars >> ${BASH_ENV};
+            touch ~/tmp/vars
+            echo "export BRANCH_NAMESPACE=uitest-xcresult" >> ~/tmp/vars
+      - run: cat ~/tmp/vars >> ${BASH_ENV};
       - sync-ruby-cache
 
 workflows:
