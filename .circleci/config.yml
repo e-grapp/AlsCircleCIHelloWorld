@@ -1,101 +1,172 @@
 version: 2.1
 
 orbs:
-#   # python: circleci/python@2.1.1
+  ##
+  # macos
   macos: circleci/macos@2.4.0
-#   slack: circleci/slack@4.12.5
+
+
+parameters:
+  shell:
+    type: string
+    default: bash
+
+aliases:
+  # Cache management
+  - &restore-dependencies-cache
+    name: 'Restore dependencies cache'
+    key: cache-bundle-{{ checksum "Gemfile.lock" }}
+
+  - &save-dependencies-cache
+    name: 'Save dependencies cache'
+    key: cache-bundle-{{ checksum "Gemfile.lock" }}
+    paths:
+      - vendor/bundle
+
+executors:
+  macos_exec:
+    macos:
+      xcode: 15.0.0
+    resource_class: macos.x86.medium.gen2
+
+commands:
+  sync-ruby-cache:
+    steps:
+      - macos/switch-ruby:
+          version: "3.2"
+      - restore_cache: *restore-dependencies-cache
+      # Install gems.
+      - run:
+          name: Bundle install
+          command: |
+            bundle check
+            bundle install
+          environment:
+            BUNDLE_JOBS: 4
+            BUNDLE_RETRY: 3
+      - save_cache: *save-dependencies-cache
 
 jobs:
-  build:
-    # parameters:
-    #   xcode_version:
-    #     type: string
-    #     default: "14.3.1"
-    #   device_version:
-    #     type: string
-    #     default: "iPhone 13 Pro Max"
-    macos:
-      xcode: 15.1.0
-    resource_class: m1-free
-    # resource_class: macos.m1.medium.gen1
+  # Job for adding any CI dependencies to cache
+  build_for_testing:
+    executor: macos_exec
+    shell: /bin/<< pipeline.parameters.shell >>
+    environment:
+      BASH_ENV: "/Users/distiller/.<< pipeline.parameters.shell >>rc"
+    working_directory: "/Users/distiller/project"
     steps:
-      # - macos/enable-vnc
+      # this is just here to mimic the thing that happens in our real pipeline
       - run:
-          shell: /bin/zsh
-          name: bash ver
+          name: First step that invokes shell
           command: |
-            echo $0
-            #!/bin/sh
-            # Echo “TOTO”
-            # which `zsh`
-            # zsh --version
-            # /bin/sh echo "something"
-            # eval printf
-      # - slack/notify
-
-      # - run:
-      #     # shell: /opt/homebrew/bin/bash --login -eo pipefail
-      #     command: |
-      #       # /opt/homebrew/bin/bash --version
-      #       # echo "==========================="
-      #       /bin/bash --version
-      #       echo "==========================="
-      #       bash --version
-      # - run: bash --version
-      # - run:
-      #     command: |
-      #       brew update
-      #       brew install bash
-      # - run: which bash
-      # - run: echo $0
-      # - run: ls -al /usr/local/bin
-      # - run: bash --version
-      # - run: ls -al /bin/bash
-      # - run:
-      #     shell: /opt/homebrew/bin/bash --login -eo pipefail
-      #     command: |
-      #       /opt/homebrew/bin/bash --version
-      #       echo "==========================="
-      #       /bin/bash --version
-      #       echo "==========================="
-      #       bash --version
-      # - run: 
-      #     command: |
-      #       /opt/homebrew/bin/bash --version
-      #       echo "==========================="
-      #       /bin/bash --version
-      #       echo "==========================="
-      #       bash --version
-
-      # - when:
-      #     condition:
-      #       equal: [true, true]
-      #     steps:
-      #       - persist_to_workspace:
-      #           root: .
-      #           paths:
-      #             - .
-
-      
-  # deploy:
-  #   macos: 
-  #     xcode: "13.4.1"
-  #   resource_class: macos.x86.medium.gen2
-  #   when:
-  #     condition:
-  #       equal: [true, true]
-  #     steps:
-  #       - run: pwd
-
+            touch /tmp/vars
+            echo "export BRANCH_NAMESPACE=uitest-xcresult" >> /tmp/vars
+      - run: cat /tmp/vars >> ${BASH_ENV};
+      - sync-ruby-cache
 
 workflows:
-  workflow-mac:
+  ui-test-development:
     jobs:
-      - build
-          # matrix:
-          #   parameters:
-          #     xcode_version: ["13.4.1"]
-          #     device_version: ["iPhone 14 Pro Max"]
-          # post-steps:
-          #   - run: pwd
-      # - deploy
+      - build_for_testing
+
+# version: 2.1
+
+# orbs:
+# #   # python: circleci/python@2.1.1
+#   macos: circleci/macos@2.4.0
+# #   slack: circleci/slack@4.12.5
+
+# jobs:
+#   build:
+#     # parameters:
+#     #   xcode_version:
+#     #     type: string
+#     #     default: "14.3.1"
+#     #   device_version:
+#     #     type: string
+#     #     default: "iPhone 13 Pro Max"
+#     macos:
+#       xcode: 15.1.0
+#     resource_class: m1-free
+#     # resource_class: macos.m1.medium.gen1
+#     steps:
+#       # - macos/enable-vnc
+#       - run:
+#           shell: /bin/zsh
+#           name: bash ver
+#           command: |
+#             echo $0
+#             #!/bin/sh
+#             # Echo “TOTO”
+#             # which `zsh`
+#             # zsh --version
+#             # /bin/sh echo "something"
+#             # eval printf
+#       # - slack/notify
+
+#       # - run:
+#       #     # shell: /opt/homebrew/bin/bash --login -eo pipefail
+#       #     command: |
+#       #       # /opt/homebrew/bin/bash --version
+#       #       # echo "==========================="
+#       #       /bin/bash --version
+#       #       echo "==========================="
+#       #       bash --version
+#       # - run: bash --version
+#       # - run:
+#       #     command: |
+#       #       brew update
+#       #       brew install bash
+#       # - run: which bash
+#       # - run: echo $0
+#       # - run: ls -al /usr/local/bin
+#       # - run: bash --version
+#       # - run: ls -al /bin/bash
+#       # - run:
+#       #     shell: /opt/homebrew/bin/bash --login -eo pipefail
+#       #     command: |
+#       #       /opt/homebrew/bin/bash --version
+#       #       echo "==========================="
+#       #       /bin/bash --version
+#       #       echo "==========================="
+#       #       bash --version
+#       # - run: 
+#       #     command: |
+#       #       /opt/homebrew/bin/bash --version
+#       #       echo "==========================="
+#       #       /bin/bash --version
+#       #       echo "==========================="
+#       #       bash --version
+
+#       # - when:
+#       #     condition:
+#       #       equal: [true, true]
+#       #     steps:
+#       #       - persist_to_workspace:
+#       #           root: .
+#       #           paths:
+#       #             - .
+
+      
+#   # deploy:
+#   #   macos: 
+#   #     xcode: "13.4.1"
+#   #   resource_class: macos.x86.medium.gen2
+#   #   when:
+#   #     condition:
+#   #       equal: [true, true]
+#   #     steps:
+#   #       - run: pwd
+
+
+# workflows:
+#   workflow-mac:
+#     jobs:
+#       - build
+#           # matrix:
+#           #   parameters:
+#           #     xcode_version: ["13.4.1"]
+#           #     device_version: ["iPhone 14 Pro Max"]
+#           # post-steps:
+#           #   - run: pwd
+#       # - deploy
