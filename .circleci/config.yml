@@ -50,7 +50,7 @@ jobs:
   # Job for adding any CI dependencies to cache
   build_for_testing:
     executor: macos_exec
-    shell: /bin/<< pipeline.parameters.shell >>
+    shell: /bin/<< pipeline.parameters.shell >> --login -eo pipefail
     environment:
       BASH_ENV: "/Users/distiller/.<< pipeline.parameters.shell >>rc"
     working_directory: "/Users/distiller/project"
