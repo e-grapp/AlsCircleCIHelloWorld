@@ -57,7 +57,7 @@ jobs:
     steps:
       - run:
           command: |
-            /bin/bash --version
+            brew install bash && bash --version
             /bin/zsh --version
       # this is just here to mimic the thing that happens in our real pipeline
       # - run:
