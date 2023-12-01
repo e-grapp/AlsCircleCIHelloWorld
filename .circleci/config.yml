@@ -26,7 +26,7 @@ aliases:
 executors:
   macos_exec:
     macos:
-      xcode: 15.0.0
+      xcode: 14.1.0
     resource_class: macos.x86.medium.gen2
 
 commands:
@@ -59,6 +59,7 @@ jobs:
       - run:
           name: First step that invokes shell
           command: |
+            mkdir ~/tmp
             touch ~/tmp/vars
             echo "export BRANCH_NAMESPACE=uitest-xcresult" >> ~/tmp/vars
       - run: cat ~/tmp/vars >> ${BASH_ENV};
