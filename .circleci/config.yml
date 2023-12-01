@@ -1,43 +1,63 @@
 version: 2.1
 
 jobs:
-  build:
+  my-job:
     machine:
-      image: ubuntu-2204:2022.10.2
-      
+      image: ubuntu-2004:2023.10.1
+    
     steps:
-      # - checkout
-      # - run:
-      #     name: Check Docker version
-      #     command: docker --version
+      - checkout
       - run:
-          name: Install stuff
           command: |
-            # $nrconf{restart} = 'i';
-            sudo sed -i 's/#$nrconf{restart} = '"'"'i'"'"';/$nrconf{restart} = '"'"'a'"'"';/g' /etc/needrestart/needrestart.conf
-            sudo apt update && sudo apt install -y build-essential cmake clang clang-format esbuild shellcheck ninja-build hugo doxygen rapidjson-dev googletest libjavascriptcoregtk-4.0-dev
-  
-  # unittest:
-  #   machine:
-  #     image: ubuntu-2004:202111-02
-  #     # docker_layer_caching: true
-  #   # working_directory: ~/hotpie
+              echo "Hello"
+          name: Wesh on check la version, gros
 
-  #   steps:
-  #     - run:
-  #         name: Install stuff
-  #         command: |
-  #           # $nrconf{restart} = 'i';
-  #           sudo apt update && sudo apt install -y build-essential cmake clang clang-format esbuild shellcheck ninja-build hugo doxygen rapidjson-dev googletest libjavascriptcoregtk-4.0-dev
-  #     # - checkout
 
 workflows:
   workflow:
     jobs:
-      - build:
-          name: Build
-      # - unittest
-          #  << matrix.name >>
-          # matrix:
-          #   parameters:
-          #     name: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"]
+      - my-job
+
+# version: 2.1
+
+# jobs:
+#   build:
+#     machine:
+#       image: ubuntu-2204:2022.10.2
+      
+#     steps:
+#       # - checkout
+#       # - run:
+#       #     name: Check Docker version
+#       #     command: docker --version
+#       - run:
+#           name: Install stuff
+#           command: |
+#             # $nrconf{restart} = 'i';
+#             sudo sed -i 's/#$nrconf{restart} = '"'"'i'"'"';/$nrconf{restart} = '"'"'a'"'"';/g' /etc/needrestart/needrestart.conf
+#             sudo apt update && sudo apt install -y build-essential cmake clang clang-format esbuild shellcheck ninja-build hugo doxygen rapidjson-dev googletest libjavascriptcoregtk-4.0-dev
+  
+#   # unittest:
+#   #   machine:
+#   #     image: ubuntu-2004:202111-02
+#   #     # docker_layer_caching: true
+#   #   # working_directory: ~/hotpie
+
+#   #   steps:
+#   #     - run:
+#   #         name: Install stuff
+#   #         command: |
+#   #           # $nrconf{restart} = 'i';
+#   #           sudo apt update && sudo apt install -y build-essential cmake clang clang-format esbuild shellcheck ninja-build hugo doxygen rapidjson-dev googletest libjavascriptcoregtk-4.0-dev
+#   #     # - checkout
+
+# workflows:
+#   workflow:
+#     jobs:
+#       - build:
+#           name: Build
+#       # - unittest
+#           #  << matrix.name >>
+#           # matrix:
+#           #   parameters:
+#           #     name: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"]
