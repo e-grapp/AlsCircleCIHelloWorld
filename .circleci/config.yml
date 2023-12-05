@@ -49,6 +49,12 @@ jobs:
             $Env:VCPKG_ROOT
 
       - run:
+          name: recall with just refreshenv
+          command: |
+            refreshenv
+            $Env:VCPKG_ROOT
+
+      - run:
           name: recall just env var
           command: $Env:VCPKG_ROOT
 
