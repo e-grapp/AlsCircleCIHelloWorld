@@ -10,7 +10,7 @@ jobs:
           command: pwd
       - run:
           name: Check status
-          command: echo "${JOB_STATUS}"
+          command: echo ${CIRCLE_JOB}
 
   failing:
     docker:
@@ -21,7 +21,7 @@ jobs:
           command: pwd
       - run:
           name: Check status
-          command: echo "${JOB_STATUS}"
+          command: echo ${CIRCLE_JOB}
       - run:
           name: Fails
           command: skdjfhdjhfg
@@ -33,13 +33,13 @@ workflows:
           post-steps:
             - run:
                 name: Check status
-                command: echo "${JOB_STATUS}"
+                command: echo ${CIRCLE_JOB}
                 when: always
       - failing:
           post-steps:
             - run:
                 name: Check status
-                command: echo "${JOB_STATUS}"
+                command: echo ${CIRCLE_JOB}
                 when: always
           
       
