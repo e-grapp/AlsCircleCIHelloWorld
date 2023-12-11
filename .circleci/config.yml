@@ -9,8 +9,8 @@ jobs:
           name: Something
           command: pwd
       - run:
-          name: Sleep
-          command: sleep 60
+          name: Check status
+          command: echo $JOB_STATUS
 
   failing:
     docker:
@@ -20,8 +20,8 @@ jobs:
           name: Something
           command: pwd
       - run:
-          name: Sleep
-          command: sleep 60
+          name: Check status
+          command: echo $JOB_STATUS
       - run:
           name: Fails
           command: skdjfhdjhfg
@@ -32,14 +32,14 @@ workflows:
       - passing:
           post-steps:
             - run:
-                name: Sleep
-                command: sleep 60
+                name: Check status
+                command: echo $JOB_STATUS
                 when: always
       - failing:
           post-steps:
             - run:
-                name: Sleep
-                command: sleep 60
+                name: Check status
+                command: echo $JOB_STATUS
                 when: always
           
       
