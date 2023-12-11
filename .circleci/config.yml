@@ -1,78 +1,122 @@
 version: 2.1
 
-orbs:
-  # jira: circleci/jira@2.0.1
-
-commands:
-  when_step:
-    parameters:
-      when:
-        type: enum
-        enum: ["on_success","on_fail","always"]
-        default: on_success
-    steps:
-      - run:
-          when: << parameters.when >>
-          name: Present directory
-          command: pwd
-      
-
 jobs:
-  build:
+  passing:
     docker:
-      - image: cimg/base:2022.06
-    working_directory: ~/mystuff
-    
+      - image: cimg/base:2023.12-22.04
     steps:
-      - setup_remote_docker:
-          docker_layer_caching: false
-          # version: default
-      # - run: docker --version
-      - checkout
-      # - run:
-      #     name: fail step
-      #     command: asdasdsadf
-      - when_step:
-          when: on_success
       - run:
-          name: Build stuff
-          command: echo "Building stuff!"
-      # - jira/notify
+          name: Something
+          command: pwd
+      - run:
+          name: Sleep
+          command: sleep 60
 
-  test:
+  failing:
     docker:
-      - image: cimg/base:2022.06
+      - image: cimg/base:2023.12-22.04
     steps:
-      - checkout
       - run:
-          name: Test stuff
-          command: echo "Testing stuff!"
-
-  deploy:
-    docker:
-      - image: cimg/base:2022.06
-    steps:
-      - checkout
+          name: Something
+          command: pwd
       - run:
-          name: Deploy stuff
-          command: echo "Deploying stuff!"
+          name: Sleep
+          command: sleep 60
+      - run:
+          name: Fails
+          command: skdjfhdjhfg
 
 workflows:
-  buid-test-deploy:
+  build-deloy:
     jobs:
-      - build:
-          context: jira
-      - test:
-          requires:
-            - build
-      # - approve:
-      #     type: approval
-      #     requires:
-      #       - test
-      # - deploy:
-      #     requires:
-      #       - approve
-      #     filters:
-      #       branches:
-      #         only:
-      #           - master
+      - passing:
+          post-steps:
+            - run:
+                name: Sleep
+                command: sleep 60
+      - failing:
+          post-steps:
+            - run:
+                name: Sleep
+                command: sleep 60
+          
+      
+
+# version: 2.1
+
+# orbs:
+#   # jira: circleci/jira@2.0.1
+
+# commands:
+#   when_step:
+#     parameters:
+#       when:
+#         type: enum
+#         enum: ["on_success","on_fail","always"]
+#         default: on_success
+#     steps:
+#       - run:
+#           when: << parameters.when >>
+#           name: Present directory
+#           command: pwd
+      
+
+# jobs:
+#   build:
+#     docker:
+#       - image: cimg/base:2022.06
+#     working_directory: ~/mystuff
+    
+#     steps:
+#       - setup_remote_docker:
+#           docker_layer_caching: false
+#           # version: default
+#       # - run: docker --version
+#       - checkout
+#       # - run:
+#       #     name: fail step
+#       #     command: asdasdsadf
+#       - when_step:
+#           when: on_success
+#       - run:
+#           name: Build stuff
+#           command: echo "Building stuff!"
+#       # - jira/notify
+
+#   test:
+#     docker:
+#       - image: cimg/base:2022.06
+#     steps:
+#       - checkout
+#       - run:
+#           name: Test stuff
+#           command: echo "Testing stuff!"
+
+#   deploy:
+#     docker:
+#       - image: cimg/base:2022.06
+#     steps:
+#       - checkout
+#       - run:
+#           name: Deploy stuff
+#           command: echo "Deploying stuff!"
+
+# workflows:
+#   buid-test-deploy:
+#     jobs:
+#       - build:
+#           context: jira
+#       - test:
+#           requires:
+#             - build
+#       # - approve:
+#       #     type: approval
+#       #     requires:
+#       #       - test
+#       # - deploy:
+#       #     requires:
+#       #       - approve
+#       #     filters:
+#       #       branches:
+#       #         only:
+#       #           - master
