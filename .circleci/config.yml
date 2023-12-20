@@ -3,14 +3,15 @@ version: 2.1
 jobs:
   my-job:
     machine:
-      image: ubuntu-2204:2023.10.1
+      image: ubuntu-2004:2023.10.1
     
     steps:
       - checkout
       - run:
           command: |
-              echo "Hello"
-          name: Wesh on check la version, gros
+              sudo apt-get update
+              sudo apt-get install -y build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev qemu-user mysql-client-core-8.0 google-cloud-sdk-bigtable-emulator google-cloud-sdk-pubsub-emulator socat
+          name: apt stuff
 
 
 workflows:
