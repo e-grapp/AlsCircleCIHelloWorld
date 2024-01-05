@@ -8,8 +8,9 @@ jobs:
     steps:
       - checkout
       - run:
-          shell: /bin/bash -exo pipefail
+          shell: /bin/bash -eo pipefail
           command: |
+            set -x
             pwd
           name: apt stuff
 
