@@ -11,6 +11,8 @@ jobs:
       - run: which ssh
       # - run: scp --version
       - run: ssh -V
+      - run: sudo apt update && sudo apt upgrade -y
+      - run: ssh -V
 
 
 workflows:
