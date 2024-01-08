@@ -10,7 +10,10 @@ jobs:
       - run:
           shell: /bin/bash -exo pipefail
           command: |
-            pwd
+            which scp
+            which openssh
+            scp --version
+            openssh --version
           name: apt stuff
 
 
