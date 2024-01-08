@@ -9,7 +9,7 @@ jobs:
       - checkout
       - run: which scp
       - run: which ssh
-      - run: scp --version
+      # - run: scp --version
       - run: ssh --version
 
 
