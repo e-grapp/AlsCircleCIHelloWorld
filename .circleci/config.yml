@@ -11,7 +11,7 @@ jobs:
       - run: which ssh
       # - run: scp --version
       - run: ssh -V
-      - run: sudo apt update && sudo apt upgrade -y
+      - run: sudo apt update && sudo apt upgrade openssh -y
       - run: ssh -V
 
 
