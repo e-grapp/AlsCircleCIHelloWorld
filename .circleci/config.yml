@@ -11,7 +11,7 @@ jobs:
       - run: which ssh
       # - run: scp --version
       - run: ssh -V
-      - run: sudo apt update && sudo apt-get install -y -o Dpkg::Options::="--force-confnew" --only-upgrade openssh-client openssh-server
+      - run: export DEBIAN_FRONTEND=noninteractive && sudo apt update && sudo apt-get install -y -o Dpkg::Options::="--force-confnew" --only-upgrade openssh-client openssh-server
       - run: ssh -V
 
 
