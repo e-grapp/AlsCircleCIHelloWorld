@@ -8,7 +8,7 @@ jobs:
     steps:
       - checkout
       - run: which scp
-      - run: which openssh
+      - run: which ssh
       - run: scp --version
       - run: ssh --version
 
