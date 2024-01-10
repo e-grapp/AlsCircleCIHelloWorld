@@ -1,5 +1,6 @@
-setup: true
 version: 2.1
+
+setup: true
 
 orbs:
   git-shallow-clone: guitarrapc/git-shallow-clone@2.8.0
