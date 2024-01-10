@@ -1,46 +1,58 @@
+setup: true
 version: 2.1
 
-jobs:
-  passing:
-    docker:
-      - image: cimg/base:2023.12-22.04
-    steps:
-      - run:
-          name: Something
-          command: pwd
-      - run:
-          name: Check status
-          command: echo ${CIRCLE_JOB}
-
-  failing:
-    docker:
-      - image: cimg/base:2023.12-22.04
-    steps:
-      - run:
-          name: Something
-          command: pwd
-      - run:
-          name: Check status
-          command: echo ${CIRCLE_JOB}
-      - run:
-          name: Fails
-          command: skdjfhdjhfg
+orbs:
+  git-shallow-clone: guitarrapc/git-shallow-clone@2.8.0
 
 workflows:
-  build-deloy:
+  setup:
     jobs:
-      - passing:
-          post-steps:
-            - run:
-                name: Check status
-                command: echo ${CIRCLE_JOB}
-                when: always
-      - failing:
-          post-steps:
-            - run:
-                name: Check status
-                command: echo ${CIRCLE_JOB}
-                when: always
+      - git-shallow-clone/checkout:
+          depth: 1
+
+# version: 2.1
+
+# jobs:
+#   passing:
+#     docker:
+#       - image: cimg/base:2023.12-22.04
+#     steps:
+#       - run:
+#           name: Something
+#           command: pwd
+#       - run:
+#           name: Check status
+#           command: echo ${CIRCLE_JOB}
+
+#   failing:
+#     docker:
+#       - image: cimg/base:2023.12-22.04
+#     steps:
+#       - run:
+#           name: Something
+#           command: pwd
+#       - run:
+#           name: Check status
+#           command: echo ${CIRCLE_JOB}
+#       - run:
+#           name: Fails
+#           command: skdjfhdjhfg
+
+# workflows:
+#   build-deloy:
+#     jobs:
+#       - passing:
+#           post-steps:
+#             - run:
+#                 name: Check status
+#                 command: echo ${CIRCLE_JOB}
+#                 when: always
+#       - failing:
+#           post-steps:
+#             - run:
+#                 name: Check status
+#                 command: echo ${CIRCLE_JOB}
+#                 when: always
           
       
 
