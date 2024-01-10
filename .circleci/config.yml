@@ -5,11 +5,18 @@ setup: true
 orbs:
   git-shallow-clone: guitarrapc/git-shallow-clone@2.8.0
 
+jobs:
+  my_job:
+    docker:
+      - image: cimg/base:2023.12-22.04
+    steps:
+      - git-shallow-clone/checkout:
+          depth: 1
+
 workflows:
   setup:
     jobs:
-      - git-shallow-clone/checkout:
-          depth: 1
+      - my_job
 
 # version: 2.1
 
