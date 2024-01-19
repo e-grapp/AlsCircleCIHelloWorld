@@ -5,14 +5,14 @@ jobs:
     machine:
       image: linux-cuda-12:edge
       docker_layer_caching: true
-    resource_class: gpu.nvidia.small.gen2
+    resource_class: gpu.nvidia.small.multi
     steps:
       # Commands are run in a Windows virtual machine environment
         - checkout
         - run:
             name: Hello World
-            shell: powershell.exe
-            command: Write-Host 'Hello, Windows'
+            # shell: powershell.exe
+            command: echo "helloworld"
 
 workflows:
   build-deploy:
