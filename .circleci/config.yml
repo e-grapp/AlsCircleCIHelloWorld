@@ -5,7 +5,7 @@ jobs:
     machine:
       image: linux-cuda-12:edge
       docker_layer_caching: true
-    resource_class: gpu.nvidia.small
+    resource_class: gpu.nvidia.medium
     steps:
       # Commands are run in a Windows virtual machine environment
         - checkout
