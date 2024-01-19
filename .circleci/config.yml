@@ -11,9 +11,9 @@ jobs:
     steps:
       - run:
           name: set env var
-          shell: powershell.exe -verb runas
+          shell: powershell.exe
           command: |
-
+            Set-ExecutionPolicy Bypass -Scope Process -Force;
             $currentPrincipal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
             $currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
             # New-Item -Path "C:\Temp" -Name "Temp" -ItemType "directory"
