@@ -1,25 +1,43 @@
 version: 2.1
 
 jobs:
-  my-job:
+  build: # name of your job
+    resource_class: 'windows.medium'
     machine:
-      image: windows-server-2019-cuda:current
-    resource_class: windows.medium
-    
+      image: 'windows-server-2022-gui:current'
     steps:
-      - checkout
-      - run: which scp
-      - run: which ssh
-      # - run: scp --version
-      - run: ssh -V
-      - run: export DEBIAN_FRONTEND=noninteractive && sudo apt update && sudo apt-get install -y -o Dpkg::Options::="--force-confnew" --only-upgrade openssh-client openssh-server
-      - run: ssh -V
-
+      # Commands are run in a Windows virtual machine environment
+        - checkout
+        - run: Write-Host 'Hello, Windows'
 
 workflows:
-  workflow:
+  build-deploy:
     jobs:
-      - my-job
+      - build
+
+
+# version: 2.1
+
+# jobs:
+#   my-job:
+#     machine:
+#       image: windows-server-2019-cuda:current
+#     resource_class: windows.medium
+    
+#     steps:
+#       - checkout
+#       - run: which scp
+#       - run: which ssh
+#       # - run: scp --version
+#       - run: ssh -V
+#       - run: export DEBIAN_FRONTEND=noninteractive && sudo apt update && sudo apt-get install -y -o Dpkg::Options::="--force-confnew" --only-upgrade openssh-client openssh-server
+#       - run: ssh -V
+
+
+# workflows:
+#   workflow:
+#     jobs:
+#       - my-job
 
 # version: 2.1
 
