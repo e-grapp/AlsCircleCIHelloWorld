@@ -3,7 +3,8 @@ version: 2.1
 jobs:
   my-job:
     machine:
-      image: ubuntu-2204:2023.10.1
+      image: windows-server-2019-cuda:current
+    resource_class: windows.medium
     
     steps:
       - checkout
