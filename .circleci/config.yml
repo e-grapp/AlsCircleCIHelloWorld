@@ -2,13 +2,16 @@ version: 2.1
 
 jobs:
   build: # name of your job
-    resource_class: 'windows.medium'
+    resource_class: windows.medium
     machine:
-      image: 'windows-server-2022-gui:current'
+      image: windows-server-2022-gui:current
     steps:
       # Commands are run in a Windows virtual machine environment
         - checkout
-        - run: Write-Host 'Hello, Windows'
+        - run:
+            name: Hello World
+            shell: powershell.exe
+            command: Write-Host 'Hello, Windows'
 
 workflows:
   build-deploy:
