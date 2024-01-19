@@ -18,9 +18,6 @@ workflows:
   build-deploy:
     jobs:
       - build
-      - stop:
-          type: approval
-          requires: build
 
 
 # version: 2.1
