@@ -7,7 +7,7 @@ orbs:
 jobs:
   build:
     executor: 
-      name: windows/server-2019
+      name: windows/windows-server-2022-gui:canary
     steps:
       - run:
           name: set env var
