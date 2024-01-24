@@ -44,6 +44,11 @@ jobs:
             [Environment]::GetEnvironmentVariable('VCPKG_ROOT', 'User')
             # $env:VCPKG_ROOT
             # [Environment]::GetEnvironmentVariable('VCPKG_ROOT', 'Machine')
+      
+      - run: 
+          name: recall from env var
+          command: |
+            $Env:VCPKG_ROOT
 
       - run:
           name: recall without .net hack
