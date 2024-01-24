@@ -3,11 +3,16 @@ version: 2.1
 orbs:
   windows: circleci/windows@5.0.0
 
+executors:
+  windows-2022-canary:
+    machine:
+      image: windows-server-2022-gui:canary
+      resource_class: windows.medium
 
 jobs:
   build:
     executor: 
-      name: windows/windows-server-2022-gui:canary
+      name: windows-server-2022-gui:canary
     steps:
       - run:
           name: set env var
