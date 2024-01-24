@@ -11,7 +11,9 @@ executors:
 
 jobs:
   build:
-    executor: windows-2022-canary
+    machine:
+      image: windows-server-2022-gui:canary
+      resource_class: windows.medium
     steps:
       - run:
           name: set env var
