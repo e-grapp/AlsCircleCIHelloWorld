@@ -13,9 +13,9 @@ jobs:
           name: set env var
           shell: powershell.exe
           command: |
-            Set-ExecutionPolicy Bypass -Scope Process -Force;
-            $currentPrincipal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
-            $currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
+            # Set-ExecutionPolicy Bypass -Scope Process -Force;
+            # $currentPrincipal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
+            # $currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
             # New-Item -Path "C:\Temp" -Name "Temp" -ItemType "directory"
             # New-Item -Path . -Name "job1-1.txt" -ItemType "file"
             # New-Item -Path . -Name "job1-2.txt" -ItemType "file"
