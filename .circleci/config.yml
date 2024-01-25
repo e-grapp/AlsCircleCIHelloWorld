@@ -60,14 +60,14 @@ jobs:
       #       # brew install bash && bash --version
       #       /bin/zsh --version
       # this is just here to mimic the thing that happens in our real pipeline
-      - run:
-          name: First step that invokes shell
-          command: |
-            mkdir ~/tmp
-            touch ~/tmp/vars
-            echo "export BRANCH_NAMESPACE=uitest-xcresult" >> ~/tmp/vars
-            cat ~/tmp/vars
-      - run: cat ~/tmp/vars >> ${BASH_ENV};
+      # - run:
+      #     name: First step that invokes shell
+      #     command: |
+      #       mkdir ~/tmp
+      #       touch ~/tmp/vars
+      #       echo "export BRANCH_NAMESPACE=uitest-xcresult" >> ~/tmp/vars
+      #       cat ~/tmp/vars
+      # - run: cat ~/tmp/vars >> ${BASH_ENV};
       - macos/install-rosetta
       # - sync-ruby-cache
 
