@@ -12,8 +12,8 @@ version: 2.1
 jobs:
   build:
     machine:
-      image: windows-server-2022-gui:current
-    resource_class: windows.medium
+      image: windows-server-2022-gui:canary
+      resource_class: windows.medium
     steps:
       - run:
           name: set env var
