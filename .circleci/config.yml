@@ -6,10 +6,10 @@ orbs:
   macos: circleci/macos@2.4.1
 
 
-parameters:
-  shell:
-    type: string
-    default: bash
+# parameters:
+#   shell:
+#     type: string
+#     default: bash
 
 aliases:
   # Cache management
@@ -50,9 +50,9 @@ jobs:
   # Job for adding any CI dependencies to cache
   build_for_testing:
     executor: macos_exec
-    shell: /bin/<< pipeline.parameters.shell >> --login -eo pipefail
-    environment:
-      BASH_ENV: "/Users/distiller/.<< pipeline.parameters.shell >>rc"
+    # shell: /bin/<< pipeline.parameters.shell >> --login -eo pipefail
+    # environment:
+    #   BASH_ENV: "/Users/distiller/.<< pipeline.parameters.shell >>rc"
     working_directory: "/Users/distiller/project"
     steps:
       # - run:
