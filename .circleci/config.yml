@@ -55,10 +55,10 @@ jobs:
       BASH_ENV: "/Users/distiller/.<< pipeline.parameters.shell >>rc"
     working_directory: "/Users/distiller/project"
     steps:
-      - run:
-          command: |
-            # brew install bash && bash --version
-            /bin/zsh --version
+      # - run:
+      #     command: |
+      #       # brew install bash && bash --version
+      #       /bin/zsh --version
       # this is just here to mimic the thing that happens in our real pipeline
       - run:
           name: First step that invokes shell
