@@ -3,7 +3,7 @@ version: 2.1
 orbs:
   ##
   # macos
-  macos: circleci/macos@2.4.0
+  macos: circleci/macos@2.4.1
 
 
 parameters:
@@ -68,6 +68,7 @@ jobs:
             echo "export BRANCH_NAMESPACE=uitest-xcresult" >> ~/tmp/vars
             cat ~/tmp/vars
       - run: cat ~/tmp/vars >> ${BASH_ENV};
+      - macos/install-rosetta
       # - sync-ruby-cache
 
 
