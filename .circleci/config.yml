@@ -49,6 +49,7 @@ commands:
 jobs:
   # Job for adding any CI dependencies to cache
   build_for_testing:
+    shell: /bin/bash --login -o pipefail
     executor: macos_exec
     # shell: /bin/<< pipeline.parameters.shell >> --login -eo pipefail
     # environment:
