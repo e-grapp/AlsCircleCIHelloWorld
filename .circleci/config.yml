@@ -1,7 +1,7 @@
 version: 2.1
 
-orbs:
-  windows: circleci/windows@5.0.0
+# orbs:
+#   windows: circleci/windows@5.0.0
 
 # executors:
 #   windows-2022-canary:
@@ -12,7 +12,7 @@ orbs:
 jobs:
   build:
     machine:
-      image: windows-server-2022-gui:canary
+      image: windows-server-2022-gui:current
     resource_class: windows.medium
     steps:
       - run:
