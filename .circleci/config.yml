@@ -86,6 +86,7 @@ jobs:
           # echo 'export PATH=`gem environment gemdir`/bin:$PATH' >> $BASH_ENV
           cd `gem environment gemdir` && ls -al
           ruby --version
+      - run: pwd
       - run:
           name: Install Rosetta translation environment on Apple Silicon Mac
           command: softwareupdate --install-rosetta --agree-to-license      
