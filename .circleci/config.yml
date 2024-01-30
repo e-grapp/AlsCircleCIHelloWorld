@@ -79,6 +79,8 @@ jobs:
       #       cat ~/tmp/vars
       # - run: cat ~/tmp/vars >> ${BASH_ENV};
       # - macos/install-rosetta
+      - macos/switch-ruby:
+          version: '3.2.2'
       - run:
           name: Install Rosetta translation environment on Apple Silicon Mac
           command: softwareupdate --install-rosetta --agree-to-license      
