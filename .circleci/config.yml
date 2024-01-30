@@ -84,6 +84,7 @@ jobs:
       - run: |
           # echo 'export PATH=/opt/homebrew/opt/ruby/bin:$PATH' >> $BASH_ENV
           # echo 'export PATH=`gem environment gemdir`/bin:$PATH' >> $BASH_ENV
+          cd `gem environment gemdir` && ls -al
           ruby --version
       - run:
           name: Install Rosetta translation environment on Apple Silicon Mac
