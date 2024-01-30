@@ -28,6 +28,10 @@ executors:
     macos:
       xcode: 15.0.0
     resource_class: macos.m1.medium.gen1
+  # macos_exec:
+  #   macos:
+  #     xcode: 15.0.0
+  #   resource_class: macos.m1.medium.gen1
 
 commands:
   sync-ruby-cache:
@@ -49,12 +53,17 @@ commands:
 jobs:
   # Job for adding any CI dependencies to cache
   build_for_testing:
+    parameters:
+      environment:
+        description: Name of the environment to backup
+        default: staging
+        type: string
     shell: /bin/bash --login -o pipefail
     executor: macos_exec
     # shell: /bin/<< pipeline.parameters.shell >> --login -eo pipefail
     # environment:
     #   BASH_ENV: "/Users/distiller/.<< pipeline.parameters.shell >>rc"
-    working_directory: "/Users/distiller/project"
+    # working_directory: "/Users/distiller/project"
     steps:
       # - run:
       #     command: |
