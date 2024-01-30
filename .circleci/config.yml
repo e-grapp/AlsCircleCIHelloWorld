@@ -78,7 +78,10 @@ jobs:
       #       echo "export BRANCH_NAMESPACE=uitest-xcresult" >> ~/tmp/vars
       #       cat ~/tmp/vars
       # - run: cat ~/tmp/vars >> ${BASH_ENV};
-      - macos/install-rosetta
+      # - macos/install-rosetta
+      - run:
+          name: Install Rosetta translation environment on Apple Silicon Mac
+          command: softwareupdate --install-rosetta --agree-to-license      
       # - sync-ruby-cache
 
 
