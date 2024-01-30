@@ -41,6 +41,8 @@ jobs:
             # $Env:VCPKG_ROOT
             [Environment]::GetEnvironmentVariable('VCPKG_ROOT', 'User')
 
+      - restore_cache:
+          key: mycache-{{ checksum "C:\Users\circleci\project\myfakefilethatdoesntreallyexist.txt" }}
 
       - run:
           name: recall env var from .NET
