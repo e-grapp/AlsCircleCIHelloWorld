@@ -58,7 +58,7 @@ jobs:
         description: Name of the environment to backup
         default: staging
         type: string
-    # shell: /bin/bash --login -o pipefail
+    shell: /bin/bash --login -o pipefail
     executor: macos_exec
     # shell: /bin/<< pipeline.parameters.shell >> --login -eo pipefail
     # environment:
