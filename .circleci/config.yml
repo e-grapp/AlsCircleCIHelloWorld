@@ -12,7 +12,7 @@ version: 2.1
 jobs:
   build:
     machine:
-      image: windows-server-2022-gui:previous
+      image: windows-server-2019-vs2019:previous
       resource_class: windows.medium
     steps:
       - run:
