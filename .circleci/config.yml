@@ -10,6 +10,12 @@ jobs:
     docker:
       - image: mcr.microsoft.com/dotnet/sdk:7.0.405@sha256:582abbba951d2e8095e7f509178527683ed58a98fc61d08ce3825aa5f1c2f8bc
     steps:
+      - run:
+          name: Install OpenSSH
+          command: |
+            apt-get update -y
+            apt-get upgrade -y
+            apt-get install openssh-client -y
       - checkout
       # - git-shallow-clone/checkout:
       #     depth: 1
