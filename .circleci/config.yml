@@ -17,6 +17,7 @@ jobs:
             apt-get update -y
             apt-get upgrade -y
             apt-get install openssh-client -y
+            apt-get install git-lfs
       - checkout
       # - git-shallow-clone/checkout:
       #     depth: 1
