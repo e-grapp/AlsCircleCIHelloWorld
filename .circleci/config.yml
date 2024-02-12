@@ -10,6 +10,7 @@ jobs:
     docker:
       - image: mcr.microsoft.com/dotnet/sdk:7.0.405@sha256:582abbba951d2e8095e7f509178527683ed58a98fc61d08ce3825aa5f1c2f8bc
     steps:
+      - checkout
       # - git-shallow-clone/checkout:
       #     depth: 1
       - run: git --version
@@ -17,7 +18,6 @@ jobs:
 workflows:
   setup:
     jobs:
-      - checkout
       - my_job
 
 # version: 2.1
