@@ -16,85 +16,88 @@ jobs:
       resource_class: windows.medium
     steps:
       - run:
-          name: set env var
-          shell: powershell.exe
-          command: |
-            # Set-ExecutionPolicy Bypass -Scope Process -Force;
-            # $currentPrincipal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
-            # $currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
-            # New-Item -Path "C:\Temp" -Name "Temp" -ItemType "directory"
-            # New-Item -Path . -Name "job1-1.txt" -ItemType "file"
-            # New-Item -Path . -Name "job1-2.txt" -ItemType "file"
-            # New-Item -Path . -Name "job2.txt" -ItemType "file"
-            # New-Item -Path . -Name "job3.txt" -ItemType "file"
-            # New-Item -Path . -Name "job4.txt" -ItemType "file"
-            # $Env:PATH -split ";" | Out-String | Set-Content -Path C:\Temp\job1-1.txt
-            # $Env:PATH += ";C:\Program Files\LLVM\bin"
-            # $Env:PATH -split ";" | Out-String | Set-Content -Path C:\Temp\job1-2.txt
-            
-            # $Env:VCPKG_ROOT = 'C:\Program Files\Microsoft Visual Studio\2022\Community\VC\vcpkg\'
-            # [Environment]::SetEnvironmentVariable("VCPKG_ROOT", $env:VCPKG_ROOT + "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\vcpkg\, 'User')
-
-            # Add-Content -Path $Profile.CurrentUserAllHosts -Value '$Env:VCPKG_ROOT = "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\vcpkg\"'
-
-            [Environment]::SetEnvironmentVariable('VCPKG_ROOT', 'C:\Program Files\Microsoft Visual Studio\2022\Community\VC\vcpkg\', 'User')
-            # $Env:VCPKG_ROOT
-            [Environment]::GetEnvironmentVariable('VCPKG_ROOT', 'User')
-
-      - restore_cache:
-          key: mycache-{{ checksum "C:\Users\circleci\project\myfakefilethatdoesntreallyexist.txt" }}
-
-      - run:
-          name: recall env var from .NET
-          command: |
-            # $Env:PATH -split ";" | Out-String | Set-Content -Path C:\Temp\job2.txt
-            # echo "Echoing the string we set in the previous step"
-            [Environment]::GetEnvironmentVariable('VCPKG_ROOT', 'User')
-            # $env:VCPKG_ROOT
-            # [Environment]::GetEnvironmentVariable('VCPKG_ROOT', 'Machine')
-      
-      - run: 
-          name: recall from env var
-          command: |
-            $Env:VCPKG_ROOT
-
-      - run:
-          name: recall without .net hack
-          command: |
-            Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
-            refreshenv
-            $Env:VCPKG_ROOT
-
-      - run:
-          name: recall with just refreshenv
-          command: |
-            refreshenv
-            $Env:VCPKG_ROOT
-
-      - run:
-          name: recall just env var
-          command: $Env:VCPKG_ROOT
-
+          name: docker?
+          command: docker --version
+      # - run:
+      #     name: set env var
+      #     shell: bash.exe
+      #     command: |
+      #       # Set-ExecutionPolicy Bypass -Scope Process -Force;
+      #       # $currentPrincipal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
+      #       # $currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
+      #       # New-Item -Path "C:\Temp" -Name "Temp" -ItemType "directory"
+      #       # New-Item -Path . -Name "job1-1.txt" -ItemType "file"
+      #       # New-Item -Path . -Name "job1-2.txt" -ItemType "file"
+      #       # New-Item -Path . -Name "job2.txt" -ItemType "file"
+      #       # New-Item -Path . -Name "job3.txt" -ItemType "file"
+      #       # New-Item -Path . -Name "job4.txt" -ItemType "file"
+      #       # $Env:PATH -split ";" | Out-String | Set-Content -Path C:\Temp\job1-1.txt
       #       # $Env:PATH += ";C:\Program Files\LLVM\bin"
-      #       # Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
-      #       # refreshenv
-      #       # $Env:PATH split ";" | Out-String | Set-Content -Path C:\Temp\job3.txt
-      #       Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
-      #       $Env:VCPKG_ROOT = 'C:\Program Files\Microsoft Visual Studio\2022\Community\VC\vcpkg\'
-      #       echo "Echoing the string we just set (if it didn't persist)"
-      #       $Env:VCPKG_ROOT
-      #       refreshenv
+      #       # $Env:PATH -split ";" | Out-String | Set-Content -Path C:\Temp\job1-2.txt
+            
+      #       # $Env:VCPKG_ROOT = 'C:\Program Files\Microsoft Visual Studio\2022\Community\VC\vcpkg\'
+      #       # [Environment]::SetEnvironmentVariable("VCPKG_ROOT", $env:VCPKG_ROOT + "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\vcpkg\, 'User')
+
+      #       # Add-Content -Path $Profile.CurrentUserAllHosts -Value '$Env:VCPKG_ROOT = "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\vcpkg\"'
+
+      #       [Environment]::SetEnvironmentVariable('VCPKG_ROOT', 'C:\Program Files\Microsoft Visual Studio\2022\Community\VC\vcpkg\', 'User')
+      #       # $Env:VCPKG_ROOT
+      #       [Environment]::GetEnvironmentVariable('VCPKG_ROOT', 'User')
+
+      # - restore_cache:
+      #     key: mycache-{{ checksum "C:\Users\circleci\project\myfakefilethatdoesntreallyexist.txt" }}
 
       # - run:
-      #     name: recall env var
+      #     name: recall env var from .NET
       #     command: |
-      #       # $Env:PATH -split ";" | Out-String | Set-Content -Path C:\Temp\job4.txt
-      #       Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
-      #       echo "Echoing the string after a refreshenv:"
+      #       # $Env:PATH -split ";" | Out-String | Set-Content -Path C:\Temp\job2.txt
+      #       # echo "Echoing the string we set in the previous step"
+      #       [Environment]::GetEnvironmentVariable('VCPKG_ROOT', 'User')
+      #       # $env:VCPKG_ROOT
+      #       # [Environment]::GetEnvironmentVariable('VCPKG_ROOT', 'Machine')
+      
+      # - run: 
+      #     name: recall from env var
+      #     command: |
       #       $Env:VCPKG_ROOT
+
+      # - run:
+      #     name: recall without .net hack
+      #     command: |
+      #       Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
+      #       refreshenv
+      #       $Env:VCPKG_ROOT
+
+      # - run:
+      #     name: recall with just refreshenv
+      #     command: |
+      #       refreshenv
+      #       $Env:VCPKG_ROOT
+
+      # - run:
+      #     name: recall just env var
+      #     command: $Env:VCPKG_ROOT
+
+      # #       # $Env:PATH += ";C:\Program Files\LLVM\bin"
+      # #       # Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
+      # #       # refreshenv
+      # #       # $Env:PATH split ";" | Out-String | Set-Content -Path C:\Temp\job3.txt
+      # #       Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
+      # #       $Env:VCPKG_ROOT = 'C:\Program Files\Microsoft Visual Studio\2022\Community\VC\vcpkg\'
+      # #       echo "Echoing the string we just set (if it didn't persist)"
+      # #       $Env:VCPKG_ROOT
+      # #       refreshenv
+
+      # # - run:
+      # #     name: recall env var
+      # #     command: |
+      # #       # $Env:PATH -split ";" | Out-String | Set-Content -Path C:\Temp\job4.txt
+      # #       Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
+      # #       echo "Echoing the string after a refreshenv:"
+      # #       $Env:VCPKG_ROOT
             
-      # - store_artifacts:
-      #     path: C:\Temp
+      # # - store_artifacts:
+      # #     path: C:\Temp
 
 workflows:
   check-this-out:
