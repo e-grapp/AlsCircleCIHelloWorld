@@ -17,6 +17,7 @@ jobs:
 workflows:
   setup:
     jobs:
+      - checkout
       - my_job
 
 # version: 2.1
