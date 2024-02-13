@@ -25,7 +25,7 @@ jobs:
           # shell: powershell.exe
       - run:
           name: gcloud
-          command: gcloud --version
+          command: which gcloud && gcloud --version
       - run:
           name: install gcp
           command: |
@@ -33,7 +33,7 @@ jobs:
           shell: bash.exe
       - run:
           name: gcloud
-          command: gcloud --version
+          command: which gcloud && gcloud --version
       # - run:
       #     name: set env var
       #     shell: bash.exe
