@@ -24,13 +24,16 @@ jobs:
           #   & $env:Temp\GoogleCloudSDKInstaller.exe
           # shell: powershell.exe
       - run:
+          name: gcloud
+          command: gcloud --version
+      - run:
           name: install gcp
           command: |
             curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-463.0.0-linux-x86_64.tar.gz && tar -xf google-cloud-cli-463.0.0-linux-x86_64.tar.gz && ./google-cloud-sdk/install.sh
           shell: bash.exe
       - run:
-          name: docker?
-          command: docker --version
+          name: gcloud
+          command: gcloud --version
       # - run:
       #     name: set env var
       #     shell: bash.exe
