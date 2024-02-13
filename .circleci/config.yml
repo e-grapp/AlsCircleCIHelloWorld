@@ -22,6 +22,7 @@ jobs:
           command: |
             (New-Object Net.WebClient).DownloadFile("https://dl.google.com/dl/cloudsdk/channels/rapid/GoogleCloudSDKInstaller.exe", "$env:Temp\GoogleCloudSDKInstaller.exe")
             & $env:Temp\GoogleCloudSDKInstaller.exe
+          shell: powershell.exe
       - run:
           name: docker?
           command: docker --version
