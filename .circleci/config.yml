@@ -16,7 +16,12 @@ jobs:
       image: windows-server-2019-vs2019:current
       resource_class: windows.medium
     steps:
-      - gcp-cli/install
+      # - gcp-cli/install
+      - run:
+          name: install gcp gcp-cli
+          command: |
+            (New-Object Net.WebClient).DownloadFile("https://dl.google.com/dl/cloudsdk/channels/rapid/GoogleCloudSDKInstaller.exe", "$env:Temp\GoogleCloudSDKInstaller.exe")
+            & $env:Temp\GoogleCloudSDKInstaller.exe
       - run:
           name: docker?
           command: docker --version
