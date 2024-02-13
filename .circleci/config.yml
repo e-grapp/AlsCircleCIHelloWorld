@@ -13,7 +13,7 @@ orbs:
 jobs:
   build:
     machine:
-      image: windows-server-2022-gui:previous
+      image: windows-server-2019:current
       resource_class: windows.medium
     steps:
       - gcp-cli/install
