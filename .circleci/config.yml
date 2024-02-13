@@ -18,11 +18,16 @@ jobs:
     steps:
       # - gcp-cli/install
       - run:
-          name: install gcp gcp-cli
+          # name: install gcp gcp-cli
+          # command: |
+          #   (New-Object Net.WebClient).DownloadFile("https://dl.google.com/dl/cloudsdk/channels/rapid/GoogleCloudSDKInstaller.exe", "$env:Temp\GoogleCloudSDKInstaller.exe")
+          #   & $env:Temp\GoogleCloudSDKInstaller.exe
+          # shell: powershell.exe
+      - run:
+          name: install gcp
           command: |
-            (New-Object Net.WebClient).DownloadFile("https://dl.google.com/dl/cloudsdk/channels/rapid/GoogleCloudSDKInstaller.exe", "$env:Temp\GoogleCloudSDKInstaller.exe")
-            & $env:Temp\GoogleCloudSDKInstaller.exe
-          shell: powershell.exe
+            curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-463.0.0-linux-x86_64.tar.gz && tar -xf google-cloud-cli-463.0.0-linux-x86_64.tar.gz && ./google-cloud-sdk/install.sh
+          shell: bash.exe
       - run:
           name: docker?
           command: docker --version
