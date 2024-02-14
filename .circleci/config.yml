@@ -1,201 +1,122 @@
 version: 2.1
 
 orbs:
-  ##
-  # macos
-  macos: circleci/macos@2.4.1
+#   windows: circleci/windows@5.0.0
+  gcp-cli: circleci/gcp-cli@2.4.1
 
-
-# parameters:
-#   shell:
-#     type: string
-#     default: bash
-
-aliases:
-  # Cache management
-  - &restore-dependencies-cache
-    name: 'Restore dependencies cache'
-    key: cache-bundle-{{ checksum "Gemfile.lock" }}
-
-  - &save-dependencies-cache
-    name: 'Save dependencies cache'
-    key: cache-bundle-{{ checksum "Gemfile.lock" }}
-    paths:
-      - vendor/bundle
-
-executors:
-  macos_exec:
-    macos:
-      xcode: 15.0.0
-    resource_class: macos.m1.medium.gen1
-  # macos_exec:
-  #   macos:
-  #     xcode: 15.0.0
-  #   resource_class: macos.m1.medium.gen1
-
-commands:
-  sync-ruby-cache:
-    steps:
-      - macos/switch-ruby:
-          version: "3.2"
-      - restore_cache: *restore-dependencies-cache
-      # Install gems.
-      - run:
-          name: Bundle install
-          command: |
-            bundle check
-            bundle install
-          environment:
-            BUNDLE_JOBS: 4
-            BUNDLE_RETRY: 3
-      - save_cache: *save-dependencies-cache
+# executors:
+#   windows-2022-canary:
+#     machine:
+#       image: windows-server-2022-gui:canary
+#       resource_class: windows.medium
 
 jobs:
-  # Job for adding any CI dependencies to cache
-  build_for_testing:
-    parameters:
-      environment:
-        description: Name of the environment to backup
-        default: staging
-        type: string
-    shell: /bin/bash --login -o pipefail
-    executor: macos_exec
-    # shell: /bin/<< pipeline.parameters.shell >> --login -eo pipefail
-    # environment:
-    #   BASH_ENV: "/Users/distiller/.<< pipeline.parameters.shell >>rc"
-    # working_directory: "/Users/distiller/project"
+  build:
+    machine:
+      image: windows-server-2019-vs2019:current
+      resource_class: windows.medium
     steps:
+      # - gcp-cli/install
       # - run:
-      #     command: |
-      #       # brew install bash && bash --version
-      #       /bin/zsh --version
-      # this is just here to mimic the thing that happens in our real pipeline
-      # - run:
-      #     name: First step that invokes shell
-      #     command: |
-      #       mkdir ~/tmp
-      #       touch ~/tmp/vars
-      #       echo "export BRANCH_NAMESPACE=uitest-xcresult" >> ~/tmp/vars
-      #       cat ~/tmp/vars
-      # - run: cat ~/tmp/vars >> ${BASH_ENV};
-      # - macos/install-rosetta
-      - macos/switch-ruby:
-          version: '3.2.2'
-      - run: |
-          echo 'export PATH=/opt/homebrew/opt/ruby/bin:$PATH' >> $BASH_ENV
-          # echo 'export PATH=`gem environment gemdir`/bin:$PATH' >> $BASH_ENV
-          cd `gem environment gemdir` && ls -al
-          ruby --version
-      - run: pwd
+          # name: install gcp gcp-cli
+          # command: |
+          #   (New-Object Net.WebClient).DownloadFile("https://dl.google.com/dl/cloudsdk/channels/rapid/GoogleCloudSDKInstaller.exe", "$env:Temp\GoogleCloudSDKInstaller.exe")
+          #   & $env:Temp\GoogleCloudSDKInstaller.exe
+          # shell: powershell.exe
       - run:
-          name: Install Rosetta translation environment on Apple Silicon Mac
-          command: softwareupdate --install-rosetta --agree-to-license      
-      # - sync-ruby-cache
+          name: gcloud
+          command: which gcloud && gcloud --version
+      - run:
+          name: install gcp
+          command: |
+            curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-463.0.0-linux-x86_64.tar.gz && tar -xf google-cloud-cli-463.0.0-linux-x86_64.tar.gz 
+            # && ./google-cloud-sdk/install.sh
+          shell: bash.exe
+      - run:
+          name: gcloud
+          command: which gcloud && gcloud --version
+      # - run:
+      #     name: set env var
+      #     shell: bash.exe
+      #     command: |
+      #       # Set-ExecutionPolicy Bypass -Scope Process -Force;
+      #       # $currentPrincipal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
+      #       # $currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
+      #       # New-Item -Path "C:\Temp" -Name "Temp" -ItemType "directory"
+      #       # New-Item -Path . -Name "job1-1.txt" -ItemType "file"
+      #       # New-Item -Path . -Name "job1-2.txt" -ItemType "file"
+      #       # New-Item -Path . -Name "job2.txt" -ItemType "file"
+      #       # New-Item -Path . -Name "job3.txt" -ItemType "file"
+      #       # New-Item -Path . -Name "job4.txt" -ItemType "file"
+      #       # $Env:PATH -split ";" | Out-String | Set-Content -Path C:\Temp\job1-1.txt
+      #       # $Env:PATH += ";C:\Program Files\LLVM\bin"
+      #       # $Env:PATH -split ";" | Out-String | Set-Content -Path C:\Temp\job1-2.txt
+            
+      #       # $Env:VCPKG_ROOT = 'C:\Program Files\Microsoft Visual Studio\2022\Community\VC\vcpkg\'
+      #       # [Environment]::SetEnvironmentVariable("VCPKG_ROOT", $env:VCPKG_ROOT + "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\vcpkg\, 'User')
 
+      #       # Add-Content -Path $Profile.CurrentUserAllHosts -Value '$Env:VCPKG_ROOT = "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\vcpkg\"'
+
+      #       [Environment]::SetEnvironmentVariable('VCPKG_ROOT', 'C:\Program Files\Microsoft Visual Studio\2022\Community\VC\vcpkg\', 'User')
+      #       # $Env:VCPKG_ROOT
+      #       [Environment]::GetEnvironmentVariable('VCPKG_ROOT', 'User')
+
+      # - restore_cache:
+      #     key: mycache-{{ checksum "C:\Users\circleci\project\myfakefilethatdoesntreallyexist.txt" }}
+
+      # - run:
+      #     name: recall env var from .NET
+      #     command: |
+      #       # $Env:PATH -split ";" | Out-String | Set-Content -Path C:\Temp\job2.txt
+      #       # echo "Echoing the string we set in the previous step"
+      #       [Environment]::GetEnvironmentVariable('VCPKG_ROOT', 'User')
+      #       # $env:VCPKG_ROOT
+      #       # [Environment]::GetEnvironmentVariable('VCPKG_ROOT', 'Machine')
+      
+      # - run: 
+      #     name: recall from env var
+      #     command: |
+      #       $Env:VCPKG_ROOT
+
+      # - run:
+      #     name: recall without .net hack
+      #     command: |
+      #       Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
+      #       refreshenv
+      #       $Env:VCPKG_ROOT
+
+      # - run:
+      #     name: recall with just refreshenv
+      #     command: |
+      #       refreshenv
+      #       $Env:VCPKG_ROOT
+
+      # - run:
+      #     name: recall just env var
+      #     command: $Env:VCPKG_ROOT
+
+      # #       # $Env:PATH += ";C:\Program Files\LLVM\bin"
+      # #       # Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
+      # #       # refreshenv
+      # #       # $Env:PATH split ";" | Out-String | Set-Content -Path C:\Temp\job3.txt
+      # #       Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
+      # #       $Env:VCPKG_ROOT = 'C:\Program Files\Microsoft Visual Studio\2022\Community\VC\vcpkg\'
+      # #       echo "Echoing the string we just set (if it didn't persist)"
+      # #       $Env:VCPKG_ROOT
+      # #       refreshenv
+
+      # # - run:
+      # #     name: recall env var
+      # #     command: |
+      # #       # $Env:PATH -split ";" | Out-String | Set-Content -Path C:\Temp\job4.txt
+      # #       Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
+      # #       echo "Echoing the string after a refreshenv:"
+      # #       $Env:VCPKG_ROOT
+            
+      # # - store_artifacts:
+      # #     path: C:\Temp
 
 workflows:
-  ui-test-development:
+  check-this-out:
     jobs:
-      - build_for_testing
-
-# version: 2.1
-
-# orbs:
-# #   # python: circleci/python@2.1.1
-#   macos: circleci/macos@2.4.0
-# #   slack: circleci/slack@4.12.5
-
-# jobs:
-#   build:
-#     # parameters:
-#     #   xcode_version:
-#     #     type: string
-#     #     default: "14.3.1"
-#     #   device_version:
-#     #     type: string
-#     #     default: "iPhone 13 Pro Max"
-#     macos:
-#       xcode: 15.1.0
-#     resource_class: m1-free
-#     # resource_class: macos.m1.medium.gen1
-#     steps:
-#       # - macos/enable-vnc
-#       - run:
-#           shell: /bin/zsh
-#           name: bash ver
-#           command: |
-#             echo $0
-#             #!/bin/sh
-#             # Echo “TOTO”
-#             # which `zsh`
-#             # zsh --version
-#             # /bin/sh echo "something"
-#             # eval printf
-#       # - slack/notify
-
-#       # - run:
-#       #     # shell: /opt/homebrew/bin/bash --login -eo pipefail
-#       #     command: |
-#       #       # /opt/homebrew/bin/bash --version
-#       #       # echo "==========================="
-#       #       /bin/bash --version
-#       #       echo "==========================="
-#       #       bash --version
-#       # - run: bash --version
-#       # - run:
-#       #     command: |
-#       #       brew update
-#       #       brew install bash
-#       # - run: which bash
-#       # - run: echo $0
-#       # - run: ls -al /usr/local/bin
-#       # - run: bash --version
-#       # - run: ls -al /bin/bash
-#       # - run:
-#       #     shell: /opt/homebrew/bin/bash --login -eo pipefail
-#       #     command: |
-#       #       /opt/homebrew/bin/bash --version
-#       #       echo "==========================="
-#       #       /bin/bash --version
-#       #       echo "==========================="
-#       #       bash --version
-#       # - run: 
-#       #     command: |
-#       #       /opt/homebrew/bin/bash --version
-#       #       echo "==========================="
-#       #       /bin/bash --version
-#       #       echo "==========================="
-#       #       bash --version
-
-#       # - when:
-#       #     condition:
-#       #       equal: [true, true]
-#       #     steps:
-#       #       - persist_to_workspace:
-#       #           root: .
-#       #           paths:
-#       #             - .
-
-      
-#   # deploy:
-#   #   macos: 
-#   #     xcode: "13.4.1"
-#   #   resource_class: macos.x86.medium.gen2
-#   #   when:
-#   #     condition:
-#   #       equal: [true, true]
-#   #     steps:
-#   #       - run: pwd
-
-
-# workflows:
-#   workflow-mac:
-#     jobs:
-#       - build
-#           # matrix:
-#           #   parameters:
-#           #     xcode_version: ["13.4.1"]
-#           #     device_version: ["iPhone 14 Pro Max"]
-#           # post-steps:
-#           #   - run: pwd
-#       # - deploy
+      - build
