@@ -25,7 +25,10 @@ jobs:
           # shell: powershell.exe
       - run:
           name: gcloud
-          command: which gcloud && gcloud --version
+          command: |
+            which gcloud && gcloud --version
+            gcloud components update
+            which gcloud && gcloud --version
       - gcp-cli/install
       - gcp-cli/setup
       # - run:
