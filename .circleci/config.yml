@@ -2,7 +2,7 @@ version: 2.1
 
 orbs:
 #   windows: circleci/windows@5.0.0
-  gcp-cli: circleci/gcp-cli@2.4.1
+  gcp-cli: circleci/gcp-cli@3.1.1
 
 # executors:
 #   windows-2022-canary:
@@ -13,7 +13,7 @@ orbs:
 jobs:
   build:
     machine:
-      image: windows-server-2022-gui:current
+      image: windows-server-2019-vs2019:2023.10.1
       resource_class: windows.medium
     steps:
       # - gcp-cli/install
@@ -26,13 +26,15 @@ jobs:
       - run:
           name: gcloud
           command: which gcloud && gcloud --version
-      - run:
-          name: update gcp
-          command: |
-            gcloud components update
-            # curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-463.0.0-linux-x86_64.tar.gz && tar -xf google-cloud-cli-463.0.0-linux-x86_64.tar.gz 
-            # # && ./google-cloud-sdk/install.sh
-          shell: bash.exe
+      - gcp-cli/install
+      - gcp-cli/setup
+      # - run:
+      #     name: update gcp
+      #     command: |
+      #       gcloud components update
+      #       # curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-463.0.0-linux-x86_64.tar.gz && tar -xf google-cloud-cli-463.0.0-linux-x86_64.tar.gz 
+      #       # # && ./google-cloud-sdk/install.sh
+      #     shell: bash.exe
       - run:
           name: gcloud
           command: which gcloud && gcloud --version
