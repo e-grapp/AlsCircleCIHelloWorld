@@ -48,10 +48,15 @@ jobs:
           background: true
 
       - run:
-          name: Drop pg_cron
+          name: Set pg_cron to use different db
           command: |
-            sleep 10 # wait for connection
-            psql -h localhost -U postgres -c "DROP EXTENSION pg_cron;"
+            psql -h localhost -U postgres -d test_db -c "CREATE EXTENSION pg_cron; SELECT cron.schedule('5 0 * * *', $$DELETE FROM events WHERE event_time < now() - interval '1 day'$$);""
+
+      # - run:
+      #     name: Drop pg_cron
+      #     command: |
+      #       sleep 10 # wait for connection
+      #       psql -h localhost -U postgres -c "DROP EXTENSION pg_cron;"
 
       - run:
           name: Attempt to drop the database
