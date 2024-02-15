@@ -39,6 +39,10 @@ jobs:
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
 
       - run:
+          name: sleep
+          command: sleep 300
+
+      - run:
           name: Create the test database
           command: psql -h localhost -U postgres -c "CREATE DATABASE test_db;"
 
@@ -47,10 +51,10 @@ jobs:
           command: psql -h localhost -U postgres -d test_db -c "SELECT pg_sleep(60);" 
           background: true
 
-      - run:
-          name: Set pg_cron to use different db
-          command: |
-            psql -h localhost -U postgres -d test_db -c "CREATE EXTENSION pg_cron; SELECT cron.schedule('5 0 * * *', $$DELETE FROM events WHERE event_time < now() - interval '1 day'$$);"
+      # - run:
+      #     name: Set pg_cron to use different db
+      #     command: |
+      #       psql -h localhost -U postgres -d test_db -c "CREATE EXTENSION pg_cron; SELECT cron.schedule('5 0 * * *', $$DELETE FROM events WHERE event_time < now() - interval '1 day'$$);"
 
       # - run:
       #     name: Drop pg_cron
