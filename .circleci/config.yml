@@ -47,11 +47,11 @@ jobs:
           command: psql -h localhost -U postgres -d test_db -c "SELECT pg_sleep(60);" 
           background: true
 
-      # - run:
-      #     name: Drop pg_cron
-      #     command: |
-      #       sleep 10 # wait for connection
-      #       psql -h localhost -U postgres -c "DROP EXTENSION pg_cron;"
+      - run:
+          name: Drop pg_cron
+          command: |
+            sleep 10 # wait for connection
+            psql -h localhost -U postgres -c "DROP EXTENSION pg_cron;"
 
       - run:
           name: Attempt to drop the database
