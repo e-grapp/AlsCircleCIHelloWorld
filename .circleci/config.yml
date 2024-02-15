@@ -1,154 +1,218 @@
 version: 2.1
 
-# setup: true
-
-# orbs:
-#   git-shallow-clone: guitarrapc/git-shallow-clone@2.8.0
-
-jobs:
-  my_job:
-    docker:
-      - image: mcr.microsoft.com/dotnet/sdk:7.0.405@sha256:582abbba951d2e8095e7f509178527683ed58a98fc61d08ce3825aa5f1c2f8bc
-      # - image: cimg/base:current
-    steps:
-      - run:
-          name: Install OpenSSH
-          command: |
-            sapt-get update -y
-            apt-get upgrade -y
-            apt-get install openssh-client -y
-            apt-get install git-lfs
-      - checkout
-      # - git-shallow-clone/checkout:
-      #     depth: 1
-      - run: git --version
-
 workflows:
-  setup:
+  dbtest:
     jobs:
-      - my_job
+      - postgresql
+      
+jobs:
+  postgresql:
+    docker:
+      - image: cimg/python:3.10
+        environment:
+          TEST_DATABASE_URL: postgresql://postgres@localhost/circle_test
+          TEST_DATABASE_URL_POSTGRES: postgresql://postgres@localhost/test_db
+
+      - image: cimg/postgres:14.9
+        environment:
+          POSTGRES_USER: postgres
+
+    steps:
+      - checkout
+      - run: sudo apt-get update
+      - run: sudo apt-get install postgresql-client
+      - run: whoami
+      # - run: |
+      #     psql \
+      #     -d $TEST_DATABASE_URL \
+      #     -c "CREATE DATABASE test_db;" \
+      # - run: |
+      #     psql \
+      #     -d $TEST_DATABASE_URL \
+      #     -c "DROPDATABASE test_db;" \
+      # - run: | 
+      #     psql \
+      #     -d $TEST_DATABASE_URL_POSTGRES \
+      #     -c "CREATE DATABASE test_db;" \
+      - run:
+          name: Wait for PostgreSQL to start
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+
+      - run:
+          name: Create the test database
+          command: psql -h localhost -U postgres -c "CREATE DATABASE test_db;"
+
+      - run:
+          name: Maintain connection to the database
+          command: psql -h localhost -U postgres -d test_db -c "SELECT pg_sleep(60);" 
+          background: true
+
+      # - run:
+      #     name: Drop pg_cron
+      #     command: |
+      #       sleep 10 # wait for connection
+      #       psql -h localhost -U postgres -c "DROP EXTENSION pg_cron;"
+
+      - run:
+          name: Attempt to drop the database
+          command: |
+            sleep 10  # wait for the other connection to be established
+            psql -h localhost -U postgres -c "DROP DATABASE IF EXISTS test_db;"
+
+
+
 
 # version: 2.1
 
-# jobs:
-#   passing:
-#     docker:
-#       - image: cimg/base:2023.12-22.04
-#     steps:
-#       - run:
-#           name: Something
-#           command: pwd
-#       - run:
-#           name: Check status
-#           command: echo ${CIRCLE_JOB}
+# # setup: true
 
-#   failing:
+# # orbs:
+# #   git-shallow-clone: guitarrapc/git-shallow-clone@2.8.0
+
+# jobs:
+#   my_job:
 #     docker:
-#       - image: cimg/base:2023.12-22.04
+#       - image: mcr.microsoft.com/dotnet/sdk:7.0.405@sha256:582abbba951d2e8095e7f509178527683ed58a98fc61d08ce3825aa5f1c2f8bc
+#       # - image: cimg/base:current
 #     steps:
 #       - run:
-#           name: Something
-#           command: pwd
-#       - run:
-#           name: Check status
-#           command: echo ${CIRCLE_JOB}
-#       - run:
-#           name: Fails
-#           command: skdjfhdjhfg
+#           name: Install OpenSSH
+#           command: |
+#             sapt-get update -y
+#             apt-get upgrade -y
+#             apt-get install openssh-client -y
+#             apt-get install git-lfs
+#       - checkout
+#       # - git-shallow-clone/checkout:
+#       #     depth: 1
+#       - run: git --version
 
 # workflows:
-#   build-deloy:
+#   setup:
 #     jobs:
-#       - passing:
-#           post-steps:
-#             - run:
-#                 name: Check status
-#                 command: echo ${CIRCLE_JOB}
-#                 when: always
-#       - failing:
-#           post-steps:
-#             - run:
-#                 name: Check status
-#                 command: echo ${CIRCLE_JOB}
-#                 when: always
+#       - my_job
+
+# # version: 2.1
+
+# # jobs:
+# #   passing:
+# #     docker:
+# #       - image: cimg/base:2023.12-22.04
+# #     steps:
+# #       - run:
+# #           name: Something
+# #           command: pwd
+# #       - run:
+# #           name: Check status
+# #           command: echo ${CIRCLE_JOB}
+
+# #   failing:
+# #     docker:
+# #       - image: cimg/base:2023.12-22.04
+# #     steps:
+# #       - run:
+# #           name: Something
+# #           command: pwd
+# #       - run:
+# #           name: Check status
+# #           command: echo ${CIRCLE_JOB}
+# #       - run:
+# #           name: Fails
+# #           command: skdjfhdjhfg
+
+# # workflows:
+# #   build-deloy:
+# #     jobs:
+# #       - passing:
+# #           post-steps:
+# #             - run:
+# #                 name: Check status
+# #                 command: echo ${CIRCLE_JOB}
+# #                 when: always
+# #       - failing:
+# #           post-steps:
+# #             - run:
+# #                 name: Check status
+# #                 command: echo ${CIRCLE_JOB}
+# #                 when: always
           
       
 
-# version: 2.1
+# # version: 2.1
 
-# orbs:
-#   # jira: circleci/jira@2.0.1
+# # orbs:
+# #   # jira: circleci/jira@2.0.1
 
-# commands:
-#   when_step:
-#     parameters:
-#       when:
-#         type: enum
-#         enum: ["on_success","on_fail","always"]
-#         default: on_success
-#     steps:
-#       - run:
-#           when: << parameters.when >>
-#           name: Present directory
-#           command: pwd
+# # commands:
+# #   when_step:
+# #     parameters:
+# #       when:
+# #         type: enum
+# #         enum: ["on_success","on_fail","always"]
+# #         default: on_success
+# #     steps:
+# #       - run:
+# #           when: << parameters.when >>
+# #           name: Present directory
+# #           command: pwd
       
 
-# jobs:
-#   build:
-#     docker:
-#       - image: cimg/base:2022.06
-#     working_directory: ~/mystuff
+# # jobs:
+# #   build:
+# #     docker:
+# #       - image: cimg/base:2022.06
+# #     working_directory: ~/mystuff
     
-#     steps:
-#       - setup_remote_docker:
-#           docker_layer_caching: false
-#           # version: default
-#       # - run: docker --version
-#       - checkout
-#       # - run:
-#       #     name: fail step
-#       #     command: asdasdsadf
-#       - when_step:
-#           when: on_success
-#       - run:
-#           name: Build stuff
-#           command: echo "Building stuff!"
-#       # - jira/notify
+# #     steps:
+# #       - setup_remote_docker:
+# #           docker_layer_caching: false
+# #           # version: default
+# #       # - run: docker --version
+# #       - checkout
+# #       # - run:
+# #       #     name: fail step
+# #       #     command: asdasdsadf
+# #       - when_step:
+# #           when: on_success
+# #       - run:
+# #           name: Build stuff
+# #           command: echo "Building stuff!"
+# #       # - jira/notify
 
-#   test:
-#     docker:
-#       - image: cimg/base:2022.06
-#     steps:
-#       - checkout
-#       - run:
-#           name: Test stuff
-#           command: echo "Testing stuff!"
+# #   test:
+# #     docker:
+# #       - image: cimg/base:2022.06
+# #     steps:
+# #       - checkout
+# #       - run:
+# #           name: Test stuff
+# #           command: echo "Testing stuff!"
 
-#   deploy:
-#     docker:
-#       - image: cimg/base:2022.06
-#     steps:
-#       - checkout
-#       - run:
-#           name: Deploy stuff
-#           command: echo "Deploying stuff!"
+# #   deploy:
+# #     docker:
+# #       - image: cimg/base:2022.06
+# #     steps:
+# #       - checkout
+# #       - run:
+# #           name: Deploy stuff
+# #           command: echo "Deploying stuff!"
 
-# workflows:
-#   buid-test-deploy:
-#     jobs:
-#       - build:
-#           context: jira
-#       - test:
-#           requires:
-#             - build
-#       # - approve:
-#       #     type: approval
-#       #     requires:
-#       #       - test
-#       # - deploy:
-#       #     requires:
-#       #       - approve
-#       #     filters:
-#       #       branches:
-#       #         only:
-#       #           - master
+# # workflows:
+# #   buid-test-deploy:
+# #     jobs:
+# #       - build:
+# #           context: jira
+# #       - test:
+# #           requires:
+# #             - build
+# #       # - approve:
+# #       #     type: approval
+# #       #     requires:
+# #       #       - test
+# #       # - deploy:
+# #       #     requires:
+# #       #       - approve
+# #       #     filters:
+# #       #       branches:
+# #       #         only:
+# #       #           - master
