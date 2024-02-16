@@ -8,14 +8,14 @@ workflows:
 jobs:
   postgresql:
     docker:
-      - image: cimg/python:3.10
-        environment:
-          TEST_DATABASE_URL: postgresql://postgres@localhost/circle_test
-          TEST_DATABASE_URL_POSTGRES: postgresql://postgres@localhost/test_db
+      - image: gallery.ecr.aws/docker/library/busybox
+      #   environment:
+      #     TEST_DATABASE_URL: postgresql://postgres@localhost/circle_test
+      #     TEST_DATABASE_URL_POSTGRES: postgresql://postgres@localhost/test_db
 
-      - image: cimg/postgres:14.9
-        environment:
-          POSTGRES_USER: postgres
+      # - image: cimg/postgres:14.9
+      #   environment:
+      #     POSTGRES_USER: postgres
 
     steps:
       - checkout
