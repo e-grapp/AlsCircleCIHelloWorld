@@ -3,16 +3,16 @@ version: 2.1
 jobs:
   build: # name of your job
     machine:
-      image: linux-cuda-11:edge
-      docker_layer_caching: true
-    resource_class: gpu.nvidia.small.multi
+      image: ubuntu-2004:2022.10.1
+      # docker_layer_caching: true
+    resource_class: medium
     steps:
       # Commands are run in a Windows virtual machine environment
         - checkout
         - run:
             name: Hello World
             # shell: powershell.exe
-            command: echo "helloworld"
+            command: java -version
 
 workflows:
   build-deploy:
