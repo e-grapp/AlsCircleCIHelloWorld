@@ -3,7 +3,7 @@ version: 2.1
 orbs:
 #   windows: circleci/windows@5.0.0
   gcp-cli: circleci/gcp-cli@3.1.1
-  docker: circleci/docker@2.5.0
+  # docker: circleci/docker@2.5.0
 
 # executors:
 #   windows-2022-canary:
@@ -27,8 +27,8 @@ jobs:
       - run:
           name: Docker stuff
           command: |
-            docker --version
-            docker build --progress=plain
+            docker version
+            docker build --progress plain
       # - run:
       #     name: gcloud
       #     command: |
