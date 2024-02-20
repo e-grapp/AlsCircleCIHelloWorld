@@ -3,6 +3,7 @@ version: 2.1
 orbs:
 #   windows: circleci/windows@5.0.0
   gcp-cli: circleci/gcp-cli@3.1.1
+  docker: circleci/docker@2.5.0
 
 # executors:
 #   windows-2022-canary:
@@ -24,11 +25,16 @@ jobs:
           #   & $env:Temp\GoogleCloudSDKInstaller.exe
           # shell: powershell.exe
       - run:
-          name: gcloud
+          name: Docker stuff
           command: |
-            which gcloud && gcloud --version
-            gcloud components update
-            which gcloud && gcloud --version
+            docker --version
+            docker build --progress=plain
+      # - run:
+      #     name: gcloud
+      #     command: |
+      #       which gcloud && gcloud --version
+      #       gcloud components update
+      #       which gcloud && gcloud --version
       - gcp-cli/install
       - gcp-cli/setup
       # - run:
