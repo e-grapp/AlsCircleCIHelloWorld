@@ -35,8 +35,8 @@ jobs:
       #       which gcloud && gcloud --version
       #       gcloud components update
       #       which gcloud && gcloud --version
-      - gcp-cli/install
-      - gcp-cli/setup
+      # - gcp-cli/install
+      # - gcp-cli/setup
       - run:
           name: update gcp
           command: |
