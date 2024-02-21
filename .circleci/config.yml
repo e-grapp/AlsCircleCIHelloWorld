@@ -37,13 +37,13 @@ jobs:
       #       which gcloud && gcloud --version
       - gcp-cli/install
       - gcp-cli/setup
-      # - run:
-      #     name: update gcp
-      #     command: |
-      #       gcloud components update
-      #       # curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-463.0.0-linux-x86_64.tar.gz && tar -xf google-cloud-cli-463.0.0-linux-x86_64.tar.gz 
-      #       # # && ./google-cloud-sdk/install.sh
-      #     shell: bash.exe
+      - run:
+          name: update gcp
+          command: |
+            gcloud components update
+            # curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-463.0.0-linux-x86_64.tar.gz && tar -xf google-cloud-cli-463.0.0-linux-x86_64.tar.gz 
+            # # && ./google-cloud-sdk/install.sh
+          shell: bash.exe
       - run:
           name: gcloud
           command: which gcloud && gcloud --version
