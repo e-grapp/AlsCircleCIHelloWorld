@@ -74,7 +74,7 @@ jobs:
           shell: bash
       - run:
           name: gcloud
-          command: which gcloud && gcloud --version
+          command: which gcloud
       # - run:
       #     name: set env var
       #     shell: bash.exe
