@@ -39,9 +39,33 @@ jobs:
       # - gcp-cli/install
       # - gcp-cli/setup
       - run:
-          name: update gcp
+          name: uninstall gcp
           command: |
-            gcloud components update
+              # Check the host platform
+              case "$(uname -s)" in
+                Linux*)     host=Linux;;
+                Darwin*)    host=Mac;;
+                CYGWIN*|MINGW32*|MSYS*|MINGW*) host=Windows;;
+                *)          host="UNKNOWN:${unameOut}"
+              esac
+
+              # Set sudo to work whether logged in as root user or non-root user.
+              # Remove sudo if the host is Windows
+              if [ "$host" = "Windows" ]; then sudo=""; 
+              elif [ "$(id -u)" -eq 0 ]; then sudo=""; else sudo="sudo"; fi
+
+              local installation_directory
+              installation_directory="$(gcloud info --format='value(installation.sdk_root)')"
+
+              local config_directory
+              config_directory="$(gcloud info --format='value(config.paths.global_config_dir)')"
+
+              # shellcheck disable=SC2086 # $sudo is not a variable, it's a command.
+              $sudo rm -rf "$installation_directory" || return 1
+
+              # shellcheck disable=SC2086 # $sudo is not a variable, it's a command.
+              $sudo rm -rf "$config_directory" || return 1
+            # gcloud components update
             # curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-463.0.0-linux-x86_64.tar.gz && tar -xf google-cloud-cli-463.0.0-linux-x86_64.tar.gz 
             # # && ./google-cloud-sdk/install.sh
           shell: bash.exe
