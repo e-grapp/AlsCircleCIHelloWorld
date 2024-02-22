@@ -1,88 +1,162 @@
 version: 2.1
 
+orbs:
+#   windows: circleci/windows@5.0.0
+  gcp-cli: circleci/gcp-cli@3.1.1
+  # docker: circleci/docker@2.5.0
+
+# executors:
+#   windows-2022-canary:
+#     machine:
+#       image: windows-server-2022-gui:canary
+#       resource_class: windows.medium
+
+
 jobs:
-  build: # name of your job
+  build:
     machine:
       image: ubuntu-2004:2022.10.1
-      # docker_layer_caching: true
     resource_class: medium
     steps:
-      # Commands are run in a Windows virtual machine environment
-        - checkout
-        - run:
-            name: Hello World
-            # shell: powershell.exe
-            command: java -version
+      - run:
+          name: check gcloud
+          command: gcloud versions
+      # - gcp-cli/install
+      # - run:
+          # name: install gcp gcp-cli
+          # command: |
+          #   (New-Object Net.WebClient).DownloadFile("https://dl.google.com/dl/cloudsdk/channels/rapid/GoogleCloudSDKInstaller.exe", "$env:Temp\GoogleCloudSDKInstaller.exe")
+          #   & $env:Temp\GoogleCloudSDKInstaller.exe
+          # shell: powershell.exe
+      # - run:
+      #     name: Docker stuff
+      #     command: |
+      #       docker version
+      #       docker build --progress plain
+      # - run:
+      #     name: gcloud
+      #     command: |
+      #       which gcloud && gcloud --version
+      #       gcloud components update
+      #       which gcloud && gcloud --version
+      # - gcp-cli/install
+      # - gcp-cli/setup
+      - run:
+          name: uninstall gcp
+          command: |
+            # Check the host platform
+            case "$(uname -s)" in
+              Linux*)     host=Linux;;
+              Darwin*)    host=Mac;;
+              CYGWIN*|MINGW32*|MSYS*|MINGW*) host=Windows;;
+              *)          host="UNKNOWN:${unameOut}"
+            esac
+
+            # Set sudo to work whether logged in as root user or non-root user.
+            # Remove sudo if the host is Windows
+            if [ "$host" = "Windows" ]; then sudo=""; 
+            elif [ "$(id -u)" -eq 0 ]; then sudo=""; else sudo="sudo"; fi
+
+            declare installation_directory
+            installation_directory="$(gcloud info --format='value(installation.sdk_root)')"
+
+            declare config_directory
+            config_directory="$(gcloud info --format='value(config.paths.global_config_dir)')"
+
+            # shellcheck disable=SC2086 # $sudo is not a variable, it's a command.
+            $sudo rm -rf "$installation_directory" || return 1
+
+            # shellcheck disable=SC2086 # $sudo is not a variable, it's a command.
+            $sudo rm -rf "$config_directory" || return 1
+            # gcloud components update
+            # curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-463.0.0-linux-x86_64.tar.gz && tar -xf google-cloud-cli-463.0.0-linux-x86_64.tar.gz 
+            # # && ./google-cloud-sdk/install.sh
+          shell: bash.exe
+      - run:
+          name: gcloud
+          command: which gcloud && gcloud --version
+      # - run:
+      #     name: set env var
+      #     shell: bash.exe
+      #     command: |
+      #       # Set-ExecutionPolicy Bypass -Scope Process -Force;
+      #       # $currentPrincipal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
+      #       # $currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
+      #       # New-Item -Path "C:\Temp" -Name "Temp" -ItemType "directory"
+      #       # New-Item -Path . -Name "job1-1.txt" -ItemType "file"
+      #       # New-Item -Path . -Name "job1-2.txt" -ItemType "file"
+      #       # New-Item -Path . -Name "job2.txt" -ItemType "file"
+      #       # New-Item -Path . -Name "job3.txt" -ItemType "file"
+      #       # New-Item -Path . -Name "job4.txt" -ItemType "file"
+      #       # $Env:PATH -split ";" | Out-String | Set-Content -Path C:\Temp\job1-1.txt
+      #       # $Env:PATH += ";C:\Program Files\LLVM\bin"
+      #       # $Env:PATH -split ";" | Out-String | Set-Content -Path C:\Temp\job1-2.txt
+            
+      #       # $Env:VCPKG_ROOT = 'C:\Program Files\Microsoft Visual Studio\2022\Community\VC\vcpkg\'
+      #       # [Environment]::SetEnvironmentVariable("VCPKG_ROOT", $env:VCPKG_ROOT + "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\vcpkg\, 'User')
+
+      #       # Add-Content -Path $Profile.CurrentUserAllHosts -Value '$Env:VCPKG_ROOT = "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\vcpkg\"'
+
+      #       [Environment]::SetEnvironmentVariable('VCPKG_ROOT', 'C:\Program Files\Microsoft Visual Studio\2022\Community\VC\vcpkg\', 'User')
+      #       # $Env:VCPKG_ROOT
+      #       [Environment]::GetEnvironmentVariable('VCPKG_ROOT', 'User')
+
+      # - restore_cache:
+      #     key: mycache-{{ checksum "C:\Users\circleci\project\myfakefilethatdoesntreallyexist.txt" }}
+
+      # - run:
+      #     name: recall env var from .NET
+      #     command: |
+      #       # $Env:PATH -split ";" | Out-String | Set-Content -Path C:\Temp\job2.txt
+      #       # echo "Echoing the string we set in the previous step"
+      #       [Environment]::GetEnvironmentVariable('VCPKG_ROOT', 'User')
+      #       # $env:VCPKG_ROOT
+      #       # [Environment]::GetEnvironmentVariable('VCPKG_ROOT', 'Machine')
+      
+      # - run: 
+      #     name: recall from env var
+      #     command: |
+      #       $Env:VCPKG_ROOT
+
+      # - run:
+      #     name: recall without .net hack
+      #     command: |
+      #       Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
+      #       refreshenv
+      #       $Env:VCPKG_ROOT
+
+      # - run:
+      #     name: recall with just refreshenv
+      #     command: |
+      #       refreshenv
+      #       $Env:VCPKG_ROOT
+
+      # - run:
+      #     name: recall just env var
+      #     command: $Env:VCPKG_ROOT
+
+      # #       # $Env:PATH += ";C:\Program Files\LLVM\bin"
+      # #       # Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
+      # #       # refreshenv
+      # #       # $Env:PATH split ";" | Out-String | Set-Content -Path C:\Temp\job3.txt
+      # #       Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
+      # #       $Env:VCPKG_ROOT = 'C:\Program Files\Microsoft Visual Studio\2022\Community\VC\vcpkg\'
+      # #       echo "Echoing the string we just set (if it didn't persist)"
+      # #       $Env:VCPKG_ROOT
+      # #       refreshenv
+
+      # # - run:
+      # #     name: recall env var
+      # #     command: |
+      # #       # $Env:PATH -split ";" | Out-String | Set-Content -Path C:\Temp\job4.txt
+      # #       Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
+      # #       echo "Echoing the string after a refreshenv:"
+      # #       $Env:VCPKG_ROOT
+            
+      # # - store_artifacts:
+      # #     path: C:\Temp
 
 workflows:
-  build-deploy:
+  check-this-out:
     jobs:
       - build
-
-
-# version: 2.1
-
-# jobs:
-#   my-job:
-#     machine:
-#       image: windows-server-2019-cuda:current
-#     resource_class: windows.medium
-    
-#     steps:
-#       - checkout
-#       - run: which scp
-#       - run: which ssh
-#       # - run: scp --version
-#       - run: ssh -V
-#       - run: export DEBIAN_FRONTEND=noninteractive && sudo apt update && sudo apt-get install -y -o Dpkg::Options::="--force-confnew" --only-upgrade openssh-client openssh-server
-#       - run: ssh -V
-
-
-# workflows:
-#   workflow:
-#     jobs:
-#       - my-job
-
-# version: 2.1
-
-# jobs:
-#   build:
-#     machine:
-#       image: ubuntu-2204:2022.10.2
-      
-#     steps:
-#       # - checkout
-#       # - run:
-#       #     name: Check Docker version
-#       #     command: docker --version
-#       - run:
-#           name: Install stuff
-#           command: |
-#             # $nrconf{restart} = 'i';
-#             sudo sed -i 's/#$nrconf{restart} = '"'"'i'"'"';/$nrconf{restart} = '"'"'a'"'"';/g' /etc/needrestart/needrestart.conf
-#             sudo apt update && sudo apt install -y build-essential cmake clang clang-format esbuild shellcheck ninja-build hugo doxygen rapidjson-dev googletest libjavascriptcoregtk-4.0-dev
-  
-#   # unittest:
-#   #   machine:
-#   #     image: ubuntu-2004:202111-02
-#   #     # docker_layer_caching: true
-#   #   # working_directory: ~/hotpie
-
-#   #   steps:
-#   #     - run:
-#   #         name: Install stuff
-#   #         command: |
-#   #           # $nrconf{restart} = 'i';
-#   #           sudo apt update && sudo apt install -y build-essential cmake clang clang-format esbuild shellcheck ninja-build hugo doxygen rapidjson-dev googletest libjavascriptcoregtk-4.0-dev
-#   #     # - checkout
-
-# workflows:
-#   workflow:
-#     jobs:
-#       - build:
-#           name: Build
-#       # - unittest
-#           #  << matrix.name >>
-#           # matrix:
-#           #   parameters:
-#           #     name: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"]
