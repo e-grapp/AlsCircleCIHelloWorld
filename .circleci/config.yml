@@ -20,7 +20,7 @@ jobs:
     steps:
       - run:
           name: check gcloud
-          command: gcloud versions
+          command: gcloud version
       # - gcp-cli/install
       # - run:
           # name: install gcp gcp-cli
