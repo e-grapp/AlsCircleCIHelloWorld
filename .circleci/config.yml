@@ -15,7 +15,7 @@ orbs:
 jobs:
   build:
     machine:
-      image: windows-server-2019-vs2019:edge
+      image: windows-server-2019-vs2019:previous
     resource_class: windows.medium
     steps:
       # - gcp-cli/install
