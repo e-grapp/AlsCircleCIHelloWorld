@@ -19,6 +19,11 @@ jobs:
     resource_class: medium
     steps:
       - run:
+          name: Update Docker
+          command: |
+            sudo apt update
+            sudo apt full-upgrade -y
+      - run:
           name: Docker stuff
           command: |
             docker version
