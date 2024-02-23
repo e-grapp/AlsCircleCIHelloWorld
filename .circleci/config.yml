@@ -19,10 +19,10 @@ jobs:
     resource_class: medium
     steps:
       - run:
-        name: Docker stuff
-        command: |
-          docker version
-          docker build --progress plain
+          name: Docker stuff
+          command: |
+            docker version
+            docker build --progress plain
       # - run:
       #     name: check gcloud
       #     command: gcloud version
