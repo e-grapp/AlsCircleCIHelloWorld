@@ -16,7 +16,7 @@ jobs:
   build:
     machine:
       image: windows-server-2019-vs2019:current
-      resource_class: windows.medium
+    resource_class: windows.medium
     steps:
       # - gcp-cli/install
       # - run:
@@ -25,11 +25,11 @@ jobs:
           #   (New-Object Net.WebClient).DownloadFile("https://dl.google.com/dl/cloudsdk/channels/rapid/GoogleCloudSDKInstaller.exe", "$env:Temp\GoogleCloudSDKInstaller.exe")
           #   & $env:Temp\GoogleCloudSDKInstaller.exe
           # shell: powershell.exe
-      # - run:
-      #     name: Docker stuff
-      #     command: |
-      #       docker version
-      #       docker build --progress plain
+      - run:
+          name: Docker stuff
+          command: |
+            docker version
+            docker build --progress plain
       # - run:
       #     name: gcloud
       #     command: |
@@ -38,40 +38,40 @@ jobs:
       #       which gcloud && gcloud --version
       # - gcp-cli/install
       # - gcp-cli/setup
-      - run:
-          name: uninstall gcp
-          command: |
-            # Check the host platform
-            case "$(uname -s)" in
-              Linux*)     host=Linux;;
-              Darwin*)    host=Mac;;
-              CYGWIN*|MINGW32*|MSYS*|MINGW*) host=Windows;;
-              *)          host="UNKNOWN:${unameOut}"
-            esac
+      # - run:
+      #     name: uninstall gcp
+      #     command: |
+      #       # Check the host platform
+      #       case "$(uname -s)" in
+      #         Linux*)     host=Linux;;
+      #         Darwin*)    host=Mac;;
+      #         CYGWIN*|MINGW32*|MSYS*|MINGW*) host=Windows;;
+      #         *)          host="UNKNOWN:${unameOut}"
+      #       esac
 
-            # Set sudo to work whether logged in as root user or non-root user.
-            # Remove sudo if the host is Windows
-            if [ "$host" = "Windows" ]; then sudo=""; 
-            elif [ "$(id -u)" -eq 0 ]; then sudo=""; else sudo="sudo"; fi
+      #       # Set sudo to work whether logged in as root user or non-root user.
+      #       # Remove sudo if the host is Windows
+      #       if [ "$host" = "Windows" ]; then sudo=""; 
+      #       elif [ "$(id -u)" -eq 0 ]; then sudo=""; else sudo="sudo"; fi
 
-            declare installation_directory
-            installation_directory="$(gcloud info --format='value(installation.sdk_root)')"
+      #       declare installation_directory
+      #       installation_directory="$(gcloud info --format='value(installation.sdk_root)')"
 
-            declare config_directory
-            config_directory="$(gcloud info --format='value(config.paths.global_config_dir)')"
+      #       declare config_directory
+      #       config_directory="$(gcloud info --format='value(config.paths.global_config_dir)')"
 
-            # shellcheck disable=SC2086 # $sudo is not a variable, it's a command.
-            $sudo rm -rf "$installation_directory" || return 1
+      #       # shellcheck disable=SC2086 # $sudo is not a variable, it's a command.
+      #       $sudo rm -rf "$installation_directory" || return 1
 
-            # shellcheck disable=SC2086 # $sudo is not a variable, it's a command.
-            $sudo rm -rf "$config_directory" || return 1
-            # gcloud components update
-            # curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-463.0.0-linux-x86_64.tar.gz && tar -xf google-cloud-cli-463.0.0-linux-x86_64.tar.gz 
-            # # && ./google-cloud-sdk/install.sh
-          shell: bash.exe
-      - run:
-          name: gcloud
-          command: which gcloud && gcloud --version
+      #       # shellcheck disable=SC2086 # $sudo is not a variable, it's a command.
+      #       $sudo rm -rf "$config_directory" || return 1
+      #       # gcloud components update
+      #       # curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-463.0.0-linux-x86_64.tar.gz && tar -xf google-cloud-cli-463.0.0-linux-x86_64.tar.gz 
+      #       # # && ./google-cloud-sdk/install.sh
+      #     shell: bash.exe
+      # - run:
+      #     name: gcloud
+      #     command: which gcloud && gcloud --version
       # - run:
       #     name: set env var
       #     shell: bash.exe
