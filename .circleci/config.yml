@@ -22,7 +22,7 @@ jobs:
           name: Update Docker
           command: |
             sudo apt update
-            sudo apt full-upgrade -y
+            sudo apt full-upgrade docker-ce docker-ce-cli containerd.io -y
       - run:
           name: Docker stuff
           command: |
