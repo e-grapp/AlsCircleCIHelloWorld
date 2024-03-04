@@ -1,7 +1,7 @@
 version: 2.1
 
-orbs:
-  browser-tools: circleci/browser-tools@1.4.6
+# orbs:
+#   browser-tools: circleci/browser-tools@1.4.6
 
 workflows:
   dbtest:
@@ -21,8 +21,9 @@ jobs:
       #     POSTGRES_USER: postgres
 
     steps:
-      - browser-tools/install-chrome
-      - browser-tools/install-chromedriver
+      - run:
+          name: sleep
+          command: sleep 300
       # - checkout
       # - run: sudo apt-get update
       # - run: sudo apt-get install postgresql-client
