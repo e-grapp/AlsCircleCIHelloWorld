@@ -11,9 +11,7 @@ jobs:
       - run:
           name: current dir
           command: pwd
-      - macos/enable-vnc:
-          username: al
-          password: $MAC_ORB_VNC_PASSWORD
+      - macos/enable-vnc
 
 workflows:
   build-and-test:
