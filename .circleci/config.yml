@@ -12,6 +12,7 @@ jobs:
           name: current dir
           command: pwd
       - macos/enable-vnc
+      - run: sleep 600
 
 workflows:
   build-and-test:
