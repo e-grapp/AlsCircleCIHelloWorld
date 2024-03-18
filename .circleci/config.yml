@@ -15,7 +15,7 @@ orbs:
 jobs:
   build:
     machine:
-      image: windows-server-2019-vs2019:current
+      image: windows-server-2019-vs2019:2023.10.1
     resource_class: windows.medium
     steps:
       # - gcp-cli/install
@@ -25,6 +25,9 @@ jobs:
           #   (New-Object Net.WebClient).DownloadFile("https://dl.google.com/dl/cloudsdk/channels/rapid/GoogleCloudSDKInstaller.exe", "$env:Temp\GoogleCloudSDKInstaller.exe")
           #   & $env:Temp\GoogleCloudSDKInstaller.exe
           # shell: powershell.exe
+      - run:
+          name: Docker Update
+          command: choco upgrade docker-engine
       - run:
           name: Docker stuff
           command: |
