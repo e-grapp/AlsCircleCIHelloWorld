@@ -27,7 +27,8 @@ jobs:
           # shell: powershell.exe
       - run:
           name: Docker Update
-          command: choco upgrade docker-engine -y
+          command: sudo choco upgrade docker-engine -y
+          shell: bash.exe
       - run:
           name: Docker stuff
           command: |
