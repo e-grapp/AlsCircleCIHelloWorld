@@ -11,7 +11,7 @@ workflows:
 jobs:
   postgresql:
     docker:
-      - image: cimg/node:18.16.0-browsers
+      - image: cimg/node:18.19.0-browsers
       #   environment:
       #     TEST_DATABASE_URL: postgresql://postgres@localhost/circle_test
       #     TEST_DATABASE_URL_POSTGRES: postgresql://postgres@localhost/test_db
