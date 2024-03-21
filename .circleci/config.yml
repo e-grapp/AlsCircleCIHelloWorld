@@ -37,59 +37,59 @@ jobs:
       - run: circleci version
       - run:
           name: Validate Config
-          command: circleci --skip-update-check config validate ./.circleci/mock_params.json-develop-results.yaml
+          command: circleci --skip-update-check config validate ./.circleci/config.yml
           when: always
       - run:
           name: Validate Config
-          command: circleci --skip-update-check config validate ./.circleci/mock_params.json-develop-results.yaml
+          command: circleci --skip-update-check config validate ./.circleci/config.yml
           when: always
       - run:
           name: Validate Config
-          command: circleci --skip-update-check config validate ./.circleci/mock_params.json-develop-results.yaml
+          command: circleci --skip-update-check config validate ./.circleci/config.yml
           when: always
       - run:
           name: Validate Config
-          command: circleci --skip-update-check config validate ./.circleci/mock_params.json-develop-results.yaml
+          command: circleci --skip-update-check config validate ./.circleci/config.yml
           when: always
       - run:
           name: Validate Config
-          command: circleci --skip-update-check config validate ./.circleci/mock_params.json-develop-results.yaml
+          command: circleci --skip-update-check config validate ./.circleci/config.yml
           when: always
       - run:
           name: Validate Config
-          command: circleci --skip-update-check config validate ./.circleci/mock_params.json-develop-results.yaml
+          command: circleci --skip-update-check config validate ./.circleci/config.yml
           when: always
       - run:
           name: Validate Config
-          command: circleci --skip-update-check config validate ./.circleci/mock_params.json-develop-results.yaml
+          command: circleci --skip-update-check config validate ./.circleci/config.yml
           when: always
       - run:
           name: Validate Config
-          command: circleci --skip-update-check config validate ./.circleci/mock_params.json-develop-results.yaml
+          command: circleci --skip-update-check config validate ./.circleci/config.yml
           when: always
       - run:
           name: Validate Config
-          command: circleci --skip-update-check config validate ./.circleci/mock_params.json-develop-results.yaml
+          command: circleci --skip-update-check config validate ./.circleci/config.yml
           when: always
       - run:
           name: Validate Config
-          command: circleci --skip-update-check config validate ./.circleci/mock_params.json-develop-results.yaml
+          command: circleci --skip-update-check config validate ./.circleci/config.yml
           when: always
       - run:
           name: Validate Config
-          command: circleci --skip-update-check config validate ./.circleci/mock_params.json-develop-results.yaml
+          command: circleci --skip-update-check config validate ./.circleci/config.yml
           when: always
       - run:
           name: Validate Config
-          command: circleci --skip-update-check config validate ./.circleci/mock_params.json-develop-results.yaml
+          command: circleci --skip-update-check config validate ./.circleci/config.yml
           when: always
       - run:
           name: Validate Config
-          command: circleci --skip-update-check config validate ./.circleci/mock_params.json-develop-results.yaml
+          command: circleci --skip-update-check config validate ./.circleci/config.yml
           when: always
       - run:
           name: Validate Config
-          command: circleci --skip-update-check config validate ./.circleci/mock_params.json-develop-results.yaml
+          command: circleci --skip-update-check config validate ./.circleci/config.yml
           when: always
       # - browser-tools/install-chrome
       # - browser-tools/install-chromedriver
