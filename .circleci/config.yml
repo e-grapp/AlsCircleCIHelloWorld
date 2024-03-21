@@ -25,10 +25,7 @@ jobs:
           #   (New-Object Net.WebClient).DownloadFile("https://dl.google.com/dl/cloudsdk/channels/rapid/GoogleCloudSDKInstaller.exe", "$env:Temp\GoogleCloudSDKInstaller.exe")
           #   & $env:Temp\GoogleCloudSDKInstaller.exe
           # shell: powershell.exe
-      - run:
-          name: Docker Update
-          command: sudo choco upgrade docker-engine -y
-          shell: bash.exe
+
       - run:
           name: Docker stuff
           command: |
