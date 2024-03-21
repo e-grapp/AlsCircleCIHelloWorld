@@ -21,6 +21,7 @@ jobs:
       #     POSTGRES_USER: postgres
 
     steps:
+      - checkout
       - run: circleci version
       - run:
           name: Download circleci
