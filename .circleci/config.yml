@@ -25,6 +25,7 @@ jobs:
       - run:
           name: Download circleci
           command: |
+            mkdir -p /tmp/cci
             curl -sSL "https://github.com/CircleCI-Public/circleci-cli/releases/download/v0.1.29936/circleci-cli_0.1.29936_linux_amd64.tar.gz" -o /tmp/cci/cci.tgz
             tar -zvxf /tmp/cci/cci.tgz  --strip-components=1 -C /tmp/cci/
       - run:
