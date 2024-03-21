@@ -36,7 +36,7 @@ jobs:
             sudo mv /tmp/cci/circleci /home/circleci/bin/circleci
       - run: circleci version
       - run:
-          name: Validate Config
+          name: Validate  Config
           command: circleci --skip-update-check config validate ./.circleci/config.yml
           when: always
       - run:
