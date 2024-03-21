@@ -21,8 +21,56 @@ jobs:
       #     POSTGRES_USER: postgres
 
     steps:
-      - browser-tools/install-chrome
-      - browser-tools/install-chromedriver
+      - run:
+          name: Validate Config
+          command: circleci config validate --org-id $ORG_ID ./.circleci/mock_params.json-develop-results.yaml
+      - run:
+          name: Validate Config
+          command: circleci config validate --org-id $ORG_ID ./.circleci/mock_params.json-develop-results.yaml
+      - run:
+          name: Validate Config
+          command: circleci config validate --org-id $ORG_ID ./.circleci/mock_params.json-develop-results.yaml
+      - run:
+          name: Validate Config
+          command: circleci config validate --org-id $ORG_ID ./.circleci/mock_params.json-develop-results.yaml
+      - run:
+          name: Validate Config
+          command: circleci config validate --org-id $ORG_ID ./.circleci/mock_params.json-develop-results.yaml
+      - run:
+          name: Validate Config
+          command: circleci config validate --org-id $ORG_ID ./.circleci/mock_params.json-develop-results.yaml
+      - run:
+          name: Validate Config
+          command: circleci config validate --org-id $ORG_ID ./.circleci/mock_params.json-develop-results.yaml
+      - run:
+          name: Validate Config
+          command: circleci config validate --org-id $ORG_ID ./.circleci/mock_params.json-develop-results.yaml
+      - run:
+          name: Validate Config
+          command: circleci config validate --org-id $ORG_ID ./.circleci/mock_params.json-develop-results.yaml
+      - run:
+          name: Validate Config
+          command: circleci config validate --org-id $ORG_ID ./.circleci/mock_params.json-develop-results.yaml
+      - run:
+          name: Validate Config
+          command: circleci config validate --org-id $ORG_ID ./.circleci/mock_params.json-develop-results.yaml
+      - run:
+          name: Validate Config
+          command: circleci config validate --org-id $ORG_ID ./.circleci/mock_params.json-develop-results.yaml
+      - run:
+          name: Validate Config
+          command: circleci config validate --org-id $ORG_ID ./.circleci/mock_params.json-develop-results.yaml
+      - run:
+          name: Validate Config
+          command: circleci config validate --org-id $ORG_ID ./.circleci/mock_params.json-develop-results.yaml
+      - run:
+          name: Validate Config
+          command: circleci config validate --org-id $ORG_ID ./.circleci/mock_params.json-develop-results.yaml
+      - run:
+          name: Validate Config
+          command: circleci config validate --org-id $ORG_ID ./.circleci/mock_params.json-develop-results.yaml
+      # - browser-tools/install-chrome
+      # - browser-tools/install-chromedriver
       # - checkout
       # - run: sudo apt-get update
       # - run: sudo apt-get install postgresql-client
