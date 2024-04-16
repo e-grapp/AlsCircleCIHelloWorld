@@ -22,7 +22,7 @@ jobs:
 
     steps:
       - checkout
-      - run: echo "testing 123"
+      - run: echo "testing 1234"
       - run: circleci version
       - run:
           name: Download circleci
